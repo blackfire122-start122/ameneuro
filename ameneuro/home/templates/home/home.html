@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ameneuro</title>
+	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+</head>
+<body>
+	<header class="header-home">
+		<h1>Ameneuro</h1>
+		<div class="friends">
+			{% for i in friends %}
+			{% endfor %}
+		</div>
+		<button>Direct</button>
+	</header>
+</body>
+</html>
