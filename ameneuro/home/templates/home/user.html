@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User</title>
+	<link rel="stylesheet" href="{% static 'home/css/user.css' %}">
+</head>
+<body>
+	<header class="header_user">
+		<div>
+			<img class="img_user" src="{{ user.img.url }}" alt="">
+			<p>{{ user.username }}</p>
+		</div>
+		<div>
+			<h3>Friends</h3>
+			<p>{{ user.friends.all|length }}</p>
+		</div>
+	</header>
+	<div class="posts">
+		{% for p in posts %}
+			<div class="post">
+				{% if p.type_p == 'video' %}
+					<video autoplay controls class="post_file" src="{{ p.file.url }}"c></video>
+				{% else %}
+					<img class="post_file" src="{{ p.file.url }}"c>
+				{% endif %}
+			</div>
+		{% endfor %}
+	</div>
+</body>
+</html>

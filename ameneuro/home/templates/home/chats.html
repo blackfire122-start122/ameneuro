@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chaats</title>
+	<link rel="stylesheet" href="{% static 'home/css/chat.css' %}">
+</head>
+<body>
+	<div class="chats">
+		{% for ch in user.chats.all %}
+		<div>
+			<h2>{{ ch.friend }}</h2>
+			<a href="{% url "chat" ch.chat_id %}">end meessage</a>
+		</div>
+		{% endfor %}
+	</div>
+</body>
+</html>

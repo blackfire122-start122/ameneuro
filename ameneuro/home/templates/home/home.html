@@ -10,12 +10,50 @@
 </head>
 <body>
 	<header class="header-home">
-		<h1>Ameneuro</h1>
-		<div class="friends">
-			{% for i in friends %}
+		<div class="friends_and_user">
+			<div>
+				<a href="{% url 'user' user.username %}">
+					<img class="img_user" src="{{ user.img }}"c>
+					<h4 class="name_user">{{ user.username|truncatechars:7 }}</h4>
+				</a>
+			</div>
+			{% for f in user.friends.all %}
+				<div>
+					<a href="{% url 'user' f.username %}">
+						<img class="img_user" src="{{ f.img }}"c>
+						<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
+					</a>
+				</div>
 			{% endfor %}
 		</div>
-		<button>Direct</button>
 	</header>
+	<hr>
+	<div class="posts">
+		{% for p in posts %}
+			<div class="post">
+				{% if p.type_p == 'video' %}
+					<video autoplay controls class="post_file" src="{{ p.file }}"c></video>
+				{% else %}
+					<img class="post_file" src="{{ p.file }}"c>
+				{% endif %}
+				<div class="menu_post">
+					<p>{{ p.likes }}</p>
+					<button onclick="">Comments</button>
+				</div>
+				<p>{{ p.description }}</p>
+
+				{% for c in p.comments.all %}
+				<div class="comment">
+					<h5>{{ c.user }}</h5>
+					<p>{{c.text}}</p>
+				</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+	<div class="menu_home">
+		<a class="link_menu" href="{% url 'chats' %}"></a>
+		<a class="link_menu" href="{% url 'user_find' %}"></a>
+	</div>
 </body>
 </html>
