@@ -5,15 +5,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Chaats</title>
-	<link rel="stylesheet" href="{% static 'home/css/chat.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/chats.css' %}">
 </head>
 <body>
 	<div class="chats">
 		{% for ch in user.chats.all %}
-		<div>
-			<h2>{{ ch.friend }}</h2>
-			<a href="{% url "chat" ch.chat_id %}">end meessage</a>
-		</div>
+			<div>
+				<a href="{% url "chat" ch.chat_id %}">
+					{% for user_ch in ch.users.all %}
+						{% if user_ch != user %}
+							<label>{{ user_ch }}</label>
+						{% endif %}
+					{% endfor %}
+				</a>
+			</div>
 		{% endfor %}
 	</div>
 </body>

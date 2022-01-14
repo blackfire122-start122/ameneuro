@@ -1,18 +1,39 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Chat</title>
+	<link rel="stylesheet" href="{% static 'home/css/chat.css' %}">
 </head>
 <body>
 	<h1>chat</h1>
-	<p>{{ chat }}</p>
 	<div class="messages">
-		{% for m in chat.messages.all %}
-			<p>{{ m }}</p>
+		{% for m in messages.all %}
+			{% if m.user == user %}
+				<div class="my_msgs">
+					<p>{{ m }}</p>
+					<time class='time'>{{ m.date }}</time>
+				</div>
+			{% else %}
+				<div class="other_msgs">
+					<p>{{ m }}</p>
+					<time class='time'>{{ m.date }}</time>
+				</div>
+			{% endif %}
+			<br>
 		{% endfor %}
 	</div>
-	<input type="text">
+	<div>
+		<input id="msg_user" type="text">
+		<button id="btn_send" onclick="btn_send(this)">Send</button>
+	</div>
+	<script>
+		let user = "{{ user }}"
+		let chat = "{{ chat }}"
+	</script>
+	<script src="{% static 'home/js/chat.js' %}"></script>
 </body>
 </html>	

@@ -1,39 +1,40 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
 body{
-	background: black;
 	overflow-x: hidden;
+	/*color: white;*/
+	/*width: 80%;*/
+	position: relative;
+	right: 0;
+	margin: 0 auto;
 }
 
 .header-home{
 	height: 5em;
-	color: white;
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
 }
 
-.name_user{
-	position: relative;
-	bottom: 2em;
-}
-
 .img_user{
 	border-radius: 50%;
-	height: 90%;
+	height: 80%;
 }
 .menu_home{
 	position: fixed;
-	left: 90%;
+	left: 80%;
 	top: 50%;
-	background: gray;
-	width: 30px;
-	height: 100px;
 	display: flex;
 	flex-direction: column;
 }
 .link_menu{
+	margin-top: 15%;
 	background: white;
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	border-radius: 50%;
 }
 .link_menu:hover{
@@ -44,22 +45,72 @@ body{
 	overflow-x: auto;
 	overflow-y: hidden;
 }
+
+.user_header{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
 .posts{
-	color: white;
-	width: 30em;
+	width: 100%;
 	margin-left: auto;
 	margin-right:auto ;
 }
 .menu_post{
 	display: flex;
+	height: 2.5em;
 }
 .post_file{
 	width: 100%;
 }
-
+.post_desc{
+	position: relative;
+	left: 10%;
+}
 /*треба js*/
 
 .comment{
 	display: none;
 	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header_post{
+	display: flex;
+	justify-content: space-between;
+	height: 2em;
+}
+
+.header_post_user{
+	display: flex;
+	text-decoration: none;
+}
+
+.img_user_post{
+	border-radius: 50%;
+}
+
+.name_user_post{
+	position: relative;
+	left: 10%;
+	color: black;
+}
+
+.options_post_img{
+	height: 50%;
+}
+
+.img_main_link{
+	height: 100%;
+}
+.line{
+	width: 100%;
+	background-color: gray;
+	height: 1px;
+	margin-bottom: 5%;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

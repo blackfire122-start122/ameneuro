@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-y$+&9t81fkft*#vpx_7e6ao8p9crlz0c4x^pg+q+g2w(_w60ae
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.0.105"]
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'channels',
-    "redis"
+    'channels_redis'
+    # 'rest_framework',
 ]
 
 MIDDLEWARE = [

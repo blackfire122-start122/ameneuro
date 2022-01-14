@@ -1,4 +1,29 @@
-/*body{
+body{
 	background: black;
 	overflow-x: hidden;
-}*/
+	color: white;
+}
+
+.messages{
+}
+
+.my_msgs, .other_msgs{
+	width: 50%;
+	position: relative;
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+}
+
+.other_msgs{
+
+}
+
+.my_msgs{
+	margin-left: 50%;
+}
+
+.time{
+	font-size: 0.9em;
+	position: relative;
+	left: 70%;
+}

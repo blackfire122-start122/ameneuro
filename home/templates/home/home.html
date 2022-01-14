@@ -11,49 +11,70 @@
 <body>
 	<header class="header-home">
 		<div class="friends_and_user">
-			<div>
-				<a href="{% url 'user' user.username %}">
-					<img class="img_user" src="{{ user.img }}"c>
-					<h4 class="name_user">{{ user.username|truncatechars:7 }}</h4>
-				</a>
-			</div>
+			<a class="user_header" href="{% url 'user' user.username %}">
+				<img class="img_user" src="{{ user.img }}"c>
+				<h4 class="name_user">{{ user.username|truncatechars:7 }}</h4>
+			</a>
 			{% for f in user.friends.all %}
-				<div>
-					<a href="{% url 'user' f.username %}">
-						<img class="img_user" src="{{ f.img }}"c>
-						<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
-					</a>
-				</div>
+				<a class="user_header" href="{% url 'user' f.username %}">
+					<img class="img_user" src="{{ f.img }}"c>
+					<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
+				</a>
 			{% endfor %}
 		</div>
 	</header>
-	<hr>
+	<div class="line"></div>
 	<div class="posts">
 		{% for p in posts %}
 			<div class="post">
+				<div class="header_post">
+					<a class="header_post_user" href="">
+						<img class="img_user_post" src="{{ p.user_pub.img }}" alt="">
+						<h4 class="name_user_post">{{ p.user_pub }}</h4>
+					</a>
+					<img class="options_post_img" src="{% static 'home/images/options.png' %}" alt="">
+				</div>
 				{% if p.type_p == 'video' %}
 					<video autoplay controls class="post_file" src="{{ p.file }}"c></video>
 				{% else %}
 					<img class="post_file" src="{{ p.file }}"c>
 				{% endif %}
 				<div class="menu_post">
-					<p>{{ p.likes }}</p>
-					<button onclick="">Comments</button>
+					<img id={{ p.id }} onclick="like(this)" src="{% static 'home/images/like.png' %}" alt="">
+					<label>{{ p.likes.all|length }}</label>
+					
+					<img src="{% static 'home/images/comment.png' %}" alt="">
+					<label>{{ p.comments.all|length }}</label>
 				</div>
-				<p>{{ p.description }}</p>
+				<p class="post_desc">{{ p.description|truncatechars:50 }}</p>
 
 				{% for c in p.comments.all %}
 				<div class="comment">
+					<p>{{ p.description }}</p>
 					<h5>{{ c.user }}</h5>
 					<p>{{c.text}}</p>
 				</div>
 				{% endfor %}
 			</div>
+			<div class="line"></div>
 		{% endfor %}
 	</div>
 	<div class="menu_home">
-		<a class="link_menu" href="{% url 'chats' %}"></a>
-		<a class="link_menu" href="{% url 'user_find' %}"></a>
+		<a class="link_menu" href="{% url 'chats' %}"><img class="img_main_link" src="{% static 'home/images/direct.png' %}" alt=""></a>
+		<a class="link_menu" href="{% url 'user_find' %}"><img class="img_main_link" src="{% static 'home/images/find.png' %}" alt=""></a>
+		<a class="link_menu" href="{% url 'friends' %}"><img class="img_main_link" src="{% static 'home/images/user.png' %}" alt=""></a>
 	</div>
+
+	<script>
+		let like_ajax = "{% url 'like_ajax' %}"
+	</script>
+	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
+	<script src="{% static 'home/js/home.js' %}"></script>
+
+	<style>
+/*		body{
+			background-image: url({% static 'home/images/fon.png' %});
+		}*/
+	</style>
 </body>
 </html>
