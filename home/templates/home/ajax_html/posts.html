@@ -1,0 +1,38 @@
+{% load static %}
+
+{% for p in posts %}
+	<div class="post post_{{ p.id }}">
+		<div class="header_post">
+			<a class="header_post_user" href="">
+				<img class="img_user_post" src="{{ p.user_pub.img.url }}" alt="">
+				<h4 class="name_user_post">{{ p.user_pub }}</h4>
+			</a>
+			<img id="{{ p.id }}" onclick="options(this)" class="options_post_img" src="{% static 'home/images/options.png' %}" alt="">
+
+			<div class="options_menu" id='opt_{{ p.id }}'>
+				<button value="{% url 'post' p.id %}" onclick="copy_link(this)" class="link_options_menu" href="">Скопіювати</button>
+				<a class="link_options_menu" href="">Поширити</a>
+				<a class="link_options_menu_red" href="">Поскаржитись</a>
+			</div>
+		</div>
+		{% if p.type_p.type_p == 'video' %}
+			<video autoplay class="video_post post_file" controls controlsList="nodownload" controls prelad="auto">
+				<source src="{% url 'stream_video_post' p.id %}">
+			</video>
+		{% else %}
+			<img class="post_file" src="{{ p.file.url }}">
+		{% endif %}
+		<div class="menu_post">
+			<img id={{ p.id }} onclick="like(this)" src="{% static 'home/images/like.png' %}" alt="">
+			<span>{{ p.likes.all|length }}</span>
+			
+			<img id={{ p.id }} onclick="comments(this)" src="{% static 'home/images/comment.png' %}" alt="">
+
+			<span>{{ p.comments.all|length }}</span>
+		</div>
+		<p class="post_desc">{{ p.description }}</p>
+
+		<div class="comments"></div>
+	</div>
+	<div class="line"></div>
+{% endfor %}

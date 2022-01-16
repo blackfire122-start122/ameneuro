@@ -8,18 +8,28 @@
 	<link rel="stylesheet" href="{% static 'home/css/chats.css' %}">
 </head>
 <body>
-	<div class="chats">
+	<header class="back_header">
+		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
+		<h4 class="userregname">{{ user }}</h4>
+		<input class='find_chat' type="text" placeholder="find">
+	</header>
+	<div>
 		{% for ch in user.chats.all %}
-			<div>
-				<a href="{% url "chat" ch.chat_id %}">
-					{% for user_ch in ch.users.all %}
-						{% if user_ch != user %}
-							<label>{{ user_ch }}</label>
-						{% endif %}
-					{% endfor %}
-				</a>
-			</div>
+			<a class="chat_link" href="{% url "chat" ch.chat_id %}">
+			{% for user_ch in ch.users.all %}
+				{% if user_ch != user %}
+					<div class="user_chat">
+						<img class='user_img' src="{{ user_ch.img }}">
+						<div class="name_end_mes">
+							<h4>{{ user_ch }}</h4>
+							<span class="end_mes" >{{ ch.messages.all.last }} </span>
+						</div>
+						<p>23</p>
+					</div>
+				{% endif %}
+			{% endfor %}
 		{% endfor %}
+		</a>
 	</div>
 </body>
 </html>

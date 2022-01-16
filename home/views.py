@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from .models import User,Post,Chat,Comment
 from .forms import RegisterForm,LoginForm,PostForm
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponseNotFound,JsonResponse,HttpResponseRedirect,HttpResponse
+from django.http import (HttpResponseNotFound,
+						JsonResponse,
+						HttpResponseRedirect,
+						HttpResponse,
+						StreamingHttpResponse)
 
-import random
-import string
-
-strings = string.ascii_letters+string.digits
+from .services import *
 
 def home(request):
 	user = {}
@@ -16,12 +17,8 @@ def home(request):
 	else:
 		return redirect("login")
 
-	# доробити пости не брати всі
-	posts = Post.objects.all()
-
 	return render(request, "home/home.html", {
 		"user": user,
-		"posts":posts
 		})
 
 def user(request,name):
@@ -29,13 +26,14 @@ def user(request,name):
 	user_reg = {}
 	posts = {}
 
-	# user_reg = якщо зареєстрований
 	if request.user.is_authenticated:
 		user_reg = request.user
 
-	user = User.objects.get(username=name)
-	posts = Post.objects.filter(user_pub=user.id)
-
+	try:
+		user = User.objects.get(username=name)
+		posts = Post.objects.filter(user_pub=user.id)
+	except:
+		return redirect("home")
 	return render(request, "home/user.html",{
 		"user_reg":user_reg,
 		"user":user,
@@ -54,10 +52,15 @@ def chats(request):
 
 def chat(request,chat_id):
 	user = {}
-	chat = Chat.objects.get(chat_id=chat_id)
-	messages = chat.messages.all().order_by("date")
 	if request.user.is_authenticated:
 		user = request.user
+
+	try:
+		chat = Chat.objects.get(chat_id=chat_id)
+		messages = chat.messages.all().order_by("date")
+	except:
+		return redirect("home")
+
 	return render(request, "home/chat.html",{
 			"user":user,
 			"messages":messages,
@@ -117,20 +120,16 @@ def friends(request):
 		})
 
 def post(request,id):
-	posts = Post.objects.filter(pk=id)
-	return render(request, "home/post.html",{"posts":posts.all()})
-	
+	return render(request, "home/post.html",{"id":id})
 
 def add_post(request):
 	user = {}
-	user_friends = {}
 	error = ""
 
 	if request.user.is_authenticated:
 		user = request.user
-		user_friends = list(user.friends.all())
-	# else:
-	# 	return redirect("home")
+	else:
+		return redirect("login")
 
 	form = PostForm()
 
@@ -141,27 +140,21 @@ def add_post(request):
 		form = PostForm(post_data,request.FILES)
 		if form.is_valid():
 			form.save(user)
+			return redirect('user',user.username)
 		else:
 			error = form.errors
 
 	return render(request, "home/add_post.html",{"form":form,"error":error})
 
+def streaming_post(request,id):
+    file, status_code, content_length, content_range = open_file(request,id)
+    response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
 
-# functions for ajax
-
-def gen_rand_id(n):
-	res = ""
-	for i in range(n):res+=random.choice(strings)
-	return res
-
-def del_friends(user_friends,user):
-	for f in range(len(user_friends)):
-		for fc in user_friends[f].chats.all():
-			for uc in user.chats.all():
-				if uc == fc:
-					del user_friends[f]
-					return del_friends(user_friends,user)
-	return user_friends
+    response['Accept-Ranges'] = 'bytes'
+    response['Content-Length'] = str(content_length)
+    response['Cache-Control'] = 'no-cache'
+    response['Content-Range'] = content_range
+    return response
 
 # ajax
 
@@ -200,8 +193,8 @@ def add_chat_ajax(request):
 		chat = Chat(chat_id=gen_rand_id(30))
 		chat.save()
 
-		chat.user.add(user)
-		chat.user.add(friend)
+		chat.users.add(user)
+		chat.users.add(friend)
 
 		user.chats.add(chat)
 		friend.chats.add(chat)
@@ -270,3 +263,10 @@ def comment_reply_ajax(request):
 
 		return JsonResponse({"data_text":"OK"},status=200)
 	return JsonResponse({"data_text":"Fail"}, status=400)
+
+def post_ajax(request):
+	if request.GET["id"]:
+		posts = Post.objects.filter(pk=request.GET["id"])
+	else:
+		posts = Post.objects.all()
+	return render(request, "home/ajax_html/posts.html",{"posts":posts.all()})

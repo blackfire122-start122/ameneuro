@@ -14,6 +14,7 @@ urlpatterns = [
     path('friends', views.friends, name='friends'),
     path('post/<int:id>', views.post, name='post'),
     path('add_post', views.add_post, name='add_post'),
+    path('stream_video_post/<int:id>',views.streaming_post,name='stream_video_post'),
 
     path('ajax/', include("home.urls_ajax"))
     

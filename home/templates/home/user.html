@@ -9,10 +9,7 @@
 </head>
 <body>
 	<header class="header_user">
-		<div>
-			<img class="img_user" src="{{ user.img.url }}" alt="">
-			<p class="user_name">{{ user.username|truncatechars:11 }}</p>
-		</div>
+		<img class="img_user" src="{{ user.img.url }}" alt="">
 		<div class="info_user">
 			<h3>{{ user.friends.all|length }}<br>Friends</h3>
 			<h3>{{ posts|length }}<br>Posts</h3>
@@ -20,15 +17,18 @@
 	</header>
 
 	<div class="menu_user">
-		<button>Add post</button>
+		<b class="user_name">{{ user.username|truncatechars:11 }}</b>
+		{% if user_reg == user %}
+			<a class="add_post" href="{% url "add_post" %}"><img class="add_post_img" src="{% static 'home/images/add.png' %}" alt=""></a>
+		{% endif %}
 	</div>
 
 	<div class="posts">
 		{% for p in posts %}
 			<div class="post">
 				<a href="{% url 'post' p.id %}">
-				{% if p.type_p == 'video' %}
-					<video autoplay class="post_file" src="{{ p.file.url }}"c></video>
+				{% if p.type_p.type_p == 'video' %}
+					<video class="post_file" src="{{ p.file.url }}"c></video>
 				{% else %}
 					<img class="post_file" src="{{ p.file.url }}"c>
 				{% endif %}

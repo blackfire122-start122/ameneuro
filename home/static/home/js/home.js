@@ -3,8 +3,8 @@ function like(e){
 		url: like_ajax,
 		data: {'id':e.id},
 		error: function (response) {
-            console.log(response.data_text)
-        }
+			console.log(response.data_text)
+		}
 	})
 }
 
@@ -29,7 +29,7 @@ function comments(e){
 		success: function (response) {
 			div_menu_post.childNodes[9].innerHTML += response
 			div_menu_post.childNodes[9].style.display = "block"
-        }
+		}
 	})
 
 }
@@ -40,7 +40,7 @@ function like_comment(e){
 		data: {'id':e.id},
 		error: function (response) {
 			console.log(response.data_text)
-        }
+		}
 	})
 }
 
@@ -106,3 +106,50 @@ function copy_link(e){
 	document.execCommand('copy')
 	e.innerText="Скопіювати"
 }
+
+let video
+
+function get_posts(){
+	let posts_div = document.querySelector('.posts')
+
+	$.ajax({
+		url: post_ajax,
+		data: {'id':id_post},
+		error: (data)=> {
+			console.log(data.data_text)
+		},
+		success: (data) =>{
+			posts_div.innerHTML += data
+			video = document.getElementsByClassName("video_post")
+		}
+	})
+}
+
+get_posts()
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+if (!id_post){
+	window.addEventListener('scroll', function(e) {
+		if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
+		    get_posts()
+		    sleep(1000)
+		}
+	})
+}
+
+window.addEventListener('scroll', function(e){
+	for (let i = 0;i<video.length;i++){
+		if (!($(video[i]).position().top > $(window).scrollTop())){
+			video[i].pause()
+		}
+	}
+})
+
+

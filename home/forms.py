@@ -59,9 +59,7 @@ class PostForm(ModelForm):
 		post = ModelForm.save(self)
 		post.user_pub = user
 
-		if str(post.file)[-3:] in imgs:
-			post.type_p = ImgObj
-		if str(post.file)[-3:] in videos:
-			post.type_p = VideoObj
+		if str(post.file)[-3:] in imgs:post.type_p = ImgObj
+		elif str(post.file)[-3:] in videos:post.type_p = VideoObj
 
 		post.save()

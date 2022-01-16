@@ -3,6 +3,8 @@ body{
 .img_user{
 	border-radius: 50%;
 	height: 100px;
+	width: 100px;
+	object-fit:cover;
 }
 .header_user{
 	display: flex;
@@ -25,11 +27,18 @@ body{
 	justify-content: space-around;
 }
 .user_name{
-	width: 100%;
+	font-size: 1.2em;
 }
 
 .menu_user{
-	position: relative;
-	left: 70%;
-	bottom: 2.5em;
+	display: flex;
+	justify-content: space-between;
+}
+
+.add_post{
+	padding-right: 3.5em;
+}
+
+.add_post_img{
+	height: 2em;
 }
