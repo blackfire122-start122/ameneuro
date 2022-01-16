@@ -1,22 +1,35 @@
 body{
-	background: black;
 }
 .img_user{
 	border-radius: 50%;
-	height: 150px;
+	height: 100px;
 }
 .header_user{
-	/*color: white;*/
 	display: flex;
 }
 .posts{
-	/*color: white;*/
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	margin-left: auto;
 	margin-right:auto;
-	width: 30em;
 }
 .post_file{
-	height: 10em;
+	height: 7em;
+	width: 7em;
+   	object-fit:cover;
+}
+
+.info_user{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+.user_name{
+	width: 100%;
+}
+
+.menu_user{
+	position: relative;
+	left: 70%;
+	bottom: 2.5em;
 }

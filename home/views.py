@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat
-from .forms import RegisterForm,LoginForm
+from .models import User,Post,Chat,Comment
+from .forms import RegisterForm,LoginForm,PostForm
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseNotFound,JsonResponse,HttpResponseRedirect,HttpResponse
 
@@ -99,6 +99,71 @@ def sigin_user(request):
 		if form.is_valid():
 			form.save()
 	return render(request, "home/sigin.html", {'form':form})
+	
+def friends(request):
+	user = {}
+	user_friends = {}
+	if request.user.is_authenticated:
+		user = request.user
+		user_friends = list(user.friends.all())
+	else:
+		return redirect("login")
+
+	user_friends = del_friends(user_friends,user)
+
+	return render(request,"home/friends.html",{
+		"user":user,
+		"user_friends":user_friends
+		})
+
+def post(request,id):
+	posts = Post.objects.filter(pk=id)
+	return render(request, "home/post.html",{"posts":posts.all()})
+	
+
+def add_post(request):
+	user = {}
+	user_friends = {}
+	error = ""
+
+	if request.user.is_authenticated:
+		user = request.user
+		user_friends = list(user.friends.all())
+	# else:
+	# 	return redirect("home")
+
+	form = PostForm()
+
+	if request.method=="POST":
+		post_data = request.POST.copy()
+		post_data["user_pub"]=user.id
+
+		form = PostForm(post_data,request.FILES)
+		if form.is_valid():
+			form.save(user)
+		else:
+			error = form.errors
+
+	return render(request, "home/add_post.html",{"form":form,"error":error})
+
+
+# functions for ajax
+
+def gen_rand_id(n):
+	res = ""
+	for i in range(n):res+=random.choice(strings)
+	return res
+
+def del_friends(user_friends,user):
+	for f in range(len(user_friends)):
+		for fc in user_friends[f].chats.all():
+			for uc in user.chats.all():
+				if uc == fc:
+					del user_friends[f]
+					return del_friends(user_friends,user)
+	return user_friends
+
+# ajax
 
 def add_friend_ajax(request):
 	user = {}
@@ -124,37 +189,6 @@ def want_add_friend_ajax(request):
 
 	else:
 		return JsonResponse({"data_text":"Fail"}, status=400)
-
-
-def del_friends(user_friends,user):
-	for f in range(len(user_friends)):
-		for fc in user_friends[f].chats.all():
-			for uc in user.chats.all():
-				if uc == fc:
-					del user_friends[f]
-					return del_friends(user_friends,user)
-	return user_friends
-	
-def friends(request):
-	user = {}
-	user_friends = {}
-	if request.user.is_authenticated:
-		user = request.user
-		user_friends = list(user.friends.all())
-	else:
-		return redirect("login")
-
-	user_friends = del_friends(user_friends,user)
-
-	return render(request,"home/friends.html",{
-		"user":user,
-		"user_friends":user_friends
-		})
-
-def gen_rand_id(n):
-	res = ""
-	for i in range(n):res+=random.choice(strings)
-	return res
 
 def add_chat_ajax(request):
 	user = {}
@@ -182,7 +216,57 @@ def like_ajax(request):
 
 		post = Post.objects.get(pk=int(request.GET["id"]))
 		post.likes.add(user)
-		post.save()
+
+		return JsonResponse({"data_text":"OK"},status=200)
+	return JsonResponse({"data_text":"Fail"}, status=400)
+
+def comment_ajax(request):
+	user = {}
+	if request.user.is_authenticated:
+		user = request.user
+
+		post = Post.objects.get(pk=int(request.GET["id"]))
+
+		return render(request,"home/ajax_html/comments.html",{"post_id":post.id ,"comments":post.comments.all()})
+	return JsonResponse({"data_text":"Fail"}, status=400)
+
+
+def comment_like_ajax(request):
+	user = {}
+	if request.user.is_authenticated:
+		user = request.user
+
+		com = Comment.objects.get(pk=int(request.GET["id"]))
+		com.likes.add(user)
+
+		return JsonResponse({"data_text":"OK"},status=200)
+	return JsonResponse({"data_text":"Fail"}, status=400)
+
+def comment_user_ajax(request):
+	user = {}
+	if request.user.is_authenticated:
+		user = request.user
+
+		com = Comment(user=user,text=request.GET["text"])
+		com.save()
+
+		post = Post.objects.get(pk=int(request.GET["id"]))
+		post.comments.add(com)
+
+		return JsonResponse({"data_text":"OK"},status=200)
+	return JsonResponse({"data_text":"Fail"}, status=400)
+
+def comment_reply_ajax(request):
+	user = {}
+	if request.user.is_authenticated:
+		user = request.user
+
+		com = Comment(user=user,text=request.GET["text"])
+		com.parent = Comment.objects.get(pk=int(request.GET["com_id"]))
+		com.save()
+
+		post = Post.objects.get(pk=int(request.GET["post_id"]))
+		post.comments.add(com)
 
 		return JsonResponse({"data_text":"OK"},status=200)
 	return JsonResponse({"data_text":"Fail"}, status=400)

@@ -11,21 +11,28 @@
 	<header class="header_user">
 		<div>
 			<img class="img_user" src="{{ user.img.url }}" alt="">
-			<p>{{ user.username }}</p>
+			<p class="user_name">{{ user.username|truncatechars:11 }}</p>
 		</div>
-		<div>
-			<h3>Friends</h3>
-			<p>{{ user.friends.all|length }}</p>
+		<div class="info_user">
+			<h3>{{ user.friends.all|length }}<br>Friends</h3>
+			<h3>{{ posts|length }}<br>Posts</h3>
 		</div>
 	</header>
+
+	<div class="menu_user">
+		<button>Add post</button>
+	</div>
+
 	<div class="posts">
 		{% for p in posts %}
 			<div class="post">
+				<a href="{% url 'post' p.id %}">
 				{% if p.type_p == 'video' %}
-					<video autoplay controls class="post_file" src="{{ p.file.url }}"c></video>
+					<video autoplay class="post_file" src="{{ p.file.url }}"c></video>
 				{% else %}
 					<img class="post_file" src="{{ p.file.url }}"c>
 				{% endif %}
+				</a>
 			</div>
 		{% endfor %}
 	</div>

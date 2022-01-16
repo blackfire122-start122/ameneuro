@@ -6,4 +6,9 @@ urlpatterns = [
     path('want_add_friend', views.want_add_friend_ajax, name='want_add_friend_ajax'),
     path('add_chat', views.add_chat_ajax, name='add_chat_ajax'),
     path('like', views.like_ajax, name='like_ajax'),
+    path('comment', views.comment_ajax, name='comment_ajax'),
+    path('comment_like', views.comment_like_ajax, name='comment_like_ajax'),
+    path('comment_user', views.comment_user_ajax, name='comment_user_ajax'),
+    path('comment_reply', views.comment_reply_ajax, name='comment_reply_ajax'),
+
 ]

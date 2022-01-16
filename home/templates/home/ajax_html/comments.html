@@ -1,0 +1,26 @@
+{% load static %}
+
+{% for c in comments %}
+	<div class="comment com_{{ c.id }}">
+		{% if c.parent %}
+		    <p>{{ c.parent }}</p>
+		{% endif %}
+		<img class="img_user_comment" src="{{ c.user.img }}" alt="">
+		<span class="user_name_comment">{{ c.user }}</span>
+		<span class="comment_text"> {{ c }}</span>
+
+		<div class="comment_menu">
+			<time>{{ c.date }}</time>
+			<div>
+				<img id={{ c.id }} onclick="like_comment(this)" class='img_like_comment' src="{% static 'home/images/like.png' %}">
+				<span>{{ c.likes.all|length }}</span>
+			</div>
+			<button value="{{ post_id }}" id="{{ c.id }}" onclick="select_reply(this)" class="reply">reply</button>
+		</div>
+	</div>
+{% endfor %}
+
+<div class="inp_sub_com">
+	<input placeholder="Comment " class=" inp_comment inp_comment{{ post_id }}" type="text">
+	<button class="com_btn" value="{{post_id }}" onclick="comment_user(this)">Comment</button>
+</div>

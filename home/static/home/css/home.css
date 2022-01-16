@@ -5,31 +5,54 @@
 
 body{
 	overflow-x: hidden;
-	/*color: white;*/
 	/*width: 80%;*/
 	position: relative;
 	right: 0;
 	margin: 0 auto;
 }
 
+.h_name{
+	font-style: italic;
+}
+
 .header-home{
-	height: 5em;
+	height: 8em;
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	justify-content: space-between;
 }
 
+.name_user_link{
+	display: flex;
+	justify-content: space-between;
+	height: 2em;
+}
+
+.link_user{
+	height: 100%;
+	position: relative;
+	right: 10px;
+	top: 5px;
+	border-radius: 50%;
+}
+
 .img_user{
 	border-radius: 50%;
-	height: 80%;
+	height: 4em;
+	width: 4em;
+	/*height: 70%;*/
 }
+
 .menu_home{
 	position: fixed;
 	left: 80%;
-	top: 50%;
+	top: 40%;
 	display: flex;
 	flex-direction: column;
+	z-index: 4;
 }
+
 .link_menu{
 	margin-top: 15%;
 	background: white;
@@ -37,9 +60,11 @@ body{
 	height: 40px;
 	border-radius: 50%;
 }
+
 .link_menu:hover{
 	opacity: 0.8;
 }
+
 .friends_and_user{
 	display: flex;
 	overflow-x: auto;
@@ -51,6 +76,9 @@ body{
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	margin-left: 1%;
+	text-decoration: none;
+	color: gray;
 }
 
 .posts{
@@ -58,22 +86,19 @@ body{
 	margin-left: auto;
 	margin-right:auto ;
 }
+
 .menu_post{
 	display: flex;
 	height: 2.5em;
 }
+
 .post_file{
 	width: 100%;
 }
+
 .post_desc{
 	position: relative;
 	left: 10%;
-}
-/*треба js*/
-
-.comment{
-	display: none;
-	background-color: rgba(255, 255, 255, 0.1);
 }
 
 .header_post{
@@ -113,4 +138,109 @@ body{
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.comments{
+	position: relative;
+	display: none;
+	overflow-y: auto;
+	max-height: 30em;
+}
+
+.inp_comment{
+	outline: none;
+	border: none;
+	background: none;
+	/*color: gray;*/
+	font-size: 1.1em;
+}
+
+.inp_sub_com{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	position: sticky;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	padding: 2px;
+}
+
+.com_btn{
+	border: none;
+	background: none;
+	color: blue;
+	font-size: 1.1em;
+}
+
+.comment{
+	background-color: rgba(255, 255, 255, 0.1);
+	margin-top: 1%;
+}
+
+.img_user_comment{
+	height: 2em;
+	border-radius: 50%;
+}
+
+.user_name_comment{
+	font-weight: bold;
+}
+
+.user_name_comment, .comment_text{
+	position: relative;
+	bottom: 0.5em;
+}
+
+.comment_menu{
+	display: flex;
+	position:relative;
+	justify-content: space-around;
+	color: gray;
+}
+
+.img_like_comment{
+	height: 1.2em;
+}
+
+.reply{
+	border: none;
+	background: none;
+	color: gray;
+}
+
+.options_menu{
+	position: absolute;
+	right: 5%;
+	display: none;
+	flex-direction: column;
+	background-color: black;
+	border: 1px solid gray ;
+	border-radius: 5px;
+	z-index: 2;
+	padding: 4px;
+}
+
+.link_options_menu, .link_options_menu_red{
+	text-decoration: none;
+	padding: 1px;
+	font-size: 1.2em;
+	color: white;
+	border: none;
+	background: none;
+}
+
+.link_options_menu_red{
+	color: red;
+}
+
+.back_header{
+	background: rgba(0, 0, 0, 0.85);
+	height: 2em;
+	padding: 5px;
+	margin-bottom: 2%;
+}
+
+.back_img{
+	height: 100%;
 }

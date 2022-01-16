@@ -1,18 +1,19 @@
-from django import forms
 from django.contrib.auth.forms import (UserCreationForm,
 								AuthenticationForm,
 								UserChangeForm,
 								PasswordResetForm)
-from django.forms import(ModelForm, 
+from django.forms import(ModelForm,
+						IntegerField, 
+						CharField,
 						TextInput,
 						PasswordInput, 
 						FileInput,
-						ModelMultipleChoiceField, 
 						Select,
-						FileField,
-						IntegerField,
-						ModelChoiceField)
-from .models import User
+						FileField)
+from .models import User, Post, TypePost
+
+imgs = ["jpg","png"]
+videos = ["mp4"]
 
 class RegisterForm(UserCreationForm):
 	def __init__(self,*args,**kwargs):
@@ -42,3 +43,25 @@ class LoginForm(AuthenticationForm):
 	class Meta:
 		model = User
 		fields = ['username','password']
+
+ImgObj = TypePost.objects.get(type_p='img')
+VideoObj = TypePost.objects.get(type_p='video')
+
+class PostForm(ModelForm):
+	file = FileInput()
+	description = TextInput()
+
+	class Meta:
+		model = Post
+		fields = ['description', 'file']
+
+	def save(self,user):
+		post = ModelForm.save(self)
+		post.user_pub = user
+
+		if str(post.file)[-3:] in imgs:
+			post.type_p = ImgObj
+		if str(post.file)[-3:] in videos:
+			post.type_p = VideoObj
+
+		post.save()

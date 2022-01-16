@@ -12,6 +12,9 @@ urlpatterns = [
     path('user/<name>', views.user, name='user'),
     path('user_find', views.user_find, name='user_find'),
     path('friends', views.friends, name='friends'),
+    path('post/<int:id>', views.post, name='post'),
+    path('add_post', views.add_post, name='add_post'),
+
     path('ajax/', include("home.urls_ajax"))
     
 ]
