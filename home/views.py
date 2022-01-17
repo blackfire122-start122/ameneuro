@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import User,Post,Chat,Comment
-from .forms import RegisterForm,LoginForm,PostForm
+from .forms import RegisterForm,LoginForm,PostForm,ChangeForm
 from django.contrib.auth import login, authenticate
 from django.http import (HttpResponseNotFound,
 						JsonResponse,
@@ -10,10 +10,15 @@ from django.http import (HttpResponseNotFound,
 
 from .services import *
 
+get_posts_how = 5
+
 def home(request):
 	user = {}
 	if request.user.is_authenticated:
 		user = request.user
+		request.session["start_element"] = 0
+		request.session["end_element"] = get_posts_how
+		request.session["end_post_friend"] = None
 	else:
 		return redirect("login")
 
@@ -57,7 +62,7 @@ def chat(request,chat_id):
 
 	try:
 		chat = Chat.objects.get(chat_id=chat_id)
-		messages = chat.messages.all().order_by("date")
+		messages = chat.messages.all()
 	except:
 		return redirect("home")
 
@@ -69,9 +74,6 @@ def chat(request,chat_id):
 
 def user_find(request):
 	user = {}
-
-	# доробити не брати всі
-
 	users = User.objects.all()
 
 	if request.user.is_authenticated:
@@ -105,18 +107,19 @@ def sigin_user(request):
 	
 def friends(request):
 	user = {}
-	user_friends = {}
+	user_friends_not_chat = {}
 	if request.user.is_authenticated:
 		user = request.user
-		user_friends = list(user.friends.all())
+		user_friends_not_chat = list(user.friends.all())
+		# user_friends = user.friends.all()
 	else:
 		return redirect("login")
 
-	user_friends = del_friends(user_friends,user)
+	user_friends_not_chat = del_friends(user_friends_not_chat,user)
 
 	return render(request,"home/friends.html",{
 		"user":user,
-		"user_friends":user_friends
+		"user_friends_not_chat":user_friends_not_chat
 		})
 
 def post(request,id):
@@ -155,6 +158,30 @@ def streaming_post(request,id):
     response['Cache-Control'] = 'no-cache'
     response['Content-Range'] = content_range
     return response
+
+def user_change(request):
+	user = {}
+	form = ChangeForm(instance=request.user)
+
+	error = ''
+
+	if request.user.is_authenticated:
+		user = request.user
+	else:
+		return redirect("login")
+
+	if request.method == 'POST':
+		form = ChangeForm(request.POST,request.FILES,instance=request.user)
+		if form.is_valid():
+			form.save()
+		else:
+			error = form.errors
+
+	return render(request, "home/user_change.html",{
+		"user":user,
+		"form":form,
+		"error":error
+	})
 
 # ajax
 
@@ -253,20 +280,84 @@ def comment_reply_ajax(request):
 	user = {}
 	if request.user.is_authenticated:
 		user = request.user
+		try:
+			com = Comment(user=user,text=request.GET["text"])
+			com.parent = Comment.objects.get(pk=int(request.GET["com_id"]))
+			com.save()
 
-		com = Comment(user=user,text=request.GET["text"])
-		com.parent = Comment.objects.get(pk=int(request.GET["com_id"]))
-		com.save()
-
-		post = Post.objects.get(pk=int(request.GET["post_id"]))
-		post.comments.add(com)
-
-		return JsonResponse({"data_text":"OK"},status=200)
+			post = Post.objects.get(pk=int(request.GET["post_id"]))
+			post.comments.add(com)
+			return JsonResponse({"data_text":"OK"},status=200)
+		except:
+			return JsonResponse({"data_text":"Fail"}, status=400)
 	return JsonResponse({"data_text":"Fail"}, status=400)
-
+	
 def post_ajax(request):
+	posts = {}
 	if request.GET["id"]:
 		posts = Post.objects.filter(pk=request.GET["id"])
 	else:
-		posts = Post.objects.all()
-	return render(request, "home/ajax_html/posts.html",{"posts":posts.all()})
+		if request.user.is_authenticated:
+			user = request.user
+			friends = user.friends.all()
+			posts = Post.objects.filter(user_pub=friends[0])[:0]
+						
+			start = request.session["start_element"]
+			end = request.session["end_element"]
+
+
+			# end_post_friend = request.session["end_post_friend"]
+			
+			# add = True
+
+			# for i in range(friends.count()):
+			# 	if (end_post_friend != None):
+			# 		posts |= Post.objects.filter(user_pub=end_post_friend)[start:end]
+			# 		end_post_friend = None
+			# 		print(i)
+			# 		continue
+			# 	else:
+			# 		posts |= Post.objects.filter(user_pub=friends.all()[i])[start:end]
+				
+			# 	if posts.count() >= (end-start):
+			# 		end_post_friend = friends.all()[i+1].id
+			# 		add = False
+			# 		break
+			# if add:
+			# 	start+=get_posts_how
+			# 	end+=get_posts_how
+			# print(start,end)
+
+
+			# need optimize
+
+			for i in friends.all():
+				posts |= Post.objects.filter(user_pub=i)
+
+			posts = posts[start:end]
+
+			start+=get_posts_how
+			end+=get_posts_how
+
+			request.session["start_element"]=start
+			request.session["end_element"]=end
+			# request.session["end_post_friend"]=end_post_friend
+
+	return render(request, "home/ajax_html/posts.html",{"posts":posts})
+
+def chat_options_ajax(request):
+	user = {}
+	if request.user.is_authenticated:
+		user = request.user
+
+	# try:
+	# 	chat = Chat.objects.get(chat_id=chat_id)
+	# 	messages = chat.messages.all()
+	# except:
+	# 	return redirect("home")
+
+	print(request.GET['chat_id'])
+
+	return render(request, "home/ajax_html/chat_options.html",{
+			"user":user,
+		})

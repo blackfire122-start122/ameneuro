@@ -9,31 +9,60 @@
 	<link rel="stylesheet" href="{% static 'home/css/chat.css' %}">
 </head>
 <body>
-	<h1>chat</h1>
+	<header class="back_header">
+		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
+		<h4 class="userregname">
+			{% for n in chat.users.all %}
+				{% if n != user %}
+					{{ n }}
+				{% endif %}
+			{% endfor %}
+		</h4>
+		<div class="opt_mus">
+<!-- 			<p>musick</p> -->
+			<img onclick="chat_options(this,'{{ chat.id }}')" class='img_opt' src="{% static 'home/images/options.png' %}" alt="">
+		</div>
+	</header>
 	<div class="messages">
 		{% for m in messages.all %}
 			{% if m.user == user %}
 				<div class="my_msgs">
-					<p>{{ m }}</p>
+					<p class="mes">{{ m }}</p>
 					<time class='time'>{{ m.date }}</time>
 				</div>
 			{% else %}
 				<div class="other_msgs">
-					<p>{{ m }}</p>
+					<p class="mes">{{ m }}</p>
 					<time class='time'>{{ m.date }}</time>
 				</div>
 			{% endif %}
-			<br>
 		{% endfor %}
 	</div>
-	<div>
-		<input id="msg_user" type="text">
+	<div class="input_mes_send">
+		<input placeholder='message' id="msg_user" type="text">
 		<button id="btn_send" onclick="btn_send(this)">Send</button>
 	</div>
+	<div class="options"></div>
 	<script>
 		let user = "{{ user }}"
 		let chat = "{{ chat }}"
+		let chat_options_ajax = "{% url 'chat_options_ajax' %}"
 	</script>
+	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/chat.js' %}"></script>
+	<style>
+		body{
+			background-image: url("{{ chat.theme.background.url }}");
+			background-size: cover;
+			background-repeat: round;
+			background-attachment: fixed;
+		}
+		.messages{
+			color: rgb({{ chat.theme.color_mes }});
+		}
+		.my_msgs, .other_msgs{
+			background: rgba({{ chat.theme.color_mes_bg }});
+		}
+	</style>
 </body>
 </html>	

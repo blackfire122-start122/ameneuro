@@ -12,7 +12,7 @@
 	<header class="header-home">
 		<div class="name_user_link">
 			<h1 class="h_name">Ameneuro</h1>
-			<a href="{% url 'user' user %}"><img class="link_user" src="{{ user.img }}"></a>
+			<a href="{% url 'user' user %}"><img class="link_user" src="{{ user.img.url }}"></a>
 		</div>
 		<div class="friends_and_user">
 			{% for f in user.friends.all %}

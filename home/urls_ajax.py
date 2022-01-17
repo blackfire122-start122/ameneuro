@@ -11,5 +11,6 @@ urlpatterns = [
     path('comment_like', views.comment_like_ajax, name='comment_like_ajax'),
     path('comment_user', views.comment_user_ajax, name='comment_user_ajax'),
     path('comment_reply', views.comment_reply_ajax, name='comment_reply_ajax'),
+    path('chat_options', views.chat_options_ajax, name='chat_options_ajax'),
 
 ]

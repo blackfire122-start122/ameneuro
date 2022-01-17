@@ -1,10 +1,61 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
 body{
-	background: black;
-	color: white;
+/*	background: black;
+	color: white;*/
 }
 
 .user{
 	display: flex;
-	background: rgba(255, 255, 255, 0.1);
+	width: 100%;
+	justify-content: space-between;
+	background: rgba(0, 0, 0, 0.1);
 	margin-top: 1%;
+	padding: 5px;
+}
+
+.back_header{
+	display: flex;
+	justify-content: space-between;
+	background: rgba(0, 0, 0, 0.85);
+	height: 2em;
+	padding: 5px;
+	margin-bottom: 2%;
+}
+
+.back_img{
+	height: 100%;
+}
+
+.btn_friend_add, .btn_follow{
+	position: relative;
+	right: 10%;
+	border: none;
+	background: none;
+}
+
+.img_f{
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.img_name{
+	display: flex;
+	align-items: center;
+}
+
+.img_name > h4{
+	position: relative;
+	left: 10px;
+}
+
+.btn_follow{
+	background-color: cyan;
+	border-radius: 20px;
+	padding: 3px 30px;
 }

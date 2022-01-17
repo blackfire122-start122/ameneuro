@@ -8,19 +8,25 @@
 	<link rel="stylesheet" href="{% static 'home/css/user_find.css' %}">
 </head>
 <body>
-	<h1>user_find</h1>
+	<header class="back_header">
+		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
+		<h4 class="userregname">{{ user }}</h4>
+		<input class='find_chat' type="text" placeholder="find">
+	</header>
 	<div class="users">
 		{% for u in users %}
 			{% if u != user %}
 				<div class="user">
-					<div>
-						<h3>{{ u.username }}</h3>
-						<div>
-							<label>friends</label>
-							<label>{{ u.friends.all|length }}</label>
-						</div>
+					<div class="img_name">
+						<img class="img_f" src={{ u.img.url }}>
+						<h4> {{ u.username }}</h4>
 					</div>
-					<button value="{{ u.id }}" onclick="want_add_friend(this)">Add</button>
+					{% if u not in user.friends.all %}
+						<div>
+							<button class="btn_follow" >Follow</button>  
+							<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this)">Add friend</button>
+						</div>
+					{% endif %}
 				</div>
 			{% endif %}
 		{% endfor %}

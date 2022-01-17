@@ -1,6 +1,6 @@
 {% load static %}
 
-{% for p in posts %}
+{% for p in posts.all %}
 	<div class="post post_{{ p.id }}">
 		<div class="header_post">
 			<a class="header_post_user" href="">
@@ -31,6 +31,7 @@
 			<span>{{ p.comments.all|length }}</span>
 		</div>
 		<p class="post_desc">{{ p.description }}</p>
+		<time>{{ p.date }}</time>
 
 		<div class="comments"></div>
 	</div>

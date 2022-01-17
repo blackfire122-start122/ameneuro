@@ -9,16 +9,41 @@
 	<link rel="stylesheet" href="{% static 'home/css/friends.css' %}">
 </head>
 <body>
-	<header>
-		
+	<header class="back_header">
+		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
+		<h4 class="userregname">{{ user }}</h4>
+		<input class='find_chat' type="text" placeholder="find">
 	</header>
 	<div class="friends">
 		{% for u in user.friend_want_add.all %}
-			<p>{{ u }} <button value={{ u.id }} onclick="add_friend(this)">add</button></p>
+			<div class="u_f">
+				<div class="img_name">
+					<img class="img_f" src={{ u.img.url }}>
+					<h4> {{ u.username }}</h4>
+				</div>
+				<button value={{ u.id }} onclick="add_friend(this)">add</button>
+			</div>
 		{% endfor %}
 
-		{% for f in user_friends %}
-			<p>{{ f }} <button value={{ f.id }} onclick="add_chat(this)">write</button></p>
+		{% for u in user.friends.all %}
+			{% if u not in user_friends_not_chat %}
+				<a href="{% url 'user' u.username %}" class="u_f">
+					<div class="img_name">
+						<img class="img_f" src={{ u.img.url }}>
+						<h4> {{ u.username }}</h4>
+					</div>
+				</a>
+			{% endif %}
+		{% endfor %}
+
+		{% for f in user_friends_not_chat %}
+			<div class="u_f">
+				<div class="img_name">
+					<img class="img_f" src={{ f.img.url }}>
+					<h4> {{ f.username }}</h4>
+				</div>
+				<button value={{ f.id }} onclick="add_chat(this)">write</button>
+			</div>
 		{% endfor %}
 	</div>
 	<script>

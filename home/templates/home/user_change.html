@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'home/css/user_change.css' %}">
+</head>
+<body>
+	<header class="back_header">
+		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
+		<h4 class="userregname">{{ user }}</h4>
+		<input class='find_chat' type="text" placeholder="find">
+	</header>
+	<form class="form_change" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.username }}
+		{{ form.first_name }}
+		{{ form.last_name }}
+		{{ form.email }}
+		{{ form.img }}
+
+		<input type="submit">
+		<span>{{ error }}</span>
+	</form>
+</body>
+</html>

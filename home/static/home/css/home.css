@@ -58,9 +58,10 @@ body{
 .link_menu{
 	margin-top: 15%;
 	background: white;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
+	padding: 5px;
 }
 
 .link_menu:hover{

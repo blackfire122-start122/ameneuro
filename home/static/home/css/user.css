@@ -42,3 +42,10 @@ body{
 .add_post_img{
 	height: 2em;
 }
+
+.set_img{
+	position: absolute;
+	right: 1%;
+	top: 1%;
+	height: 35px;
+}

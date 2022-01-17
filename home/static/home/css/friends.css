@@ -1,0 +1,42 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.back_header{
+	display: flex;
+	justify-content: space-between;
+	background: rgba(0, 0, 0, 0.85);
+	height: 2em;
+	padding: 5px;
+	margin-bottom: 2%;
+}
+
+.back_img{
+	height: 100%;
+}
+
+.img_f{
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.img_name{
+	display: flex;
+	align-items: center;
+}
+
+.img_name > h4{
+	position: relative;
+	left: 10px;
+}
+
+.u_f{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	text-decoration: none;
+	color: black;
+}

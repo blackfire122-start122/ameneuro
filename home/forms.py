@@ -63,3 +63,22 @@ class PostForm(ModelForm):
 		elif str(post.file)[-3:] in videos:post.type_p = VideoObj
 
 		post.save()
+
+class ChangeForm(UserChangeForm):
+	class Meta:
+		model = User
+		fields = ['username',
+			'first_name','last_name',
+			'email',
+			'img',
+			]
+		widgets = {
+			'username':TextInput(attrs={
+				'class':'form_name_change','placeholder':"name",'id':'username'}),
+			'first_name':TextInput(attrs={
+				'class':'form_name_change','placeholder':'first_name','id':'first_name'}),
+			'last_name':TextInput(attrs={
+				'class':'form_name_change','placeholder':'last_name','id':'last_name'}),
+			'email':TextInput(attrs={
+				'class':'form_email_change','placeholder':'Email','id':'email'}),
+			}

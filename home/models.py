@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import pre_delete, pre_save
+from django.dispatch.dispatcher import receiver
+
 
 class Comment(models.Model):
 	user = models.ForeignKey("User", on_delete=models.CASCADE,related_name="comment_user")
@@ -20,6 +23,7 @@ class TypePost(models.Model):
 class Post(models.Model):
 	user_pub = models.ForeignKey("User", on_delete=models.CASCADE,null=True,related_name="user_pub_post")
 	type_p = models.ForeignKey("TypePost", on_delete=models.CASCADE,related_name="type_post",null=True)
+	date = models.DateField(auto_now=True)
 	file = models.FileField(upload_to='posts')
 	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_post")
 	description = models.TextField(blank=True,null=True)
@@ -27,6 +31,16 @@ class Post(models.Model):
 	
 	def __str__(self):
 		return self.file.url
+
+class Theme(models.Model):
+	color_mes = models.CharField(max_length=15,null=True)
+	color_mes_bg = models.CharField(max_length=15,null=True)
+	background = models.FileField(upload_to='themes',null=True)
+
+	name = models.CharField(max_length=15,null=True)
+
+	def __str__(self):
+		return self.name
 
 class Message(models.Model):
 	user = models.ForeignKey("User", on_delete=models.CASCADE,null=True)
@@ -39,13 +53,22 @@ class Message(models.Model):
 class Chat(models.Model):
 	users = models.ManyToManyField("User",null=True, related_name="user_chat")
 	messages = models.ManyToManyField("Message",null=True)
+	theme = models.ForeignKey("Theme",null=True,on_delete=models.CASCADE)
 	chat_id = models.CharField(max_length=255,null=True, blank=False)
+
 	def __str__(self):
 		return self.chat_id
 
+class Music(models.Model):
+	file = models.FileField(upload_to='music',null=True,blank=True)
+	name = models.CharField(max_length=15)
+	def __str__(self):
+		return self.name
+
 class User(AbstractUser):
-	img = models.ImageField(upload_to='user_img', null=True, blank=True)
+	img = models.ImageField(upload_to='user_img', default='user_img/user.png', null=True, blank=True)
 	friends = models.ManyToManyField("User",symmetrical=True,null=True,blank=True,related_name="friends_user")
+	music = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_user")
 	chats = models.ManyToManyField("Chat",symmetrical=False,null=True,blank=True,related_name="chats_user")
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
 
@@ -56,3 +79,19 @@ class User(AbstractUser):
 		verbose_name = "User"
 		verbose_name_plural = "Users"
 	pass
+
+@receiver(pre_save, sender=User)
+def User_delete_old(sender, instance, **kwargs):
+	try:
+		old_instance = User.objects.get(id=instance.id)
+		if old_instance.img != 'user_img/user.png':old_instance.img.delete(False)
+	except:
+		pass
+
+@receiver(pre_delete, sender=User)
+def User_delete(sender, instance, **kwargs):
+	instance.img.delete(False)
+
+@receiver(pre_delete, sender=Post)
+def Post_delete(sender, instance, **kwargs):
+	instance.file.delete(False)
