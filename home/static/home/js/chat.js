@@ -8,35 +8,47 @@ conn.onmessage = onmessage
 function onmessage(e){
 	let data = JSON.parse(e.data)
 
-	let div = document.createElement('div')
-	let p = document.createElement('p')
-	let time = document.createElement('time')
+	if (data['type']=='msg'){
+		let div = document.createElement('div')
+		let p = document.createElement('p')
+		let time = document.createElement('time')
 
-	if (data["user"]==user) {
-		div.className = "my_msgs"
-	}else{
-		div.className = "other_msgs"
+		if (data["user"]==user) {
+			div.className = "my_msgs"
+		}else{
+			div.className = "other_msgs"
+		}
+		p.className="mes"
+		p.innerText = data["msg"]
+
+		time.className = 'time'
+		time.innerText = data["time"]
+
+		div.append(p)
+		div.append(time)
+		msg_div.append(div)
+
+	}else if(data['type']=='new_theme'){
+		let div = document.createElement('div')
+		let p = document.createElement('p')
+
+		div.className = "new_theme"
+		p.innerText = data['msg_new_theme']
+
+		div.append(p)
+		msg_div.append(div)
+
 	}
-	p.className="mes"
-	p.innerText = data["msg"]
-
-	time.className = 'time'
-	time.innerText = data["time"]
-
-	div.append(p)
-	div.append(time)
-	msg_div.append(div)
-
 	console.log(data)
 }
 
 conn.onopen = ()=>{
-	conn.send(JSON.stringify({'user': user,'chat':chat}))
+	conn.send(JSON.stringify({'type':'first_msg','user': user,'chat':chat}))
 }
 
 
 function btn_send(btn){
-	conn.send(JSON.stringify({'msg': msg_user.value}))
+	conn.send(JSON.stringify({'type':'msg','msg': msg_user.value}))
 	msg_div
 	msg_user.value = ""
 }
@@ -44,24 +56,35 @@ function btn_send(btn){
 
 let chat_options_change = false
 
-function chat_options(e,chat_id) {
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(parseInt(r)) + componentToHex(parseInt(g)) + componentToHex(parseInt(b));
+}
+
+function chat_options(e) {
 	let messages = document.querySelector(".messages")
 	let input_mes_send = document.querySelector(".input_mes_send")
 	let options_div = document.querySelector(".options")
+	let error = document.querySelector('#error')
+
 
 	if (chat_options_change) {
 		messages.style.display='block'
 		input_mes_send.style.display='block'
-		document.querySelector("body").style.color = "white"
 		chat_options_change = false
 		options_div.style.display = "none"
 		options_div.innerHTML = ''
+		error.style.display='none'
 		return
 	}else{
 		messages.style.display='none'
-		input_mes_send.style.display='none'	
+		input_mes_send.style.display='none'
 		options_div.style.display = "block"
-		document.querySelector("body").style.color = "black"
+		error.style.display='block'
 	}
 
 	$.ajax({
@@ -69,7 +92,22 @@ function chat_options(e,chat_id) {
 		data: {'chat_id':chat_id},
 		success: function (response) {
             options_div.innerHTML = response
+            bg_inp_val = bg_inp_val.split(",")
+			document.querySelector('#bg_op').value = bg_inp_val[3]
+			document.querySelector('#mes_bg').style.opacity = bg_inp_val[3]
+			document.querySelector('#mes_bg').value = rgbToHex(bg_inp_val[0],bg_inp_val[1],bg_inp_val[2])
         }
 	})
 	chat_options_change = true
+
+}
+
+chat_options(null,chat_id)
+
+function inp_ran(e){
+	document.querySelector('#mes_bg').style.opacity = e.value
+}
+
+function new_theme(theme){
+	conn.send(JSON.stringify({'type':'new_theme','theme_id':theme}))
 }

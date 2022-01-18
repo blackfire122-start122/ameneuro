@@ -1,9 +1,43 @@
 {% load static %}
 
-<div class="chat_opt_blocks">
-	<button class="btn_opt"><span>name_opt</span></button><br>
-	<button class="btn_opt"><span>name_opt</span></button><br>
-</div>
-<div class="chat_opt_blocks">
-	<button class="btn_opt"><span>name_opt</span></button><br>
+<form class="form" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="chat_opt_blocks">
+		<div class="opt_value">
+			<p class="opt">name</p>
+			<input class='name_theme' type="text" name="name" value="{{ chat.theme.name }}">
+		</div>
+		<div class="opt_value">
+			<p class="opt">color message</p>
+			<input class="inp_color" value="{{ chat.theme.color_mes }}" name="color_mes" type="color">
+		</div>
+		<div class="opt_value">
+			<p class="opt">background color mesaage</p>
+			<div>
+			<input id="bg_op" oninput="inp_ran(this)" class="inp_op" name='mes_bg_op' value=1 type="range" min=0 max=1 step="0.1" >
+			<input class="inp_color" id="mes_bg" name="color_mes_bg" type="color">
+			</div>
+		</div>
+	</div>
+	<div class="chat_opt_blocks">
+		<div class="opt_value">
+			<p class="opt">img background</p>
+			<div class="theme_file_select">
+				<label for="file_theme" class="file_theme_button">Select fon</label><br>
+				<input id ='file_theme' class='file_theme' value="{{ chat.theme.background }}"" type="file" name="background">
+			</div>
+			<img class="backgraund_opt" src="{{ chat.theme.background.url }}">
+		</div>
+	</div>
+	
+	<div class="how_save">
+		<input name='how_save' class=form_save type="submit" value="Save changes">
+		<input name='how_save' class=form_save type="submit" value="Save theme">
+	</div>
+</form>
+
+<div class="themes_user">
+	{% for i in user.themes.all %}
+		<button onclick="new_theme('{{ i.id }}')" class="theme"><h3>{{ i }}</h3> <img class='theme_bg' src="{{ i.background.url }}"></button>
+	{% endfor %}
 </div>

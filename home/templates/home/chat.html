@@ -20,24 +20,32 @@
 		</h4>
 		<div class="opt_mus">
 <!-- 			<p>musick</p> -->
-			<img onclick="chat_options(this,'{{ chat.id }}')" class='img_opt' src="{% static 'home/images/options.png' %}" alt="">
+			<img onclick="chat_options(this)" class='img_opt' src="{% static 'home/images/options.png' %}" alt="">
 		</div>
 	</header>
 	<div class="messages">
 		{% for m in messages.all %}
-			{% if m.user == user %}
-				<div class="my_msgs">
-					<p class="mes">{{ m }}</p>
-					<time class='time'>{{ m.date }}</time>
-				</div>
+			{% if m.type_m == 'msg' %}
+				{% if m.user == user %}
+					<div class="my_msgs">
+						<p class="mes">{{ m }}</p>
+						<time class='time'>{{ m.date }}</time>
+					</div>
+				{% else %}
+					<div class="other_msgs">
+						<p class="mes">{{ m }}</p>
+						<time class='time'>{{ m.date }}</time>
+					</div>
+				{% endif %}
+
 			{% else %}
-				<div class="other_msgs">
+				<div class="new_theme">
 					<p class="mes">{{ m }}</p>
-					<time class='time'>{{ m.date }}</time>
 				</div>
 			{% endif %}
 		{% endfor %}
 	</div>
+	<span id="error"> {{ error }} </span>
 	<div class="input_mes_send">
 		<input placeholder='message' id="msg_user" type="text">
 		<button id="btn_send" onclick="btn_send(this)">Send</button>
@@ -46,7 +54,9 @@
 	<script>
 		let user = "{{ user }}"
 		let chat = "{{ chat }}"
+		let chat_id = "{{ chat.id }}"
 		let chat_options_ajax = "{% url 'chat_options_ajax' %}"
+		let bg_inp_val = "{{ chat.theme.color_mes_bg }}"
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/chat.js' %}"></script>
@@ -58,7 +68,7 @@
 			background-attachment: fixed;
 		}
 		.messages{
-			color: rgb({{ chat.theme.color_mes }});
+			color: {{ chat.theme.color_mes }};
 		}
 		.my_msgs, .other_msgs{
 			background: rgba({{ chat.theme.color_mes_bg }});

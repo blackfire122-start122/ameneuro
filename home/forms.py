@@ -10,7 +10,7 @@ from django.forms import(ModelForm,
 						FileInput,
 						Select,
 						FileField)
-from .models import User, Post, TypePost
+from .models import User, Post, TypePost, Theme
 
 imgs = ["jpg","png"]
 videos = ["mp4"]
@@ -82,3 +82,9 @@ class ChangeForm(UserChangeForm):
 			'email':TextInput(attrs={
 				'class':'form_email_change','placeholder':'Email','id':'email'}),
 			}
+
+class ThemeForm(ModelForm):
+	mes_bg_op = CharField()
+	class Meta:
+		model = Theme
+		fields = ['color_mes','color_mes_bg','background','mes_bg_op','name']

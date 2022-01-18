@@ -57,7 +57,7 @@ body{
 
 .input_mes_send{
 	position: fixed;
-	bottom: 10px;
+	bottom: 20px;
 	width: 90%;
 	left: 2.5%;
 	display: flex;
@@ -81,6 +81,8 @@ body{
 }
 
 .img_opt{
+	position: relative;
+	right: 20px;
 	height: 80%;
 }
 
@@ -91,11 +93,116 @@ body{
 .chat_opt_blocks{
 	display: flex;
 	flex-direction: column;
+	align-items: start;
 	background-color: rgba(0, 0, 0, 0.8);
 	width: 100%;
+	margin-top: 2%;
 }
 
-.btn_opt{
+.opt{
+	width: 150px;
+	padding: 2px;
+	font-size: 1.1em;
 	border: none;
 	background: none;
+	color: white;
+}
+
+.opt_value{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.backgraund_opt{
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+}
+
+/*.inp_op{
+	width: 20px;
+	font-size: 1.2em;
+}*/
+
+.inp_color{
+	padding: 0;
+	background: none;
+	border: none;
+}
+
+.form_save{
+	border: none;
+	background: none;
+	color: white;
+	font-size: 1.1em;
+}
+
+.form{
+	display: flex;
+	flex-direction: column;
+}
+
+.theme_bg{
+	height: 40px;
+	width: 40px;
+	object-fit: cover;
+}
+
+.theme{
+	font-size: 1.1em;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1%;
+}
+
+.name_theme{
+	border: none;
+	background: none;
+	outline: none;
+	color: white;
+}
+
+.file_theme::-webkit-file-upload-button {
+	display: none;
+}
+
+.file_theme{
+	width: 130px;
+}
+
+.file_theme_button{
+	border-radius: 5px;
+	height: 100%;
+	padding:0 30px;
+
+}
+
+.theme_file_select{
+	position: relative;
+	left: 10%;
+	background: rgba(255,255,255,0.1);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.how_save{
+	display: flex;
+	justify-content: space-around;
+}
+
+#error{
+	display: none;
+	position: relative;
+	top: 3em;
+	left: 20%;
+	color: red;
+}
+
+.new_theme{
+
 }

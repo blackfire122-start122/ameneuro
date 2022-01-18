@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat,Comment
-from .forms import RegisterForm,LoginForm,PostForm,ChangeForm
+from .models import User,Post,Chat,Comment,Theme
+from .forms import RegisterForm,LoginForm,PostForm,ChangeForm,ThemeForm
 from django.contrib.auth import login, authenticate
 from django.http import (HttpResponseNotFound,
 						JsonResponse,
@@ -57,19 +57,49 @@ def chats(request):
 
 def chat(request,chat_id):
 	user = {}
+	error = ''
 	if request.user.is_authenticated:
 		user = request.user
-
 	try:
 		chat = Chat.objects.get(chat_id=chat_id)
 		messages = chat.messages.all()
 	except:
 		return redirect("home")
+	else:
+		redirect('login')
+
+	if request.method=='POST':
+		bg = request.POST['color_mes_bg'].lstrip('#')
+		bg = ','.join([str(int(bg[i:i+2], 16)) for i in (0, 2, 4)])+','+request.POST['mes_bg_op']
+
+		new_rp = request.POST.copy()
+		new_rp['color_mes_bg'] = bg
+
+		how_save = 0
+
+		if request.POST['how_save']=='Save changes':
+			form = ThemeForm(new_rp,request.FILES,instance=chat.theme)
+			how_save = 0
+		elif request.POST['how_save']=='Save theme':
+			form = ThemeForm(new_rp,request.FILES)
+			how_save = 1
+
+		if form.is_valid():
+			if how_save:
+				theme = form.save()
+				user.themes.add(theme)
+				chat.theme = theme
+			else:
+				form.save()
+		else:
+			print(form.errors)
+			error = form.errors
 
 	return render(request, "home/chat.html",{
 			"user":user,
 			"messages":messages,
-			"chat":chat
+			"chat":chat,
+			"error":error
 		})
 
 def user_find(request):
@@ -217,7 +247,11 @@ def add_chat_ajax(request):
 
 		friend = User.objects.get(pk=int(request.GET["id"]))
 		
+		theme = Theme(background='themes/default.jpg', color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+user.username)
+		theme.save()
+
 		chat = Chat(chat_id=gen_rand_id(30))
+		chat.theme=theme
 		chat.save()
 
 		chat.users.add(user)
@@ -347,17 +381,19 @@ def post_ajax(request):
 
 def chat_options_ajax(request):
 	user = {}
+	chat = {}
 	if request.user.is_authenticated:
 		user = request.user
 
-	# try:
-	# 	chat = Chat.objects.get(chat_id=chat_id)
-	# 	messages = chat.messages.all()
-	# except:
-	# 	return redirect("home")
+	try:
+		chat = Chat.objects.get(pk=int(request.GET['chat_id']))
+	except:
+		return JsonResponse({"data_text":"Fail"}, status=400)
 
-	print(request.GET['chat_id'])
+	form = ThemeForm()
 
 	return render(request, "home/ajax_html/chat_options.html",{
 			"user":user,
+			"chat":chat,
+			"form":form
 		})

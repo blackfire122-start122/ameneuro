@@ -35,15 +35,16 @@ class Post(models.Model):
 class Theme(models.Model):
 	color_mes = models.CharField(max_length=15,null=True)
 	color_mes_bg = models.CharField(max_length=15,null=True)
-	background = models.FileField(upload_to='themes',null=True)
+	background = models.FileField(upload_to='themes',default='themes/default.jpg',null=True,blank=False)
 
-	name = models.CharField(max_length=15,null=True)
+	name = models.CharField(max_length=100,null=True)
 
 	def __str__(self):
 		return self.name
 
 class Message(models.Model):
 	user = models.ForeignKey("User", on_delete=models.CASCADE,null=True)
+	type_m = models.CharField(max_length=10,null=True)
 	text = models.TextField() 
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
 	date = models.TimeField(null=True,auto_now=True)
@@ -70,6 +71,7 @@ class User(AbstractUser):
 	friends = models.ManyToManyField("User",symmetrical=True,null=True,blank=True,related_name="friends_user")
 	music = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_user")
 	chats = models.ManyToManyField("Chat",symmetrical=False,null=True,blank=True,related_name="chats_user")
+	themes = models.ManyToManyField("Theme",null=True,blank=True, related_name="themes_user")
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
 
 	def __str__(self):
@@ -83,6 +85,7 @@ class User(AbstractUser):
 @receiver(pre_save, sender=User)
 def User_delete_old(sender, instance, **kwargs):
 	try:
+		print()
 		old_instance = User.objects.get(id=instance.id)
 		if old_instance.img != 'user_img/user.png':old_instance.img.delete(False)
 	except:
@@ -95,3 +98,16 @@ def User_delete(sender, instance, **kwargs):
 @receiver(pre_delete, sender=Post)
 def Post_delete(sender, instance, **kwargs):
 	instance.file.delete(False)
+
+@receiver(pre_delete, sender=Theme)
+def Theme_delete(sender, instance, **kwargs):
+	old_instance = Theme.objects.get(id=instance.id)
+	if old_instance.background.url != '/themes/default.jpg':instance.background.delete(False)
+
+@receiver(pre_save, sender=Theme)
+def Theme_delete_old(sender, instance, **kwargs):
+	try:
+		old_instance = Theme.objects.get(id=instance.id)
+		if instance.background.url!=old_instance.background.url:old_instance.background.delete(False)
+	except:
+		pass
