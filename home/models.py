@@ -48,6 +48,7 @@ class Message(models.Model):
 	text = models.TextField() 
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
 	date = models.TimeField(null=True,auto_now=True)
+	readeble = models.BooleanField(null=True,default=False)
 	def __str__(self):
 		return self.text
 
@@ -85,9 +86,8 @@ class User(AbstractUser):
 @receiver(pre_save, sender=User)
 def User_delete_old(sender, instance, **kwargs):
 	try:
-		print()
 		old_instance = User.objects.get(id=instance.id)
-		if old_instance.img != 'user_img/user.png':old_instance.img.delete(False)
+		if old_instance.img != 'user_img/user.png' and old_instance.img!=instance.img:old_instance.img.delete(False)
 	except:
 		pass
 

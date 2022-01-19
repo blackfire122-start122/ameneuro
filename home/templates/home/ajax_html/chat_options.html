@@ -38,6 +38,10 @@
 
 <div class="themes_user">
 	{% for i in user.themes.all %}
-		<button onclick="new_theme('{{ i.id }}')" class="theme"><h3>{{ i }}</h3> <img class='theme_bg' src="{{ i.background.url }}"></button>
+		<button onclick="new_theme('{{ i.id }}')" class="theme">
+			<h3>{{ i }}</h3>
+			<img class='theme_bg' src="{{ i.background.url }}">
+			<button onclick="delete_theme('{{ i.id }}')">Delete</button>
+		</button>
 	{% endfor %}
 </div>

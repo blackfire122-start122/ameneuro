@@ -45,7 +45,14 @@
 			{% endif %}
 		{% endfor %}
 	</div>
+	{% if messages.last.readeble %}
+		<span class='readeble'>Read</span>
+	{% else %}
+		<span class='readeble'>not read</span>
+	{% endif %}
+
 	<span id="error"> {{ error }} </span>
+	
 	<div class="input_mes_send">
 		<input placeholder='message' id="msg_user" type="text">
 		<button id="btn_send" onclick="btn_send(this)">Send</button>

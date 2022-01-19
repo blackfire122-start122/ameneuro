@@ -4,13 +4,12 @@
 }
 
 body{
-	/*background: black;*/
 	overflow-x: hidden;
 	color: white;
 }
 
 .messages{
-	margin-bottom: 50px;
+	margin-bottom: 60px;
 	margin-top: 50px;
 }
 
@@ -35,7 +34,7 @@ body{
 .time{
 	font-size: 0.8em;
 	position: relative;
-	left: 70%;
+	left: 60%;
 }
 
 .back_header{
@@ -120,11 +119,6 @@ body{
 	object-fit: cover;
 }
 
-/*.inp_op{
-	width: 20px;
-	font-size: 1.2em;
-}*/
-
 .inp_color{
 	padding: 0;
 	background: none;
@@ -205,4 +199,11 @@ body{
 
 .new_theme{
 
+}
+
+.readeble{
+	position: fixed;
+	top: 3%;
+	left: 45%;
+	z-index: 5;
 }

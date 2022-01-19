@@ -38,8 +38,19 @@ function onmessage(e){
 		div.append(p)
 		msg_div.append(div)
 
+	}else if(data['type']=='delete_theme'){
+		let error = document.querySelector('#error')
+		error.innerText = data["error"]
+		error.style.display='block'
+
+	}else if(data['type']=='end_readable'){
+		let readeble = document.querySelector('.readeble')
+		if (data['readeble'] == 'True'){
+			readeble.innerText = 'Read'
+		}else{
+			readeble.innerText = 'not read'
+		}
 	}
-	console.log(data)
 }
 
 conn.onopen = ()=>{
@@ -52,7 +63,6 @@ function btn_send(btn){
 	msg_div
 	msg_user.value = ""
 }
-
 
 let chat_options_change = false
 
@@ -93,16 +103,14 @@ function chat_options(e) {
 		success: function (response) {
             options_div.innerHTML = response
             bg_inp_val = bg_inp_val.split(",")
-			document.querySelector('#bg_op').value = bg_inp_val[3]
-			document.querySelector('#mes_bg').style.opacity = bg_inp_val[3]
-			document.querySelector('#mes_bg').value = rgbToHex(bg_inp_val[0],bg_inp_val[1],bg_inp_val[2])
+						document.querySelector('#bg_op').value = bg_inp_val[3]
+						document.querySelector('#mes_bg').style.opacity = bg_inp_val[3]
+						document.querySelector('#mes_bg').value = rgbToHex(bg_inp_val[0],bg_inp_val[1],bg_inp_val[2])
         }
 	})
 	chat_options_change = true
 
 }
-
-chat_options(null,chat_id)
 
 function inp_ran(e){
 	document.querySelector('#mes_bg').style.opacity = e.value
@@ -110,4 +118,34 @@ function inp_ran(e){
 
 function new_theme(theme){
 	conn.send(JSON.stringify({'type':'new_theme','theme_id':theme}))
+}
+
+function delete_theme(theme){
+	conn.send(JSON.stringify({'type':'delete_theme','theme_id':theme}))
+}
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+window.addEventListener('scroll',()=>{
+	let messages = document.getElementsByClassName("other_msgs")
+	end_mes = messages[messages.length-1]
+	
+	if ($(end_mes).is(':offscreen') && conn.readyState){
+		sleep(200)
+		conn.send(JSON.stringify({'type':'end_readable','user': user}))
+	}
+})
+
+jQuery.expr.filters.offscreen = function(el) {
+  let rect = el.getBoundingClientRect()
+  return ((rect.x + rect.width) < 0 
+          || (rect.y + rect.height) < 0
+          || (rect.x > window.innerWidth || rect.y > window.innerHeight)
+       )
 }
