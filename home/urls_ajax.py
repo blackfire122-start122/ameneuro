@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+# from . import ajax_views
 
 urlpatterns = [
     path('add_friend', views.add_friend_ajax, name='add_friend_ajax'),

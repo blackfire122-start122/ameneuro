@@ -11,19 +11,41 @@
 <body>
 	<header class="back_header">
 		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
-		<h4 class="userregname">{{ user }}</h4>
-		<input class='find_chat' type="text" placeholder="find">
+		<h4 class="username">{{ user }}</h4>
 	</header>
 	<form class="form_change" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{ form.username }}
-		{{ form.first_name }}
-		{{ form.last_name }}
-		{{ form.email }}
-		{{ form.img }}
-
-		<input type="submit">
+		<div class="form_opt">
+			<h3>name</h3>
+			{{ form.username }}
+		</div>
+		<div class="form_opt">
+			<h3>firstname</h3>
+			{{ form.first_name }}
+		</div>
+		<div class="form_opt">
+			<h3>lastname</h3>
+			{{ form.last_name }}
+		</div>
+		<div class="form_opt">
+			<h3>email</h3>
+			{{ form.email }}
+		</div>
+		
 		<span>{{ error }}</span>
+
+		<div class="form_opt">
+			<h3>img</h3>
+			<div class="file_img">
+				<input type="file" name="img" accept="image/*" id="id_img">
+				<label class="img_file" for="id_img">Image</label>
+				<img class="img_user" src="{{ user.img }}">
+			</div>
+		</div>
+		<div class="inputs">
+			<input name='submit' class="submit" type="submit" value="Save changes">
+			<input name='submit' class="exit" type="submit" value="Exit">
+		</div>
 	</form>
 </body>
 </html>

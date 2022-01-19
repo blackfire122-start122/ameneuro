@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import User,Post,Chat,Comment,Theme
 from .forms import RegisterForm,LoginForm,PostForm,ChangeForm,ThemeForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.http import (HttpResponseNotFound,
 						JsonResponse,
 						HttpResponseRedirect,
@@ -192,11 +192,16 @@ def user_change(request):
 	else:return redirect("login")
 
 	if request.method == 'POST':
-		form = ChangeForm(request.POST,request.FILES,instance=request.user)
-		if form.is_valid():
-			form.save()
-		else:
-			error = form.errors
+		print(request.POST)
+		if request.POST['submit'] == 'Save changes':
+			form = ChangeForm(request.POST,request.FILES,instance=request.user)
+			if form.is_valid():
+				form.save()
+			else:
+				error = form.errors
+		elif request.POST['submit'] == 'Exit':
+			logout(request)
+			return redirect('login')
 
 	return render(request, "home/user_change.html",{
 		"user":user,

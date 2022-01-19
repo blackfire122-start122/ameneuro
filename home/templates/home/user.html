@@ -9,9 +9,11 @@
 </head>
 <body>
 	<header class="header_user">
-		<a href="{% url 'user_change' %}">
-			<img class="set_img" src="{% static 'home/images/settings.png' %}" alt="">
-		</a>
+		{% if user_reg == user %}
+			<a href="{% url 'user_change' %}">
+				<img class="set_img" src="{% static 'home/images/settings.png' %}" alt="">
+			</a>
+		{% endif %}
 		<img class="img_user" src="{{ user.img.url }}" alt="">
 		<div class="info_user">
 			<h3>{{ user.friends.all|length }}<br>Friends</h3>
