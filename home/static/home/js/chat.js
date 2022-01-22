@@ -12,6 +12,7 @@ function onmessage(e){
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 		let time = document.createElement('time')
+		let readeble = document.querySelector('.readeble')
 
 		if (data["user"]==user) {
 			div.className = "my_msgs"
@@ -27,6 +28,7 @@ function onmessage(e){
 		div.append(p)
 		div.append(time)
 		msg_div.append(div)
+		readeble.innerText = 'not read'
 
 	}else if(data['type']=='new_theme'){
 		let div = document.createElement('div')
@@ -62,6 +64,7 @@ function btn_send(btn){
 	conn.send(JSON.stringify({'type':'msg','msg': msg_user.value}))
 	msg_div
 	msg_user.value = ""
+	end_readable_send()
 }
 
 let chat_options_change = false
@@ -132,15 +135,7 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-window.addEventListener('scroll',()=>{
-	let messages = document.getElementsByClassName("other_msgs")
-	end_mes = messages[messages.length-1]
-	
-	if ($(end_mes).is(':offscreen') && conn.readyState){
-		sleep(200)
-		conn.send(JSON.stringify({'type':'end_readable','user': user}))
-	}
-})
+window.addEventListener('scroll',end_readable_send)
 
 jQuery.expr.filters.offscreen = function(el) {
   let rect = el.getBoundingClientRect()
@@ -149,3 +144,44 @@ jQuery.expr.filters.offscreen = function(el) {
           || (rect.x > window.innerWidth || rect.y > window.innerHeight)
        )
 }
+
+function end_readable_send(){
+	let readeble = document.querySelector('.readeble')
+
+	if(readeble.innerText=="Read"){return}
+
+	let messages = document.getElementsByClassName("other_msgs")
+	end_mes = messages[messages.length-1]
+	
+	if ($(end_mes).is(':offscreen') && conn.readyState){
+		conn.send(JSON.stringify({'type':'end_readable','user': user}))
+	}
+}
+
+window.addEventListener('scroll',()=>{
+	if(window.scrollY!=0){return}
+	
+	$.ajax({
+		url: chat_get_mess_ajax,
+		data: {'chat_id':chat_id},
+		success: function (response) {
+			msgs = msg_div.innerHTML 
+			msg_div.innerHTML = response+msgs
+			// window.scrollTo(0,1)
+		}
+	})
+})
+
+let height = 20
+let attempt = 5
+
+function scrollToEndPage() {
+	if (height < document.body.scrollHeight){
+	    window.scrollTo(0, height)
+	    attempt++
+	    height = parseInt(height) + attempt
+	}else{
+	    clearInterval(intS);
+	}
+}
+let intS = setInterval(scrollToEndPage,10)

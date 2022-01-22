@@ -2,7 +2,6 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import *
-
 from django.db.models import Max
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -63,35 +62,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
             await self.first_conn()
             return
 
-
         elif self.text_data_json['type']=='end_readable':
             await self.end_readable()
-
-            await self.channel_layer.group_send(
-                self.room_group_name,    
-                {
-                    "type": "chat.message",
-                    "text": self.text_data_json,
-                }
-            )
-
-            return
-
 
         elif self.text_data_json['type']=='new_theme':
             await self.new_theme()
             await self.new_mes(self.text_data_json['type'],self.user.username+" "+self.chat.theme.name)
 
             self.text_data_json["msg_new_theme"]=self.user.username+" "+self.chat.theme.name
-
-            await self.channel_layer.group_send(
-                self.room_group_name,    
-                {
-                    "type": "chat.message",
-                    "text": self.text_data_json,
-                }
-            )
-            return
 
         elif self.text_data_json['type']=='delete_theme':
             await self.delete_theme()
@@ -100,14 +78,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json['type']=='msg':
             await self.new_mes(self.text_data_json['type'],self.text_data_json['msg'])
-            
-            await self.channel_layer.group_send(
-                self.room_group_name,    
-                {
-                    "type": "chat.message",
-                    "text": self.text_data_json,
-                }
-            )
+
+
+        await self.channel_layer.group_send(
+            self.room_group_name,{
+                "type": "chat.message",
+                "text": self.text_data_json,
+            }
+        )
 
     async def chat_message(self, event):
         await self.send(text_data=json.dumps(event["text"]))

@@ -24,7 +24,7 @@
 		</div>
 	</header>
 	<div class="messages">
-		{% for m in messages.all %}
+		{% for m in messages %}
 			{% if m.type_m == 'msg' %}
 				{% if m.user == user %}
 					<div class="my_msgs">
@@ -45,11 +45,13 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-	{% if messages.last.readeble %}
-		<span class='readeble'>Read</span>
-	{% else %}
-		<span class='readeble'>not read</span>
-	{% endif %}
+	{% with end_mes=messages|last %}
+		{% if end_mes.readeble %}
+			<span class='readeble'>Read</span>
+		{% else %}
+			<span class='readeble'>not read</span>
+		{% endif %} 
+	{% endwith %}
 
 	<span id="error"> {{ error }} </span>
 	
@@ -64,6 +66,8 @@
 		let chat_id = "{{ chat.id }}"
 		let chat_options_ajax = "{% url 'chat_options_ajax' %}"
 		let bg_inp_val = "{{ chat.theme.color_mes_bg }}"
+		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
+
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/chat.js' %}"></script>

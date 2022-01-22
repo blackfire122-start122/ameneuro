@@ -11,6 +11,7 @@ from django.http import (HttpResponseNotFound,
 from .services import *
 
 get_posts_how = 5
+get_mes_how = 20
 
 def home(request):
 	user = {}
@@ -55,13 +56,15 @@ def chats(request):
 def chat(request,chat_id):
 	user = {}
 	error = ''
+	request.session['end_mes_wath'] = get_mes_how
 	if request.user.is_authenticated:
 		user = request.user
-		try:
-			chat = Chat.objects.get(chat_id=chat_id)
-			messages = chat.messages.all()
-		except:return redirect("home")
-	else:redirect('login')
+		# try:
+		chat = Chat.objects.get(chat_id=chat_id)
+		messages = list(chat.messages.order_by('-date')[:get_mes_how][::-1])
+
+	# 	except:return redirect("home")
+	# else:redirect('login')
 
 	if request.method=='POST':
 		bg = request.POST['color_mes_bg'].lstrip('#')
@@ -370,3 +373,20 @@ def chat_options_ajax(request):
 			"chat":chat,
 			"form":form
 		})
+
+def chat_get_mess_ajax(request):
+	user = {}
+	chat = {}
+	mess = {}
+	if request.user.is_authenticated:
+		user = request.user
+		try:
+			chat = Chat.objects.get(pk=int(request.GET['chat_id']))
+			if not user in chat.users.all():return JsonResponse({"data_text":"Fail"}, status=400)
+			mess = list(chat.messages.order_by('-date')[request.session['end_mes_wath']:request.session['end_mes_wath']+get_mes_how][::-1])
+		except:return JsonResponse({"data_text":"Fail"}, status=400)
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+
+	request.session['end_mes_wath'] += get_mes_how
+
+	return render(request, "home/ajax_html/mess.html",{"mess":mess})
