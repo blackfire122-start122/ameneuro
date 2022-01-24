@@ -20,8 +20,12 @@ urlpatterns = [
     path('add_post', views.add_post, name='add_post'),
 
     path('stream_video_post/<int:id>',views.streaming_post,name='stream_video_post'),
-    path('ajax/', include("home.urls_ajax"))
     
+    path('streaming_music/<int:id>',views.streaming_music,name='streaming_music'),
+    path('musics', views.musics_all, name='musics'),
+    path('add_music', views.add_music, name='add_music'),
+
+    path('ajax/', include("home.urls_ajax"))
 ]
 
 if settings.DEBUG:

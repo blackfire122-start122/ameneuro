@@ -25,6 +25,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def first_conn(self):
         self.user = User.objects.get(username=self.text_data_json['user'])
         self.chat = Chat.objects.get(chat_id=self.text_data_json['chat'])
+        
+        self.text_data_json['musics_url'] = []
+
+        for u in self.chat.users.all():
+            for m in u.music.all():
+                if not ('/streaming_music/'+str(m.id),m.id) in self.text_data_json['musics_url']:
+                    self.text_data_json['musics_url'].append(('/streaming_music/'+str(m.id),m.id))
+
 
     @database_sync_to_async
     def new_mes(self,type_m,text):
@@ -60,8 +68,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         if self.text_data_json['type']=='first_msg':
             await self.first_conn()
+            self.text_data_json['focus_mus']=1
+            await self.send(text_data=json.dumps(self.text_data_json))
             return
-
+            
         elif self.text_data_json['type']=='end_readable':
             await self.end_readable()
 

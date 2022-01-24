@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import User,Post,Chat,Comment,Theme
-from .forms import RegisterForm,LoginForm,PostForm,ChangeForm,ThemeForm
+
+from .forms import (RegisterForm,
+					LoginForm,
+					PostForm,
+					ChangeForm,
+					ThemeForm,
+					MusicForm)
+
 from django.contrib.auth import login, authenticate, logout
 from django.http import (HttpResponseNotFound,
 						JsonResponse,
@@ -50,21 +57,22 @@ def chats(request):
 	else:return redirect("login")
 
 	return render(request, "home/chats.html",{
-			"user":user
+			"user":user,
 		})
 
 def chat(request,chat_id):
 	user = {}
 	error = ''
 	request.session['end_mes_wath'] = get_mes_how
+	mus = 0
+	
 	if request.user.is_authenticated:
 		user = request.user
-		# try:
-		chat = Chat.objects.get(chat_id=chat_id)
-		messages = list(chat.messages.order_by('-date')[:get_mes_how][::-1])
-
-	# 	except:return redirect("home")
-	# else:redirect('login')
+		try:
+			chat = Chat.objects.get(chat_id=chat_id)
+			messages = list(chat.messages.order_by('-date')[:get_mes_how][::-1])
+		except:return redirect("home")
+	else:redirect('login')
 
 	if request.method=='POST':
 		bg = request.POST['color_mes_bg'].lstrip('#')
@@ -97,7 +105,7 @@ def chat(request,chat_id):
 			"user":user,
 			"messages":messages,
 			"chat":chat,
-			"error":error
+			"error":error,
 		})
 
 def user_find(request):
@@ -176,14 +184,14 @@ def add_post(request):
 	return render(request, "home/add_post.html",{"form":form,"error":error})
 
 def streaming_post(request,id):
-    file, status_code, content_length, content_range = open_file(request,id)
-    response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
+	file, status_code, content_length, content_range = open_file(request,id,'video')
+	response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
 
-    response['Accept-Ranges'] = 'bytes'
-    response['Content-Length'] = str(content_length)
-    response['Cache-Control'] = 'no-cache'
-    response['Content-Range'] = content_range
-    return response
+	response['Accept-Ranges'] = 'bytes'
+	response['Content-Length'] = str(content_length)
+	response['Cache-Control'] = 'no-cache'
+	response['Content-Range'] = content_range
+	return response
 
 def user_change(request):
 	user = {}
@@ -207,6 +215,47 @@ def user_change(request):
 			return redirect('login')
 
 	return render(request, "home/user_change.html",{
+		"user":user,
+		"form":form,
+		"error":error
+	})
+
+def musics_all(request):
+	if request.user.is_authenticated:user = request.user
+	else:return redirect("login")
+
+	return render(request, "home/music_all.html",{
+		"user":user,
+	})
+
+def streaming_music(request,id):
+	file, status_code, content_length, content_range = open_file(request,id,'music')
+	response = StreamingHttpResponse(file, status=status_code, content_type='music/mp3')
+
+	response['Accept-Ranges'] = 'bytes'
+	response['Content-Length'] = str(content_length)
+	response['Cache-Control'] = 'no-cache'
+	response['Content-Range'] = content_range
+
+	return response
+
+def add_music(request):
+	error = ""
+
+	if request.user.is_authenticated:user = request.user
+	else:return redirect("login")
+
+	if request.method == 'POST':
+		form = MusicForm(request.POST,request.FILES)
+		if form.is_valid():
+			user.music.add(form.save())
+			return redirect('musics')
+		else:
+			error = form.errors
+
+	form = MusicForm()
+
+	return render(request, "home/add_music.html",{
 		"user":user,
 		"form":form,
 		"error":error

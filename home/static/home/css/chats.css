@@ -32,19 +32,6 @@
 	color: gray;
 }
 
-.back_header{
-	display: flex;
-	justify-content: space-between;
-	background: rgba(0, 0, 0, 0.85);
-	height: 2em;
-	padding: 5px;
-	margin-bottom: 2%;
-}
-
-.back_img{
-	height: 100%;
-}
-
 .userregname{
 	color: white;
 }
@@ -53,4 +40,8 @@
 	width: 8em;
 	border-radius: 10px;
 	padding: 5px;
+}
+
+main{
+	margin-top: 11%;
 }

@@ -49,3 +49,24 @@ body{
 	top: 1%;
 	height: 35px;
 }
+
+.musics_user{
+	position: relative;
+	bottom: 1em;
+}
+
+.musics{
+	display: none;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.8);
+	color: white;
+	width: 20em;
+	height: 10em;
+	overflow-y: auto;
+	right: 0;
+	padding: 5px;
+}
+
+.music{
+	width: 100%;
+}

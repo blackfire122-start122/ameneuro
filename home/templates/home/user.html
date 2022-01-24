@@ -26,6 +26,14 @@
 		{% if user_reg == user %}
 			<a class="add_post" href="{% url "add_post" %}"><img class="add_post_img" src="{% static 'home/images/add.png' %}" alt=""></a>
 		{% endif %}
+		<div onclick="music_show()" class='musics_user'>
+			<h3>Musics</h3>
+			<div class="musics">
+				{% for m in user.music.all %}
+					<audio class='music' src="{% url 'streaming_music' m.id %}" controls>sound</audio>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
 
 	<div class="posts">
@@ -41,5 +49,6 @@
 			</div>
 		{% endfor %}
 	</div>
+	<script src='{% static "home/js/user.js" %}' ></script>
 </body>
 </html>

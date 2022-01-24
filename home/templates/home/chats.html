@@ -1,19 +1,15 @@
+{% extends 'home/shablons/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Chaats</title>
+{% block title %}Chats{% endblock title %}
+
+{% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/chats.css' %}">
-</head>
-<body>
-	<header class="back_header">
-		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
-		<h4 class="userregname">{{ user }}</h4>
-		<input class='find_chat' type="text" placeholder="find">
-	</header>
-	<div>
+	<h4 class="userregname">{{ user }}</h4>
+	<input class='find_chat' type="text" placeholder="find">
+{% endblock content_header %}
+
+{% block content %}	
+	<div class="chats">
 		{% for ch in user.chats.all %}
 			<a class="chat_link" href="{% url "chat" ch.chat_id %}">
 			{% for user_ch in ch.users.all %}
@@ -31,5 +27,4 @@
 		{% endfor %}
 		</a>
 	</div>
-</body>
-</html>
+{% endblock content %}

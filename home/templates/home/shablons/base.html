@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'home/css/shablons/base.css' %}">
+	<title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+	<header class="back_header">
+		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}">
+		{% block content_header %}
+		{% endblock content_header %}
+	</header>
+	<main>
+		{% block content %}
+		
+		{% endblock content %}
+	</main>
+</body>

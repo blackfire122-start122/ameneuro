@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import IO, Generator
 from django.shortcuts import get_object_or_404
-from .models import Post
+from .models import Post, Music
 
 import random
 import string
@@ -41,10 +41,14 @@ def ranged(file: IO[bytes],start: int = 0,end: int = None,block_size: int = 8192
         file.close()
 
 
-def open_file(request, id) -> tuple:
-    _video = get_object_or_404(Post, pk=id)
+def open_file(request, id, type_s) -> tuple:
+    if type_s == 'video':
+        _file = get_object_or_404(Post, pk=id)
+    elif type_s == 'music':
+        _file = get_object_or_404(Music, pk=id)
+        request.session['music_id'] = id
 
-    path = Path(_video.file.path)
+    path = Path(_file.file.path)
 
     file = path.open('rb')
     file_size = path.stat().st_size

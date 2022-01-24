@@ -24,7 +24,7 @@
 			<p class="opt">img background</p>
 			<div class="theme_file_select">
 				<label for="file_theme" class="file_theme_button">Select fon</label><br>
-				<input id ='file_theme' class='file_theme' value="{{ chat.theme.background }}"" type="file" name="background">
+				<input id ='file_theme' class='file_theme' value="{{ chat.theme.background }}" type="file" name="background">
 			</div>
 			<img class="backgraund_opt" src="{{ chat.theme.background.url }}">
 		</div>
@@ -40,8 +40,8 @@
 	{% for i in user.themes.all %}
 		<button onclick="new_theme('{{ i.id }}')" class="theme">
 			<h3>{{ i }}</h3>
+			<h3 class='btn_delete' onclick="delete_theme('{{ i.id }}')">Delete</h3>
 			<img class='theme_bg' src="{{ i.background.url }}">
-			<button onclick="delete_theme('{{ i.id }}')">Delete</button>
 		</button>
 	{% endfor %}
 </div>

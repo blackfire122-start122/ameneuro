@@ -1,28 +1,27 @@
+{% extends 'home/shablons/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Chat</title>
+{% block title %}Chat{% endblock title %}
+
+{% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/chat.css' %}">
-</head>
-<body>
-	<header class="back_header">
-		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
-		<h4 class="userregname">
-			{% for n in chat.users.all %}
-				{% if n != user %}
-					{{ n }}
-				{% endif %}
-			{% endfor %}
-		</h4>
-		<div class="opt_mus">
-<!-- 			<p>musick</p> -->
-			<img onclick="chat_options(this)" class='img_opt' src="{% static 'home/images/options.png' %}" alt="">
-		</div>
-	</header>
+	<h4 class="userregname">
+		{% for n in chat.users.all %}
+			{% if n != user %}
+				{{ n }}
+			{% endif %}
+		{% endfor %}
+	</h4>
+	<div>
+		<button class="music_btn" onclick="music_show()">music</button>
+		<div class="musics"></div>
+	</div>
+	<div class="opt_mus">
+		<img onclick="chat_options(this)" class='img_opt' src="{% static 'home/images/options.png' %}" alt="">
+	</div>
+{% endblock content_header %}
+
+{% block content %}	
 	<div class="messages">
 		{% for m in messages %}
 			{% if m.type_m == 'msg' %}
@@ -60,6 +59,11 @@
 		<button id="btn_send" onclick="btn_send(this)">Send</button>
 	</div>
 	<div class="options"></div>
+
+	<div class="click_mus" onclick="click_mus(this)">
+		<h1 class="text_for_click">Click for music play</h1>
+	</div>
+
 	<script>
 		let user = "{{ user }}"
 		let chat = "{{ chat }}"
@@ -85,5 +89,4 @@
 			background: rgba({{ chat.theme.color_mes_bg }});
 		}
 	</style>
-</body>
-</html>	
+{% endblock content %}

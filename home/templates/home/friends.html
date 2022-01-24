@@ -1,19 +1,15 @@
+{% extends 'home/shablons/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+{% block title %}Friends{% endblock title %}
+
+{% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/friends.css' %}">
-</head>
-<body>
-	<header class="back_header">
-		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
-		<h4 class="userregname">{{ user }}</h4>
-		<input class='find_chat' type="text" placeholder="find">
-	</header>
+	<h4 class="userregname">{{ user }}</h4>
+	<input class='find_chat' type="text" placeholder="find">
+{% endblock content_header %}
+
+{% block content %}
 	<div class="friends">
 		{% for u in user.friend_want_add.all %}
 			<div class="u_f">
@@ -52,5 +48,4 @@
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/friends.js' %}"></script>
-</body>
-</html>
+{% endblock content %}	

@@ -111,3 +111,7 @@ def Theme_delete_old(sender, instance, **kwargs):
 		if instance.background.url!=old_instance.background.url:old_instance.background.delete(False)
 	except:
 		pass
+
+@receiver(pre_delete, sender=Music)
+def Music_delete(sender, instance, **kwargs):
+	instance.file.delete(False)

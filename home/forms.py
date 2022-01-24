@@ -10,7 +10,7 @@ from django.forms import(ModelForm,
 						FileInput,
 						Select,
 						FileField)
-from .models import User, Post, TypePost, Theme
+from .models import User, Post, TypePost, Theme, Music
 
 imgs = ["jpg","png"]
 videos = ["mp4"]
@@ -86,3 +86,8 @@ class ThemeForm(ModelForm):
 	class Meta:
 		model = Theme
 		fields = ['color_mes','color_mes_bg','background','mes_bg_op','name']
+
+class MusicForm(ModelForm):
+	class Meta:
+		model = Music
+		fields = ["name","file"]

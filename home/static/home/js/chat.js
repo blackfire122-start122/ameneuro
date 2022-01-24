@@ -1,14 +1,35 @@
 let msg_user = document.querySelector("#msg_user")
 let msg_div = document.querySelector('.messages')
+let musics = document.querySelector('.musics')
+let music
 
 // conn = new WebSocket("ws://127.0.0.1:8000/"+"test")
 conn = new WebSocket("ws://"+window.location.hostname+"/"+"test")
 conn.onmessage = onmessage
 
+m_play = true
+m_pause = true
+m_time = true
+
 function onmessage(e){
 	let data = JSON.parse(e.data)
+	if (data['type']=='first_msg'){
+		for (i=0;i<data['musics_url'].length;i++){
+			audio = document.createElement('audio')
 
-	if (data['type']=='msg'){
+			audio.src = data['musics_url'][i][0]
+			audio.controls = true
+			audio.className = 'music'
+			audio.id = data['musics_url'][i][1]
+
+			audio.addEventListener('play',play_m)
+			audio.addEventListener('pause',pause_m)
+			audio.addEventListener('seeked',seeked_m)
+
+			musics.append(audio)
+		}
+		
+	}else if (data['type']=='msg'){
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 		let time = document.createElement('time')
@@ -52,6 +73,29 @@ function onmessage(e){
 		}else{
 			readeble.innerText = 'not read'
 		}
+	}else if(data['type']=='play_mus'){
+		music = document.getElementById(data['m_id'])
+		music.play()
+		setTimeout(()=>{m_play = true},300)
+	}else if(data['type']=='pause_mus'){
+		music.pause()
+		setTimeout(()=>{m_pause = true},300)
+	}else if(data['type']=='seeked'){
+		music.currentTime = data['time']
+		setTimeout(()=>{
+			m_time = true
+			music.play()
+		},300)
+	}else if(data['type']=='get_seeked'){
+	  conn.send(JSON.stringify({'type':'set_seeked','time':music.currentTime, 'm_id':music.id}))
+	}
+	else if(data['type']=='set_seeked'){
+		music = document.getElementById(data['m_id'])
+		music.currentTime = data["time"]
+		setTimeout(()=>{
+			m_time = true
+			music.play()
+		},300)
 	}
 }
 
@@ -127,14 +171,6 @@ function delete_theme(theme){
 	conn.send(JSON.stringify({'type':'delete_theme','theme_id':theme}))
 }
 
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
-
 window.addEventListener('scroll',end_readable_send)
 
 jQuery.expr.filters.offscreen = function(el) {
@@ -185,3 +221,56 @@ function scrollToEndPage() {
 	}
 }
 let intS = setInterval(scrollToEndPage,10)
+
+musics_s = true
+function music_show(){
+  let musics = document.querySelector('.musics')
+  if (musics_s){
+  	musics.style.display = 'block'
+  }else{
+  	musics.style.display = 'none'
+  }
+  musics_s = !musics_s
+}
+
+function play_m(e){
+	music = e.srcElement
+	all_pause(music)
+	if (m_play){
+	  conn.send(JSON.stringify({'type':'play_mus','m_id':music.id}))
+  }
+  m_play = false
+}
+
+function pause_m(e){
+	music = e.srcElement
+	all_pause()
+	if (m_pause){
+	  conn.send(JSON.stringify({'type':'pause_mus'}))
+	}
+	m_pause = false
+}
+
+function seeked_m(e){
+	music = e.srcElement
+	all_pause()
+	if (m_time){
+  	conn.send(JSON.stringify({'type':'seeked','time':music.currentTime}))
+		music.play()
+	}
+	m_time = false
+}
+
+function all_pause(music){
+	let musics = document.getElementsByClassName('music')
+	for (i=0;i<musics.length;i++){
+		if (musics[i]!=music){
+			musics[i].pause()
+		}
+	}
+}
+
+function click_mus(e){
+	e.style.display = "none"
+  conn.send(JSON.stringify({'type':'get_seeked'}))
+}

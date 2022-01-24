@@ -1,0 +1,17 @@
+.back_header{
+	display: flex;
+	position: fixed;
+	z-index: 3;
+	width: 100%;
+	top: 0;
+	justify-content: space-between;
+	background: rgba(0, 0, 0, 0.85);
+	background: rgba(0, 0, 0, 0.5);
+	height: 2em;
+	padding: 5px;
+	margin-bottom: 2%;
+}
+
+.back_img{
+	height: 100%;
+}
