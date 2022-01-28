@@ -1,8 +1,3 @@
-*{
-	margin: 0;
-	padding: 0;
-}
-
 .img_f{
 	height: 40px;
 	width: 40px;
@@ -30,4 +25,17 @@
 
 main{
 	margin-top: 11%;
+}
+
+.none_mes{
+	display: flex;
+	width: 40%;
+}
+
+.write_btn{
+	background: none;
+	border: none;
+	position: relative;
+	bottom:25%;
+	padding: 5%;
 }

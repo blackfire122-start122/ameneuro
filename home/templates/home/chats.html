@@ -20,7 +20,11 @@
 							<h4>{{ user_ch }}</h4>
 							<span class="end_mes" >{{ ch.messages.all.last }} </span>
 						</div>
-						<p>23</p>
+						{% if not ch.messages.all.last.readeble %}
+							<div class="point"></div>
+						{% else %}
+							<div class="point_none"></div>
+						{% endif %}
 					</div>
 				{% endif %}
 			{% endfor %}

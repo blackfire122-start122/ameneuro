@@ -1,3 +1,8 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
 .back_header{
 	display: flex;
 	position: fixed;

@@ -1,0 +1,18 @@
+main{
+	margin-top: 11%;
+}
+
+.name_mus{
+	position: absolute;
+	z-index: 2;
+	left: 1em;
+}
+
+.add_mus{
+	background: gray;
+	text-decoration: none;
+	color: black;
+	font-size: 1.3em;
+	padding: 3px;
+	border-radius: 10px;
+}

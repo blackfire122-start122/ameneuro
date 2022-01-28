@@ -74,6 +74,8 @@ class User(AbstractUser):
 	chats = models.ManyToManyField("Chat",symmetrical=False,null=True,blank=True,related_name="chats_user")
 	themes = models.ManyToManyField("Theme",null=True,blank=True, related_name="themes_user")
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
+	followers = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="followers_user")
+	follow = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="follow_user")
 
 	def __str__(self):
 		return self.username

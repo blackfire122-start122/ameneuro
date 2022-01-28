@@ -1,8 +1,3 @@
-*{
-	margin: 0;
-	padding: 0;
-}
-
 .user_img{
 	height: 40px;
 	width: 40px;
@@ -44,4 +39,16 @@
 
 main{
 	margin-top: 11%;
+}
+
+.point{
+	background: black;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	position: relative;
+	right: 5%;
+}
+.point_none{
+	width: 10px;
 }

@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('add_friend', views.add_friend_ajax, name='add_friend_ajax'),
+    path('follow', views.follow_ajax, name='follow_ajax'),
     path('want_add_friend', views.want_add_friend_ajax, name='want_add_friend_ajax'),
     path('add_chat', views.add_chat_ajax, name='add_chat_ajax'),
     path('post', views.post_ajax, name='post_ajax'),

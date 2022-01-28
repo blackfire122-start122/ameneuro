@@ -13,11 +13,11 @@
 		{% endfor %}
 	</h4>
 	<div>
-		<button class="music_btn" onclick="music_show()">music</button>
+		<img src="{% static 'home/images/music.png' %}" class="music_btn" onclick="music_show()"></img>
 		<div class="musics"></div>
 	</div>
 	<div class="opt_mus">
-		<img onclick="chat_options(this)" class='img_opt' src="{% static 'home/images/options.png' %}" alt="">
+		<img onclick="chat_options(this)" class='img_opt' src="{% static 'home/images/options.png' %}">
 	</div>
 {% endblock content_header %}
 

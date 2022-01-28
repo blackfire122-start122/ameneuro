@@ -38,7 +38,10 @@
 					<img class="img_f" src={{ f.img.url }}>
 					<h4> {{ f.username }}</h4>
 				</div>
-				<button value={{ f.id }} onclick="add_chat(this)">write</button>
+				<div class="none_mes">
+					<p id="{{ f.id }}">More not messages </p>
+					<button class="write_btn" value={{ f.id }} onclick="add_chat(this)"> write</button>
+				</div>
 			</div>
 		{% endfor %}
 	</div>

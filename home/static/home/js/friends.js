@@ -7,6 +7,9 @@ function add_chat(btn) {
             console.log(response.data_text)
         }
 	})
+	btn.disabled=true
+	btn.style.display = "none"
+	document.getElementById(btn.value).style.display = "none"
 }
 
 function add_friend(btn) {

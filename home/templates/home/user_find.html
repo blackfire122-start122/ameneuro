@@ -19,8 +19,13 @@
 						<h4> {{ u.username }}</h4>
 					</div>
 					{% if u not in user.friends.all %}
-						<div>
-							<button class="btn_follow" >Follow</button>  
+						<div class="friend_follow">
+							{% if not u in user.follow.all %}
+							    <button id="{{ u.id }}" value="{{ u.id }}" onclick="follow(this)" class="btn_follow" >Follow</button>
+							{% else %}
+								<p id="{{ u.id }}" class="follow">follow</p>
+							{% endif %}
+
 							<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this)">Add friend</button>
 						</div>
 					{% endif %}
@@ -30,6 +35,7 @@
 	</div>
 	<script>
 		let want_add_friend_ajax = "{% url "want_add_friend_ajax" %}"
+		let follow_ajax = "{% url "follow_ajax" %}"
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/user_friend.js' %}"></script>

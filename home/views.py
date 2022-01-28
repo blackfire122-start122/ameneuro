@@ -19,6 +19,7 @@ from .services import *
 
 get_posts_how = 5
 get_mes_how = 20
+get_user_how = 5
 
 def home(request):
 	user = {}
@@ -27,6 +28,13 @@ def home(request):
 		request.session["start_element"] = 0
 		request.session["end_element"] = get_posts_how
 		request.session["end_post_friend"] = None
+		request.session["start_rec_post"] = 0
+		request.session["end_rec_post"] = get_posts_how
+		request.session["start_rec_user"] = 0
+		request.session["end_rec_user"] = get_user_how
+		request.session["defolt_posts"] = False
+
+
 	else:return redirect("login")
 
 	return render(request, "home/home.html", {
@@ -94,7 +102,7 @@ def chat(request,chat_id):
 			if how_save:
 				theme = form.save()
 				try:
-					user.themes.add(theme)
+					user.themes.add(theme.id)
 					chat.theme = theme
 					chat.save()
 				except:error = 'save error'
@@ -269,7 +277,7 @@ def add_friend_ajax(request):
 		user = request.user
 		try:
 			friend = User.objects.get(pk=int(request.GET["id"]))
-			user.friends.add(friend)
+			user.friends.add(friend.id)
 			user.friend_want_add.remove(friend)
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 		
@@ -282,7 +290,7 @@ def want_add_friend_ajax(request):
 		user = request.user
 		try:
 			friend = User.objects.get(pk=int(request.GET["id"]))
-			friend.friend_want_add.add(user)
+			friend.friend_want_add.add(user.id)
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 		
 		return JsonResponse({"data_text":"OK"}, status=200)
@@ -303,11 +311,11 @@ def add_chat_ajax(request):
 			chat.theme=theme
 			chat.save()
 
-			chat.users.add(user)
-			chat.users.add(friend)
+			chat.users.add(user.id)
+			chat.users.add(friend.id)
 
-			user.chats.add(chat)
-			friend.chats.add(chat)
+			user.chats.add(chat.id)
+			friend.chats.add(chat.id)
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 		
 		return JsonResponse({"data_text":"OK"}, status=200)
@@ -320,7 +328,7 @@ def like_ajax(request):
 		user = request.user
 		try:
 			post = Post.objects.get(pk=int(request.GET["id"]))
-			post.likes.add(user)
+			post.likes.add(user.id)
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 
 		return JsonResponse({"data_text":"OK"},status=200)
@@ -345,7 +353,7 @@ def comment_like_ajax(request):
 
 		try:
 			com = Comment.objects.get(pk=int(request.GET["id"]))
-			com.likes.add(user)
+			com.likes.add(user.id)
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 
 		return JsonResponse({"data_text":"OK"},status=200)
@@ -361,7 +369,7 @@ def comment_user_ajax(request):
 			com.save()
 
 			post = Post.objects.get(pk=int(request.GET["id"]))
-			post.comments.add(com)
+			post.comments.add(com.id)
 
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 
@@ -378,25 +386,59 @@ def comment_reply_ajax(request):
 			com.save()
 
 			post = Post.objects.get(pk=int(request.GET["post_id"]))
-			post.comments.add(com)
+			post.comments.add(com.id)
 			return JsonResponse({"data_text":"OK"},status=200)
 		except:
 			return JsonResponse({"data_text":"Fail"}, status=400)
 	return JsonResponse({"data_text":"Fail"}, status=400)
 	
 def post_ajax(request):
+	# need recomendations and hard work
+
 	posts = {}
 	if request.GET["id"]:
 		posts = Post.objects.filter(pk=request.GET["id"])
 	else:
 		if request.user.is_authenticated:
-			# need recomendations and hard work
 			user = request.user
+
 			start = request.session["start_element"]
 			end = request.session["end_element"]
+
 			try:
 				friends = user.friends.all()
-				posts = Post.objects.filter(user_pub__in=friends)[start:end]
+				follow = user.follow.all()
+				posts = Post.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
+				if len(posts)<get_posts_how:
+					start_rec_post = request.session["start_rec_post"]
+					end_rec_post = request.session["end_rec_post"]
+
+					start_rec_user = request.session["start_rec_user"]
+					end_rec_user = request.session["end_rec_user"]
+
+					rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_user:end_rec_user]
+					posts |= Post.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_post:end_rec_post]
+				
+					if request.session["defolt_posts"]:	
+						start_rec_post = 0
+						end_rec_post = get_posts_how
+						request.session["defolt_posts"] = False
+
+					if len(posts)<get_posts_how:
+						request.session["defolt_posts"] = True
+
+						start_rec_user+=get_user_how
+						end_rec_user+=get_user_how
+
+						request.session["start_rec_user"]=start_rec_user
+						request.session["end_rec_user"]=end_rec_user
+					
+					start_rec_post+=get_posts_how
+					end_rec_post+=get_posts_how
+
+					request.session["start_rec_post"]=start_rec_post
+					request.session["end_rec_post"]=end_rec_post
+
 			except:return JsonResponse({"data_text":"Fail"}, status=400)
 
 			start+=get_posts_how
@@ -439,3 +481,14 @@ def chat_get_mess_ajax(request):
 	request.session['end_mes_wath'] += get_mes_how
 
 	return render(request, "home/ajax_html/mess.html",{"mess":mess})
+
+def follow_ajax(request):
+	if request.user.is_authenticated:
+		user = request.user
+		try:
+			follow_to = User.objects.get(pk=request.GET["id"])
+			follow_to.followers.add(user.id)
+			user.follow.add(follow_to.id)
+		except:return JsonResponse({"data_text":"Fail"}, status=400)
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+	return JsonResponse({"data_text":"OK"}, status=200)
