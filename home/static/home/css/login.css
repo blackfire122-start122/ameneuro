@@ -110,3 +110,7 @@ body {
 .submit:active {
   background-color: #06b;
 }
+
+.error{
+  color: red;
+}

@@ -140,15 +140,20 @@ def login_user(request):
 		if user:
 			login(request, user)
 			return redirect("home")
-		else:error = "error"
+		else:error = form.errors
 	return render(request, "home/login.html",{'form':form,"error":error})
 
 def sigin_user(request):
 	form = RegisterForm()
-	if request.method == "POST":
+	error = ""
+	if request.method == "POST":		
 		form = RegisterForm(request.POST)
-		if form.is_valid():form.save()
-	return render(request, "home/sigin.html", {'form':form})
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			return redirect("home")
+		else:error = form.errors
+	return render(request, "home/sigin.html", {'form':form,"error":error})
 	
 def friends(request):
 	user = {}
@@ -166,8 +171,7 @@ def friends(request):
 		"user_friends_not_chat":user_friends_not_chat
 		})
 
-def post(request,id):
-	return render(request, "home/post.html",{"id":id})
+def post(request,id):return render(request, "home/post.html",{"id":id})
 
 def add_post(request):
 	user = {}
@@ -211,7 +215,6 @@ def user_change(request):
 	else:return redirect("login")
 
 	if request.method == 'POST':
-		print(request.POST)
 		if request.POST['submit'] == 'Save changes':
 			form = ChangeForm(request.POST,request.FILES,instance=request.user)
 			if form.is_valid():
@@ -320,7 +323,6 @@ def add_chat_ajax(request):
 		
 		return JsonResponse({"data_text":"OK"}, status=200)
 	return JsonResponse({"data_text":"Fail"}, status=400)
-	
 
 def like_ajax(request):
 	user = {}
@@ -344,7 +346,6 @@ def comment_ajax(request):
 
 		return render(request,"home/ajax_html/comments.html",{"post_id":post.id ,"comments":post.comments.all()})
 	return JsonResponse({"data_text":"Fail"}, status=400)
-
 
 def comment_like_ajax(request):
 	user = {}

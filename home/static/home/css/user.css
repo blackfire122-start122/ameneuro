@@ -45,7 +45,7 @@ body{
 
 .set_img{
 	position: absolute;
-	right: 1%;
+	right: 3%;
 	top: 1%;
 	height: 35px;
 }
@@ -69,4 +69,21 @@ body{
 
 .music{
 	width: 100%;
+}
+
+.btn_follow, .follow_none{
+	background: none;
+	color: blue;
+	border: none;
+	font-size: 1.1em;
+	position: relative;
+	bottom: 0.8em;
+}
+
+.follow_none{
+	color: gray;
+}
+
+main{
+	margin-top: 11%;
 }

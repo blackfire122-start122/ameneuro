@@ -95,7 +95,8 @@ def User_delete_old(sender, instance, **kwargs):
 
 @receiver(pre_delete, sender=User)
 def User_delete(sender, instance, **kwargs):
-	instance.img.delete(False)
+	old_instance = User.objects.get(id=instance.id)
+	if old_instance.img.url != '/user_img/user.png':instance.img.delete(False)
 
 @receiver(pre_delete, sender=Post)
 def Post_delete(sender, instance, **kwargs):

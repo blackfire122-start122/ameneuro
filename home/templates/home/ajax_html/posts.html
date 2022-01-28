@@ -3,7 +3,7 @@
 {% for p in posts.all %}
 	<div class="post post_{{ p.id }}">
 		<div class="header_post">
-			<a class="header_post_user" href="">
+			<a class="header_post_user" href="{% url 'user' p.user_pub.username %}">
 				<img class="img_user_post" src="{{ p.user_pub.img.url }}" alt="">
 				<h4 class="name_user_post">{{ p.user_pub }}</h4>
 			</a>

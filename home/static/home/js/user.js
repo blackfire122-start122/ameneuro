@@ -9,3 +9,15 @@ function music_show(){
 	}
 	musics_s = !musics_s
 }
+
+function follow(btn) {
+	$.ajax({
+		type: $(this).attr('post'),
+		url: follow_ajax,
+		data: {'id':btn.value},
+	})
+	btn.disabled = true
+	btn.style.color = "gray"
+	btn.style.fontSize = "1em"
+	btn.innerText = "follow"
+}

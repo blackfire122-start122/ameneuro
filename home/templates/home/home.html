@@ -17,7 +17,13 @@
 		<div class="friends_and_user">
 			{% for f in user.friends.all %}
 				<a class="user_header" href="{% url 'user' f.username %}">
-					<img class="img_user" src="{{ f.img }}">
+					<img class="img_user" src="{{ f.img.url }}">
+					<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
+				</a>
+			{% endfor %}
+			{% for f in user.follow.all %}
+				<a class="user_header" href="{% url 'user' f.username %}">
+					<img class="img_user" src="{{ f.img.url }}">
 					<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
 				</a>
 			{% endfor %}

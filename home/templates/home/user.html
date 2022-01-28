@@ -1,19 +1,17 @@
+{% extends 'home/shablons/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>User</title>
+{% block title %}User{% endblock title %}
+
+{% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/user.css' %}">
-</head>
-<body>
+	{% if user_reg == user %}
+		<a href="{% url 'user_change' %}">
+			<img class="set_img" src="{% static 'home/images/settings.png' %}" alt="">
+		</a>
+	{% endif %}
+{% endblock content_header %}
+{% block content %}	
 	<header class="header_user">
-		{% if user_reg == user %}
-			<a href="{% url 'user_change' %}">
-				<img class="set_img" src="{% static 'home/images/settings.png' %}" alt="">
-			</a>
-		{% endif %}
 		<img class="img_user" src="{{ user.img.url }}" alt="">
 		<div class="info_user">
 			<h3>{{ user.friends.all|length }}<br>Friends</h3>
@@ -25,8 +23,12 @@
 	<div class="menu_user">
 		<b class="user_name">{{ user.username|truncatechars:11 }}</b>
 		{% if user_reg == user %}
-			<a class="add_post" href="{% url "add_post" %}"><img class="add_post_img" src="{% static 'home/images/add.png' %}" alt=""></a>
-		{% endif %}
+			<a class="add_post" href="{% url 'add_post' %}"><img class="add_post_img" src="{% static 'home/images/add.png' %}" alt=""></a>
+		{% elif not user in user_reg.friends.all and not user in user_reg.follow.all %}
+		    <button value="{{ user.id }}" class="btn_follow" onclick="follow(this)">Follow</button>
+		{% else %}
+			<p class="follow_none">follow</p>
+		{% endif %}		
 		<div onclick="music_show()" class='musics_user'>
 			<h3>Musics</h3>
 			<div class="musics">
@@ -50,6 +52,9 @@
 			</div>
 		{% endfor %}
 	</div>
+	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src='{% static "home/js/user.js" %}' ></script>
-</body>
-</html>
+	<script>
+		let follow_ajax = "{% url "follow_ajax" %}"
+	</script>
+{% endblock content %}

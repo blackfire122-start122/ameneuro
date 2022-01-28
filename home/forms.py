@@ -19,11 +19,11 @@ class RegisterForm(UserCreationForm):
 	def __init__(self,*args,**kwargs):
 		super().__init__(*args,**kwargs)
 		self.fields['username'].widget = TextInput(attrs={
-				'class':'form_name','placeholder':'username'})
+				'class':'input','placeholder':''})
 		self.fields['password1'].widget = PasswordInput(attrs={
-				'class':'form_pass','placeholder':'pass1'})
+				'class':'input','placeholder':''})
 		self.fields['password2'].widget = PasswordInput(attrs={
-				'class':'form_pass','placeholder':'pass2'})
+				'class':'input','placeholder':''})
 
 	class Meta:
 		model = User
