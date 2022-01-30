@@ -6,7 +6,8 @@ from .forms import (RegisterForm,
 					PostForm,
 					ChangeForm,
 					ThemeForm,
-					MusicForm)
+					MusicForm,
+					MessageForm)
 
 from django.contrib.auth import login, authenticate, logout
 from django.http import (HttpResponseNotFound,
@@ -493,3 +494,29 @@ def follow_ajax(request):
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 	else:return JsonResponse({"data_text":"Fail"}, status=400)
 	return JsonResponse({"data_text":"OK"}, status=200)
+
+def send_file_mes_ajax(request):
+	form = MessageForm()
+	error = ""
+	if request.user.is_authenticated:
+		user = request.user
+	else:
+		return JsonResponse({"data_text":"Fail"}, status=400)
+
+	if request.method == "POST":
+		src = ""
+		data_form = request.POST.copy()
+		data_form['type_m'] = "file"
+		form = MessageForm(data_form,request.FILES)
+		if form.is_valid():
+			mes = form.save()
+			mes.user = user
+			mes.save()
+			src = mes.file.url
+			chat = Chat.objects.get(pk=int(data_form["chat_id"]))
+			chat.messages.add(mes)
+		else:
+			return JsonResponse({"data_text":"Fail"}, status=400)
+		return JsonResponse({"data_text":"OK","src":src}, status=200)
+
+	return render(request,"home/ajax_html/send_file.html",{"form":form})

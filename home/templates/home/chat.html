@@ -37,10 +37,24 @@
 					</div>
 				{% endif %}
 
-			{% else %}
+			{% elif m.type_m == 'new_theme' %}
 				<div class="new_theme">
 					<p class="mes">{{ m }}</p>
 				</div>
+			{% elif m.type_m == 'file' %}
+				{% if m.user == user %}
+					<div class="my_msgs">
+						<img class="img_file_mes" src="{{ m.file.url }}" alt="">
+						<p class="mes">{{ m }}</p>
+						<time class='time'>{{ m.date }}</time>
+					</div>
+				{% else %}
+					<div class="other_msgs">
+						<img class="img_file_mes" src="{{ m.file.url }}" alt="">
+						<p class="mes">{{ m }}</p>
+						<time class='time'>{{ m.date }}</time>
+					</div>
+				{% endif %}
 			{% endif %}
 		{% endfor %}
 	</div>
@@ -55,14 +69,17 @@
 	<span id="error"> {{ error }} </span>
 	
 	<div class="input_mes_send">
-		<input placeholder='message' id="msg_user" type="text">
-		<button id="btn_send" onclick="btn_send(this)">Send</button>
+		<input onkeydown="inp_msg_user(this)" placeholder='message' id="msg_user" type="text">
+		<div class="send_file">
+			<button id="btn_send" onclick="btn_send()">Send</button>
+			<img onclick="send_file_mes()" class="file_img" src="{% static 'home/images/file.png' %}" alt="">
+		</div>
 	</div>
 	<div class="options"></div>
-
-	<div class="click_mus" onclick="click_mus(this)">
+	<div class="file_mes_form"></div>
+<!-- 	<div class="click_mus" onclick="click_mus(this)">
 		<h1 class="text_for_click">Click for music play</h1>
-	</div>
+	</div> -->
 
 	<script>
 		let user = "{{ user }}"
@@ -71,6 +88,7 @@
 		let chat_options_ajax = "{% url 'chat_options_ajax' %}"
 		let bg_inp_val = "{{ chat.theme.color_mes_bg }}"
 		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
+		let send_file_mes_ajax = "{% url 'send_file_mes_ajax' %}"
 
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>

@@ -15,5 +15,5 @@ urlpatterns = [
     path('comment_reply', views.comment_reply_ajax, name='comment_reply_ajax'),
     path('chat_options', views.chat_options_ajax, name='chat_options_ajax'),
     path('chat_get_mess', views.chat_get_mess_ajax, name='chat_get_mess_ajax'),
-
+    path('send_file_mes', views.send_file_mes_ajax, name='send_file_mes_ajax'),
 ]

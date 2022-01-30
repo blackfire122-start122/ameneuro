@@ -97,6 +97,33 @@ function onmessage(e){
 			music.play()
 		},300)
 	}
+	else if(data['type']=='msg_file'){
+		let div = document.createElement('div')
+		let p = document.createElement('p')
+		let img = document.createElement('img')
+		let time = document.createElement('time')
+		let readeble = document.querySelector('.readeble')
+
+		if (data["user"]==user) {
+			div.className = "my_msgs"
+		}else{
+			div.className = "other_msgs"
+		}
+		p.className="mes"
+		p.innerText = data["msg"]
+
+		img.className = "img_file_mes"
+		img.src = data["src"]
+
+		time.className = 'time'
+		time.innerText = data["time"]
+
+		div.append(img)
+		div.append(p)
+		div.append(time)
+		msg_div.append(div)
+		readeble.innerText = 'not read'
+	}
 }
 
 conn.onopen = ()=>{
@@ -104,9 +131,8 @@ conn.onopen = ()=>{
 }
 
 
-function btn_send(btn){
+function btn_send(){
 	conn.send(JSON.stringify({'type':'msg','msg': msg_user.value}))
-	msg_div
 	msg_user.value = ""
 	end_readable_send()
 }
@@ -273,4 +299,64 @@ function all_pause(music){
 function click_mus(e){
 	e.style.display = "none"
   conn.send(JSON.stringify({'type':'get_seeked'}))
+}
+
+let sel_f_vis = true
+
+function send_file_mes(){
+	if (!sel_f_vis) {
+		sel_f_vis = true
+		form_mes.style.display="none"
+		return
+	}
+	sel_f_vis = false
+	$.ajax({
+		url: send_file_mes_ajax,
+		data: {},
+		success: function (response) {
+			form_mes = document.querySelector(".file_mes_form")
+			form_mes.innerHTML = response
+			form_mes.style.display="block"
+		}
+	})
+}
+
+function send_file_mes_btn(btn){
+
+	file = document.querySelector("#id_file").files[0]
+	formdata = new FormData()
+
+	msg = msg_user.value
+	if (!msg) {
+		msg = "file"
+	}
+	formdata.append('csrfmiddlewaretoken',document.querySelector(".form_send_file").childNodes[1].value)
+	formdata.append("text", msg);
+	formdata.append("chat_id", chat_id);
+	formdata.append("file", file);
+
+	$.ajax({
+		type:"POST",
+		url: send_file_mes_ajax,
+		data: formdata,
+    processData: false,
+    contentType: false,
+		success: function (response) {
+			conn.send(JSON.stringify({'type':'msg_file',
+																"src":response["src"],
+																"msg":msg,
+																"user":user,
+																"time":String(new Date()).slice(16,21)
+															}))
+			msg_user.value = ""
+			end_readable_send()
+		}
+	})
+}
+
+function inp_msg_user(inp){
+	if (inp.value == "" || inp.value.split(' ').join('')==""){return}
+	else if(event.key === 'Enter') {
+    btn_send()
+   }
 }

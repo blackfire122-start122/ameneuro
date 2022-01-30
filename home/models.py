@@ -45,7 +45,7 @@ class Theme(models.Model):
 class Message(models.Model):
 	user = models.ForeignKey("User", on_delete=models.CASCADE,null=True)
 	type_m = models.CharField(max_length=10,null=True)
-	text = models.TextField() 
+	text = models.TextField(null=True,blank=True) 
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
 	date = models.TimeField(null=True,auto_now=True)
 	readeble = models.BooleanField(null=True,default=False)
@@ -83,38 +83,49 @@ class User(AbstractUser):
 	class Meta:
 		verbose_name = "User"
 		verbose_name_plural = "Users"
-	pass
 
 @receiver(pre_save, sender=User)
 def User_delete_old(sender, instance, **kwargs):
 	try:
 		old_instance = User.objects.get(id=instance.id)
 		if old_instance.img != 'user_img/user.png' and old_instance.img!=instance.img:old_instance.img.delete(False)
-	except:
-		pass
+	except:pass
 
 @receiver(pre_delete, sender=User)
 def User_delete(sender, instance, **kwargs):
-	old_instance = User.objects.get(id=instance.id)
-	if old_instance.img.url != '/user_img/user.png':instance.img.delete(False)
+	try:
+		old_instance = User.objects.get(id=instance.id)
+		if old_instance.img.url != '/user_img/user.png':instance.img.delete(False)
+	except:pass
 
 @receiver(pre_delete, sender=Post)
 def Post_delete(sender, instance, **kwargs):
-	instance.file.delete(False)
+	try:
+		instance.file.delete(False)
+	except:pass
 
 @receiver(pre_delete, sender=Theme)
 def Theme_delete(sender, instance, **kwargs):
-	old_instance = Theme.objects.get(id=instance.id)
-	if old_instance.background.url != '/themes/default.jpg':instance.background.delete(False)
+	try:
+		old_instance = Theme.objects.get(id=instance.id)
+		if old_instance.background.url != '/themes/default.jpg':instance.background.delete(False)
+	except:pass
 
 @receiver(pre_save, sender=Theme)
 def Theme_delete_old(sender, instance, **kwargs):
 	try:
 		old_instance = Theme.objects.get(id=instance.id)
 		if instance.background.url!=old_instance.background.url:old_instance.background.delete(False)
-	except:
-		pass
+	except:pass
 
 @receiver(pre_delete, sender=Music)
 def Music_delete(sender, instance, **kwargs):
-	instance.file.delete(False)
+	try:
+		instance.file.delete(False)
+	except:pass
+
+@receiver(pre_delete, sender=Message)
+def Messge_delete(sender, instance, **kwargs):
+	try:
+		instance.file.delete(False)
+	except:pass
