@@ -8,11 +8,17 @@
 
 {% block content %}
 	<link rel="stylesheet" href="{% static 'home/css/music_all.css' %}">
-	{% for m in user.music.all %}
-		<h4 class="name_mus">{{ m }}</h4>
-		<audio src="{% url 'streaming_music' m.id %}" controls>sound</audio>
-	{% endfor %}
+
+	<div class="music_all"></div>
+
 	<br>
-	<a class="add_mus" href="{% url "add_music" %}">Add music</a>
+	<a class="add_mus" href="{% url 'add_music' %}">Add music</a>
+	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
+	<script>
+		let play_img = "{% static 'home/images/play.png' %}"
+		let pause_img = "{% static 'home/images/pause.png' %}"
+		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
+		let id_user = "{{ user.id }}"
+	</script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>
 {% endblock content %}

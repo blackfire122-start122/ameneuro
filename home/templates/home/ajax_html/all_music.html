@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
+
+{% for m in music.all %}
+	<div class="audio-player">
+		<h4 class="name_mus">{{ m }}</h4>
+		<audio id="{{ m.id }}" src="{% url 'streaming_music' m.id %}"></audio>
+		<div class="controls">
+			<button value="{{ m.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+			<input id="timeline_{{ m.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
+		</div>
+	</div>
+{% endfor %}

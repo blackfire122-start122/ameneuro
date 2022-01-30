@@ -520,3 +520,7 @@ def send_file_mes_ajax(request):
 		return JsonResponse({"data_text":"OK","src":src}, status=200)
 
 	return render(request,"home/ajax_html/send_file.html",{"form":form})
+
+def musics_all_ajax(request):
+	user_mus = User.objects.get(pk = int(request.GET["id"]))
+	return render(request,"home/ajax_html/all_music.html",{"music":user_mus.music})

@@ -77,9 +77,9 @@
 	</div>
 	<div class="options"></div>
 	<div class="file_mes_form"></div>
-<!-- 	<div class="click_mus" onclick="click_mus(this)">
+	<div class="click_mus" onclick="click_mus(this)">
 		<h1 class="text_for_click">Click for music play</h1>
-	</div> -->
+	</div>
 
 	<script>
 		let user = "{{ user }}"
@@ -89,6 +89,9 @@
 		let bg_inp_val = "{{ chat.theme.color_mes_bg }}"
 		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
 		let send_file_mes_ajax = "{% url 'send_file_mes_ajax' %}"
+
+		let play_img = "{% static 'home/images/play.png' %}"
+		let pause_img = "{% static 'home/images/pause.png' %}"
 
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
