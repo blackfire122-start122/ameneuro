@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import User,Post,Chat,Comment,Theme
-
 from .forms import (RegisterForm,
 					LoginForm,
 					PostForm,
@@ -8,82 +7,85 @@ from .forms import (RegisterForm,
 					ThemeForm,
 					MusicForm,
 					MessageForm)
-
 from django.contrib.auth import login, authenticate, logout
 from django.http import (HttpResponseNotFound,
 						JsonResponse,
 						HttpResponseRedirect,
 						HttpResponse,
 						StreamingHttpResponse)
-
+from django.views.generic import ListView, TemplateView, CreateView
 from .services import *
 
 get_posts_how = 5
 get_mes_how = 20
 get_user_how = 5
 
-def home(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-		request.session["start_element"] = 0
-		request.session["end_element"] = get_posts_how
-		request.session["end_post_friend"] = None
-		request.session["start_rec_post"] = 0
-		request.session["end_rec_post"] = get_posts_how
-		request.session["start_rec_user"] = 0
-		request.session["end_rec_user"] = get_user_how
-		request.session["defolt_posts"] = False
+class home(TemplateView):
+	template_name = "home/home.html"
+	def get(self, request, *args, **kwargs):
+		if request.user.is_authenticated:
+			request.session["start_element"] = 0
+			request.session["end_element"] = get_posts_how
+			request.session["end_post_friend"] = None
+			request.session["start_rec_post"] = 0
+			request.session["end_rec_post"] = get_posts_how
+			request.session["start_rec_user"] = 0
+			request.session["end_rec_user"] = get_user_how
+			request.session["defolt_posts"] = False
+		else:return redirect("login")
+		return super().get(request,*args, **kwargs)
 
+class user(ListView):
+	model = Post
+	context_object_name = "posts"
+	template_name = "home/user.html"
 
-	else:return redirect("login")
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:return redirect("login")
+		self.user_reg = request.user
 
-	return render(request, "home/home.html", {
-		"user": user,
-		})
+		try:self.user = User.objects.get(username=self.kwargs["name"])
+		except:return redirect('home')
 
-def user(request,name):
-	user = {}
-	user_reg = {}
-	posts = {}
+		return super().get(request,*args, **kwargs)
 
-	if request.user.is_authenticated:user_reg = request.user
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context["user"] = self.user
+		context["user_reg"] = self.user_reg
+		return context
 
-	try:
-		user = User.objects.get(username=name)
-		posts = Post.objects.filter(user_pub=user.id)
-	except:return redirect("home")
-	
-	return render(request, "home/user.html",{
-		"user_reg":user_reg,
-		"user":user,
-		"posts":posts
-	})
+	def get_queryset(self):
+		# не брати всі
+		return Post.objects.filter(user_pub=self.user.id)
 
-def chats(request):
-	user = {}
-	if request.user.is_authenticated:user = request.user
-	else:return redirect("login")
+class chats(TemplateView):
+	template_name = "home/chats.html"
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:return redirect("login")
+		return super().get(request,*args, **kwargs)
 
-	return render(request, "home/chats.html",{
-			"user":user,
-		})
+class chat(ListView):
+	context_object_name = "messages"
+	template_name = "home/chat.html"
 
-def chat(request,chat_id):
-	user = {}
-	error = ''
-	request.session['end_mes_wath'] = get_mes_how
-	mus = 0
-	
-	if request.user.is_authenticated:
-		user = request.user
-		try:
-			chat = Chat.objects.get(chat_id=chat_id)
-			messages = list(chat.messages.order_by('-date')[:get_mes_how][::-1])
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:return redirect("login")
+		
+		try:self.chat = Chat.objects.get(chat_id=self.kwargs["chat_id"])
 		except:return redirect("home")
-	else:redirect('login')
+		
+		self.error = ""
+		return super().get(request,*args, **kwargs)
+	
+	def post(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:return redirect("login")
+		
+		try:self.chat = Chat.objects.get(chat_id=self.kwargs["chat_id"])
+		except:return redirect("home")
+		
+		self.error = ""
 
-	if request.method=='POST':
 		bg = request.POST['color_mes_bg'].lstrip('#')
 		bg = ','.join([str(int(bg[i:i+2], 16)) for i in (0, 2, 4)])+','+request.POST['mes_bg_op']
 
@@ -93,7 +95,7 @@ def chat(request,chat_id):
 		how_save = 0
 
 		if request.POST['how_save']=='Save changes':
-			form = ThemeForm(new_rp,request.FILES,instance=chat.theme)
+			form = ThemeForm(new_rp,request.FILES,instance=self.chat.theme)
 			how_save = 0
 		elif request.POST['how_save']=='Save theme':
 			form = ThemeForm(new_rp,request.FILES)
@@ -104,33 +106,39 @@ def chat(request,chat_id):
 				theme = form.save()
 				try:
 					user.themes.add(theme.id)
-					chat.theme = theme
-					chat.save()
+					self.chat.theme = theme
+					self.chat.save()
 				except:error = 'save error'
 			else:form.save()
-		else:error = form.errors
+		else:self.error = form.errors
 
-	return render(request, "home/chat.html",{
-			"user":user,
-			"messages":messages,
-			"chat":chat,
-			"error":error,
-		})
+		return super().get(request,*args, **kwargs)
 
-def user_find(request):
-	user = {}
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context["chat"] = self.chat
+		context["error"] = self.error
+		return context
 
-	# не брати всі
-	try:users = User.objects.all()
-	except:pass
+	def get_queryset(self):
+		return list(self.chat.messages.order_by('-date')[:get_mes_how][::-1])
 
-	if request.user.is_authenticated:
-		user = request.user
+class user_find(ListView):
+	model = User
+	context_object_name = "users"
+	template_name = "home/user_find.html"
 
-	return render(request, "home/user_find.html",{
-			"user":user,
-			"users":users
-		})
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:return redirect("login")
+		return super().get(request,*args, **kwargs)
+
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		return context
+
+	def get_queryset(self):
+		# не брати всі
+		return User.objects.all()
 
 def login_user(request):
 	error = ""
@@ -251,27 +259,15 @@ def streaming_music(request,id):
 
 	return response
 
-def add_music(request):
-	error = ""
+class add_music(CreateView):
+	template_name = 'home/add_music.html'
+	form_class = MusicForm
 
-	if request.user.is_authenticated:user = request.user
-	else:return redirect("login")
-
-	if request.method == 'POST':
-		form = MusicForm(request.POST,request.FILES)
-		if form.is_valid():
-			user.music.add(form.save())
-			return redirect('musics')
-		else:
-			error = form.errors
-
-	form = MusicForm()
-
-	return render(request, "home/add_music.html",{
-		"user":user,
-		"form":form,
-		"error":error
-	})
+	def form_valid(self, form):
+		if self.request.user.is_authenticated:user = self.request.user
+		else:return redirect("login")
+		user.music.add(form.save())
+		return redirect('musics')
 
 # ajax
 

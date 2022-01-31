@@ -4,16 +4,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('chats', views.chats, name='chats'),
-    path('chat/<chat_id>', views.chat, name='chat'),
+    path('', views.home.as_view(), name='home'),
+    path('chats', views.chats.as_view(), name='chats'),
+    path('chat/<chat_id>', views.chat.as_view(), name='chat'),
 
     path('login', views.login_user, name='login'),
     path('sigin', views.sigin_user, name='sigin'),
 
-    path('user/<name>', views.user, name='user'),
+    path('user/<name>', views.user.as_view(), name='user'),
     path('user_change', views.user_change, name='user_change'),
-    path('user_find', views.user_find, name='user_find'),
+    path('user_find', views.user_find.as_view(), name='user_find'),
     path('friends', views.friends, name='friends'),
 
     path('post/<int:id>', views.post, name='post'),
@@ -23,7 +23,7 @@ urlpatterns = [
     
     path('streaming_music/<int:id>',views.streaming_music,name='streaming_music'),
     path('musics', views.musics_all, name='musics'),
-    path('add_music', views.add_music, name='add_music'),
+    path('add_music', views.add_music.as_view(), name='add_music'),
 
     path('ajax/', include("home.urls_ajax"))
 ]
