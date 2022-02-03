@@ -24,6 +24,7 @@ class home(TemplateView):
 	template_name = "home/home.html"
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated:
+			user = request.user
 			request.session["start_element"] = 0
 			request.session["end_element"] = get_posts_how
 			request.session["end_post_friend"] = None
@@ -76,6 +77,7 @@ class chat(ListView):
 		except:return redirect("home")
 		
 		self.error = ""
+		request.session['end_mes_wath'] = get_mes_how
 		return super().get(request,*args, **kwargs)
 	
 	def post(self, request, *args, **kwargs):
@@ -121,6 +123,7 @@ class chat(ListView):
 		return context
 
 	def get_queryset(self):
+		#file неправильно
 		return list(self.chat.messages.order_by('-date')[:get_mes_how][::-1])
 
 class user_find(ListView):
@@ -205,7 +208,7 @@ def add_post(request):
 	return render(request, "home/add_post.html",{"form":form,"error":error})
 
 def streaming_post(request,id):
-	file, status_code, content_length, content_range = open_file(request,id,'video')
+	file, status_code, content_length, content_range = open_file(request,id,'post')
 	response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
 
 	response['Accept-Ranges'] = 'bytes'
@@ -318,7 +321,7 @@ def add_chat_ajax(request):
 			friend.chats.add(chat.id)
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 		
-		return JsonResponse({"data_text":"OK"}, status=200)
+		return JsonResponse({"url":"chat/"+chat.chat_id}, status=200)
 	return JsonResponse({"data_text":"Fail"}, status=400)
 
 def like_ajax(request):
@@ -444,7 +447,7 @@ def post_ajax(request):
 
 			request.session["start_element"]=start
 			request.session["end_element"]=end
-
+	if not posts:return JsonResponse({"info":"None post"}, status=200)
 	return render(request, "home/ajax_html/posts.html",{"posts":posts})
 
 def chat_options_ajax(request):

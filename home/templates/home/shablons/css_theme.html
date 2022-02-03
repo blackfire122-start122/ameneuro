@@ -1,0 +1,17 @@
+<style>
+	body{
+		background-color: {{ user.theme_all.fon_color }};
+		background-image: url("{{ user.theme_all.fon_img }}");
+		background-size: 100%;
+		background-repeat: repeat-y;
+		background-attachment: fixed;
+		color: {{ user.theme_all.text_color }};
+	}
+	.name_user_post, .user_header, .chat_link, .u_f, .write_btn, .add_mus{
+		color: {{ user.theme_all.text_color }};
+	}
+	.back_header{
+		background-color: {{ user.theme_all.header_bg_color }};
+	    opacity:  {{ user.theme_all.header_bg_opacity }};
+	}
+</style>

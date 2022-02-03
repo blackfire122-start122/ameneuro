@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'home',
     'channels',
     'channels_redis',
+    'colorful',
     # "debug_toolbar",
     # 'rest_framework',
 ]

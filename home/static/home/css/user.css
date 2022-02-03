@@ -1,5 +1,3 @@
-body{
-}
 .img_user{
 	border-radius: 50%;
 	height: 100px;
@@ -50,11 +48,6 @@ body{
 	height: 35px;
 }
 
-.musics_user{
-	position: relative;
-	bottom: 1em;
-}
-
 .musics{
 	display: none;
 	position: absolute;
@@ -77,13 +70,8 @@ body{
 	border: none;
 	font-size: 1.1em;
 	position: relative;
-	bottom: 0.8em;
 }
 
 .follow_none{
 	color: gray;
-}
-
-main{
-	margin-top: 11%;
 }

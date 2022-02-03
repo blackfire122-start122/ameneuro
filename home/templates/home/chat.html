@@ -28,12 +28,12 @@
 				{% if m.user == user %}
 					<div class="my_msgs">
 						<p class="mes">{{ m }}</p>
-						<time class='time'>{{ m.date }}</time>
+						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% else %}
 					<div class="other_msgs">
 						<p class="mes">{{ m }}</p>
-						<time class='time'>{{ m.date }}</time>
+						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% endif %}
 
@@ -46,13 +46,13 @@
 					<div class="my_msgs">
 						<img class="img_file_mes" src="{{ m.file.url }}" alt="">
 						<p class="mes">{{ m }}</p>
-						<time class='time'>{{ m.date }}</time>
+						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% else %}
 					<div class="other_msgs">
 						<img class="img_file_mes" src="{{ m.file.url }}" alt="">
 						<p class="mes">{{ m }}</p>
-						<time class='time'>{{ m.date }}</time>
+						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% endif %}
 			{% endif %}

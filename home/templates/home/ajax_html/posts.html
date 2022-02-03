@@ -1,5 +1,4 @@
 {% load static %}
-
 {% for p in posts.all %}
 	<div class="post post_{{ p.id }}">
 		<div class="header_post">
@@ -17,16 +16,25 @@
 		</div>
 		{% if p.type_p.type_p == 'video' %}
 			<video autoplay class="video_post post_file" controls controlsList="nodownload" controls prelad="auto">
-				<source src="{% url 'stream_video_post' p.id %}">
+				<source src="{% url 'stream_post' p.id %}">
 			</video>
-		{% else %}
+		{% elif p.type_p.type_p == 'img' %}
 			<img class="post_file" src="{{ p.file.url }}">
+		{% elif p.type_p.type_p == 'audio' %}
+			<div class="audio-player">
+				<h4 class="name_mus">audio</h4>
+				<audio class="audio_ap" id="audio_{{ p.id }}" src="{% url 'stream_post' p.id %}"></audio>
+				<div class="controls">
+					<button value="{{ p.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+					<input id="timeline_{{ p.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
+				</div>
+			</div>
 		{% endif %}
 		<div class="menu_post">
-			<img id={{ p.id }} onclick="like(this)" src="{% static 'home/images/like.png' %}" alt="">
+			<img id={{ p.id }} onclick="like(this)" src="{{ user.theme_all.like_img }}" alt="">
 			<span>{{ p.likes.all|length }}</span>
 			
-			<img id={{ p.id }} onclick="comments(this)" src="{% static 'home/images/comment.png' %}" alt="">
+			<img id={{ p.id }} onclick="comments(this)" src="{{ user.theme_all.comment_img }}" alt="">
 
 			<span>{{ p.comments.all|length }}</span>
 		</div>

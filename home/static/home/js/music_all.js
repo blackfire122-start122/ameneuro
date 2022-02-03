@@ -1,46 +1,54 @@
 function toggleAudio (btn) {
-  audio = document.getElementById(btn.value)
+  audio = document.getElementById("audio_"+btn.value)
   timeline = document.getElementById("timeline_"+btn.value)
   
-  update_time = false
-  setInterval(()=>{
-    update_time = true
-  },1000)
+  audio.addEventListener("play",play_audio)
+  audio.addEventListener("pause",pause_audio)
   
   audio.ontimeupdate = ()=>{
-    if (update_time){
-      const percentagePosition = (100*audio.currentTime) / audio.duration
-      timeline.style.backgroundSize = `${percentagePosition}% 100%`
-      timeline.value = percentagePosition
-      update_time = false
-    }
+    const percentagePosition = (100*audio.currentTime) / audio.duration
+    timeline.style.backgroundSize = `${percentagePosition}% 100%`
+    timeline.value = percentagePosition
   }
 
   if (audio.paused) {
+    all_pause()
     audio.play()
-    btn.childNodes[0].src = play_img
   } else {
     audio.pause()
-    btn.childNodes[0].src = pause_img
   }
 }
 
 function changeSeek(timeline) {
-  audio = document.getElementById(String(timeline.id).slice(9))
+  audio = document.getElementById("audio_"+String(timeline.id).slice(9))
+  audio.ontimeupdate = null
   const time = (timeline.value * audio.duration) / 100
   audio.currentTime = time
 
   const percentagePosition = (100*audio.currentTime) / audio.duration
   timeline.style.backgroundSize = `${percentagePosition}% 100%`
   timeline.value = percentagePosition
+
+
+  audio.addEventListener("play",play_audio)
+  audio.addEventListener("pause",pause_audio)
+  
+  all_pause()
+  audio.play()
+
 }
 
-$.ajax({
-  type: $(this).attr('post'),
-  url: musics_all_ajax,
-  data: {'id':id_user},
-  success: function (response) {
-     document.querySelector(".music_all").innerHTML = response
+function all_pause(){
+  audios = document.getElementsByClassName("audio_ap")
+  for (i=audios.length-1;i>=0;--i){
+    audios[i].pause()
   }
-})
+}
 
+function play_audio(e){
+  e.target.parentNode.childNodes[5].childNodes[1].childNodes[0].src = play_img
+}
+
+function pause_audio(e){
+  e.target.parentNode.childNodes[5].childNodes[1].childNodes[0].src = pause_img
+}

@@ -8,6 +8,7 @@
 .img_name{
 	display: flex;
 	align-items: center;
+	min-width: 50%;
 }
 
 .img_name > h4{
@@ -20,11 +21,6 @@
 	width: 100%;
 	justify-content: space-between;
 	text-decoration: none;
-	color: black;
-}
-
-main{
-	margin-top: 11%;
 }
 
 .none_mes{

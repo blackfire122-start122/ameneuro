@@ -1,6 +1,5 @@
 body{
 	overflow-x: hidden;
-	color: white;
 }
 
 .messages{
@@ -30,6 +29,8 @@ body{
 	font-size: 0.8em;
 	position: relative;
 	left: 60%;
+	display: block;
+	max-width: 100px;
 }
 
 .input_mes_send{

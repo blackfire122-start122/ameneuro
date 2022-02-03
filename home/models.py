@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import pre_delete, pre_save
 from django.dispatch.dispatcher import receiver
+from colorful.fields import RGBColorField
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Comment(models.Model):
@@ -47,7 +49,7 @@ class Message(models.Model):
 	type_m = models.CharField(max_length=10,null=True)
 	text = models.TextField(null=True,blank=True) 
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
-	date = models.TimeField(null=True,auto_now=True)
+	date = models.DateTimeField(null=True,auto_now=True)
 	readeble = models.BooleanField(null=True,default=False)
 	def __str__(self):
 		return self.text
@@ -67,6 +69,28 @@ class Music(models.Model):
 	def __str__(self):
 		return self.name
 
+class AllTheme(models.Model):
+	name = models.CharField(max_length=100,null=True)
+	fon_color = RGBColorField(null=True)
+	text_color = RGBColorField(null=True)
+	header_bg_color = RGBColorField(null=True)
+	header_bg_opacity = models.FloatField(null=True,default=1,validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
+
+	fon_img = models.ImageField(upload_to="theme_all/fon_imgs",default=None,null=True,blank=True)
+	comment_img = models.ImageField(upload_to="theme_all/comment_imgs",default="comment_imgs/comment.png",null=True)
+	like_img = models.ImageField(upload_to="theme_all/like_imgs",default="like_imgs/like.png",null=True)
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = "AllTheme"
+		verbose_name_plural = "AllThemes"
+
+def def_all_theme():
+	try:return AllTheme.objects.get(name="default").id
+	except:return None
+
 class User(AbstractUser):
 	img = models.ImageField(upload_to='user_img', default='user_img/user.png', null=True, blank=True)
 	friends = models.ManyToManyField("User",symmetrical=True,null=True,blank=True,related_name="friends_user")
@@ -76,6 +100,8 @@ class User(AbstractUser):
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
 	followers = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="followers_user")
 	follow = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="follow_user")
+
+	theme_all = models.ForeignKey("AllTheme",default=def_all_theme,null=True,blank=True,on_delete=models.CASCADE,related_name="theme_all_user")
 
 	def __str__(self):
 		return self.username

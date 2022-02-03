@@ -19,6 +19,15 @@
 		let pause_img = "{% static 'home/images/pause.png' %}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 		let id_user = "{{ user.id }}"
+		
+		$.ajax({
+		  type: $(this).attr('post'),
+		  url: musics_all_ajax,
+		  data: {'id':id_user},
+		  success: function (response) {
+		     document.querySelector(".music_all").innerHTML = response
+		  }
+		})
 	</script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>
 {% endblock content %}

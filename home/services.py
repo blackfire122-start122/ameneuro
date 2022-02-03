@@ -42,7 +42,7 @@ def ranged(file: IO[bytes],start: int = 0,end: int = None,block_size: int = 8192
 
 
 def open_file(request, id, type_s) -> tuple:
-    if type_s == 'video':
+    if type_s == 'post':
         _file = get_object_or_404(Post, pk=id)
     elif type_s == 'music':
         _file = get_object_or_404(Music, pk=id)

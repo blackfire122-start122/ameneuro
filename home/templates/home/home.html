@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ameneuro</title>
 	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
 </head>
 <body>
 	<header class="header-home">
@@ -49,16 +50,13 @@
 		let comment_reply_ajax = "{% url 'comment_reply_ajax' %}"
 		let post_ajax = "{% url 'post_ajax' %}"
 		let id_post = "{{ id }}"
-		
+		let play_img = "{% static 'home/images/play.png' %}"
+		let pause_img = "{% static 'home/images/pause.png' %}"
 
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/home.js' %}"></script>
-
-	<style>
-/*		body{
-			background-image: url("{% static 'home/images/fon.png' %}");
-		}*/
-	</style>
+	<script src='{% static "home/js/music_all.js" %}' ></script>
+	{% include 'home/shablons/css_theme.html' %}
 </body>
 </html>

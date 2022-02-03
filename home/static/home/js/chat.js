@@ -22,6 +22,7 @@ function onmessage(e){
 			`" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="/static/home/images/pause.png" alt=""></button><input id="timeline_` + data['musics_url'][i][1] + 
 			`" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0"></div></div>`	
 		}
+
 	}else if (data['type']=='msg'){
 		let div = document.createElement('div')
 		let p = document.createElement('p')
@@ -37,7 +38,7 @@ function onmessage(e){
 		p.innerText = data["msg"]
 
 		time.className = 'time'
-		time.innerText = data["time"]
+		time.innerText = data["time"].slice(11,16)
 
 		div.append(p)
 		div.append(time)
@@ -84,7 +85,9 @@ function onmessage(e){
 			music.play()
 			},300)
 	}else if(data['type']=='get_seeked'){
-		conn.send(JSON.stringify({'type':'set_seeked','time':music.currentTime, 'm_id':music.id}))
+		if (music){
+			conn.send(JSON.stringify({'type':'set_seeked','time':music.currentTime, 'm_id':music.id}))
+		}
 	}
 	else if(data['type']=='set_seeked'){
 		music.ontimeupdate = null
@@ -378,7 +381,6 @@ function toggleAudio (btn) {
 	music = document.getElementById(btn.value)
 
 	if (music.paused) {
-		console.log("play")
 		music.play()
 	} else {
 		music.pause()
@@ -387,6 +389,7 @@ function toggleAudio (btn) {
 
 function changeSeek(timeline) {
 	music = document.getElementById(String(timeline.id).slice(9))
+	music.ontimeupdate = null
 	const time = (timeline.value * music.duration) / 100
 	music.currentTime = time
 

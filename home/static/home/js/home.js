@@ -119,8 +119,10 @@ function get_posts(){
 			console.log(data.data_text)
 		},
 		success: (data) =>{
-			posts_div.innerHTML += data
-			video = document.getElementsByClassName("video_post")
+			if (data["info"] != "None post"){
+				posts_div.innerHTML += data
+				video = document.getElementsByClassName("video_post")
+			}
 		}
 	})
 }
@@ -139,7 +141,7 @@ if (!id_post){
 	window.addEventListener('scroll', function(e) {
 		if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
 		    get_posts()
-		    sleep(1000)
+		    sleep(700)
 		}
 	})
 }
