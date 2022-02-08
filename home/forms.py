@@ -10,7 +10,7 @@ from django.forms import(ModelForm,
 						FileInput,
 						Select,
 						FileField)
-from .models import User, Post, TypePost, Theme, Music, Message
+from .models import User, Post, TypePost, Theme, Music, Message, AllTheme
 
 imgs = ["jpg","png"]
 videos = ["mp4"]
@@ -96,3 +96,22 @@ class MessageForm(ModelForm):
 	class Meta:
 		model = Message
 		fields = ["file","type_m","text"]
+
+class AllThemeForm(ModelForm):
+	class Meta:
+		model = AllTheme
+
+		fields_text = ["name","header_bg_opacity"]
+
+		fields = ["name",
+				"fon_color",
+				"text_color",
+				"header_bg_color",
+				"header_bg_opacity",
+				"fon_img",
+				"comment_img",
+				"like_img",
+		]+fields_text
+		
+		widgets = {i:TextInput(attrs={'class':'form_name_change','placeholder':i}) for i in fields_text}
+		

@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat,Comment,Theme
+from .models import User,Post,Chat,Comment,Theme,AllTheme
 from .forms import (RegisterForm,
 					LoginForm,
 					PostForm,
 					ChangeForm,
 					ThemeForm,
 					MusicForm,
-					MessageForm)
+					MessageForm,
+					AllThemeForm)
 from django.contrib.auth import login, authenticate, logout
 from django.http import (HttpResponseNotFound,
 						JsonResponse,
@@ -219,7 +220,8 @@ def streaming_post(request,id):
 
 def user_change(request):
 	user = {}
-	form = ChangeForm(instance=request.user)
+	form_user = ChangeForm(instance=request.user)
+	form_theme = AllThemeForm(instance=request.user.theme_all)
 
 	error = ''
 
@@ -228,18 +230,34 @@ def user_change(request):
 
 	if request.method == 'POST':
 		if request.POST['submit'] == 'Save changes':
-			form = ChangeForm(request.POST,request.FILES,instance=request.user)
-			if form.is_valid():
-				form.save()
+			form_user = ChangeForm(request.POST,request.FILES,instance=request.user)
+			if form_user.is_valid():
+				form_user.save()
 			else:
-				error = form.errors
+				error = form_user.errors
 		elif request.POST['submit'] == 'Exit':
 			logout(request)
 			return redirect('login')
 
+		elif request.POST['submit'] == 'Save changes theme':
+			if request.POST["name"]!="default":
+				if user.theme_all.name == "default":
+					new_theme_all = AllTheme(name=request.POST["name"])
+					new_theme_all.save()
+					user.theme_all = new_theme_all
+					user.save()
+				form_theme = AllThemeForm(request.POST,request.FILES,instance=request.user.theme_all)
+				
+				if form_theme.is_valid():
+					form_theme.save()
+				else:error = form_theme.errors
+			else:error = "this teheme name reserve"
+
+
 	return render(request, "home/user_change.html",{
 		"user":user,
-		"form":form,
+		"form_user":form_user,
+		"form_theme":form_theme,
 		"error":error
 	})
 

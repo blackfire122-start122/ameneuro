@@ -4,10 +4,8 @@ function add_chat(btn) {
 		url: add_chat_ajax,
 		data: {'id':btn.value},
 		error: function (response) {
-            console.log(response.data_text)
         },
         success: function(response){
-        	console.log(response)
         	window.location.href = response["url"]
         }
 	})

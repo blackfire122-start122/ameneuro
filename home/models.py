@@ -77,8 +77,8 @@ class AllTheme(models.Model):
 	header_bg_opacity = models.FloatField(null=True,default=1,validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
 
 	fon_img = models.ImageField(upload_to="theme_all/fon_imgs",default=None,null=True,blank=True)
-	comment_img = models.ImageField(upload_to="theme_all/comment_imgs",default="comment_imgs/comment.png",null=True)
-	like_img = models.ImageField(upload_to="theme_all/like_imgs",default="like_imgs/like.png",null=True)
+	comment_img = models.ImageField(upload_to="theme_all/comment_imgs",default="theme_all/comment_imgs/comment.png",null=True)
+	like_img = models.ImageField(upload_to="theme_all/like_imgs",default="theme_all/like_imgs/like.png",null=True)
 
 	def __str__(self):
 		return self.name
@@ -100,7 +100,6 @@ class User(AbstractUser):
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
 	followers = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="followers_user")
 	follow = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="follow_user")
-
 	theme_all = models.ForeignKey("AllTheme",default=def_all_theme,null=True,blank=True,on_delete=models.CASCADE,related_name="theme_all_user")
 
 	def __str__(self):
@@ -109,6 +108,16 @@ class User(AbstractUser):
 	class Meta:
 		verbose_name = "User"
 		verbose_name_plural = "Users"
+
+@receiver(pre_delete, sender=AllTheme)
+def AllTheme_delete(sender, instance, **kwargs):
+	try:
+		old_instance = AllTheme.objects.get(id=instance.id)
+		if old_instance.comment_img != 'theme_all/comment_imgs/comment.png' and old_instance.like_img != 'theme_all/like_imgs/like.png':
+			old_instance.comment_img.delete(False)
+			old_instance.fon_img.delete(False)
+			old_instance.like_img.delete(False)
+	except:pass
 
 @receiver(pre_save, sender=User)
 def User_delete_old(sender, instance, **kwargs):

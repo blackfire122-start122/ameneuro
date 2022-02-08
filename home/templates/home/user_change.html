@@ -1,51 +1,110 @@
+{% extends 'home/shablons/base.html' %}
 {% load static %}
+{% block title %}Change{% endblock title %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+{% block content_header %}
+	<h4 class="username">{{ user }}</h4>
+{% endblock content_header %}
+
+{% block content %}
 	<link rel="stylesheet" href="{% static 'home/css/user_change.css' %}">
-</head>
-<body>
-	<header class="back_header">
-		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}" alt="">
-		<h4 class="username">{{ user }}</h4>
-	</header>
-	<form class="form_change" method="post" enctype="multipart/form-data">
-		{% csrf_token %}
-		<div class="form_opt">
-			<h3>name</h3>
-			{{ form.username }}
-		</div>
-		<div class="form_opt">
-			<h3>firstname</h3>
-			{{ form.first_name }}
-		</div>
-		<div class="form_opt">
-			<h3>lastname</h3>
-			{{ form.last_name }}
-		</div>
-		<div class="form_opt">
-			<h3>email</h3>
-			{{ form.email }}
-		</div>
-		
-		<span>{{ error }}</span>
-
-		<div class="form_opt">
-			<h3>img</h3>
-			<div class="file_img">
-				<input type="file" name="img" accept="image/*" id="id_img">
-				<label class="img_file" for="id_img">Image</label>
-				<img class="img_user" src="{{ user.img }}">
+	<span>{{ error }}</span>
+	<div class="changes_btn">
+		<div>
+			<div class="change_btn" onclick="change_btn(this)">
+				<h2>User</h2>
 			</div>
+			
+			<form class="form_change" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="form_opt">
+					{{ form_user.username }}
+				</div>
+				<div class="form_opt">
+					{{ form_user.first_name }}
+				</div>
+				<div class="form_opt">
+					{{ form_user.last_name }}
+				</div>
+				<div class="form_opt">
+					{{ form_user.email }}
+				</div>
+				
+				<span>{{ error }}</span>
+
+				<div class="form_opt">
+					<h3>img</h3>
+					<div class="file_img">
+						<input type="file" name="img" accept="image/*" id="id_img">
+						<label class="img_file" for="id_img">Image</label>
+						<img class="img_user" src="{{ user.img }}">
+					</div>
+				</div>
+				<div class="inputs">
+					<input name='submit' class="submit" type="submit" value="Save changes">
+					<input name='submit' class="exit" type="submit" value="Exit">
+				</div>
+			</form>
 		</div>
-		<div class="inputs">
-			<input name='submit' class="submit" type="submit" value="Save changes">
-			<input name='submit' class="exit" type="submit" value="Exit">
+
+
+		<div>
+			<div class="change_btn" onclick="change_btn(this)">
+				<h2>Theme</h2>
+			</div>
+
+			<form class="form_change" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="form_opt">
+					{{ form_theme.name }}
+				</div>
+				<div class="form_opt">
+					{{ form_theme.fon_color }}
+				</div>
+				<div class="form_opt">
+					{{ form_theme.text_color }}
+				</div>
+				<div class="form_opt">
+					{{ form_theme.header_bg_color }}
+				</div>
+				<div class="form_opt">
+					{{ form_theme.header_bg_opacity }}
+				</div>
+
+
+				<div class="form_opt">
+					<h3>fon_img</h3>
+					<div class="file_img">
+						<input type="file" name="fon_img" accept="image/*" id="id_img">
+						<label class="img_file" for="id_img">Image</label>
+						<img class="img_user" src="{{ user.theme_all.fon_img }}">
+					</div>
+				</div>
+
+				<div class="form_opt">
+					<h3>comment_img</h3>
+					<div class="file_img">
+						<input type="file" name="comment_img" accept="image/*" id="id_img">
+						<label class="img_file" for="id_img">Image</label>
+						<img class="img_user" src="{{ user.theme_all.comment_img }}">
+					</div>
+				</div>
+
+				<div class="form_opt">
+					<h3>like_img</h3>
+					<div class="file_img">
+						<input type="file" name="like_img" accept="image/*" id="id_img">
+						<label class="img_file" for="id_img">Image</label>
+						<img class="img_user" src="{{ user.theme_all.like_img }}">
+					</div>
+				</div>
+
+				<div class="inputs">
+					<input name='submit' class="submit" type="submit" value="Save changes theme">
+				</div>
+			</form>
 		</div>
-	</form>
-</body>
-</html>
+	</div>
+
+	<script src="{% static 'home/js/user_change.js' %}" ></script>
+{% endblock content %}
