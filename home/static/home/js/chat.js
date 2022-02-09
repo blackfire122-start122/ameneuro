@@ -3,7 +3,7 @@ let msg_div = document.querySelector('.messages')
 let musics = document.querySelector('.musics')
 let music
 
-conn = new WebSocket("ws://"+window.location.hostname+"/"+"test")
+conn = new WebSocket("ws://"+window.location.hostname+"/"+chat)
 conn.onmessage = onmessage
 
 m_play = true
@@ -125,11 +125,34 @@ function onmessage(e){
 		msg_div.append(div)
 		readeble.innerText = 'not read'
 	}
+	else if (data['type']=='spread'){
+		let div = document.createElement('div')
+		let a = document.createElement('a')
+		let time = document.createElement('time')
+		let readeble = document.querySelector('.readeble')
+
+		if (data["user"]==user) {
+			div.className = "my_msgs"
+		}else{
+			div.className = "other_msgs"
+		}
+		a.className="mes"
+		a.href=data["msg"]
+		a.innerText = data["msg"]
+
+		time.className = 'time'
+		time.innerText = data["time"].slice(11,16)
+
+		div.append(p)
+		div.append(time)
+		msg_div.append(div)
+		readeble.innerText = 'not read'
+	}
 	console.log(data)
 }
 
 conn.onopen = ()=>{
-	conn.send(JSON.stringify({'type':'first_msg','user': user,'chat':chat}))
+	conn.send(JSON.stringify({'type':'first_msg','user': user}))
 }
 
 function btn_send(){

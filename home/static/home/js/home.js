@@ -27,8 +27,9 @@ function comments(e){
 		url: comment_ajax,
 		data: {'id':e.id},
 		success: function (response) {
-			div_menu_post.childNodes[9].innerHTML += response
-			div_menu_post.childNodes[9].style.display = "block"
+			console.log(div_menu_post.childNodes)
+			div_menu_post.childNodes[11].innerHTML += response
+			div_menu_post.childNodes[11].style.display = "block"
 		}
 	})
 
@@ -154,4 +155,19 @@ window.addEventListener('scroll', function(e){
 	}
 })
 
+let id_spread
 
+function spread(id){
+	id_spread = id
+	document.querySelector(".friens_spread").style.display = "block"
+}
+
+function close_spr(){
+	document.querySelector(".friens_spread").style.display="none"
+}
+function spread_btn(ch_id){
+	conn = new WebSocket("ws://"+window.location.hostname+"/"+ch_id)
+	conn.onopen = ()=>{
+		conn.send(JSON.stringify({'type':'spread','user': user,'msg':"http://"+window.location.hostname+"/post/"+id_spread}))
+	}
+}

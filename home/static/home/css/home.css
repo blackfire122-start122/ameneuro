@@ -5,7 +5,6 @@
 
 body{
 	overflow-x: hidden;
-	/*width: 80%;*/
 	position: relative;
 	right: 0;
 	margin: 0 auto;
@@ -185,7 +184,9 @@ body{
 
 .img_user_comment{
 	height: 2em;
+	width: 2em;
 	border-radius: 50%;
+	object-fit: cover;
 }
 
 .user_name_comment{
@@ -252,4 +253,30 @@ body{
 
 main{
 	margin-top: 11%;
+}
+
+.audio-player {
+  width: 90%;
+  position: relative;
+	right: 0;
+  margin: 0 auto;
+}
+
+.friens_spread{
+	position: fixed;
+	bottom: 0;
+	display: none;
+	width: 50%;
+	padding: 10px;
+	background: red;
+	border-radius: 20px;
+}
+
+.f_spread{
+	display: flex;
+	justify-content: space-around;
+}
+
+.name_spr{
+	width: 2em;
 }

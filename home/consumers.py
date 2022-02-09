@@ -24,8 +24,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def first_conn(self):
         self.user = User.objects.get(username=self.text_data_json['user'])
-        self.chat = Chat.objects.get(chat_id=self.text_data_json['chat'])
-        
+        self.chat = Chat.objects.get(chat_id=self.room_name)
         self.text_data_json['musics_url'] = []
 
         for u in self.chat.users.all():
@@ -40,7 +39,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         mes.save()
         self.text_data_json["time"]=str(mes.date)
         self.text_data_json["user"]=str(self.user)
-
         self.chat.messages.add(mes)
 
     @database_sync_to_async
@@ -62,6 +60,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             end_mes.readeble = True
             end_mes.save()
         self.text_data_json["readeble"]=str(end_mes.readeble)
+
+    @database_sync_to_async
+    def spread(self):
+        self.chat = Chat.objects.get(chat_id=self.room_name)
+        self.user = User.objects.get(username=self.text_data_json['user'])
 
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
@@ -88,7 +91,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json['type']=='msg':
             await self.new_mes(self.text_data_json['type'],self.text_data_json['msg'])
-
+        
+        elif self.text_data_json['type']=='spread':
+            await self.spread()
+            await self.new_mes(self.text_data_json['type'],self.text_data_json['msg'])
 
         await self.channel_layer.group_send(
             self.room_group_name,{

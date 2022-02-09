@@ -10,7 +10,9 @@
 
 			<div class="options_menu" id='opt_{{ p.id }}'>
 				<button value="{% url 'post' p.id %}" onclick="copy_link(this)" class="link_options_menu" href="">Скопіювати</button>
-				<a class="link_options_menu" href="">Поширити</a>
+
+				<button onclick="spread('{{ p.id }}')" class="link_options_menu">Поширити</button>
+
 				<a class="link_options_menu_red" href="">Поскаржитись</a>
 			</div>
 		</div>
@@ -31,10 +33,10 @@
 			</div>
 		{% endif %}
 		<div class="menu_post">
-			<img id={{ p.id }} onclick="like(this)" src="{{ user.theme_all.like_img }}" alt="">
+			<img id={{ p.id }} onclick="like(this)" src="{{ user.theme_all.like_img.url }}" alt="">
 			<span>{{ p.likes.all|length }}</span>
 			
-			<img id={{ p.id }} onclick="comments(this)" src="{{ user.theme_all.comment_img }}" alt="">
+			<img id={{ p.id }} onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
 
 			<span>{{ p.comments.all|length }}</span>
 		</div>
@@ -45,3 +47,4 @@
 	</div>
 	<div class="line"></div>
 {% endfor %}
+

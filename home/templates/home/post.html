@@ -4,6 +4,7 @@
 {% block title %}Post{% endblock title %}
 
 {% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 {% endblock content_header %}
 
@@ -17,7 +18,10 @@
 		let comment_reply_ajax = "{% url 'comment_reply_ajax' %}"
 		let post_ajax = "{% url 'post_ajax' %}"
 		let id_post = "{{ id }}"
+		let play_img = "{% static 'home/images/play.png' %}"
+		let pause_img = "{% static 'home/images/pause.png' %}"
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/home.js' %}"></script>
+	<script src='{% static "home/js/music_all.js" %}' ></script>
 {% endblock content %}

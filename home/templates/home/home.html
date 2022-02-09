@@ -6,8 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ameneuro</title>
-	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 </head>
 <body>
 	<header class="header-home">
@@ -42,7 +42,18 @@
 		<a class="link_menu" href="{% url 'musics' %}"><img class="img_main_link" src="{% static 'home/images/music.png' %}" alt=""></a>
 	</div>
 
+	<div class="friens_spread">
+		<span onclick="close_spr()">X</span>
+		{% for ch in user.chats.all %}
+			<div class="f_spread">
+				<h3 class="name_spr">{{ ch }}</h3>
+				<button onclick="spread_btn('{{ ch }}')">Spread</button>
+			</div>
+		{% endfor %}
+	</div>
+
 	<script>
+		let user = "{{ user }}"
 		let like_ajax = "{% url 'like_ajax' %}"
 		let comment_ajax = "{% url 'comment_ajax' %}"
 		let comment_like_ajax = "{% url 'comment_like_ajax' %}"

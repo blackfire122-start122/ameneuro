@@ -55,6 +55,20 @@
 						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% endif %}
+			{% elif m.type_m == 'spread' %}
+
+				{% if m.user == user %}
+					<div class="my_msgs">
+						<a href="{{ m }}" class="mes">{{ m }}</a>
+						<time class='time'>{{ m.date|date:"h:m" }}</time>
+					</div>
+				{% else %}
+					<div class="other_msgs">
+						<a href="{{ m }}" class="mes">{{ m }}</a>
+						<time class='time'>{{ m.date|date:"h:m" }}</time>
+					</div>
+				{% endif %}
+
 			{% endif %}
 		{% endfor %}
 	</div>
