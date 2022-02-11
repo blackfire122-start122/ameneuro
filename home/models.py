@@ -16,15 +16,14 @@ class Comment(models.Model):
 	def __str__(self):
 		return self.text
 
-class TypePost(models.Model):
-	type_p = models.CharField(max_length=15)
-
+class TypeFile(models.Model):
+	type_f = models.CharField(max_length=15)
 	def __str__(self):
-		return self.type_p
+		return self.type_f
 
 class Post(models.Model):
 	user_pub = models.ForeignKey("User", on_delete=models.CASCADE,null=True,related_name="user_pub_post")
-	type_p = models.ForeignKey("TypePost", on_delete=models.CASCADE,related_name="type_post",null=True)
+	type_p = models.ForeignKey("TypeFile", on_delete=models.CASCADE,related_name="type_file_post",null=True)
 	date = models.DateField(auto_now=True)
 	file = models.FileField(upload_to='posts')
 	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_post")
@@ -44,11 +43,17 @@ class Theme(models.Model):
 	def __str__(self):
 		return self.name
 
+class TypeMes(models.Model):
+	type_m = models.CharField(max_length=15)
+	def __str__(self):
+		return self.type_m
+
 class Message(models.Model):
 	user = models.ForeignKey("User", on_delete=models.CASCADE,null=True)
-	type_m = models.CharField(max_length=10,null=True)
+	type_m = models.ForeignKey("TypeMes",on_delete=models.CASCADE,related_name="type_mes",null=True,blank=True)
 	text = models.TextField(null=True,blank=True) 
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
+	type_file = models.ForeignKey("TypeFile", on_delete=models.CASCADE,related_name="type_file_mes",null=True)
 	date = models.DateTimeField(null=True,auto_now=True)
 	readeble = models.BooleanField(null=True,default=False)
 	def __str__(self):
@@ -162,5 +167,6 @@ def Music_delete(sender, instance, **kwargs):
 @receiver(pre_delete, sender=Message)
 def Messge_delete(sender, instance, **kwargs):
 	try:
-		instance.file.delete(False)
+		if instance.file.url[:6] != "/posts":
+			instance.file.delete(False)
 	except:pass

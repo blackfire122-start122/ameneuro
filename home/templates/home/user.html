@@ -43,11 +43,7 @@
 		{% for p in posts %}
 			<div class="post">
 				<a href="{% url 'post' p.id %}">
-				{% if p.type_p.type_p == 'video' %}
-					<video class="post_file" src="{{ p.file.url }}"c></video>
-				{% else %}
-					<img class="post_file" src="{{ p.file.url }}"c>
-				{% endif %}
+					<{{ p.type_p.type_f }} class="post_file" src="{{ p.file.url }}"c></{{ p.type_p.type_f }}>
 				</a>
 			</div>
 		{% endfor %}

@@ -127,6 +127,7 @@ function onmessage(e){
 	}
 	else if (data['type']=='spread'){
 		let div = document.createElement('div')
+		let file = document.createElement(data['type_file'])
 		let a = document.createElement('a')
 		let time = document.createElement('time')
 		let readeble = document.querySelector('.readeble')
@@ -136,14 +137,15 @@ function onmessage(e){
 		}else{
 			div.className = "other_msgs"
 		}
-		a.className="mes"
-		a.href=data["msg"]
-		a.innerText = data["msg"]
+		a.href = data["url_post"]
+		file.className="mes"
+		file.src = data["url_file"]
 
 		time.className = 'time'
 		time.innerText = data["time"].slice(11,16)
 
-		div.append(p)
+		div.append(file)
+		div.append(a)
 		div.append(time)
 		msg_div.append(div)
 		readeble.innerText = 'not read'

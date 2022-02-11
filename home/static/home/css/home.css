@@ -2,6 +2,9 @@
 	margin: 0;
 	padding: 0;
 }
+html{
+	overflow-x: hidden;
+}
 
 body{
 	overflow-x: hidden;
@@ -47,7 +50,7 @@ body{
 
 .menu_home{
 	position: fixed;
-	left: 80%;
+	right: 5%;
 	top: 40%;
 	display: flex;
 	flex-direction: column;
@@ -266,17 +269,33 @@ main{
 	position: fixed;
 	bottom: 0;
 	display: none;
-	width: 50%;
+	color: white;
+	width: 80%;
+	left: 10%;
 	padding: 10px;
-	background: red;
-	border-radius: 20px;
+	background: rgba(0, 0, 0, 0.7);
+	border-radius: 20px 20px 0 0 ;
 }
 
 .f_spread{
+	margin-top: 3%;
 	display: flex;
 	justify-content: space-around;
 }
 
 .name_spr{
 	width: 2em;
+}
+
+.close_spr{
+	position: absolute;
+	right: 10%;
+}
+
+.btn_spr{
+	background: black;
+	padding: 5px;
+	border-radius: 5px;
+	color: white;
+	border: none;
 }

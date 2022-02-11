@@ -16,13 +16,13 @@
 				<a class="link_options_menu_red" href="">Поскаржитись</a>
 			</div>
 		</div>
-		{% if p.type_p.type_p == 'video' %}
+		{% if p.type_p.type_f == 'video' %}
 			<video autoplay class="video_post post_file" controls controlsList="nodownload" controls prelad="auto">
 				<source src="{% url 'stream_post' p.id %}">
 			</video>
-		{% elif p.type_p.type_p == 'img' %}
+		{% elif p.type_p.type_f == 'img' %}
 			<img class="post_file" src="{{ p.file.url }}">
-		{% elif p.type_p.type_p == 'audio' %}
+		{% elif p.type_p.type_f == 'audio' %}
 			<div class="audio-player">
 				<h4 class="name_mus">audio</h4>
 				<audio class="audio_ap" id="audio_{{ p.id }}" src="{% url 'stream_post' p.id %}"></audio>

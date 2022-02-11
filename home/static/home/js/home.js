@@ -27,7 +27,6 @@ function comments(e){
 		url: comment_ajax,
 		data: {'id':e.id},
 		success: function (response) {
-			console.log(div_menu_post.childNodes)
 			div_menu_post.childNodes[11].innerHTML += response
 			div_menu_post.childNodes[11].style.display = "block"
 		}
@@ -168,6 +167,6 @@ function close_spr(){
 function spread_btn(ch_id){
 	conn = new WebSocket("ws://"+window.location.hostname+"/"+ch_id)
 	conn.onopen = ()=>{
-		conn.send(JSON.stringify({'type':'spread','user': user,'msg':"http://"+window.location.hostname+"/post/"+id_spread}))
+		conn.send(JSON.stringify({'type':'spread','user': user,'id_spread':id_spread,'msg':"http://"+window.location.hostname+"/post/"+id_spread}))
 	}
 }

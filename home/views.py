@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat,Comment,Theme,AllTheme
+from .models import User,Post,Chat,Comment,Theme,AllTheme,TypeMes
 from .forms import (RegisterForm,
 					LoginForm,
 					PostForm,
@@ -519,18 +519,16 @@ def send_file_mes_ajax(request):
 		user = request.user
 	else:
 		return JsonResponse({"data_text":"Fail"}, status=400)
-
 	if request.method == "POST":
 		src = ""
-		data_form = request.POST.copy()
-		data_form['type_m'] = "file"
-		form = MessageForm(data_form,request.FILES)
+		form = MessageForm(request.POST, request.FILES)
 		if form.is_valid():
 			mes = form.save()
 			mes.user = user
+			mes.type_m = TypeMes.objects.get(type_m="file")
 			mes.save()
 			src = mes.file.url
-			chat = Chat.objects.get(pk=int(data_form["chat_id"]))
+			chat = Chat.objects.get(pk=int(request.POST["chat_id"]))
 			chat.messages.add(mes)
 		else:
 			return JsonResponse({"data_text":"Fail"}, status=400)

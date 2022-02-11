@@ -32,10 +32,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 if not ('/streaming_music/'+str(m.id),m.id) in self.text_data_json['musics_url']:
                     self.text_data_json['musics_url'].append(('/streaming_music/'+str(m.id),m.id))
 
-
     @database_sync_to_async
-    def new_mes(self,type_m,text):
-        mes = Message(user = self.user,text=text,type_m=type_m)
+    def new_mes(self,text):
+        mes = Message(user = self.user,text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
         mes.save()
         self.text_data_json["time"]=str(mes.date)
         self.text_data_json["user"]=str(self.user)
@@ -66,6 +65,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.chat = Chat.objects.get(chat_id=self.room_name)
         self.user = User.objects.get(username=self.text_data_json['user'])
 
+    @database_sync_to_async
+    def new_mes_spread(self):
+        post = Post.objects.get(pk=int(self.text_data_json["id_spread"]))
+        mes = Message(type_file=post.type_p, file=post.file, user=self.user,text=self.text_data_json["msg"],type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
+        mes.save()
+
+        self.text_data_json["time"]=str(mes.date)
+        self.text_data_json["user"]=str(self.user)
+        self.chat.messages.add(mes)
+        self.text_data_json["type_file"] = post.type_p.type_f
+
+
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
@@ -80,7 +91,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json['type']=='new_theme':
             await self.new_theme()
-            await self.new_mes(self.text_data_json['type'],self.user.username+" "+self.chat.theme.name)
+            await self.new_mes(self.user.username+" "+self.chat.theme.name)
 
             self.text_data_json["msg_new_theme"]=self.user.username+" "+self.chat.theme.name
 
@@ -90,11 +101,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             return
 
         elif self.text_data_json['type']=='msg':
-            await self.new_mes(self.text_data_json['type'],self.text_data_json['msg'])
+            await self.new_mes(self.text_data_json['msg'])
         
         elif self.text_data_json['type']=='spread':
             await self.spread()
-            await self.new_mes(self.text_data_json['type'],self.text_data_json['msg'])
+            await self.new_mes_spread()
 
         await self.channel_layer.group_send(
             self.room_group_name,{

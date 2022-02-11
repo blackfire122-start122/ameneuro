@@ -43,11 +43,17 @@
 	</div>
 
 	<div class="friens_spread">
-		<span onclick="close_spr()">X</span>
+		<span class="close_spr" onclick="close_spr()">X</span>
 		{% for ch in user.chats.all %}
 			<div class="f_spread">
-				<h3 class="name_spr">{{ ch }}</h3>
-				<button onclick="spread_btn('{{ ch }}')">Spread</button>
+				<h3 class="name_spr">
+					{% for u in ch.users.all %}
+						{% if u != user %}
+							{{ u }}
+						{% endif %}
+					{% endfor %}
+				</h3>
+				<button class="btn_spr" onclick="spread_btn('{{ ch }}')">Spread</button>
 			</div>
 		{% endfor %}
 	</div>

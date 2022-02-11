@@ -10,7 +10,7 @@ from django.forms import(ModelForm,
 						FileInput,
 						Select,
 						FileField)
-from .models import User, Post, TypePost, Theme, Music, Message, AllTheme
+from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes
 
 imgs = ["jpg","png"]
 videos = ["mp4"]
@@ -42,8 +42,8 @@ class LoginForm(AuthenticationForm):
 		model = User
 		fields = ['username','password']
 
-ImgObj = TypePost.objects.get(type_p='img')
-VideoObj = TypePost.objects.get(type_p='video')
+ImgObj = TypeFile.objects.get(type_f='img')
+VideoObj = TypeFile.objects.get(type_f='video')
 
 class PostForm(ModelForm):
 	file = FileInput()
@@ -95,7 +95,7 @@ class MusicForm(ModelForm):
 class MessageForm(ModelForm):
 	class Meta:
 		model = Message
-		fields = ["file","type_m","text"]
+		fields = ["file","text"]
 
 class AllThemeForm(ModelForm):
 	class Meta:

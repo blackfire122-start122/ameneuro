@@ -24,7 +24,7 @@
 {% block content %}	
 	<div class="messages">
 		{% for m in messages %}
-			{% if m.type_m == 'msg' %}
+			{% if m.type_m.type_m == 'msg' %}
 				{% if m.user == user %}
 					<div class="my_msgs">
 						<p class="mes">{{ m }}</p>
@@ -37,34 +37,38 @@
 					</div>
 				{% endif %}
 
-			{% elif m.type_m == 'new_theme' %}
+			{% elif m.type_m.type_m == 'new_theme' %}
 				<div class="new_theme">
 					<p class="mes">{{ m }}</p>
 				</div>
-			{% elif m.type_m == 'file' %}
+			{% elif m.type_m.type_m == 'file' %}
 				{% if m.user == user %}
 					<div class="my_msgs">
-						<img class="img_file_mes" src="{{ m.file.url }}" alt="">
+						<img class="img_file_mes" src="{{ m.file.url }}">
 						<p class="mes">{{ m }}</p>
 						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% else %}
 					<div class="other_msgs">
-						<img class="img_file_mes" src="{{ m.file.url }}" alt="">
+						<img class="img_file_mes" src="{{ m.file.url }}">
 						<p class="mes">{{ m }}</p>
 						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% endif %}
-			{% elif m.type_m == 'spread' %}
+			{% elif m.type_m.type_m == 'spread' %}
 
 				{% if m.user == user %}
 					<div class="my_msgs">
-						<a href="{{ m }}" class="mes">{{ m }}</a>
+						<a href="{{ m.text }}">
+							<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
+						</a>
 						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% else %}
 					<div class="other_msgs">
-						<a href="{{ m }}" class="mes">{{ m }}</a>
+						<a href="{{ m.text }}">
+							<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
+						</a>
 						<time class='time'>{{ m.date|date:"h:m" }}</time>
 					</div>
 				{% endif %}
