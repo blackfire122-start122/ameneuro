@@ -104,6 +104,7 @@ body{
 .post_desc{
 	position: relative;
 	left: 10%;
+	width: 90%;
 }
 
 .header_post{

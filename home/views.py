@@ -89,26 +89,21 @@ class chat(ListView):
 		
 		self.error = ""
 
-		bg = request.POST['color_mes_bg'].lstrip('#')
-		bg = ','.join([str(int(bg[i:i+2], 16)) for i in (0, 2, 4)])+','+request.POST['mes_bg_op']
-
-		new_rp = request.POST.copy()
-		new_rp['color_mes_bg'] = bg
-
 		how_save = 0
 
 		if request.POST['how_save']=='Save changes':
-			form = ThemeForm(new_rp,request.FILES,instance=self.chat.theme)
+			form = ThemeForm(request.POST,request.FILES,instance=self.chat.theme)
 			how_save = 0
 		elif request.POST['how_save']=='Save theme':
-			form = ThemeForm(new_rp,request.FILES)
+			form = ThemeForm(request.POST,request.FILES)
 			how_save = 1
 
 		if form.is_valid():
 			if how_save:
 				theme = form.save()
+				print(theme)
 				try:
-					user.themes.add(theme.id)
+					request.user.themes.add(theme.id)
 					self.chat.theme = theme
 					self.chat.save()
 				except:error = 'save error'
@@ -337,6 +332,10 @@ def add_chat_ajax(request):
 
 			user.chats.add(chat.id)
 			friend.chats.add(chat.id)
+
+			user.themes.add(theme.id)
+			friend.themes.add(theme.id)
+
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 		
 		return JsonResponse({"url":"chat/"+chat.chat_id}, status=200)

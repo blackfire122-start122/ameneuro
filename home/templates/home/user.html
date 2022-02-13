@@ -31,11 +31,7 @@
 		{% endif %}		
 		<div onclick="music_show()" class='musics_user'>
 			<h3>Musics</h3>
-			<div class="musics">
-				{% for m in user.music.all %}
-					<audio class='music' src="{% url 'streaming_music' m.id %}" controls>sound</audio>
-				{% endfor %}
-			</div>
+			<div class="musics"></div>
 		</div>
 	</div>
 
@@ -43,7 +39,13 @@
 		{% for p in posts %}
 			<div class="post">
 				<a href="{% url 'post' p.id %}">
-					<{{ p.type_p.type_f }} class="post_file" src="{{ p.file.url }}"c></{{ p.type_p.type_f }}>
+					{% if p.type_p.type_f == "audio" %}
+						<h3 class="name_audio">{{ p.description|truncatechars:10 }}</h3>
+						<img class="post_file" src="{% static 'home/images/music.png' %}">
+					{% else %}
+						<{{ p.type_p.type_f }} class="post_file" src="{{ p.file.url }}"></{{ p.type_p.type_f }}>
+					{% endif %}
+
 				</a>
 			</div>
 		{% endfor %}

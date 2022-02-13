@@ -11,9 +11,16 @@ from django.forms import(ModelForm,
 						Select,
 						FileField)
 from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes
+from django.conf import settings
+import magic
 
-imgs = ["jpg","png"]
-videos = ["mp4"]
+imgs = ["JPEG image data","PNG image data"]
+videos = ["ISO Media"]
+audios = ["Audio file"]
+
+ImgObj = TypeFile.objects.get(type_f='img')
+VideoObj = TypeFile.objects.get(type_f='video')
+AudioObj = TypeFile.objects.get(type_f='audio')
 
 class RegisterForm(UserCreationForm):
 	def __init__(self,*args,**kwargs):
@@ -42,9 +49,6 @@ class LoginForm(AuthenticationForm):
 		model = User
 		fields = ['username','password']
 
-ImgObj = TypeFile.objects.get(type_f='img')
-VideoObj = TypeFile.objects.get(type_f='video')
-
 class PostForm(ModelForm):
 	file = FileInput()
 	description = TextInput()
@@ -57,8 +61,11 @@ class PostForm(ModelForm):
 		post = ModelForm.save(self)
 		post.user_pub = user
 
-		if str(post.file)[-3:] in imgs:post.type_p = ImgObj
-		elif str(post.file)[-3:] in videos:post.type_p = VideoObj
+		type_f = magic.from_buffer(open(str(settings.MEDIA_ROOT)+str(post.file),"rb").read(2048))
+
+		if any(([i in type_f for i in imgs])):post.type_p = ImgObj
+		elif any(([i in type_f for i in videos])):post.type_p = VideoObj
+		elif any(([i in type_f for i in audios])):post.type_p = AudioObj
 
 		post.save()
 
@@ -82,10 +89,9 @@ class ChangeForm(UserChangeForm):
 			}
 
 class ThemeForm(ModelForm):
-	mes_bg_op = CharField()
 	class Meta:
 		model = Theme
-		fields = ['color_mes','color_mes_bg','background','mes_bg_op','name']
+		fields = ['color_mes_bg_op','color_mes','color_mes_bg','background','name']
 
 class MusicForm(ModelForm):
 	class Meta:

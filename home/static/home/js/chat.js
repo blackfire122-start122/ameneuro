@@ -24,6 +24,7 @@ function onmessage(e){
 		}
 
 	}else if (data['type']=='msg'){
+		let div_ = document.createElement('div')
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 		let time = document.createElement('time')
@@ -42,7 +43,8 @@ function onmessage(e){
 
 		div.append(p)
 		div.append(time)
-		msg_div.append(div)
+		div_.append(div)
+		msg_div.append(div_)
 		readeble.innerText = 'not read'
 
 	}else if(data['type']=='new_theme'){
@@ -99,6 +101,7 @@ function onmessage(e){
 		},300)
 	}
 	else if(data['type']=='msg_file'){
+		let div_ = document.createElement('div')
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 		let img = document.createElement('img')
@@ -122,10 +125,12 @@ function onmessage(e){
 		div.append(img)
 		div.append(p)
 		div.append(time)
-		msg_div.append(div)
+		div_.append(div)
+		div_.append(div_)
 		readeble.innerText = 'not read'
 	}
 	else if (data['type']=='spread'){
+		let div_ = document.createElement('div')
 		let div = document.createElement('div')
 		let file = document.createElement(data['type_file'])
 		let a = document.createElement('a')
@@ -147,7 +152,8 @@ function onmessage(e){
 		div.append(file)
 		div.append(a)
 		div.append(time)
-		msg_div.append(div)
+		div_.append(div)
+		msg_div.append(div_)
 		readeble.innerText = 'not read'
 	}
 	console.log(data)
@@ -164,15 +170,6 @@ function btn_send(){
 }
 
 let chat_options_change = false
-
-function componentToHex(c) {
-	var hex = c.toString(16);
-	return hex.length == 1 ? "0" + hex : hex;
-}
-
-function rgbToHex(r, g, b) {
-	return "#" + componentToHex(parseInt(r)) + componentToHex(parseInt(g)) + componentToHex(parseInt(b));
-}
 
 function chat_options(e) {
 	let messages = document.querySelector(".messages")
@@ -199,13 +196,7 @@ function chat_options(e) {
 	$.ajax({
 		url: chat_options_ajax,
 		data: {'chat_id':chat_id},
-		success: function (response) {
-						options_div.innerHTML = response
-						bg_inp_val = bg_inp_val.split(",")
-						document.querySelector('#bg_op').value = bg_inp_val[3]
-						document.querySelector('#mes_bg').style.opacity = bg_inp_val[3]
-						document.querySelector('#mes_bg').value = rgbToHex(bg_inp_val[0],bg_inp_val[1],bg_inp_val[2])
-				}
+		success: function (response) {options_div.innerHTML = response}
 	})
 	chat_options_change = true
 
@@ -219,8 +210,10 @@ function new_theme(theme){
 	conn.send(JSON.stringify({'type':'new_theme','theme_id':theme}))
 }
 
-function delete_theme(theme){
+function delete_theme(e,theme){
 	conn.send(JSON.stringify({'type':'delete_theme','theme_id':theme}))
+	// if (true) {}
+	e.parentNode.remove()
 }
 
 window.addEventListener('scroll',end_readable_send)

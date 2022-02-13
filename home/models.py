@@ -5,7 +5,6 @@ from django.dispatch.dispatcher import receiver
 from colorful.fields import RGBColorField
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-
 class Comment(models.Model):
 	user = models.ForeignKey("User", on_delete=models.CASCADE,related_name="comment_user")
 	parent = models.ForeignKey("self",on_delete=models.CASCADE,null=True,blank=True,related_name="comment_parent")
@@ -34,10 +33,10 @@ class Post(models.Model):
 		return self.file.url
 
 class Theme(models.Model):
-	color_mes = models.CharField(max_length=15,null=True)
-	color_mes_bg = models.CharField(max_length=15,null=True)
+	color_mes = RGBColorField(null=True)
+	color_mes_bg = RGBColorField(null=True)
+	color_mes_bg_op = models.FloatField(null=True,default=1,validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
 	background = models.FileField(upload_to='themes',default='themes/default.jpg',null=True,blank=False)
-
 	name = models.CharField(max_length=100,null=True)
 
 	def __str__(self):
