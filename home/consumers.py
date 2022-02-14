@@ -47,10 +47,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def delete_theme(self):
-        if self.chat.theme.id == int(self.text_data_json['theme_id']):
+        if self.chat.theme.id == int(self.text_data_json['th_id']):
             self.text_data_json['error'] = "This chat theme"
         else:
-            Theme.objects.get(pk = int(self.text_data_json['theme_id'])).delete()
+            Theme.objects.get(pk = int(self.text_data_json['th_id'])).delete()
 
     @database_sync_to_async
     def end_readable(self):
@@ -92,7 +92,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         elif self.text_data_json['type']=='new_theme':
             await self.new_theme()
             await self.new_mes(self.user.username+" "+self.chat.theme.name)
-
             self.text_data_json["msg_new_theme"]=self.user.username+" "+self.chat.theme.name
 
         elif self.text_data_json['type']=='delete_theme':

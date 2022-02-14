@@ -21,8 +21,8 @@ class TypeFile(models.Model):
 		return self.type_f
 
 class Post(models.Model):
-	user_pub = models.ForeignKey("User", on_delete=models.CASCADE,null=True,related_name="user_pub_post")
-	type_p = models.ForeignKey("TypeFile", on_delete=models.CASCADE,related_name="type_file_post",null=True)
+	user_pub = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="user_pub_post")
+	type_p = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_post",null=True)
 	date = models.DateField(auto_now=True)
 	file = models.FileField(upload_to='posts')
 	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_post")
@@ -48,11 +48,11 @@ class TypeMes(models.Model):
 		return self.type_m
 
 class Message(models.Model):
-	user = models.ForeignKey("User", on_delete=models.CASCADE,null=True)
-	type_m = models.ForeignKey("TypeMes",on_delete=models.CASCADE,related_name="type_mes",null=True,blank=True)
+	user = models.ForeignKey("User", on_delete=models.SET_NULL,null=True)
+	type_m = models.ForeignKey("TypeMes",on_delete=models.SET_NULL,related_name="type_mes",null=True,blank=True)
 	text = models.TextField(null=True,blank=True) 
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
-	type_file = models.ForeignKey("TypeFile", on_delete=models.CASCADE,related_name="type_file_mes",null=True)
+	type_file = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_mes",null=True)
 	date = models.DateTimeField(null=True,auto_now=True)
 	readeble = models.BooleanField(null=True,default=False)
 	def __str__(self):
@@ -61,7 +61,7 @@ class Message(models.Model):
 class Chat(models.Model):
 	users = models.ManyToManyField("User",null=True, related_name="user_chat")
 	messages = models.ManyToManyField("Message",null=True)
-	theme = models.ForeignKey("Theme",null=True,on_delete=models.CASCADE)
+	theme = models.ForeignKey("Theme",null=True,on_delete=models.SET_NULL)
 	chat_id = models.CharField(max_length=255,null=True, blank=False)
 
 	def __str__(self):
@@ -74,6 +74,7 @@ class Music(models.Model):
 		return self.name
 
 class AllTheme(models.Model):
+	default = models.BooleanField(default=False)
 	name = models.CharField(max_length=100,null=True)
 	fon_color = RGBColorField(null=True)
 	text_color = RGBColorField(null=True)
@@ -81,9 +82,11 @@ class AllTheme(models.Model):
 	header_bg_opacity = models.FloatField(null=True,default=1,validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
 
 	fon_img = models.ImageField(upload_to="theme_all/fon_imgs",default=None,null=True,blank=True)
-	comment_img = models.ImageField(upload_to="theme_all/comment_imgs",default="theme_all/comment_imgs/comment.png",null=True)
-	like_img = models.ImageField(upload_to="theme_all/like_imgs",default="theme_all/like_imgs/like.png",null=True)
-
+	comment_img = models.ImageField(upload_to="theme_all/comment_imgs",default=None,null=True,blank=True)
+	like_img = models.ImageField(upload_to="theme_all/like_imgs",default=None,null=True,blank=True)
+	back_img = models.ImageField(upload_to="theme_all/back_imgs",default=None,null=True,blank=True)
+	music_img = models.ImageField(upload_to="theme_all/music_imgs",default=None,null=True,blank=True)
+	
 	def __str__(self):
 		return self.name
 
@@ -104,7 +107,7 @@ class User(AbstractUser):
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
 	followers = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="followers_user")
 	follow = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="follow_user")
-	theme_all = models.ForeignKey("AllTheme",default=def_all_theme,null=True,blank=True,on_delete=models.CASCADE,related_name="theme_all_user")
+	theme_all = models.ForeignKey("AllTheme",default=def_all_theme,null=True,blank=True,on_delete=models.SET_DEFAULT,related_name="theme_all_user")
 
 	def __str__(self):
 		return self.username
@@ -117,10 +120,12 @@ class User(AbstractUser):
 def AllTheme_delete(sender, instance, **kwargs):
 	try:
 		old_instance = AllTheme.objects.get(id=instance.id)
-		if old_instance.comment_img != 'theme_all/comment_imgs/comment.png' and old_instance.like_img != 'theme_all/like_imgs/like.png':
+		if not old_instance.default:
 			old_instance.comment_img.delete(False)
-			old_instance.fon_img.delete(False)
 			old_instance.like_img.delete(False)
+			old_instance.back_img.delete(False)
+			old_instance.fon_img.delete(False)
+			old_instance.music_img.delete(False)
 	except:pass
 
 @receiver(pre_save, sender=User)

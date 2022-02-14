@@ -109,6 +109,7 @@ body{
 	border: none;
 	background: none;
 	color: white;
+	text-decoration: underline;
 	font-size: 1.1em;
 }
 
@@ -178,7 +179,7 @@ body{
 }
 
 .new_theme{
-
+	text-align: center;
 }
 
 .readeble{
@@ -381,4 +382,13 @@ body{
 
 .play_pause_img{
 	height: 70%;
+}
+
+.my_themes{
+	text-align: center;
+	color: gray;
+}
+
+.th_sel{
+	background: rgba(255, 255, 255, 0.3);
 }

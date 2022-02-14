@@ -13,7 +13,7 @@
 		{% endfor %}
 	</h4>
 	<div>
-		<img src="{% static 'home/images/music.png' %}" class="music_btn" onclick="music_show()"></img>
+		<img src="{{ user.theme_all.music_img.url }}" class="music_btn" onclick="music_show()"></img>
 		<div class="musics"></div>
 	</div>
 	<div class="opt_mus">
@@ -42,8 +42,10 @@
 				{% endif %}
 
 			{% elif m.type_m.type_m == 'new_theme' %}
-				<div class="new_theme">
-					<p class="mes">{{ m }}</p>
+				<div>
+					<div class="new_theme">
+						<p class="mes">{{ m }}</p>
+					</div>
 				</div>
 			{% elif m.type_m.type_m == 'file' %}
 				{% if m.user == user %}

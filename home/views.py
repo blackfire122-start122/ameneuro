@@ -101,7 +101,6 @@ class chat(ListView):
 		if form.is_valid():
 			if how_save:
 				theme = form.save()
-				print(theme)
 				try:
 					request.user.themes.add(theme.id)
 					self.chat.theme = theme

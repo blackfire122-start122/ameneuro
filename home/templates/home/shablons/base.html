@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header class="back_header">
-		<img onclick="window.history.back()" class="back_img" src="{% static 'home/images/back.png' %}">
+		<img onclick="window.history.back()" class="back_img" src="{{ user.theme_all.back_img.url }}">
 		{% block content_header %}
 		{% endblock content_header %}
 	</header>

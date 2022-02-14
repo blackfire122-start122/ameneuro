@@ -58,9 +58,14 @@ function onmessage(e){
 		msg_div.append(div)
 
 	}else if(data['type']=='delete_theme'){
-		let error = document.querySelector('#error')
-		error.innerText = data["error"]
-		error.style.display='block'
+		if (data["error"]){
+			let error = document.querySelector('#error')
+			error.innerText = data["error"]
+			error.style.display='block'
+		}
+		if (data["error"]!="This chat theme"){
+			document.getElementById(data["del_el"]).remove()
+		}
 
 	}else if(data['type']=='end_readable'){
 		let readeble = document.querySelector('.readeble')
@@ -160,7 +165,7 @@ function onmessage(e){
 }
 
 conn.onopen = ()=>{
-	conn.send(JSON.stringify({'type':'first_msg','user': user}))
+	conn.send(JSON.stringify({'type':'first_msg','user': user}))	
 }
 
 function btn_send(){
@@ -211,11 +216,8 @@ function new_theme(theme){
 }
 
 function delete_theme(e,theme){
-	conn.send(JSON.stringify({'type':'delete_theme','theme_id':theme}))
-	// if (true) {}
-	e.parentNode.remove()
+	conn.send(JSON.stringify({'type':'delete_theme','th_id':theme,'del_el':e.parentNode.id}))
 }
-
 window.addEventListener('scroll',end_readable_send)
 
 jQuery.expr.filters.offscreen = function(el) {

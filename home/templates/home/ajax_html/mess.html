@@ -1,21 +1,67 @@
 {% for m in mess %}
-	{% if m.type_m == 'msg' %}
+	{% if m.type_m.type_m == 'msg' %}
 		{% if m.user == user %}
-			<div class="my_msgs">
-				<p class="mes">{{ m }}</p>
-				<time class='time'>{{ m.date|date:"h:m" }}</time>
+			<div>
+				<div class="my_msgs">
+					<p class="mes">{{ m }}</p>
+					<time class='time'>{{ m.date|date:"h:m" }}</time>
+				</div>
 			</div>
 		{% else %}
-			<div class="other_msgs">
-				<p class="mes">{{ m }}</p>
-				<time class='time'>{{ m.date|date:"h:m" }}</time>
+			<div>
+				<div class="other_msgs">
+					<p class="mes">{{ m }}</p>
+					<time class='time'>{{ m.date|date:"h:m" }}</time>
+				</div>
 			</div>
 		{% endif %}
 
-	{% else %}
-		<div class="new_theme">
-			<p class="mes">{{ m }}</p>
+	{% elif m.type_m.type_m == 'new_theme' %}
+		<div>
+			<div class="new_theme">
+				<p class="mes">{{ m }}</p>
+			</div>
 		</div>
+	{% elif m.type_m.type_m == 'file' %}
+		{% if m.user == user %}
+			<div>
+				<div class="my_msgs">
+					<img class="img_file_mes" src="{{ m.file.url }}">
+					<p class="mes">{{ m }}</p>
+					<time class='time'>{{ m.date|date:"h:m" }}</time>
+				</div>
+			</div>
+		{% else %}
+			<div>
+				<div class="other_msgs">
+					<img class="img_file_mes" src="{{ m.file.url }}">
+					<p class="mes">{{ m }}</p>
+					<time class='time'>{{ m.date|date:"h:m" }}</time>
+				</div>
+			</div>
+		{% endif %}
+	{% elif m.type_m.type_m == 'spread' %}
+
+		{% if m.user == user %}
+			<div>
+				<div class="my_msgs">
+					<a href="{{ m.text }}">
+						<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
+					</a>
+					<time class='time'>{{ m.date|date:"h:m" }}</time>
+				</div>
+			</div>
+		{% else %}
+			<div>
+				<div class="other_msgs">
+					<a href="{{ m.text }}">
+						<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
+					</a>
+					<time class='time'>{{ m.date|date:"h:m" }}</time>
+				</div>
+			</div>
+		{% endif %}
+
 	{% endif %}
 {% endfor %}
 
