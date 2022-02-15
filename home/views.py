@@ -214,17 +214,18 @@ def streaming_post(request,id):
 
 def user_change(request):
 	user = {}
-	form_user = ChangeForm(instance=request.user)
-	form_theme = AllThemeForm(instance=request.user.theme_all)
-
 	error = ''
-
 	if request.user.is_authenticated:user = request.user
 	else:return redirect("login")
 
+	form_user = ChangeForm(instance=user)
+	form_theme = AllThemeForm(instance=user.theme_all)
+
+	default_themes = AllTheme.objects.filter(default=True)
+
 	if request.method == 'POST':
 		if request.POST['submit'] == 'Save changes':
-			form_user = ChangeForm(request.POST,request.FILES,instance=request.user)
+			form_user = ChangeForm(request.POST,request.FILES,instance=user)
 			if form_user.is_valid():
 				form_user.save()
 			else:
@@ -234,24 +235,24 @@ def user_change(request):
 			return redirect('login')
 
 		elif request.POST['submit'] == 'Save changes theme':
-			if request.POST["name"]!="default":
-				if user.theme_all.name == "default":
-					new_theme_all = AllTheme(name=request.POST["name"])
-					new_theme_all.save()
-					user.theme_all = new_theme_all
-					user.save()
-				form_theme = AllThemeForm(request.POST,request.FILES,instance=request.user.theme_all)
-				
-				if form_theme.is_valid():
-					form_theme.save()
-				else:error = form_theme.errors
-			else:error = "this teheme name reserve"
+			if user.theme_all.default:
+				new_theme = user.theme_all
+				new_theme.pk = None
+				new_theme.default = False
+				new_theme.save()
+				user.theme_all = new_theme
+			form_theme = AllThemeForm(request.POST,request.FILES,instance=user.theme_all)
+			if form_theme.is_valid():
+				user.theme_all = form_theme.save()
+				user.save()
+			else:error = form_theme.errors
 
 
 	return render(request, "home/user_change.html",{
 		"user":user,
 		"form_user":form_user,
 		"form_theme":form_theme,
+		"default_themes":default_themes,
 		"error":error
 	})
 

@@ -117,6 +117,8 @@ class AllThemeForm(ModelForm):
 				"fon_img",
 				"comment_img",
 				"like_img",
+				"back_img",
+				"music_img",
 		]+fields_text
 		
 		widgets = {i:TextInput(attrs={'class':'form_name_change','placeholder':i}) for i in fields_text}

@@ -57,7 +57,7 @@
 	background: red;
 }
 
-#id_img{
+#id_img, #id_fon_img ,#id_comment_img ,#id_like_img ,#id_back_img ,#id_music_img{
 	display: none;
 }
 
@@ -104,4 +104,29 @@
 	width: 80%;
 	right: 0;
 	margin:0 auto;
+}
+
+.clear_check{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.def_themes{
+	width: 100%;
+	overflow-x: scroll;
+	max-height: 300px;
+}
+
+.def_th{
+	display: flex;
+	background-color: gray;
+	width: 100%;
+	margin-top: 1%;
+}
+
+.img_theme{
+	height: 35px;
+	width: 35px;
+	object-fit: cover;
 }

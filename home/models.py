@@ -120,12 +120,64 @@ class User(AbstractUser):
 def AllTheme_delete(sender, instance, **kwargs):
 	try:
 		old_instance = AllTheme.objects.get(id=instance.id)
-		if not old_instance.default:
-			old_instance.comment_img.delete(False)
-			old_instance.like_img.delete(False)
-			old_instance.back_img.delete(False)
-			old_instance.fon_img.delete(False)
-			old_instance.music_img.delete(False)
+
+		fields = {"comment_img":True,"like_img":True,"back_img":True,"fon_img":True,"music_img":True}
+
+		for i in AllTheme.objects.filter(default=True):
+			if i.comment_img == old_instance.comment_img:
+				fields["comment_img"] = False
+			if i.like_img == old_instance.like_img:
+				fields["like_img"] = False
+			if i.back_img == old_instance.back_img:
+				fields["back_img"] = False
+			if i.fon_img == old_instance.fon_img:
+				fields["fon_img"] = False
+			if i.music_img == old_instance.music_img:
+				fields["music_img"] = False
+
+		for i in fields:
+			if fields[i] and i == "comment_img":
+				old_instance.comment_img.delete(False)
+			if fields[i] and i == "like_img":
+				old_instance.like_img.delete(False)
+			if fields[i] and i == "back_img":
+				old_instance.back_img.delete(False)
+			if fields[i] and i == "fon_img":
+				old_instance.fon_img.delete(False)
+			if fields[i] and i == "music_img":
+				old_instance.music_img.delete(False)
+	except:pass
+
+@receiver(pre_save, sender=AllTheme)
+def AllTheme_delete(sender, instance, **kwargs):
+	try:
+		old_instance = AllTheme.objects.get(id=instance.id)
+
+		fields = {"comment_img":True,"like_img":True,"back_img":True,"fon_img":True,"music_img":True}
+
+		for i in AllTheme.objects.filter(default=True):
+			if i.comment_img == old_instance.comment_img:
+				fields["comment_img"] = False
+			if i.like_img == old_instance.like_img:
+				fields["like_img"] = False
+			if i.back_img == old_instance.back_img:
+				fields["back_img"] = False
+			if i.fon_img == old_instance.fon_img:
+				fields["fon_img"] = False
+			if i.music_img == old_instance.music_img:
+				fields["music_img"] = False
+				
+		for i in fields:
+			if fields[i] and i == "comment_img":
+				old_instance.comment_img.delete(False)
+			if fields[i] and i == "like_img":
+				old_instance.like_img.delete(False)
+			if fields[i] and i == "back_img":
+				old_instance.back_img.delete(False)
+			if fields[i] and i == "fon_img":
+				old_instance.fon_img.delete(False)
+			if fields[i] and i == "music_img":
+				old_instance.music_img.delete(False)
 	except:pass
 
 @receiver(pre_save, sender=User)

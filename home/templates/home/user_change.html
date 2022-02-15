@@ -35,7 +35,7 @@
 				<div class="form_opt">
 					<h3>img</h3>
 					<div class="file_img">
-						<input type="file" name="img" accept="image/*" id="id_img">
+						<input type="file" name="img" id="id_img">
 						<label class="img_file" for="id_img">Image</label>
 						<img class="img_user" src="{{ user.img }}">
 					</div>
@@ -47,7 +47,6 @@
 			</form>
 		</div>
 
-
 		<div>
 			<div class="change_btn" onclick="change_btn(this)">
 				<h2>Theme</h2>
@@ -55,37 +54,49 @@
 
 			<form class="form_change" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
+
 				<div class="form_opt">
 					{{ form_theme.name }}
 				</div>
 				<div class="form_opt">
+					<h3>fon_color</h3>
 					{{ form_theme.fon_color }}
 				</div>
 				<div class="form_opt">
+					<h3>text_color</h3>
 					{{ form_theme.text_color }}
 				</div>
 				<div class="form_opt">
+					<h3>header_bg_color</h3>
 					{{ form_theme.header_bg_color }}
 				</div>
 				<div class="form_opt">
 					{{ form_theme.header_bg_opacity }}
 				</div>
-
-
+				
 				<div class="form_opt">
 					<h3>fon_img</h3>
+					{% if user.theme_all.fon_img %}
+						<div class="clear_check">
+							<input type="checkbox" name="fon_img-clear" id="fon_img-clear_id">
+							<label for="fon_img-clear_id">Clear</label>
+						</div>
+					{% endif %}
 					<div class="file_img">
-						<input type="file" name="fon_img" accept="image/*" id="id_img">
-						<label class="img_file" for="id_img">Image</label>
-						<img class="img_user" src="{{ user.theme_all.fon_img }}">
+						<input type="file" name="fon_img" accept="image/*" id="id_fon_img">
+						<label class="img_file" for="id_fon_img">Image</label>
+						{% if user.theme_all.fon_img %}
+						    <img class="img_user" src="{{ user.theme_all.fon_img }}">
+						{% endif %}
+						
 					</div>
 				</div>
 
 				<div class="form_opt">
 					<h3>comment_img</h3>
 					<div class="file_img">
-						<input type="file" name="comment_img" accept="image/*" id="id_img">
-						<label class="img_file" for="id_img">Image</label>
+						<input type="file" name="comment_img" accept="image/*" id="id_comment_img">
+						<label class="img_file" for="id_comment_img">Image</label>
 						<img class="img_user" src="{{ user.theme_all.comment_img }}">
 					</div>
 				</div>
@@ -93,11 +104,45 @@
 				<div class="form_opt">
 					<h3>like_img</h3>
 					<div class="file_img">
-						<input type="file" name="like_img" accept="image/*" id="id_img">
-						<label class="img_file" for="id_img">Image</label>
+						<input type="file" name="like_img" accept="image/*" id="id_like_img">
+						<label class="img_file" for="id_like_img">Image</label>
 						<img class="img_user" src="{{ user.theme_all.like_img }}">
 					</div>
 				</div>
+
+				<div class="form_opt">
+					<h3>back_img</h3>
+					<div class="file_img">
+						<input type="file" name="back_img" accept="image/*" id="id_back_img">
+						<label class="img_file" for="id_back_img">Image</label>
+						<img class="img_user" src="{{ user.theme_all.back_img }}">
+					</div>
+				</div>
+
+				<div class="form_opt">
+					<h3>music_img</h3>
+					<div class="file_img">
+						<input type="file" name="music_img" accept="image/*" id="id_music_img">
+						<label class="img_file" for="id_music_img">Image</label>
+						<img class="img_user" src="{{ user.theme_all.music_img }}">
+					</div>
+				</div>
+
+				<div class="def_themes">
+					{% for i in default_themes %}
+						<div class="def_th">
+							<h1>{{ i }}</h1>
+							
+							<img class="img_theme" src="{{ i.comment_img }}">
+							<img class="img_theme" src="{{ i.like_img }}">
+							<img class="img_theme" src="{{ i.back_img }}">
+							<img class="img_theme" src="{{ i.music_img }}">
+						</div>
+					{% endfor %}
+				</div>
+
+
+
 
 				<div class="inputs">
 					<input name='submit' class="submit" type="submit" value="Save changes theme">
