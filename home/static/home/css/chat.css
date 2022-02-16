@@ -392,3 +392,30 @@ body{
 .th_sel{
 	background: rgba(255, 255, 255, 0.3);
 }
+
+.file_see{
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.file_see_js{
+	width: 100%;
+	margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%) 
+}
+
+.close_file_see{
+	color: white;
+	font-size: 2em;
+	float: right;
+}
+
+.file_mes{
+	width: 100%;
+}

@@ -17,13 +17,14 @@ class Comment(models.Model):
 
 class TypeFile(models.Model):
 	type_f = models.CharField(max_length=15)
+	type_f_magic = models.TextField(null=True)
 	def __str__(self):
 		return self.type_f
 
 class Post(models.Model):
 	user_pub = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="user_pub_post")
 	type_p = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_post",null=True)
-	date = models.DateField(auto_now=True)
+	date = models.DateTimeField(auto_now=True)
 	file = models.FileField(upload_to='posts')
 	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_post")
 	description = models.TextField(blank=True,null=True)

@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import IO, Generator
 from django.shortcuts import get_object_or_404
-from .models import Post, Music
+from .models import Post, Music, Chat, Message
 
 import random
 import string
@@ -10,18 +10,24 @@ import string
 strings = string.ascii_letters+string.digits
 
 def gen_rand_id(n):
-	res = ""
-	for i in range(n):res+=random.choice(strings)
-	return res
+    res = ""
+    unicue = True
+    for i in range(n):res+=random.choice(strings)
+
+    while unicue:
+        if Chat.objects.filter(chat_id=res):
+            for i in range(n):res+=random.choice(strings)
+        else:unicue = False
+    return res
 
 def del_friends(user_friends,user):
-	for f in range(len(user_friends)):
-		for fc in user_friends[f].chats.all():
-			for uc in user.chats.all():
-				if uc == fc:
-					del user_friends[f]
-					return del_friends(user_friends,user)
-	return user_friends
+    for f in range(len(user_friends)):
+        for fc in user_friends[f].chats.all():
+            for uc in user.chats.all():
+                if uc == fc:
+                    del user_friends[f]
+                    return del_friends(user_friends,user)
+    return user_friends
 
 def ranged(file: IO[bytes],start: int = 0,end: int = None,block_size: int = 8192,) -> Generator[bytes, None, None]:
     consumed = 0
@@ -46,6 +52,9 @@ def open_file(request, id, type_s) -> tuple:
         _file = get_object_or_404(Post, pk=id)
     elif type_s == 'music':
         _file = get_object_or_404(Music, pk=id)
+        request.session['music_id'] = id
+    elif type_s == 'mess':
+        _file = get_object_or_404(Message, pk=id)
         request.session['music_id'] = id
 
     path = Path(_file.file.path)

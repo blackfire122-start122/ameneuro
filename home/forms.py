@@ -14,14 +14,6 @@ from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeM
 from django.conf import settings
 import magic
 
-imgs = ["JPEG image data","PNG image data"]
-videos = ["ISO Media"]
-audios = ["Audio file"]
-
-ImgObj = TypeFile.objects.get(type_f='img')
-VideoObj = TypeFile.objects.get(type_f='video')
-AudioObj = TypeFile.objects.get(type_f='audio')
-
 class RegisterForm(UserCreationForm):
 	def __init__(self,*args,**kwargs):
 		super().__init__(*args,**kwargs)
@@ -62,11 +54,10 @@ class PostForm(ModelForm):
 		post.user_pub = user
 
 		type_f = magic.from_buffer(open(str(settings.MEDIA_ROOT)+str(post.file),"rb").read(2048))
-
-		if any(([i in type_f for i in imgs])):post.type_p = ImgObj
-		elif any(([i in type_f for i in videos])):post.type_p = VideoObj
-		elif any(([i in type_f for i in audios])):post.type_p = AudioObj
-
+		for i in TypeFile.objects.all():
+			if i.type_f_magic in type_f:
+				post.type_p = i
+				break
 		post.save()
 
 class ChangeForm(UserChangeForm):
@@ -102,6 +93,18 @@ class MessageForm(ModelForm):
 	class Meta:
 		model = Message
 		fields = ["file","text"]
+
+	def save(self):
+		mes = ModelForm.save(self)
+
+		type_f = magic.from_buffer(open(str(settings.MEDIA_ROOT)+str(mes.file),"rb").read(2048))
+		for i in TypeFile.objects.all():
+			if i.type_f_magic in type_f:
+				mes.type_file = i
+				break
+		mes.save()
+		
+		return mes
 
 class AllThemeForm(ModelForm):
 	class Meta:

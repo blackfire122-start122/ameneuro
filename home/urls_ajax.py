@@ -17,4 +17,5 @@ urlpatterns = [
     path('chat_get_mess', views.chat_get_mess_ajax, name='chat_get_mess_ajax'),
     path('send_file_mes', views.send_file_mes_ajax, name='send_file_mes_ajax'),
     path('musics_all', views.musics_all_ajax, name='musics_all_ajax'),
+    path('delete_post', views.delete_post_ajax, name='delete_post_ajax'),
 ]

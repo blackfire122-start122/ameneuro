@@ -170,3 +170,13 @@ function spread_btn(ch_id){
 		conn.send(JSON.stringify({'type':'spread','user': user,'id_spread':id_spread,'msg':"http://"+window.location.hostname+"/post/"+id_spread}))
 	}
 }
+
+function delete_post(id_post){
+	$.ajax({
+		url: delete_post_ajax,
+		data: {'id':id_post},
+		error: (data)=> {
+			console.log(data.data_text)
+		},
+	})
+}

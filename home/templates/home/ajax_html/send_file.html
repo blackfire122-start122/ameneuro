@@ -1,6 +1,6 @@
 <form class="form_send_file" method="post",encode="multipart/form-data">
 	{% csrf_token %}
 	{{ form.file }}
-	<label for="id_file">Select</label>
+	<label class="id_file" for="id_file">Select</label>
 	<button type="button" onclick="send_file_mes_btn(this)" class="send_file_mes_btn" >Send</button>
 </form>

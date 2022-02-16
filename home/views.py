@@ -59,7 +59,7 @@ class user(ListView):
 
 	def get_queryset(self):
 		# не брати всі
-		return Post.objects.filter(user_pub=self.user.id)
+		return Post.objects.filter(user_pub=self.user.id).order_by("-date")
 
 class chats(TemplateView):
 	template_name = "home/chats.html"
@@ -284,6 +284,18 @@ class add_music(CreateView):
 		else:return redirect("login")
 		user.music.add(form.save())
 		return redirect('musics')
+
+
+def streaming_mess(request,id):
+	file, status_code, content_length, content_range = open_file(request,id,'mess')
+	response = StreamingHttpResponse(file, status=status_code)
+
+	response['Accept-Ranges'] = 'bytes'
+	response['Content-Length'] = str(content_length)
+	response['Cache-Control'] = 'no-cache'
+	response['Content-Range'] = content_range
+
+	return response
 
 # ajax
 
@@ -538,3 +550,14 @@ def send_file_mes_ajax(request):
 def musics_all_ajax(request):
 	user_mus = User.objects.get(pk = int(request.GET["id"]))
 	return render(request,"home/ajax_html/all_music.html",{"music":user_mus.music})
+
+def delete_post_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+	try:post = Post.objects.get(pk=request.GET["id"])
+	except:return JsonResponse({"data_text":"Fail"}, status=400)
+
+	if post.user_pub == user:post.delete()
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+	
+	return JsonResponse({"data_text":"OK"}, status=200)

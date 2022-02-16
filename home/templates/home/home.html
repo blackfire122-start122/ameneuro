@@ -37,10 +37,10 @@
 	</div>
 
 	<div class="menu_home">
-		<a class="link_menu" href="{% url 'chats' %}"><img class="img_main_link" src="{% static 'home/images/direct.png' %}" alt=""></a>
-		<a class="link_menu" href="{% url 'user_find' %}"><img class="img_main_link" src="{% static 'home/images/find.png' %}" alt=""></a>
-		<a class="link_menu" href="{% url 'friends' %}"><img class="img_main_link" src="{% static 'home/images/user.png' %}" alt=""></a>
-		<a class="link_menu" href="{% url 'musics' %}"><img class="img_main_link" src="{% static 'home/images/music.png' %}" alt=""></a>
+		<a class="link_menu" href="{% url 'chats' %}"><img class="img_main_link" src="{% static 'home/images/direct.png' %}"></a>
+		<a class="link_menu" href="{% url 'user_find' %}"><img class="img_main_link" src="{% static 'home/images/find.png' %}"></a>
+		<a class="link_menu" href="{% url 'friends' %}"><img class="img_main_link" src="{% static 'home/images/user.png' %}"></a>
+		<a class="link_menu" href="{% url 'musics' %}"><img class="img_main_link" src="{{ user.theme_all.music_img }}"></a>
 	</div>
 
 	<div class="friens_spread">
@@ -66,6 +66,7 @@
 		let comment_like_ajax = "{% url 'comment_like_ajax' %}"
 		let comment_user_ajax = "{% url 'comment_user_ajax' %}"
 		let comment_reply_ajax = "{% url 'comment_reply_ajax' %}"
+		let delete_post_ajax = "{% url 'delete_post_ajax' %}"
 		let post_ajax = "{% url 'post_ajax' %}"
 		let id_post = "{{ id }}"
 		let play_img = "{% static 'home/images/play.png' %}"

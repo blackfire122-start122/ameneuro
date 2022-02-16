@@ -13,6 +13,12 @@
 
 				<button onclick="spread('{{ p.id }}')" class="link_options_menu">Поширити</button>
 
+				{% if p.user_pub == user %}
+					<button onclick="delete_post({{ p.id }})" class="link_options_menu">Видалити</button>
+				{% endif %}
+
+
+
 				<a class="link_options_menu_red" href="">Поскаржитись</a>
 			</div>
 		</div>
