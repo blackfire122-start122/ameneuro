@@ -106,39 +106,76 @@ function onmessage(e){
 		},300)
 	}
 	else if(data['type']=='msg_file'){
+		if (data["type_file"] == "audio"){
+			element = `
+				<div>
+					<div class="my_msgs file_mes">
+						<div class="audio-player">
+							<h4 class="name_mus">` + data["msg"] + `</h4>
+							<audio class="audio_ap" id="audio_`+data["id"]+`" src="`+data["src"]+`"></audio>
+							<div class="controls">
+								<button value="`+data["id"]+`" onclick="toggleAudio_mess(this)" class="player-button"><img class="play_pause_img" src="`+pause_img+`" alt=""></button>
+								<input id="timeline_`+data["id"]+`" onchange ="changeSeek_mess(this)" type="range" class="timeline" max="100" value="0">
+							</div>
+						</div>
+						<p class="mes">` + data["msg"] + `</p>
+						<time class='time'>` +data["time"]+ `</time>
+					</div>
+				</div>
+			`
+			msg_div.innerHTML += element
+			readeble.innerText = 'not read'
+			return
+		}
+
 		let div_ = document.createElement('div')
 		let div = document.createElement('div')
 		let p = document.createElement('p')
-		let img = document.createElement('img')
 		let time = document.createElement('time')
 		let readeble = document.querySelector('.readeble')
-
+		let file = document.createElement(data["type_file"])
+		
 		if (data["user"]==user) {
-			div.className = "my_msgs"
+			div.className = "my_msgs file_mes"
 		}else{
-			div.className = "other_msgs"
+			div.className = "other_msgs file_mes"
 		}
 		p.className="mes"
 		p.innerText = data["msg"]
 
-		img.className = "img_file_mes"
-		img.src = data["src"]
+		file.className = "img_file_mes"
+		file.src = data["src"]
+		file.addEventListener("click", ()=>{file_see(file)})
 
 		time.className = 'time'
 		time.innerText = data["time"]
 
-		div.append(img)
+		div.append(file)
 		div.append(p)
 		div.append(time)
 		div_.append(div)
-		div_.append(div_)
+		msg_div.append(div_)
 		readeble.innerText = 'not read'
 	}
 	else if (data['type']=='spread'){
 		let div_ = document.createElement('div')
 		let div = document.createElement('div')
-		let file = document.createElement(data['type_file'])
+		let file
+		
+		if (data["type_file"] == "audio"){
+			file = document.createElement("img")
+			file.className="file_mes"
+			file.src = user_music_theme
+		}else{
+			file = document.createElement(data['type_file'])
+			file.className="img_file_mes"
+			file.src = data["url_file"]
+		}
+
+		console.log(file)
+		
 		let a = document.createElement('a')
+		let p = document.createElement('p')
 		let time = document.createElement('time')
 		let readeble = document.querySelector('.readeble')
 
@@ -148,14 +185,14 @@ function onmessage(e){
 			div.className = "other_msgs"
 		}
 		a.href = data["url_post"]
-		file.className="mes"
-		file.src = data["url_file"]
 
 		time.className = 'time'
 		time.innerText = data["time"].slice(11,16)
+		p.innerText = "share"
 
-		div.append(file)
+		a.append(file)
 		div.append(a)
+		div.append(p)
 		div.append(time)
 		div_.append(div)
 		msg_div.append(div_)
@@ -255,6 +292,16 @@ window.addEventListener('scroll',()=>{
 	})
 })
 
+$.ajax({
+	url: chat_get_mess_ajax,
+	data: {'chat_id':chat_id},
+	success: function (response) {
+		msgs = msg_div.innerHTML 
+		msg_div.innerHTML = response+msgs
+		// window.scrollTo(0,1)
+	}
+})
+
 let height = 20
 let attempt = 5
 
@@ -267,7 +314,7 @@ function scrollToEndPage() {
 			clearInterval(intS);
 	}
 }
-let intS = setInterval(scrollToEndPage,10)
+let intS = setInterval(scrollToEndPage,5)
 
 musics_s = true
 function music_show(){
@@ -358,7 +405,6 @@ function send_file_mes(){
 }
 
 function send_file_mes_btn(btn){
-
 	file = document.querySelector("#id_file").files[0]
 	formdata = new FormData()
 
@@ -381,6 +427,8 @@ function send_file_mes_btn(btn){
 			conn.send(JSON.stringify({'type':'msg_file',
 									"src":response["src"],
 									"msg":msg,
+									"id":response["id"],
+									"type_file":response["type_file"],
 									"user":user,
 									"time":String(new Date()).slice(16,21)
 			}))
@@ -426,82 +474,3 @@ function style_play_audio(music){
 	music.parentNode.childNodes[2].childNodes[0].childNodes[0].src = play_img
 }
 
-function file_see(e){
-	file = e.cloneNode()
-	file.className = "file_see_js"
-	file.controls = true
-
-	div = document.createElement("div")
-	span = document.createElement("span")
-
-	div.className = "file_see"
-	span.innerText = "X"
-	span.className = "close_file_see"
-	span.addEventListener("click",()=>{
-		div.remove()
-	})
-
-
-	div.append(span)
-	div.append(file)
-
-
-	document.body.append(div)
-}
-
-
-
-function toggleAudio_mess (btn) {
-  audio = document.getElementById("audio_"+btn.value)
-  timeline = document.getElementById("timeline_"+btn.value)
-  
-  audio.addEventListener("play",play_audio)
-  audio.addEventListener("pause",pause_audio)
-  
-  audio.ontimeupdate = ()=>{
-    const percentagePosition = (100*audio.currentTime) / audio.duration
-    timeline.style.backgroundSize = `${percentagePosition}% 100%`
-    timeline.value = percentagePosition
-  }
-
-  if (audio.paused) {
-    all_pause_mess()
-    audio.play()
-  } else {
-    audio.pause()
-  }
-}
-
-function changeSeek_mess(timeline) {
-  audio = document.getElementById("audio_"+String(timeline.id).slice(9))
-  audio.ontimeupdate = null
-  const time = (timeline.value * audio.duration) / 100
-  audio.currentTime = time
-
-  const percentagePosition = (100*audio.currentTime) / audio.duration
-  timeline.style.backgroundSize = `${percentagePosition}% 100%`
-  timeline.value = percentagePosition
-
-
-  audio.addEventListener("play",play_audio)
-  audio.addEventListener("pause",pause_audio)
-  
-  all_pause_mess()
-  audio.play()
-
-}
-
-function all_pause_mess(){
-  audios = document.getElementsByClassName("audio_ap")
-  for (i=audios.length-1;i>=0;--i){
-    audios[i].pause()
-  }
-}
-
-function play_audio(e){
-  e.target.parentNode.childNodes[5].childNodes[1].childNodes[0].src = play_img
-}
-
-function pause_audio(e){
-  e.target.parentNode.childNodes[5].childNodes[1].childNodes[0].src = pause_img
-}

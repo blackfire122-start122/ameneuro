@@ -22,116 +22,13 @@
 {% endblock content_header %}
 
 {% block content %}	
-	<div class="messages">
-		{% for m in messages %}
-			{% if m.type_m.type_m == 'msg' %}
-				{% if m.user == user %}
-					<div>
-						<div class="my_msgs">
-							<p class="mes">{{ m }}</p>
-							<time class='time'>{{ m.date|date:"h:m" }}</time>
-						</div>
-					</div>
-				{% else %}
-					<div>
-						<div class="other_msgs">
-							<p class="mes">{{ m }}</p>
-							<time class='time'>{{ m.date|date:"h:m" }}</time>
-						</div>
-					</div>
-				{% endif %}
+	<div class="messages"></div>
 
-			{% elif m.type_m.type_m == 'new_theme' %}
-				<div>
-					<div class="new_theme">
-						<p class="mes">{{ m }}</p>
-					</div>
-				</div>
-			{% elif m.type_m.type_m == 'file' %}
-				{% if m.type_file.type_f == "audio" %}
-				    {% if m.user == user %}
-						<div>
-							<div class="my_msgs file_mes">
-								<div class="audio-player">
-									<h4 class="name_mus">{{ m }}</h4>
-									<audio class="audio_ap" id="audio_{{ m.id }}" src="{% url 'stream_mess' m.id %}"></audio>
-									<div class="controls">
-										<button value="{{ m.id }}" onclick="toggleAudio_mess(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
-										<input id="timeline_{{ m.id }}" onchange ="changeSeek_mess(this)" type="range" class="timeline" max="100" value="0">
-									</div>
-								</div>
-								<p class="mes">{{ m }}</p>
-								<time class='time'>{{ m.date|date:"h:m" }}</time>
-							</div>
-						</div>
-					{% else %}
-						<div>
-							<div class="other_msgs file_mes">
-								<div class="audio-player">
-									<h4 class="name_mus">{{ m }}</h4>
-									<audio class="audio_ap" id="audio_{{ m.id }}" src="{% url 'stream_mess' m.id %}"></audio>
-									<div class="controls">
-										<button value="{{ m.id }}" onclick="toggleAudio_mess(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
-										<input id="timeline_{{ m.id }}" onchange ="changeSeek_mess(this)" type="range" class="timeline" max="100" value="0">
-									</div>
-								</div>
-								<p class="mes">{{ m }}</p>
-								<time class='time'>{{ m.date|date:"h:m" }}</time>
-							</div>
-						</div>
-					{% endif %}
-				{% else %}
-					{% if m.user == user %}
-						<div>
-							<div class="my_msgs file_mes">
-								<{{ m.type_file }} controls class="file_mes" src="{% url 'stream_mess' m.id %}" onclick="file_see(this)"></{{ m.type_file }}>
-								<p class="mes">{{ m }}</p>
-								<time class='time'>{{ m.date|date:"h:m" }}</time>
-							</div>
-						</div>
-					{% else %}
-						<div>
-							<div class="other_msgs file_mes">
-								<{{ m.type_file }} controls class="file_mes" src="{% url 'stream_mess' m.id %}" onclick="file_see(this)"></{{ m.type_file }}>
-								<p class="mes">{{ m }}</p>
-								<time class='time'>{{ m.date|date:"h:m" }}</time>
-							</div>
-						</div>
-					{% endif %}
-				{% endif %}				
-
-			{% elif m.type_m.type_m == 'spread' %}
-
-				{% if m.user == user %}
-					<div>
-						<div class="my_msgs">
-							<a href="{{ m.text }}">
-								<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
-							</a>
-							<time class='time'>{{ m.date|date:"h:m" }}</time>
-						</div>
-					</div>
-				{% else %}
-					<div>
-						<div class="other_msgs">
-							<a href="{{ m.text }}">
-								<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
-							</a>
-							<time class='time'>{{ m.date|date:"h:m" }}</time>
-						</div>
-					</div>
-				{% endif %}
-
-			{% endif %}
-		{% endfor %}
-	</div>
-	{% with end_mes=messages|last %}
-		{% if end_mes.readeble %}
-			<span class='readeble'>Read</span>
-		{% else %}
-			<span class='readeble'>not read</span>
-		{% endif %} 
-	{% endwith %}
+	{% if end_mes.readeble %}
+		<span class='readeble'>Read</span>
+	{% else %}
+		<span class='readeble'>not read</span>
+	{% endif %} 
 
 	<span id="error"> {{ error }} </span>
 	
@@ -156,13 +53,15 @@
 		let bg_inp_val = "{{ chat.theme.color_mes_bg }}"
 		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
 		let send_file_mes_ajax = "{% url 'send_file_mes_ajax' %}"
-
+		let user_music_theme = "{{ user.theme_all.music_img.url }}"
 		let play_img = "{% static 'home/images/play.png' %}"
 		let pause_img = "{% static 'home/images/pause.png' %}"
 
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/chat.js' %}"></script>
+	<style>
+	<script src="{% static 'home/js/style_chat.js' %}"></script>
 	<style>
 		body{
 			background-image: url("{{ chat.theme.background.url }}");

@@ -73,6 +73,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         self.text_data_json["time"]=str(mes.date)
         self.text_data_json["user"]=str(self.user)
+        self.text_data_json["url_file"]=mes.file.url
+        self.text_data_json["url_post"]="/post/" + str(post.id)
         self.chat.messages.add(mes)
         self.text_data_json["type_file"] = post.type_p.type_f
 

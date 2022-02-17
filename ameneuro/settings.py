@@ -116,3 +116,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+get_posts_how = 5
+get_mes_how = 20
+get_user_how = 5
