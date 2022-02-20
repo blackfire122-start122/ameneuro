@@ -6,18 +6,21 @@ function like(e){
 			console.log(response.data_text)
 		}
 	})
+	e.style.opacity = "0.5"
+	e.onclick = null
+	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
 }
 
 function comments(e){
 	let div_menu_post = document.querySelector(".post_"+e.id)
 	
 	function show_comment(){
-		div_menu_post.childNodes[9].style.display = "block"
+		div_menu_post.childNodes[11].style.display = "block"
 		e.onclick = close_comment
 	}
 
 	function close_comment(){
-		div_menu_post.childNodes[9].style.display = "none"
+		div_menu_post.childNodes[11].style.display = "none"
 		e.onclick = show_comment
 	}
 
@@ -42,6 +45,10 @@ function like_comment(e){
 			console.log(response.data_text)
 		}
 	})
+
+	e.style.opacity = "0.5"
+	e.onclick = null
+	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
 }
 
 let reply = false
@@ -79,6 +86,9 @@ function select_reply(e){
 	let com = document.querySelector('.com_'+e.id)
 	com.style.background = "rgba(0,0,0,0.1)"
 	reply = true
+	if(btn_reply){
+			document.querySelector('.com_'+btn_reply.id).style.background = "none"
+	}
 	btn_reply = e
 }
 
@@ -154,20 +164,20 @@ window.addEventListener('scroll', function(e){
 	}
 })
 
-let id_spread
+let id_share
 
-function spread(id){
-	id_spread = id
-	document.querySelector(".friens_spread").style.display = "block"
+function share(id){
+	id_share = id
+	document.querySelector(".friends_share").style.display = "block"
 }
 
-function close_spr(){
-	document.querySelector(".friens_spread").style.display="none"
+function close_sh(){
+	document.querySelector(".friends_share").style.display="none"
 }
-function spread_btn(ch_id){
+function share_btn(ch_id){
 	conn = new WebSocket("ws://"+window.location.hostname+"/"+ch_id)
 	conn.onopen = ()=>{
-		conn.send(JSON.stringify({'type':'spread','user': user,'id_spread':id_spread,'msg':"http://"+window.location.hostname+"/post/"+id_spread}))
+		conn.send(JSON.stringify({'type':'share','user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share}))
 	}
 }
 
@@ -179,4 +189,16 @@ function delete_post(id_post){
 			console.log(data.data_text)
 		},
 	})
+}
+
+let menu_show_v = true
+
+function menu_show(e){
+	if (menu_show_v) {
+		document.querySelector(".menu_home").style.display = "flex"
+		menu_show_v = false
+	}else{
+		document.querySelector(".menu_home").style.display = "none"
+		menu_show_v = true
+	}
 }

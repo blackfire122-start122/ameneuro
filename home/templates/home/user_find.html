@@ -2,40 +2,19 @@
 {% load static %}
 
 {% block title %}User find{% endblock title %}
-
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/user_find.css' %}">
 	<h4 class="userregname">{{ user }}</h4>
-	<input class='find_chat' type="text" placeholder="find">
+	<input onkeydown="find_inp(this)" class='find_user' type="text" placeholder="Find user">
 {% endblock content_header %}
 
 {% block content %}	
-	<div class="users">
-		{% for u in users %}
-			{% if u != user %}
-				<div class="user">
-					<div class="img_name">
-						<img class="img_f" src={{ u.img.url }}>
-						<h4> {{ u.username }}</h4>
-					</div>
-					{% if u not in user.friends.all %}
-						<div class="friend_follow">
-							{% if not u in user.follow.all %}
-							    <button id="{{ u.id }}" value="{{ u.id }}" onclick="follow(this)" class="btn_follow" >Follow</button>
-							{% else %}
-								<p id="{{ u.id }}" class="follow">follow</p>
-							{% endif %}
-
-							<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this)">Add friend</button>
-						</div>
-					{% endif %}
-				</div>
-			{% endif %}
-		{% endfor %}
-	</div>
+	<div class="users"></div>
 	<script>
-		let want_add_friend_ajax = "{% url "want_add_friend_ajax" %}"
-		let follow_ajax = "{% url "follow_ajax" %}"
+		let want_add_friend_ajax = "{% url 'want_add_friend_ajax' %}"
+		let follow_ajax = "{% url 'follow_ajax' %}"
+		let user_find_ajax = "{% url 'user_find_ajax' %}"
+		let users_get_ajax = "{% url 'users_get_ajax' %}"
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/user_friend.js' %}"></script>

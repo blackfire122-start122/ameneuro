@@ -50,7 +50,8 @@
 		let chat = "{{ chat }}"
 		let chat_id = "{{ chat.id }}"
 		let chat_options_ajax = "{% url 'chat_options_ajax' %}"
-		let bg_inp_val = "{{ chat.theme.color_mes_bg }}"
+		let color_mes_bg = "{{ chat.theme.color_mes_bg }}"
+		let color_mes_bg_op = "{{ chat.theme.color_mes_bg_op }}"
 		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
 		let send_file_mes_ajax = "{% url 'send_file_mes_ajax' %}"
 		let user_music_theme = "{{ user.theme_all.music_img.url }}"
@@ -60,21 +61,20 @@
 	</script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/chat.js' %}"></script>
-	<style>
 	<script src="{% static 'home/js/style_chat.js' %}"></script>
+
 	<style>
 		body{
-			background-image: url("{{ chat.theme.background.url }}");
+			{% if chat.theme.background %}
+				background-image: url("{{ chat.theme.background.url }}");
+			{% endif %}
+
 			background-size: cover;
 			background-repeat: round;
 			background-attachment: fixed;
 		}
 		.messages, .id_file{
 			color: {{ chat.theme.color_mes }};
-		}
-		.my_msgs, .other_msgs{
-			background-color: {{ chat.theme.color_mes_bg }};
-			opacity:{{ chat.theme.color_mes_bg_op }};
 		}
 	</style>
 {% endblock content %}

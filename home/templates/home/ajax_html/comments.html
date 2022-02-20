@@ -12,7 +12,12 @@
 		<div class="comment_menu">
 			<time>{{ c.date }}</time>
 			<div>
-				<img id={{ c.id }} onclick="like_comment(this)" class='img_like_comment' src="{{ user.theme_all.like_img.url }}">
+				{% if user in c.likes.all %}
+					<img id={{ c.id }} class='img_like_comment my_like' src="{{ user.theme_all.like_img.url }}">
+				{% else %}			    
+					<img id={{ c.id }} onclick="like_comment(this)" class='img_like_comment' src="{{ user.theme_all.like_img.url }}">
+				{% endif %}
+
 				<span>{{ c.likes.all|length }}</span>
 			</div>
 			<button value="{{ post_id }}" id="{{ c.id }}" onclick="select_reply(this)" class="reply">reply</button>

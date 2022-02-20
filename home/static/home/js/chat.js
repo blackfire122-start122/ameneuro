@@ -35,6 +35,9 @@ function onmessage(e){
 		}else{
 			div.className = "other_msgs"
 		}
+
+		div.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
+
 		p.className="mes"
 		p.innerText = data["msg"]
 
@@ -140,6 +143,8 @@ function onmessage(e){
 		}else{
 			div.className = "other_msgs file_mes"
 		}
+		div.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
+
 		p.className="mes"
 		p.innerText = data["msg"]
 
@@ -157,7 +162,7 @@ function onmessage(e){
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
 	}
-	else if (data['type']=='spread'){
+	else if (data['type']=='share'){
 		let div_ = document.createElement('div')
 		let div = document.createElement('div')
 		let file
@@ -171,8 +176,6 @@ function onmessage(e){
 			file.className="img_file_mes"
 			file.src = data["url_file"]
 		}
-
-		console.log(file)
 		
 		let a = document.createElement('a')
 		let p = document.createElement('p')
@@ -184,6 +187,8 @@ function onmessage(e){
 		}else{
 			div.className = "other_msgs"
 		}
+		div.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
+
 		a.href = data["url_post"]
 
 		time.className = 'time'
@@ -209,43 +214,6 @@ function btn_send(){
 	conn.send(JSON.stringify({'type':'msg','msg': msg_user.value}))
 	msg_user.value = ""
 	end_readable_send()
-}
-
-let chat_options_change = false
-
-function chat_options(e) {
-	let messages = document.querySelector(".messages")
-	let input_mes_send = document.querySelector(".input_mes_send")
-	let options_div = document.querySelector(".options")
-	let error = document.querySelector('#error')
-
-
-	if (chat_options_change) {
-		messages.style.display='flex'
-		input_mes_send.style.display='block'
-		chat_options_change = false
-		options_div.style.display = "none"
-		options_div.innerHTML = ''
-		error.style.display='none'
-		return
-	}else{
-		messages.style.display='none'
-		input_mes_send.style.display='none'
-		options_div.style.display = "block"
-		error.style.display='block'
-	}
-
-	$.ajax({
-		url: chat_options_ajax,
-		data: {'chat_id':chat_id},
-		success: function (response) {options_div.innerHTML = response}
-	})
-	chat_options_change = true
-
-}
-
-function inp_ran(e){
-	document.querySelector('#mes_bg').style.opacity = e.value
 }
 
 function new_theme(theme){
@@ -276,55 +244,6 @@ function end_readable_send(){
 	if ($(end_mes).is(':offscreen') && conn.readyState){
 		conn.send(JSON.stringify({'type':'end_readable','user': user}))
 	}
-}
-
-window.addEventListener('scroll',()=>{
-	if(window.scrollY!=0){return}
-	
-	$.ajax({
-		url: chat_get_mess_ajax,
-		data: {'chat_id':chat_id},
-		success: function (response) {
-			msgs = msg_div.innerHTML 
-			msg_div.innerHTML = response+msgs
-			// window.scrollTo(0,1)
-		}
-	})
-})
-
-$.ajax({
-	url: chat_get_mess_ajax,
-	data: {'chat_id':chat_id},
-	success: function (response) {
-		msgs = msg_div.innerHTML 
-		msg_div.innerHTML = response+msgs
-		// window.scrollTo(0,1)
-	}
-})
-
-let height = 20
-let attempt = 5
-
-function scrollToEndPage() {
-	if (height < document.body.scrollHeight){
-			window.scrollTo(0, height)
-			attempt++
-			height = parseInt(height) + attempt
-	}else{
-			clearInterval(intS);
-	}
-}
-let intS = setInterval(scrollToEndPage,5)
-
-musics_s = true
-function music_show(){
-	let musics = document.querySelector('.musics')
-	if (musics_s){
-		musics.style.display = 'block'
-	}else{
-		musics.style.display = 'none'
-	}
-	musics_s = !musics_s
 }
 
 function play_m(music_e){

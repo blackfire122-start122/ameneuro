@@ -54,7 +54,7 @@
 	background: rgba(0, 0, 0, 0.8);
 	color: white;
 	width: 20em;
-	height: 10em;
+	max-height: 10em;
 	overflow-y: auto;
 	right: 0;
 	padding: 5px;
@@ -81,4 +81,8 @@
 	position: absolute;
 	margin-top: 21%;
 	margin-left: 2%;
+}
+
+.not_mus{
+	text-align: center;
 }

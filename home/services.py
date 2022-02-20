@@ -1,11 +1,11 @@
 from pathlib import Path
 from typing import IO, Generator
 from django.shortcuts import get_object_or_404
-from .models import Post, Music, Chat, Message
+from .models import Post, Music, Chat, Message, User
 
 import random
 import string
-
+from ameneuro.settings import get_posts_how, get_mes_how, get_user_how
 
 strings = string.ascii_letters+string.digits
 
@@ -77,3 +77,59 @@ def open_file(request, id, type_s) -> tuple:
         content_range = f'bytes {range_start}-{range_end}/{file_size}'
 
     return file, status_code, content_length, content_range
+
+def get_posts(request,user):
+    # need recomendations and hard work
+    # bags
+
+    posts = {}
+    start = request.session["start_element"]
+    end = request.session["end_element"]
+
+    try:
+        friends = user.friends.all()
+        follow = user.follow.all()
+        posts = Post.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
+        if len(posts)<get_posts_how:
+            start_rec_post = request.session["start_rec_post"]
+            end_rec_post = request.session["end_rec_post"]
+
+            start_rec_user = request.session["start_rec_user"]
+            end_rec_user = request.session["end_rec_user"]
+
+            rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_user:end_rec_user]
+            posts |= Post.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_post:end_rec_post]
+        
+            if request.session["defolt_posts"]: 
+                start_rec_post = 0
+                end_rec_post = get_posts_how
+                request.session["defolt_posts"] = False
+            
+            if request.session["start_rec_user"] > User.objects.count():
+                return posts
+            if len(posts)<get_posts_how:
+                request.session["defolt_posts"] = True
+
+                start_rec_user+=get_user_how
+                end_rec_user+=get_user_how
+
+                request.session["start_rec_user"]=start_rec_user
+                request.session["end_rec_user"]=end_rec_user
+
+                posts |= get_posts(request,user)
+
+            start_rec_post+=get_posts_how
+            end_rec_post+=get_posts_how
+
+            request.session["start_rec_post"]=start_rec_post
+            request.session["end_rec_post"]=end_rec_post
+
+    except:return {}
+
+    start+=get_posts_how
+    end+=get_posts_how
+
+    request.session["start_element"]=start
+    request.session["end_element"]=end
+
+    return posts

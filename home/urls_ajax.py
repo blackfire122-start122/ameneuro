@@ -17,4 +17,6 @@ urlpatterns = [
     path('send_file_mes', ajax_views.send_file_mes_ajax, name='send_file_mes_ajax'),
     path('musics_all', ajax_views.musics_all_ajax, name='musics_all_ajax'),
     path('delete_post', ajax_views.delete_post_ajax, name='delete_post_ajax'),
+    path('user_find', ajax_views.user_find_ajax, name='user_find_ajax'),
+    path('users_get', ajax_views.users_get_ajax, name='users_get_ajax'),
 ]

@@ -24,6 +24,7 @@
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.1);
 	object-fit: cover;
 }
 
@@ -51,4 +52,14 @@
 }
 .friend_follow{
 	display: flex;
+}
+
+.find_user{
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	border-radius:5px;
+	outline: none;
+	padding: 5px;
+	position: relative;
+	right: 5%;
 }

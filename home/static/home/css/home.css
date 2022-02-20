@@ -34,7 +34,7 @@ body{
 .link_user{
 	height: 40px;
 	width: 40px;
-	position: relative;
+	position: fixed;
 	right: 10px;
 	top: 5px;
 	border-radius: 50%;
@@ -50,17 +50,20 @@ body{
 }
 
 .menu_home{
+	display: none;
 	position: fixed;
-	right: 5%;
-	top: 40%;
+	left: 0;
+}
+
+.menu_home_btn{
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
 	display: flex;
-	flex-direction: column;
-	z-index: 4;
 }
 
 .link_menu{
-	margin-top: 15%;
-	background: white;
+	margin-right: 10%;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
@@ -124,6 +127,7 @@ body{
 	height: 30px;
 	width: 30px;
 	object-fit:cover;
+	background: rgba(255, 255, 255, 0.1);
 }
 
 .name_user_post{
@@ -266,7 +270,7 @@ main{
   margin: 0 auto;
 }
 
-.friens_spread{
+.friends_share{
 	position: fixed;
 	bottom: 0;
 	display: none;
@@ -278,25 +282,29 @@ main{
 	border-radius: 20px 20px 0 0 ;
 }
 
-.f_spread{
+.f_share{
 	margin-top: 3%;
 	display: flex;
 	justify-content: space-around;
 }
 
-.name_spr{
+.name_sh{
 	width: 2em;
 }
 
-.close_spr{
+.close_sh{
 	position: absolute;
 	right: 10%;
 }
 
-.btn_spr{
+.btn_sh{
 	background: black;
 	padding: 5px;
 	border-radius: 5px;
 	color: white;
 	border: none;
+}
+
+.my_like{
+	opacity: 0.5;
 }

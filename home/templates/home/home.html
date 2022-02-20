@@ -36,25 +36,28 @@
 	<div class="posts">
 	</div>
 
-	<div class="menu_home">
-		<a class="link_menu" href="{% url 'chats' %}"><img class="img_main_link" src="{% static 'home/images/direct.png' %}"></a>
-		<a class="link_menu" href="{% url 'user_find' %}"><img class="img_main_link" src="{% static 'home/images/find.png' %}"></a>
-		<a class="link_menu" href="{% url 'friends' %}"><img class="img_main_link" src="{% static 'home/images/user.png' %}"></a>
-		<a class="link_menu" href="{% url 'musics' %}"><img class="img_main_link" src="{{ user.theme_all.music_img }}"></a>
+	<div class="menu_home_btn">
+		<div class="menu_home">
+			<a class="link_menu" href="{% url 'chats' %}"><img class="img_main_link" src="{% static 'home/images/direct.png' %}"></a>
+			<a class="link_menu" href="{% url 'user_find' %}"><img class="img_main_link" src="{% static 'home/images/find.png' %}"></a>
+			<a class="link_menu" href="{% url 'friends' %}"><img class="img_main_link" src="{% static 'home/images/user.png' %}"></a>
+			<a class="link_menu" href="{% url 'musics' %}"><img class="img_main_link" src="{{ user.theme_all.music_img }}"></a>
+		</div>
+		<img onclick="menu_show(this)" class="link_menu" src="{% static 'home/images/menu.png' %}">		
 	</div>
 
-	<div class="friens_spread">
-		<span class="close_spr" onclick="close_spr()">X</span>
+	<div class="friends_share">
+		<span class="close_sh" onclick="close_sh()">X</span>
 		{% for ch in user.chats.all %}
-			<div class="f_spread">
-				<h3 class="name_spr">
+			<div class="f_share">
+				<h3 class="name_sh">
 					{% for u in ch.users.all %}
 						{% if u != user %}
 							{{ u }}
 						{% endif %}
 					{% endfor %}
 				</h3>
-				<button class="btn_spr" onclick="spread_btn('{{ ch }}')">Spread</button>
+				<button class="btn_sh" onclick="share_btn('{{ ch }}')">share</button>
 			</div>
 		{% endfor %}
 	</div>

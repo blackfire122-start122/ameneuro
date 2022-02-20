@@ -14,7 +14,7 @@
 		<div class="opt_value">
 			<p class="opt">background color mesaage</p>
 			<div>
-			<input id="bg_op" oninput="inp_ran(this)" class="inp_op" name='color_mes_bg_op' value={{ chat.theme.color_mes_bg_op }} type="range" min=0 max=1 step="0.1" >
+			<input id="bg_op" oninput="inp_ran(this)" class="inp_op" name='color_mes_bg_op' value="{{ chat.theme.color_mes_bg_op }}" type="range" min=0 max=1 step="0.1" >
 			<input class="inp_color" id="mes_bg" name="color_mes_bg" value="{{ chat.theme.color_mes_bg }}" type="color">
 			</div>
 		</div>
@@ -26,7 +26,9 @@
 				<label for="file_theme" class="file_theme_button">Select fon</label><br>
 				<input id ='file_theme' class='file_theme' value="{{ chat.theme.background }}" type="file" name="background">
 			</div>
-			<img class="backgraund_opt" src="{{ chat.theme.background.url }}">
+			{% if chat.theme.background %}
+			    <img class="backgraund_opt" src="{{ chat.theme.background.url }}">
+			{% endif %}
 		</div>
 	</div>
 	
@@ -44,13 +46,17 @@
 			<button id="theme_{{ i.id }}" class="theme th_sel">
 				<h3>{{ i }}</h3>
 				<h3>Selected</h3>
-				<img class='theme_bg' src="{{ i.background.url }}">
+				{% if i.background %}
+					<img class='theme_bg' src="{{ i.background.url }}">
+				{% endif %}
 			</button>
 		{% else %}
 			<button id="theme_{{ i.id }}" class="theme">
 				<h3 onclick="new_theme('{{ i.id }}')">{{ i }}</h3>
 				<h3 class='btn_delete' onclick="delete_theme(this,'{{ i.id }}')">Delete</h3>
-				<img class='theme_bg' src="{{ i.background.url }}">
+				{% if i.background %}
+					<img class='theme_bg' src="{{ i.background.url }}">
+				{% endif %}
 			</button>
 		{% endif %}
 	{% endfor %}

@@ -39,7 +39,7 @@ def add_chat_ajax(request):
 		try:
 			friend = User.objects.get(pk=int(request.GET["id"]))
 			
-			theme = Theme(background='themes/default.jpg', color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+user.username)
+			theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+user.username)
 			theme.save()
 
 			chat = Chat(chat_id=gen_rand_id(30))
@@ -130,59 +130,12 @@ def comment_reply_ajax(request):
 	return JsonResponse({"data_text":"Fail"}, status=400)
 	
 def post_ajax(request):
-	# need recomendations and hard work
-
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
 	posts = {}
-	if request.GET["id"]:
-		posts = Post.objects.filter(pk=request.GET["id"])
-	else:
-		if request.user.is_authenticated:
-			user = request.user
+	if request.GET["id"]:posts = Post.objects.filter(pk=request.GET["id"])
+	else:posts = get_posts(request,user)
 
-			start = request.session["start_element"]
-			end = request.session["end_element"]
-
-			try:
-				friends = user.friends.all()
-				follow = user.follow.all()
-				posts = Post.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
-				if len(posts)<get_posts_how:
-					start_rec_post = request.session["start_rec_post"]
-					end_rec_post = request.session["end_rec_post"]
-
-					start_rec_user = request.session["start_rec_user"]
-					end_rec_user = request.session["end_rec_user"]
-
-					rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_user:end_rec_user]
-					posts |= Post.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_post:end_rec_post]
-				
-					if request.session["defolt_posts"]:	
-						start_rec_post = 0
-						end_rec_post = get_posts_how
-						request.session["defolt_posts"] = False
-
-					if len(posts)<get_posts_how:
-						request.session["defolt_posts"] = True
-
-						start_rec_user+=get_user_how
-						end_rec_user+=get_user_how
-
-						request.session["start_rec_user"]=start_rec_user
-						request.session["end_rec_user"]=end_rec_user
-					
-					start_rec_post+=get_posts_how
-					end_rec_post+=get_posts_how
-
-					request.session["start_rec_post"]=start_rec_post
-					request.session["end_rec_post"]=end_rec_post
-
-			except:return JsonResponse({"data_text":"Fail"}, status=400)
-
-			start+=get_posts_how
-			end+=get_posts_how
-
-			request.session["start_element"]=start
-			request.session["end_element"]=end
 	if not posts:return JsonResponse({"info":"None post"}, status=200)
 	return render(request, "home/ajax_html/posts.html",{"posts":posts})
 
@@ -267,3 +220,24 @@ def delete_post_ajax(request):
 	else:return JsonResponse({"data_text":"Fail"}, status=400)
 	
 	return JsonResponse({"data_text":"OK"}, status=200)
+
+from django.core import serializers
+
+def user_find_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+	try:
+		users = User.objects.filter(username__contains=request.GET["find_name"])[int(request.GET["users_find_start"]):int(request.GET["users_find_end"])]
+	except:return JsonResponse({"data_text":"Fail"}, status=400)
+	return render(request,"home/ajax_html/users.html",{"users":users})
+
+def users_get_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+	if int(request.GET["users_start"])-int(request.GET["users_end"])!=-20:
+		return JsonResponse({"data_text":"Fail"}, status=400)
+
+	try:users = User.objects.all()[int(request.GET["users_start"]):int(request.GET["users_end"])]
+	except:return JsonResponse({"data_text":"Fail"}, status=400)
+	
+	return render(request,"home/ajax_html/users.html",{"users":users})

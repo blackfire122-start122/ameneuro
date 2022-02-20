@@ -61,13 +61,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.text_data_json["readeble"]=str(end_mes.readeble)
 
     @database_sync_to_async
-    def spread(self):
+    def share(self):
         self.chat = Chat.objects.get(chat_id=self.room_name)
         self.user = User.objects.get(username=self.text_data_json['user'])
 
     @database_sync_to_async
-    def new_mes_spread(self):
-        post = Post.objects.get(pk=int(self.text_data_json["id_spread"]))
+    def new_mes_share(self):
+        post = Post.objects.get(pk=int(self.text_data_json["id_share"]))
         mes = Message(type_file=post.type_p, file=post.file, user=self.user,text=self.text_data_json["msg"],type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
         mes.save()
 
@@ -93,8 +93,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json['type']=='new_theme':
             await self.new_theme()
-            await self.new_mes(self.user.username+" "+self.chat.theme.name)
-            self.text_data_json["msg_new_theme"]=self.user.username+" "+self.chat.theme.name
+            await self.new_mes(self.user.username+" changed "+self.chat.theme.name)
+            self.text_data_json["msg_new_theme"]=self.user.username+" changed "+self.chat.theme.name
 
         elif self.text_data_json['type']=='delete_theme':
             await self.delete_theme()
@@ -104,9 +104,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         elif self.text_data_json['type']=='msg':
             await self.new_mes(self.text_data_json['msg'])
         
-        elif self.text_data_json['type']=='spread':
-            await self.spread()
-            await self.new_mes_spread()
+        elif self.text_data_json['type']=='share':
+            await self.share()
+            await self.new_mes_share()
 
         await self.channel_layer.group_send(
             self.room_group_name,{

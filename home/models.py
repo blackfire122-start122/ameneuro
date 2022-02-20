@@ -37,7 +37,7 @@ class Theme(models.Model):
 	color_mes = RGBColorField(null=True)
 	color_mes_bg = RGBColorField(null=True)
 	color_mes_bg_op = models.FloatField(null=True,default=1,validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
-	background = models.FileField(upload_to='themes',default='themes/default.jpg',null=True,blank=False)
+	background = models.FileField(upload_to='themes',default=None,null=True,blank=True)
 	name = models.CharField(max_length=100,null=True)
 
 	def __str__(self):
@@ -96,7 +96,8 @@ class AllTheme(models.Model):
 		verbose_name_plural = "AllThemes"
 
 def def_all_theme():
-	try:return AllTheme.objects.get(name="default").id
+	try:
+		return AllTheme.objects.get(name="white", default=True).id
 	except:return None
 
 class User(AbstractUser):

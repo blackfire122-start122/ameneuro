@@ -1,6 +1,7 @@
 musics = document.querySelector('.musics')
 
-musics_s = true
+let musics_s = true
+
 function music_show(){
 	if(musics_s){
 		musics.style.display = 'block'
@@ -26,7 +27,7 @@ $.ajax({
   type: $(this).attr('post'),
   url: musics_all_ajax,
   data: {'id':id_user},
-  success: function (response) {
-     document.querySelector(".musics").innerHTML = response
+  success: function (response){
+    document.querySelector(".musics").innerHTML = response
   }
 })
