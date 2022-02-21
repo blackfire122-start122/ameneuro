@@ -20,5 +20,9 @@
 		{% block content %}
 		
 		{% endblock content %}
+		<script>
+			let username = "{{ user }}"
+		</script>
+		<script src="{% static 'home/js/user_consumer.js' %}"></script>
 	</main>
 </body>

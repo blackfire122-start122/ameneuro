@@ -174,11 +174,16 @@ function share(id){
 function close_sh(){
 	document.querySelector(".friends_share").style.display="none"
 }
-function share_btn(ch_id){
-	conn = new WebSocket("ws://"+window.location.hostname+"/"+ch_id)
+function share_btn(ch_id,friend){
+	conn = new WebSocket("ws://"+window.location.hostname+"/chat/"+ch_id)
+	conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+friend)
+
 	conn.onopen = ()=>{
 		conn.send(JSON.stringify({'type':'share','user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share}))
 	}
+	conn_u_f.onopen = ()=>{
+		conn_u_f.send(JSON.stringify({'type':'msg','msg':"http://"+window.location.hostname+"/post/"+id_share,'from_user': user, "from_chat":ch_id}))
+	}	
 }
 
 function delete_post(id_post){

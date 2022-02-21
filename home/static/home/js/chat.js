@@ -3,8 +3,10 @@ let msg_div = document.querySelector('.messages')
 let musics = document.querySelector('.musics')
 let music
 
-conn = new WebSocket("ws://"+window.location.hostname+"/"+chat)
+conn = new WebSocket("ws://"+window.location.hostname+"/chat/"+chat)
 conn.onmessage = onmessage
+
+conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+friend)
 
 m_play = true
 m_pause = true
@@ -24,6 +26,8 @@ function onmessage(e){
 		}
 
 	}else if (data['type']=='msg'){
+		conn_u_f.send(JSON.stringify({'type':'msg','msg':data["msg"],'from_user': user, "from_chat":chat}))
+		
 		let div_ = document.createElement('div')
 		let div = document.createElement('div')
 		let p = document.createElement('p')
@@ -51,6 +55,8 @@ function onmessage(e){
 		readeble.innerText = 'not read'
 
 	}else if(data['type']=='new_theme'){
+		conn_u_f.send(JSON.stringify({'type':'msg','msg':data['msg_new_theme'],'from_user': user, "from_chat":chat}))
+
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 
@@ -109,6 +115,8 @@ function onmessage(e){
 		},300)
 	}
 	else if(data['type']=='msg_file'){
+		conn_u_f.send(JSON.stringify({'type':'msg','msg':data["msg"],'from_user': user, "from_chat":chat}))
+
 		if (data["type_file"] == "audio"){
 			element = `
 				<div>
@@ -203,7 +211,7 @@ function onmessage(e){
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
 	}
-	console.log(data)
+	// console.log(data)
 }
 
 conn.onopen = ()=>{

@@ -308,3 +308,25 @@ main{
 .my_like{
 	opacity: 0.5;
 }
+
+.red_point{
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: red;
+	border: 2px solid black;
+  position: absolute;
+  margin-left: 15%;
+  margin-top: -3%;
+  color: black;
+  text-align: center;
+  display: none;
+}
+.red_point p{
+	font-size: 0.8em;
+	position: relative;
+	bottom: 17%;
+}
+#menu_id{
+  margin-left: 60%;	
+}

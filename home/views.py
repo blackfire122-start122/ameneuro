@@ -27,8 +27,19 @@ class home(TemplateView):
 			request.session["start_rec_user"] = 0
 			request.session["end_rec_user"] = get_user_how
 			request.session["defolt_posts"] = False
+
+			self.chat_not_read_count = 0
+			for i in user.chats.all():
+				if not i.messages.last().readeble and i.messages.last().user != user:
+					self.chat_not_read_count+=1
+
 		else:return redirect("login")
 		return super().get(request,*args, **kwargs)
+
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context["chat_not_read_count"] = self.chat_not_read_count
+		return context
 
 class user(ListView):
 	model = Post

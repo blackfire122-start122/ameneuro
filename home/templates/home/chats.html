@@ -11,14 +11,14 @@
 {% block content %}	
 	<div class="chats">
 		{% for ch in user.chats.all %}
-			<a class="chat_link" href="{% url "chat" ch.chat_id %}">
+			<a class="chat_link" href="{% url 'chat' ch.chat_id %}">
 			{% for user_ch in ch.users.all %}
 				{% if user_ch != user %}
 					<div class="user_chat">
 						<img class='user_img' src="{{ user_ch.img }}">
 						<div class="name_end_mes">
 							<h4>{{ user_ch }}</h4>
-							<span class="end_mes" >{{ ch.messages.all.last }} </span>
+							<span id="{{ ch.chat_id }}" class="end_mes" >{{ ch.messages.all.last }} </span>
 						</div>
 						{% if not ch.messages.all.last.readeble %}
 							<div class="point"></div>
@@ -31,4 +31,5 @@
 		{% endfor %}
 		</a>
 	</div>
+	<script src="{% static 'home/js/chats.js' %}"></script>
 {% endblock content %}

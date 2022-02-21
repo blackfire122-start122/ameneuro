@@ -47,6 +47,13 @@
 
 	<script>
 		let user = "{{ user }}"
+
+		{% for u in chat.users.all %}
+			{% if u != user %}
+			    let friend = "{{ u }}"
+			{% endif %}
+		{% endfor %}
+
 		let chat = "{{ chat }}"
 		let chat_id = "{{ chat.id }}"
 		let chat_options_ajax = "{% url 'chat_options_ajax' %}"
