@@ -285,7 +285,6 @@ class add_music(CreateView):
 		user.music.add(form.save())
 		return redirect('musics')
 
-
 def streaming_mess(request,id):
 	file, status_code, content_length, content_range = open_file(request,id,'mess')
 	response = StreamingHttpResponse(file, status=status_code)
