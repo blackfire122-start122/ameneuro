@@ -21,7 +21,12 @@
 		
 		{% endblock content %}
 		<script>
-			let username = "{{ user }}"
+			{% if user_reg %}
+				let username = "{{ user_reg }}"
+			{% else %}
+				let username = "{{ user }}"
+			{% endif %}
+			
 		</script>
 		<script src="{% static 'home/js/user_consumer.js' %}"></script>
 	</main>

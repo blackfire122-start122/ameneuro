@@ -234,8 +234,8 @@ def user_change(request):
 			logout(request)
 			return redirect('login')
 
-		elif request.POST['submit'] == 'Save changes theme':
-			if user.theme_all.default:
+		elif request.POST['submit'] == 'Save changes theme' or 'Save new theme':
+			if user.theme_all.default or request.POST['submit'] == 'Save new theme':
 				new_theme = user.theme_all
 				new_theme.pk = None
 				new_theme.default = False
@@ -243,7 +243,9 @@ def user_change(request):
 				user.theme_all = new_theme
 			form_theme = AllThemeForm(request.POST,request.FILES,instance=user.theme_all)
 			if form_theme.is_valid():
-				user.theme_all = form_theme.save()
+				theme_all_update = form_theme.save()
+				user.theme_all = theme_all_update
+				user.themes_all.add(theme_all_update)
 				user.save()
 			else:error = form_theme.errors
 
@@ -295,3 +297,9 @@ def streaming_mess(request,id):
 	response['Content-Range'] = content_range
 
 	return response
+
+class saves_posts(TemplateView):
+	template_name = "home/save_posts.html"
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:return redirect("login")
+		return super().get(request,*args, **kwargs)

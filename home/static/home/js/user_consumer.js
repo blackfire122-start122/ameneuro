@@ -35,9 +35,23 @@ if (msg_point){
 		menu_id.style.display = "block"
 	}
 }
-// friends
-// musics
 
-// conn_u.onopen = ()=>{
-// 	conn_u.send(JSON.stringify({'type':'first_msg','user': username}))	
-// }
+conn_u.onopen = ()=>{
+	conn_u.send(JSON.stringify({'type':'first_conn','user': username}))	
+}
+
+function add_mus_share(e){
+	conn_u.send(JSON.stringify({'type':'add_mus_share', "id":e.value}))
+}
+function not_add_mus_share(e){
+	conn_u.send(JSON.stringify({'type':'not_add_mus_share', "id":e.value}))
+}
+function mus_share(e){
+	conn_u.send(JSON.stringify({'type':'mus_share', "id":music_share_id, "to_user":e.value}))
+}
+function add_mus(e){
+	conn_u.send(JSON.stringify({'type':'add_to_me', "id":e.value}))
+}
+function delete_mus(e){
+	conn_u.send(JSON.stringify({'type':'delete_mus', "id":e.value}))
+}

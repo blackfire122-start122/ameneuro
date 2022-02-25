@@ -26,7 +26,8 @@ function follow(btn) {
 $.ajax({
   type: $(this).attr('post'),
   url: musics_all_ajax,
-  data: {'id':id_user},
+  data: {'id':id_user,
+				'type':'user_music_add'},
   success: function (response){
     document.querySelector(".musics").innerHTML = response
   }

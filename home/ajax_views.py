@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import User,Post,Chat,Comment,Theme,TypeMes
-from .forms import ThemeForm,MessageForm
+from .forms import ThemeForm,MessageForm,AllTheme
 from django.http import JsonResponse
 from ameneuro.settings import get_posts_how, get_mes_how, get_user_how
 
 from .services import *
+
+# in all need defence
 
 def add_friend_ajax(request):
 	user = {}
@@ -207,8 +209,12 @@ def send_file_mes_ajax(request):
 	return render(request,"home/ajax_html/send_file.html",{"form":form})
 
 def musics_all_ajax(request):
-	user_mus = User.objects.get(pk = int(request.GET["id"]))
-	return render(request,"home/ajax_html/all_music.html",{"music":user_mus.music})
+	mus = {}
+	if request.GET["type"] == "music_share":
+		mus = User.objects.get(pk = int(request.GET["id"])).music_shared
+	else:
+		mus = User.objects.get(pk = int(request.GET["id"])).music
+	return render(request,"home/ajax_html/all_music.html",{"music":mus,'type':request.GET["type"]})
 
 def delete_post_ajax(request):
 	if request.user.is_authenticated:user = request.user
@@ -241,3 +247,34 @@ def users_get_ajax(request):
 	except:return JsonResponse({"data_text":"Fail"}, status=400)
 	
 	return render(request,"home/ajax_html/users.html",{"users":users})
+
+def new_theme_all_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+
+	try:
+		user.theme_all = AllTheme.objects.get(pk = int(request.GET["id"]))
+		user.save()
+	except:return JsonResponse({"data_text":"Fail"}, status=400)
+	
+	return JsonResponse({"data_text":"OK"}, status=200)
+
+def delete_theme_all_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+
+	try:
+		theme_del = AllTheme.objects.get(pk = int(request.GET["id"]))
+		if not theme_del.default:theme_del.delete()
+	except:return JsonResponse({"data_text":"Fail"}, status=400)
+	
+	return JsonResponse({"data_text":"OK"}, status=200)
+
+def saves_posts_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+	try:
+		# users = User.objects.filter(username__contains=request.GET["find_name"])[int(request.GET["users_find_start"]):int(request.GET["users_find_end"])]
+		posts = user.saves_posts.all()
+	except:return JsonResponse({"data_text":"Fail"}, status=400)
+	return render(request,"home/ajax_html/posts.html",{"posts":posts})

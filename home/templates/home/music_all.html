@@ -4,12 +4,30 @@
 {% block title %}Music{% endblock title %}
 
 {% block content_header %}
+	<div class="shared_musics">
+		<img onclick="music_share(this)" class="m_s_img" src="{% static 'home/images/music_share.png' %}">
+		{% if user.music_shared.all.count != 0 %}
+		    <div class="red_point"></div>
+		{% endif %}
+		
+		<div class="musics_share"></div>
+	</div>
 {% endblock content_header %}
 
 {% block content %}
 	<link rel="stylesheet" href="{% static 'home/css/music_all.css' %}">
 
 	<div class="music_all"></div>
+
+	<div class="music_share">
+		<span class="close_sh" onclick="close_sh()">X</span>
+		{% for i in user.friends.all %}
+			<div class="user_share">
+				<h2 class="name_sh">{{ i|truncatechars:10 }}</h2>
+				<button class="btn_sh" value="{{ i.id }}" onclick="mus_share(this)">Share</button>
+			</div>
+		{% endfor %}
+	</div>
 
 	<br>
 	<a class="add_mus" href="{% url 'add_music' %}">Add music</a>
@@ -19,15 +37,7 @@
 		let pause_img = "{% static 'home/images/pause.png' %}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 		let id_user = "{{ user.id }}"
-		
-		$.ajax({
-		  type: $(this).attr('post'),
-		  url: musics_all_ajax,
-		  data: {'id':id_user},
-		  success: function (response) {
-		     document.querySelector(".music_all").innerHTML = response
-		  }
-		})
 	</script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>
+	<script src='{% static "home/js/music_user.js" %}' ></script>
 {% endblock content %}

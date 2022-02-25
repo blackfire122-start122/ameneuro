@@ -15,3 +15,25 @@ function change_btn(e){
 		e.style.height = "30px"
 	}
 }
+
+function select_theme(e,id){
+	$.ajax({
+		url: new_theme_all_ajax,
+		data: {'id':id},
+		error: function (response) {
+			console.log(response.data_text)
+		}
+	})
+}
+
+function delete_theme(e,id){
+	$.ajax({
+		url: delete_theme_all_ajax,
+		data: {'id':id},
+		error: function (response) {
+			console.log(response.data_text)
+		}
+	})
+	e.parentNode.remove()
+}
+

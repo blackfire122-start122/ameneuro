@@ -98,6 +98,7 @@ body{
 
 .menu_post{
 	display: flex;
+	justify-content: space-between;
 	height: 2.5em;
 }
 
@@ -280,6 +281,8 @@ main{
 	padding: 10px;
 	background: rgba(0, 0, 0, 0.7);
 	border-radius: 20px 20px 0 0 ;
+  overflow-y: auto;
+  max-height: 20em;	
 }
 
 .f_share{
@@ -329,4 +332,37 @@ main{
 }
 #menu_id{
   margin-left: 60%;	
+}
+
+.post_share{
+	width: 50%;
+}
+
+.menu_post_share{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.inputs_post_share{
+	width: 50%;
+}
+
+.save_post{
+	opacity: 1;
+}
+
+.not_save_post{
+	opacity: 0.5;
+}
+
+.left, .right{
+	display: flex;
+	height: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+	.posts{
+		width: 50%;
+	}
 }

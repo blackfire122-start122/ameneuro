@@ -26,6 +26,7 @@ urlpatterns = [
     path('streaming_music/<int:id>',views.streaming_music,name='streaming_music'),
     path('musics', views.musics_all, name='musics'),
     path('add_music', views.add_music.as_view(), name='add_music'),
+    path('saves_posts', views.saves_posts.as_view(), name='saves_posts'),
 
     path('ajax/', include("home.urls_ajax"))
 ]

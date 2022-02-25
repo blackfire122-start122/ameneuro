@@ -1,4 +1,5 @@
 {% load static %}
+	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
 {% for p in posts.all %}
 	<div class="post post_{{ p.id }}">
 		<div class="header_post">
@@ -37,16 +38,25 @@
 			</div>
 		{% endif %}
 		<div class="menu_post">
-			{% if user in p.likes.all %}
-				<img class="my_like" id={{ p.id }} src="{{ user.theme_all.like_img.url }}" alt="">
-			{% else %}			    
-				<img id={{ p.id }} onclick="like(this)" src="{{ user.theme_all.like_img.url }}" alt="">
-			{% endif %}
-			<span>{{ p.likes.all|length }}</span>
-			
-			<img id={{ p.id }} onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
+			<div class="left">
+				<img id={{ p.id }} onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
 
-			<span>{{ p.comments.all|length }}</span>
+				<span>{{ p.comments.all|length }}</span>
+				{% if p in user.saves_posts.all %}
+					<img class="not_save_post" onclick="not_save_post(this,{{ p.id }})" src="{{ user.theme_all.save_img.url }}">
+				{% else %}
+				    <img class="save_post" onclick="save_post(this,{{ p.id }})" src="{{ user.theme_all.save_img.url }}">
+				{% endif %}
+			</div>
+			<div class="right">
+				{% if user in p.likes.all %}
+					<img class="my_like" id={{ p.id }} src="{{ user.theme_all.like_img.url }}" alt="">
+				{% else %}			    
+					<img id={{ p.id }} onclick="like(this)" src="{{ user.theme_all.like_img.url }}" alt="">
+				{% endif %}
+				<span>{{ p.likes.all|length }}</span>
+			</div>
+			
 		</div>
 		<p class="post_desc">{{ p.description }}</p>
 		<time>{{ p.date }}</time>
@@ -55,4 +65,3 @@
 	</div>
 	<div class="line"></div>
 {% endfor %}
-

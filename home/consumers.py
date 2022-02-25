@@ -135,13 +135,70 @@ class UserConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
+    @database_sync_to_async
+    def first_conn(self):
+        self.user = User.objects.get(username=self.text_data_json['user'])
+   
+    @database_sync_to_async
+    def add_mus_share(self):
+        mus = Music.objects.get(pk=self.text_data_json["id"])
+        self.user.music.add(mus)
+        self.user.music_shared.remove(mus)
+
+    @database_sync_to_async
+    def not_add_mus_share(self):
+        self.user.music_shared.remove(Music.objects.get(pk=self.text_data_json["id"]))
+    
+    @database_sync_to_async
+    def add_to_me(self):
+        self.user.music.add(Music.objects.get(pk=self.text_data_json["id"]))
+
+    @database_sync_to_async
+    def delete_mus(self):
+        self.user.music.remove(Music.objects.get(pk=self.text_data_json["id"]))
+    
+    @database_sync_to_async
+    def mus_share(self):
+        User.objects.get(pk=int(self.text_data_json["to_user"])).music_shared.add(Music.objects.get(pk=self.text_data_json["id"]))
+
+    @database_sync_to_async
+    def save_post(self):
+        self.user.saves_posts.add(Post.objects.get(pk=int(self.text_data_json["id"])))
+
+    @database_sync_to_async
+    def not_save(self):
+        self.user.saves_posts.remove(Post.objects.get(pk=int(self.text_data_json["id"])))
+
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
-        # if self.text_data_json['type']=='first_msg':
-            # print(self.text_data_json)
-        # print(self.text_data_json)
+        if self.text_data_json['type']=='first_conn':
+            await self.first_conn()
+            await self.send(text_data=json.dumps(self.text_data_json))
+            # print(self.room_name == self.user.username)
+            return
 
+        elif self.text_data_json['type']=='add_mus_share':
+            await self.add_mus_share()
+            return
+        elif self.text_data_json['type']=='not_add_mus_share':
+            await self.not_add_mus_share()
+            return
+        elif self.text_data_json['type']=='add_to_me':
+            await self.add_to_me()
+            return
+        elif self.text_data_json['type']=='delete_mus':
+            await self.delete_mus()
+            return
+        elif self.text_data_json['type']=='mus_share':
+            await self.mus_share()
+            return
+        elif self.text_data_json['type']=='save_post':
+            await self.save_post()
+            return
+        elif self.text_data_json['type']=='not_save':
+            await self.not_save()
+            return            
         await self.channel_layer.group_send(
             self.room_group_name,{
                 "type": "chat.message",

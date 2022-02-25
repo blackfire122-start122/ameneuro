@@ -19,4 +19,7 @@ urlpatterns = [
     path('delete_post', ajax_views.delete_post_ajax, name='delete_post_ajax'),
     path('user_find', ajax_views.user_find_ajax, name='user_find_ajax'),
     path('users_get', ajax_views.users_get_ajax, name='users_get_ajax'),
+    path('new_theme_all', ajax_views.new_theme_all_ajax, name='new_theme_all_ajax'),
+    path('delete_theme_all', ajax_views.delete_theme_all_ajax, name='delete_theme_all_ajax'),
+    path('saves_posts', ajax_views.saves_posts_ajax, name='saves_posts_ajax'),
 ]

@@ -28,7 +28,12 @@
 		    <button value="{{ user.id }}" class="btn_follow" onclick="follow(this)">Follow</button>
 		{% else %}
 			<p class="follow_none">follow</p>
-		{% endif %}		
+		{% endif %}
+		{% if user_reg == user %}
+			<div class="saves_posts">
+				<a class="save_post_link" href="{% url 'saves_posts' %}"><h3>Save posts</h3></a>
+			</div>
+		{% endif %}
 		<div onclick="music_show()" class='musics_user'>
 			<h3>Musics</h3>
 			<div class="musics"></div>

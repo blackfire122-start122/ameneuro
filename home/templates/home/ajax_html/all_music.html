@@ -10,6 +10,21 @@
 				<button value="{{ m.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
 				<input id="timeline_{{ m.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
 			</div>
+			{% if type == "music_share" %}
+				<div class="menu_player">
+					<button class="btn_menu_player" value="{{ m.id }}" onclick="add_mus_share(this)">Add</button>
+					<button class="btn_menu_player" value="{{ m.id }}" onclick="not_add_mus_share(this)">not add</button>
+				</div>
+			{% elif type == "user_my_music" %}
+				<div class="menu_player">
+					<img id="{{ m.id }}" onclick="share_menu(this)" class="m_s_img" src="{% static 'home/images/music_share.png' %}">
+					<button class="btn_menu_player" value="{{ m.id }}" onclick="delete_mus(this)">Delete</button>
+				</div>
+			{% elif type == "user_music_add" %}
+				<div class="menu_player">
+					<button class="btn_menu_player" value="{{ m.id }}" onclick="add_mus(this)">Add to me</button>
+				</div>
+			{% endif %}			
 		</div>
 	{% endfor %}
 {% else %}

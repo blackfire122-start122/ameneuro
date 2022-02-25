@@ -7,7 +7,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ameneuro</title>
-	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 </head>
 <body>
@@ -52,11 +51,18 @@
 
 	<div class="friends_share">
 		<span class="close_sh" onclick="close_sh()">X</span>
+		<div class="menu_post_share">
+			<div class="post_share"></div>
+			<div class="inputs_post_share">
+				<input type="text" placeholder="message">
+				<input type="text" placeholder="find user">
+			</div>
+		</div>
 		{% for ch in user.chats.all %}
 			<div class="f_share">
 				{% for u in ch.users.all %}
 					{% if u != user %}
-						<h3 class="name_sh">{{ u }}</h3>
+						<h3 class="name_sh">{{ u|truncatechars:10 }}</h3>
 						<button class="btn_sh" onclick="share_btn('{{ ch }}', '{{ u }}')">share</button>
 					{% endif %}
 				{% endfor %}
@@ -77,11 +83,11 @@
 		let id_post = "{{ id }}"
 		let play_img = "{% static 'home/images/play.png' %}"
 		let pause_img = "{% static 'home/images/pause.png' %}"
-
 	</script>
 	<script src="{% static 'home/js/user_consumer.js' %}"></script>
 	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/home.js' %}"></script>
+	<script src="{% static 'home/js/posts.js' %}"></script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>
 	{% include 'home/shablons/css_theme.html' %}
 </body>

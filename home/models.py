@@ -87,6 +87,7 @@ class AllTheme(models.Model):
 	like_img = models.ImageField(upload_to="theme_all/like_imgs",default=None,null=True,blank=True)
 	back_img = models.ImageField(upload_to="theme_all/back_imgs",default=None,null=True,blank=True)
 	music_img = models.ImageField(upload_to="theme_all/music_imgs",default=None,null=True,blank=True)
+	save_img = models.ImageField(upload_to="theme_all/save_img",default=None,null=True,blank=True)
 	
 	def __str__(self):
 		return self.name
@@ -104,12 +105,15 @@ class User(AbstractUser):
 	img = models.ImageField(upload_to='user_img', default='user_img/user.png', null=True, blank=True)
 	friends = models.ManyToManyField("User",symmetrical=True,null=True,blank=True,related_name="friends_user")
 	music = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_user")
+	music_shared = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_shared_user")
 	chats = models.ManyToManyField("Chat",symmetrical=False,null=True,blank=True,related_name="chats_user")
 	themes = models.ManyToManyField("Theme",null=True,blank=True, related_name="themes_user")
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
 	followers = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="followers_user")
 	follow = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="follow_user")
 	theme_all = models.ForeignKey("AllTheme",default=def_all_theme,null=True,blank=True,on_delete=models.SET_DEFAULT,related_name="theme_all_user")
+	themes_all = models.ManyToManyField("AllTheme",null=True,blank=True, related_name="themes_all_user")
+	saves_posts = models.ManyToManyField("Post",null=True,blank=True, related_name="save_post_user")
 
 	def __str__(self):
 		return self.username
@@ -136,6 +140,8 @@ def AllTheme_delete(sender, instance, **kwargs):
 				fields["fon_img"] = False
 			if i.music_img == old_instance.music_img:
 				fields["music_img"] = False
+			if i.save_img == old_instance.save_img:
+				fields["save_img"] = False
 
 		for i in fields:
 			if fields[i] and i == "comment_img":
@@ -148,6 +154,8 @@ def AllTheme_delete(sender, instance, **kwargs):
 				old_instance.fon_img.delete(False)
 			if fields[i] and i == "music_img":
 				old_instance.music_img.delete(False)
+			if fields[i] and i == "save_img":
+				old_instance.save_img.delete(False)	
 	except:pass
 
 @receiver(pre_save, sender=AllTheme)
@@ -155,7 +163,7 @@ def AllTheme_delete(sender, instance, **kwargs):
 	try:
 		old_instance = AllTheme.objects.get(id=instance.id)
 
-		fields = {"comment_img":True,"like_img":True,"back_img":True,"fon_img":True,"music_img":True}
+		fields = {"comment_img":True,"like_img":True,"back_img":True,"fon_img":True,"music_img":True,"save_img":True}
 
 		for i in AllTheme.objects.filter(default=True):
 			if i.comment_img == old_instance.comment_img:
@@ -168,6 +176,8 @@ def AllTheme_delete(sender, instance, **kwargs):
 				fields["fon_img"] = False
 			if i.music_img == old_instance.music_img:
 				fields["music_img"] = False
+			if i.save_img == old_instance.save_img:
+				fields["save_img"] = False
 				
 		for i in fields:
 			if fields[i] and i == "comment_img":
@@ -180,6 +190,8 @@ def AllTheme_delete(sender, instance, **kwargs):
 				old_instance.fon_img.delete(False)
 			if fields[i] and i == "music_img":
 				old_instance.music_img.delete(False)
+			if fields[i] and i == "save_img":
+				old_instance.save_img.delete(False)				
 	except:pass
 
 @receiver(pre_save, sender=User)

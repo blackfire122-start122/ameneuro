@@ -1,120 +1,13 @@
-function like(e){
-	$.ajax({
-		url: like_ajax,
-		data: {'id':e.id},
-		error: function (response) {
-			console.log(response.data_text)
-		}
-	})
-	e.style.opacity = "0.5"
-	e.onclick = null
-	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
-}
+let menu_show_v = true
 
-function comments(e){
-	let div_menu_post = document.querySelector(".post_"+e.id)
-	
-	function show_comment(){
-		div_menu_post.childNodes[11].style.display = "block"
-		e.onclick = close_comment
-	}
-
-	function close_comment(){
-		div_menu_post.childNodes[11].style.display = "none"
-		e.onclick = show_comment
-	}
-
-	e.onclick = close_comment 
-
-	$.ajax({
-		url: comment_ajax,
-		data: {'id':e.id},
-		success: function (response) {
-			div_menu_post.childNodes[11].innerHTML += response
-			div_menu_post.childNodes[11].style.display = "block"
-		}
-	})
-
-}
-
-function like_comment(e){
-	$.ajax({
-		url: comment_like_ajax,
-		data: {'id':e.id},
-		error: function (response) {
-			console.log(response.data_text)
-		}
-	})
-
-	e.style.opacity = "0.5"
-	e.onclick = null
-	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
-}
-
-let reply = false
-let btn_reply
-
-function comment_user(e){
-	let inp_comment = document.querySelector('.inp_comment'+e.value)
-
-	if (reply){
-		$.ajax({
-			url: comment_reply_ajax,
-			data: {'com_id':btn_reply.id,
-					'post_id':btn_reply.value,
-					'text':inp_comment.value},
-			error: function (response) {
-				console.log(response)
-			}
-		})
-
+function menu_show(e){
+	if (menu_show_v) {
+		document.querySelector(".menu_home").style.display = "flex"
+		menu_show_v = false
 	}else{
-		$.ajax({
-			url: comment_user_ajax,
-			data: {'id':e.value,
-					'text':inp_comment.value},
-			error: function (response) {
-				console.log(response)
-			}
-		})
+		document.querySelector(".menu_home").style.display = "none"
+		menu_show_v = true
 	}
-	reply = false
-	inp_comment.value = ""
-}
-
-function select_reply(e){
-	let com = document.querySelector('.com_'+e.id)
-	com.style.background = "rgba(0,0,0,0.1)"
-	reply = true
-	if(btn_reply){
-			document.querySelector('.com_'+btn_reply.id).style.background = "none"
-	}
-	btn_reply = e
-}
-
-function options(e){
-	let opt_menu = document.querySelector('#opt_'+e.id)
-	if (e.value) {
-		opt_menu.style.display = "none"
-		e.value = false
-		return
-	}
-
-	if (!e.value) {
-		e.value = true
-	}
-	opt_menu.style.display = "flex"
-}
-
-function copy_link(e){
-	e.innerText = "http://"+window.location.hostname+e.value
-
-  	let range = document.createRange()
-  	range.selectNode(e)
-  	window.getSelection().addRange(range)
-
-	document.execCommand('copy')
-	e.innerText="Скопіювати"
 }
 
 let video
@@ -163,47 +56,3 @@ window.addEventListener('scroll', function(e){
 		}
 	}
 })
-
-let id_share
-
-function share(id){
-	id_share = id
-	document.querySelector(".friends_share").style.display = "block"
-}
-
-function close_sh(){
-	document.querySelector(".friends_share").style.display="none"
-}
-function share_btn(ch_id,friend){
-	conn = new WebSocket("ws://"+window.location.hostname+"/chat/"+ch_id)
-	conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+friend)
-
-	conn.onopen = ()=>{
-		conn.send(JSON.stringify({'type':'share','user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share}))
-	}
-	conn_u_f.onopen = ()=>{
-		conn_u_f.send(JSON.stringify({'type':'msg','msg':"http://"+window.location.hostname+"/post/"+id_share,'from_user': user, "from_chat":ch_id}))
-	}	
-}
-
-function delete_post(id_post){
-	$.ajax({
-		url: delete_post_ajax,
-		data: {'id':id_post},
-		error: (data)=> {
-			console.log(data.data_text)
-		},
-	})
-}
-
-let menu_show_v = true
-
-function menu_show(e){
-	if (menu_show_v) {
-		document.querySelector(".menu_home").style.display = "flex"
-		menu_show_v = false
-	}else{
-		document.querySelector(".menu_home").style.display = "none"
-		menu_show_v = true
-	}
-}

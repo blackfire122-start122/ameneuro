@@ -10,3 +10,46 @@ main{
 	padding: 3px;
 	border-radius: 10px;
 }
+
+.music_share{
+	position: fixed;
+    bottom: 0;
+    display: none;
+    color: white;
+    width: 80%;
+    left: 10%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 20px 20px 0 0;
+    overflow-y: auto;
+    max-height: 20em;
+}
+
+.user_share{
+	margin-top: 3%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.btn_sh{
+	background: black;
+	padding: 5px;
+	border-radius: 5px;
+	color: white;
+	border: none;
+}
+
+.name_sh{
+	width: 2em;
+}
+
+.red_point{
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: red;
+	border: 2px solid black;
+	position: absolute;
+	margin-left: 60%;
+	margin-top: -2.5em;
+}
