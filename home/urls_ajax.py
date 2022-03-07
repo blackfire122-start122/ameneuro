@@ -22,4 +22,10 @@ urlpatterns = [
     path('new_theme_all', ajax_views.new_theme_all_ajax, name='new_theme_all_ajax'),
     path('delete_theme_all', ajax_views.delete_theme_all_ajax, name='delete_theme_all_ajax'),
     path('saves_posts', ajax_views.saves_posts_ajax, name='saves_posts_ajax'),
+    path('music_get', ajax_views.music_get_ajax, name='music_get_ajax'),
+    path('video_get', ajax_views.video_get_ajax, name='video_get_ajax'),
+    path('music_find', ajax_views.music_find_ajax, name='music_find_ajax'),
+    path('video_find', ajax_views.video_find_ajax, name='video_find_ajax'),
+    path('playlists', ajax_views.playlists_ajax, name='playlists_ajax'),
+
 ]

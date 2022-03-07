@@ -1,0 +1,10 @@
+{% for p in playlists.all %}
+	<div class="playlist">
+		<img class="img_ps" src="{{ p.img }}">
+		<div>
+			<a class="link_name_ps" href="{% url 'playlists' p %} "><h3>{{ p }}</h3></a>
+			<h4><a class="ps_link_user" href="{% url 'user' p.autor %}">{{ p.autor }}</a></h4>
+		</div>
+		<time class="time_ps">{{ p.date }}</time>
+	</div>
+{% endfor %}

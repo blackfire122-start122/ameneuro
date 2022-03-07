@@ -1,0 +1,25 @@
+.playlist{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.6);	
+}
+
+.img_ps{
+	position: relative;
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+}
+
+.link_name_ps{
+	text-decoration: none;
+}
+
+.time_ps{
+	margin-top: 7%;
+}
+
+.ps_link_user{
+	text-decoration: none;
+}

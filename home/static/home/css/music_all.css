@@ -53,3 +53,21 @@ main{
 	margin-left: 60%;
 	margin-top: -2.5em;
 }
+
+.menu_mus{
+	display: flex;
+	justify-content: space-between;
+}
+.menu_mus h2{
+	text-align: center;
+	border-bottom: 2px solid black;
+	width: 100%;
+}
+
+.menu_mus h2:nth-child(1){
+	border-bottom: 2px solid white;
+}
+
+.music_all, .playlists{
+	margin-top: 1%;
+}

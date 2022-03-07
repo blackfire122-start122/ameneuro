@@ -47,9 +47,11 @@ function not_add_mus_share(e){
 	conn_u.send(JSON.stringify({'type':'not_add_mus_share', "id":e.value}))
 }
 function mus_share(e){
+	e.style.opacity = "0.5"
 	conn_u.send(JSON.stringify({'type':'mus_share', "id":music_share_id, "to_user":e.value}))
 }
 function add_mus(e){
+	e.remove()
 	conn_u.send(JSON.stringify({'type':'add_to_me', "id":e.value}))
 }
 function delete_mus(e){

@@ -2,10 +2,10 @@
 {% for u in users %}
 	{% if u != user %}
 		<div class="user">
-			<div class="img_name">
+			<a href="{% url 'user' u %}" class="img_name">
 				<img class="img_f" src={{ u.img.url }}>
 				<h4> {{ u.username }}</h4>
-			</div>
+			</a>
 			{% if u not in user.friends.all %}
 				<div class="friend_follow">
 					{% if not u in user.follow.all %}

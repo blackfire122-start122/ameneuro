@@ -4,6 +4,7 @@
 
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/user.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/users.css' %}">
 	{% if user_reg == user %}
 		<a href="{% url 'user_change' %}">
 			<img class="set_img" src="{% static 'home/images/settings.png' %}" alt="">
@@ -14,9 +15,16 @@
 	<header class="header_user">
 		<img class="img_user" src="{{ user.img.url }}" alt="">
 		<div class="info_user">
-			<h3>{{ user.friends.all|length }}<br>Friends</h3>
+			<h3 onclick="get_friends()">{{ user.friends.all|length }}<br>Friends</h3>
+			<div class="friends_show">
+				<span onclick="close_friends(this)" class="close" id="close_fr">X</span>
+			</div>
 			<h3>{{ posts|length }}<br>Posts</h3>
-			<h3>{{ user.followers.all|length }}<br>Followers</h3>
+			<h3 onclick="get_followers()">{{ user.followers.all|length }}<br>Followers</h3>
+			<div class="followers_show">
+				<span onclick="close_followers(this)" class="close" id="close_fl">X</span>
+			</div>
+
 		</div>
 	</header>
 
@@ -55,13 +63,12 @@
 			</div>
 		{% endfor %}
 	</div>
-	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script>
 		let follow_ajax = "{% url "follow_ajax" %}"
-		let play_img = "{% static 'home/images/play.png' %}"
-		let pause_img = "{% static 'home/images/pause.png' %}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 		let id_user = "{{ user.id }}"
+		let users_get_ajax = "{% url 'users_get_ajax' %}"
+
 	</script>
 	<script src='{% static "home/js/user.js" %}' ></script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>

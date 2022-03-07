@@ -8,7 +8,6 @@ conn.onmessage = onmessage
 
 conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+friend)
 
-m_play = true
 m_pause = true
 m_time = true
 
@@ -87,7 +86,6 @@ function onmessage(e){
 		all_pause()
 		music = document.getElementById(data['m_id'])
 		music.play()
-		setTimeout(()=>{m_play = true},300)
 	}else if(data['type']=='pause_mus'){
 		all_pause()
 		music.pause()
@@ -99,6 +97,7 @@ function onmessage(e){
 		setTimeout(()=>{
 			m_time = true
 			music.play()
+
 			},300)
 	}else if(data['type']=='get_seeked'){
 		if (music){
@@ -111,7 +110,8 @@ function onmessage(e){
 		music.currentTime = data["time"]
 		setTimeout(()=>{
 			m_time = true
-			music.play()
+			play_m(music)
+
 		},300)
 	}
 	else if(data['type']=='msg_file'){
@@ -211,7 +211,7 @@ function onmessage(e){
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
 	}
-	// console.log(data)
+	console.log(data)
 }
 
 conn.onopen = ()=>{
@@ -255,34 +255,33 @@ function end_readable_send(){
 }
 
 function play_m(music_e){
-	music.ontimeupdate = null
 	update_time = false
 	setInterval(()=>{
 		update_time = true
 	},1000)
 	timeline = document.getElementById("timeline_"+music_e.id)
+	all_pause()
+	music.play()
 	music_e.ontimeupdate = ()=>{
 		if (update_time){
 			const percentagePosition = (100*music_e.currentTime) / music_e.duration
 			timeline.style.backgroundSize = `${percentagePosition}% 100%`
 			timeline.value = percentagePosition
 			update_time = false
+			if(timeline.value >= 100){
+				toggleAudio(music_e.parentNode.nextSibling.childNodes[2].childNodes[0])
+			}
 		}
 	}
-
-	all_pause()
-	if (m_play){
-		conn.send(JSON.stringify({'type':'play_mus','m_id':music_e.id}))
-		style_play_audio(music_e)
-	}
-	m_play = false
+	conn.send(JSON.stringify({'type':'play_mus','m_id':music_e.id}))
+	style_play_audio(music_e)
 
 }
 
 function pause_m(music){
 	all_pause()
 	if (m_pause){
-		conn.send(JSON.stringify({'type':'pause_mus'}))
+		conn.send(JSON.stringify({'type':'pause_mus','m_id':music.id}))
 		style_pause_audio(music)
 	}
 	m_pause = false
@@ -301,13 +300,19 @@ function all_pause(){
 	let musics = document.getElementsByClassName('music')
 	for (i=0;i<musics.length;i++){
 		if (musics[i]!=music){
+			musics[i].ontimeupdate = null
 			musics[i].pause()
 		}
 	}
 }
 
-function click_mus(e){
-	e.style.display = "none"
+function close_popups(){
+	document.querySelector(".click_mus").style.display = "none"
+	document.querySelector(".click_not_mus").style.display = "none"
+}
+
+function click_mus(){
+	close_popups()
 	conn.send(JSON.stringify({'type':'get_seeked'}))
 }
 
@@ -327,6 +332,12 @@ function send_file_mes(){
 			form_mes = document.querySelector(".file_mes_form")
 			form_mes.innerHTML = response
 			form_mes.style.display="block"
+
+			let send_file = document.querySelector("#id_file")
+			send_file.addEventListener("change",()=>{
+				path = send_file.value.split("\\")
+				document.querySelector(".id_file").innerText = path[path.length -1]
+			})
 		}
 	})
 }
@@ -374,7 +385,6 @@ function inp_msg_user(inp){
 
 function toggleAudio (btn) {
 	music = document.getElementById(btn.value)
-
 	if (music.paused) {
 		music.play()
 	} else {
@@ -384,7 +394,6 @@ function toggleAudio (btn) {
 
 function changeSeek(timeline) {
 	music = document.getElementById(String(timeline.id).slice(9))
-	music.ontimeupdate = null
 	const time = (timeline.value * music.duration) / 100
 	music.currentTime = time
 
@@ -400,4 +409,3 @@ function style_pause_audio(music){
 function style_play_audio(music){
 	music.parentNode.childNodes[2].childNodes[0].childNodes[0].src = play_img
 }
-

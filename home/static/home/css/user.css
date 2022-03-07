@@ -89,3 +89,26 @@
 .save_post_link{
 	text-decoration: none;
 }
+
+.friends_show, .followers_show{
+	display: none;
+	position: fixed;
+	left: 0;
+	bottom:0;
+	width: 100%;
+	max-height: 50%;
+	min-height: 10%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 20px 20px 0 0;
+}
+
+.close{
+	position: absolute;
+	right: 10px;
+	font-size: 1.1em;
+	color: white;
+	padding: 2px;
+	z-index:2;
+}

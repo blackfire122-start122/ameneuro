@@ -1,0 +1,25 @@
+{% extends 'home/shablons/base.html' %}
+{% load static %}
+
+{% block title %}Music{% endblock title %}
+
+{% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/playlist.css' %}">
+	<h1 class="ps_name">{{ playlist }}</h1>
+{% endblock content_header %}
+
+{% block content %}
+	<div class="musics"></div>
+	<h3 class="ps_autor">{{ playlist.autor }}</h3>
+	<script>
+		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
+		let playlist = "{{ playlist }}"
+	</script>
+	<script src='{% static "home/js/music_all.js" %}' ></script>
+	<script src="{% static 'home/js/playlist.js' %}"></script>
+	<style>
+		body{
+			background-image: url("{{ playlist.img.url }}");
+		}
+	</style>
+{% endblock content %}

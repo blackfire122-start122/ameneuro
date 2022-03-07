@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat,Theme,AllTheme
+from .models import User,Post,Chat,Theme,AllTheme,Playlist
 from .forms import (RegisterForm,
 					LoginForm,
 					PostForm,
@@ -121,22 +121,12 @@ class chat(TemplateView):
 		context["error"] = self.error
 		return context
 
-class user_find(ListView):
-	model = User
-	context_object_name = "users"
-	template_name = "home/user_find.html"
+class find(TemplateView):
+	template_name = "home/find.html"
 
 	def get(self, request, *args, **kwargs):
 		if not request.user.is_authenticated:return redirect("login")
 		return super().get(request,*args, **kwargs)
-
-	def get_context_data(self,*args,**kwargs):
-		context = super().get_context_data(**kwargs)
-		return context
-
-	def get_queryset(self):
-		# не брати всі
-		return User.objects.all()
 
 def login_user(request):
 	error = ""
@@ -303,3 +293,15 @@ class saves_posts(TemplateView):
 	def get(self, request, *args, **kwargs):
 		if not request.user.is_authenticated:return redirect("login")
 		return super().get(request,*args, **kwargs)
+
+class playlists(TemplateView):
+	template_name = "home/playlists.html"
+	def get(self, request, *args, **kwargs):
+		self.ps = Playlist.objects.get(name=self.kwargs["name"])
+		if not request.user.is_authenticated:return redirect("login")
+		return super().get(request,*args, **kwargs)
+
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context["playlist"] = self.ps
+		return context

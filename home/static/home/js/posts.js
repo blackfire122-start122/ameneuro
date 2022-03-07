@@ -144,13 +144,45 @@ function share_btn(ch_id,friend){
 }
 
 function delete_post(id_post){
-	$.ajax({
-		url: delete_post_ajax,
-		data: {'id':id_post},
-		error: (data)=> {
-			console.log(data.data_text)
-		},
+	popup = document.createElement('div')
+	btn_delete = document.createElement('button')
+	btn_not = document.createElement('button')
+	h2 = document.createElement('h2')
+
+	popup.className = "popup"
+
+	btn_delete.className = "btn_delete_post"
+	btn_delete.innerText = "Delete"
+
+	btn_delete.addEventListener('click',()=>{
+		$.ajax({
+			url: delete_post_ajax,
+			data: {'id':id_post},
+			error: (data)=> {
+				console.log(data.data_text)
+			},
+		})
+		popup.remove()
 	})
+	btn_not.className = "btn_not_post"
+	btn_not.innerText = "Not delete"
+	btn_not.addEventListener('click',()=>{
+		popup.remove()
+	})
+	
+	h2.innerText = "Really delete"
+	h2.className = "h2_delete"
+
+	popup.append(h2)
+	popup.append(btn_not)
+	popup.append(btn_delete)
+
+	document.body.append(popup)
+
+	let opt_menu = document.querySelector('#opt_'+id_post)
+	let opt_img = document.getElementById(id_post)
+	opt_img.value = false
+	opt_menu.style.display = "none"
 }
 
 let posts_div = document.querySelector('.posts')

@@ -37,3 +37,8 @@ function delete_theme(e,id){
 	e.parentNode.remove()
 }
 
+
+function select_file_name(file){
+	path = file.value.split("\\")
+	file.parentNode.childNodes[3].innerText = path[path.length -1]
+}

@@ -361,6 +361,42 @@ main{
 	height: 100%;
 }
 
+.btn_delete_post, .btn_not_post{
+	position: relative;
+	width: 90%;
+	background: white;
+	border: none;
+	font-size: 1.5em;
+	border-radius: 20px;
+	height: 50px;
+	right: 0;
+	margin: 5px auto;
+}
+
+.btn_delete_post{
+	background: red;
+}
+
+.popup{
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 20%;
+	width: 80%;
+	background: rgba(0,0,0,0.5);
+	padding: 30px 10px;
+	border-radius: 20px;
+	left: 8%;
+}
+
+.h2_delete{
+	color: white;
+	position: relative;
+	right: 0;
+	bottom:20px;
+	margin: 0 auto;
+}
+
 @media screen and (min-width: 1024px) {
 	.posts{
 		width: 50%;

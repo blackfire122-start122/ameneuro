@@ -1,7 +1,6 @@
 {% if music.all %}
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
-
 	{% for m in music.all %}
 		<div class="audio-player">
 			<h4 class="name_mus">{{ m }}</h4>
@@ -22,11 +21,11 @@
 				</div>
 			{% elif type == "user_music_add" %}
 				<div class="menu_player">
-					<button class="btn_menu_player" value="{{ m.id }}" onclick="add_mus(this)">Add to me</button>
+					{% if not m in user.music.all %}
+						<button class="btn_menu_player" value="{{ m.id }}" onclick="add_mus(this)">Add to me</button>
+					{% endif %}
 				</div>
 			{% endif %}			
 		</div>
 	{% endfor %}
-{% else %}
-	<h2 class="not_mus">Not music</h2>
 {% endif %}

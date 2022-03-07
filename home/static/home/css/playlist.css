@@ -1,0 +1,10 @@
+.ps_name{
+	position: relative;
+	right: 10%;	
+}
+
+.ps_autor{
+	position: fixed;
+	bottom: 1%;
+	right: 1%;
+}

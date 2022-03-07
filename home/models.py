@@ -105,6 +105,7 @@ class User(AbstractUser):
 	img = models.ImageField(upload_to='user_img', default='user_img/user.png', null=True, blank=True)
 	friends = models.ManyToManyField("User",symmetrical=True,null=True,blank=True,related_name="friends_user")
 	music = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_user")
+	playlists = models.ManyToManyField("Playlist",symmetrical=False,null=True,blank=True,related_name="playlist_user")
 	music_shared = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_shared_user")
 	chats = models.ManyToManyField("Chat",symmetrical=False,null=True,blank=True,related_name="chats_user")
 	themes = models.ManyToManyField("Theme",null=True,blank=True, related_name="themes_user")
@@ -121,6 +122,16 @@ class User(AbstractUser):
 	class Meta:
 		verbose_name = "User"
 		verbose_name_plural = "Users"
+
+class Playlist(models.Model):
+	musics = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="musics_playlist")
+	img = models.ImageField(upload_to="playlists_img",default=None)
+	name = models.CharField(max_length=15)
+	date = models.DateField(null=True,auto_now=True)
+	autor = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="autor_playlist")
+	
+	def __str__(self):
+		return self.name
 
 @receiver(pre_delete, sender=AllTheme)
 def AllTheme_delete(sender, instance, **kwargs):

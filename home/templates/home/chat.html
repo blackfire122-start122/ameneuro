@@ -41,8 +41,11 @@
 	</div>
 	<div class="options"></div>
 	<div class="file_mes_form"></div>
-	<div class="click_mus" onclick="click_mus(this)">
-		<h1 class="text_for_click">Click for music play</h1>
+	<div class="click_mus" onclick="click_mus()">
+		<h3 class="text_for_click">Click for play chat music</h3>
+	</div>
+	<div class="click_not_mus" onclick="close_popups()">
+		<h3 class="text_for_click">Click for not play chat music</h3>
 	</div>
 
 	<script>
@@ -62,11 +65,7 @@
 		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
 		let send_file_mes_ajax = "{% url 'send_file_mes_ajax' %}"
 		let user_music_theme = "{{ user.theme_all.music_img.url }}"
-		let play_img = "{% static 'home/images/play.png' %}"
-		let pause_img = "{% static 'home/images/pause.png' %}"
-
 	</script>
-	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script src="{% static 'home/js/chat.js' %}"></script>
 	<script src="{% static 'home/js/style_chat.js' %}"></script>
 

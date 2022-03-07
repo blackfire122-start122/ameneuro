@@ -16,8 +16,16 @@
 
 {% block content %}
 	<link rel="stylesheet" href="{% static 'home/css/music_all.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/playlists.css' %}">
 
+	<div class="menu_mus">
+		<h2 class="h2_now" onclick="what_find(this,'musics')">Musics</h2>
+		<h2 class="h2_now" onclick="what_find(this,'playlists')">Playlists</h2>
+	</div>
 	<div class="music_all"></div>
+	<div class="playlists"></div>
+
+	<a class="add_mus" href="{% url 'add_music' %}">Add music</a>
 
 	<div class="music_share">
 		<span class="close_sh" onclick="close_sh()">X</span>
@@ -29,13 +37,9 @@
 		{% endfor %}
 	</div>
 
-	<br>
-	<a class="add_mus" href="{% url 'add_music' %}">Add music</a>
-	<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 	<script>
-		let play_img = "{% static 'home/images/play.png' %}"
-		let pause_img = "{% static 'home/images/pause.png' %}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
+		let playlists_ajax = "{% url 'playlists_ajax' %}"
 		let id_user = "{{ user.id }}"
 	</script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>

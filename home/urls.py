@@ -13,7 +13,7 @@ urlpatterns = [
 
     path('user/<name>', views.user.as_view(), name='user'),
     path('user_change', views.user_change, name='user_change'),
-    path('user_find', views.user_find.as_view(), name='user_find'),
+    path('find', views.find.as_view(), name='find'),
     path('friends', views.friends, name='friends'),
 
     path('post/<int:id>', views.post, name='post'),
@@ -27,6 +27,7 @@ urlpatterns = [
     path('musics', views.musics_all, name='musics'),
     path('add_music', views.add_music.as_view(), name='add_music'),
     path('saves_posts', views.saves_posts.as_view(), name='saves_posts'),
+    path('playlists/<name>', views.playlists.as_view(), name='playlists'),
 
     path('ajax/', include("home.urls_ajax"))
 ]
