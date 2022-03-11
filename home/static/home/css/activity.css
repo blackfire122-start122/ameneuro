@@ -1,0 +1,46 @@
+.username{
+	position: relative;
+	right: 10%;
+}
+
+.ma{
+	display:flex;
+	margin-top: 4px;
+	justify-content: space-between;
+}
+
+.img_from_user_ma{
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.ma_text{
+	width: 70%;
+	overflow-wrap: anywhere;
+}
+
+.ma_date{
+	color: gray;
+}
+
+.file_ma{
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+}
+
+.point, .not_point{
+	position: absolute;
+	left: 40px;
+	margin-top: 40px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: red;
+}
+
+.not_point{
+	display: none;
+}

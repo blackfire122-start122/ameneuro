@@ -1,4 +1,3 @@
-add post style
 music share *
 music base style share *
 inducator music share *
@@ -10,29 +9,45 @@ if like js*
 if comment like js *
 direct *
 spread-share *
-friends message btn and find
 user music if null *
 friends user show and спільні auto *
 theme_all переключатель *
-add music form style
-show name file in forms *** *** *** *** 
 delete post really delete *
-read 
-work with dark theme
-models pre_
 share see select *
-share see functionals
 music in chats more worck *
 comments style bags * 
 menu style in lents *
-bags in follow friend
 home recomendations bags *
 saves_posts *
 new arhitectyre *
 music playlists *
 music create playlists *
-lennts in end bugs hard
+delete friend *
+click play or not play *
+ajax in websockets *
+share see functionals *
+bags in follow friend *
+in networc inducator *
+add activity page *
+inducators *
+read chat *
+if none *
+optimize sqls *** *** ***
+show name file in forms *** *** ***
+
+work with dark theme
+models pre_
+lents in end bugs hard
 videos as mini-youtube
-commnts reply send inducator
-delete friend
-click play or not play
+friends message btn and find
+
+
+defence:
+	is_digit
+	ajax_spoof
+	websocket defence
+
+css style:
+	add music form style
+	one formats think think 
+	add post style

@@ -1,11 +1,6 @@
 function like(e){
-	$.ajax({
-		url: like_ajax,
-		data: {'id':e.id},
-		error: function (response) {
-			console.log(response.data_text)
-		}
-	})
+	conn_u.send(JSON.stringify({'type':'like', "id":e.id}))
+
 	e.style.opacity = "0.5"
 	e.onclick = null
 	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
@@ -38,13 +33,7 @@ function comments(e){
 }
 
 function like_comment(e){
-	$.ajax({
-		url: comment_like_ajax,
-		data: {'id':e.id},
-		error: function (response) {
-			console.log(response.data_text)
-		}
-	})
+	conn_u.send(JSON.stringify({'type':'comment_like', "id":e.id}))
 
 	e.style.opacity = "0.5"
 	e.onclick = null
@@ -53,41 +42,34 @@ function like_comment(e){
 
 let reply = false
 let btn_reply
+let user_reply
 
 function comment_user(e){
 	let inp_comment = document.querySelector('.inp_comment'+e.value)
 
 	if (reply){
-		$.ajax({
-			url: comment_reply_ajax,
-			data: {'com_id':btn_reply.id,
-					'post_id':btn_reply.value,
-					'text':inp_comment.value},
-			error: function (response) {
-				console.log(response)
-			}
-		})
-
+		conn_u.send(JSON.stringify({'type':'comment_reply','com_id':btn_reply.id,'post_id':btn_reply.value,'text':inp_comment.value}))
+		
+		conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+user_reply)	
+		conn_u_f.onopen = ()=>{
+			conn_u_f.send(JSON.stringify({'type':'activity'}))
+			conn_u_f.close()
+		}
 	}else{
-		$.ajax({
-			url: comment_user_ajax,
-			data: {'id':e.value,
-					'text':inp_comment.value},
-			error: function (response) {
-				console.log(response)
-			}
-		})
+		conn_u.send(JSON.stringify({'type':'comment_user', "id":e.value,'text':inp_comment.value}))
 	}
 	reply = false
 	inp_comment.value = ""
 }
 
-function select_reply(e){
+
+function select_reply(e,user){
+	user_reply = user
 	let com = document.querySelector('.com_'+e.id)
 	com.style.background = "rgba(0,0,0,0.1)"
 	reply = true
 	if(btn_reply){
-			document.querySelector('.com_'+btn_reply.id).style.background = "none"
+		document.querySelector('.com_'+btn_reply.id).style.background = "none"
 	}
 	btn_reply = e
 }
@@ -120,6 +102,14 @@ function copy_link(e){
 let id_share
 
 function share(id){
+	$.ajax({
+		url: share_ch_ajax,
+		data: {"type":'all'},
+		success: function (response) {
+			document.querySelector(".chats").innerHTML += response
+		}
+	})
+
 	id_share = id
 	document.querySelector(".friends_share").style.display = "block"
 	post_share = document.querySelector(".post_share")
@@ -134,13 +124,16 @@ function close_sh(){
 function share_btn(ch_id,friend){
 	conn = new WebSocket("ws://"+window.location.hostname+"/chat/"+ch_id)
 	conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+friend)
-
+ 
 	conn.onopen = ()=>{
-		conn.send(JSON.stringify({'type':'share','user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share}))
+		conn.send(JSON.stringify({'type':'share','user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share+ "#@" +document.querySelector("#mess_share").value}))
+		conn.close()
 	}
 	conn_u_f.onopen = ()=>{
-		conn_u_f.send(JSON.stringify({'type':'msg','msg':"http://"+window.location.hostname+"/post/"+id_share,'from_user': user, "from_chat":ch_id}))
-	}	
+		conn_u_f.send(JSON.stringify({'type':'msg','msg':"http://"+window.location.hostname+"/post/"+id_share+ "#@;" +document.querySelector("#mess_share").value,'from_user': user, "from_chat":ch_id}))
+		conn_u_f.close()
+	}
+
 }
 
 function delete_post(id_post){
@@ -155,13 +148,7 @@ function delete_post(id_post){
 	btn_delete.innerText = "Delete"
 
 	btn_delete.addEventListener('click',()=>{
-		$.ajax({
-			url: delete_post_ajax,
-			data: {'id':id_post},
-			error: (data)=> {
-				console.log(data.data_text)
-			},
-		})
+		conn_u.send(JSON.stringify({'type':'delete_post', "id":id_post}))
 		popup.remove()
 	})
 	btn_not.className = "btn_not_post"
@@ -212,4 +199,14 @@ function not_save_post(e,id){
 	conn_u.send(JSON.stringify({'type':'not_save', "id":id}))
 	e.addEventListener('click',() => {save_post(e,id)})
 	e.style.opacity = "1"
+}
+
+function find_user_share(e){
+	$.ajax({
+		url: share_ch_ajax,
+		data: {"type":'find_ch' ,"find_ch":e.value},
+		success: function (response) {
+			document.querySelector(".chats").innerHTML = response
+		}
+	})
 }

@@ -45,3 +45,12 @@
 .friend_follow{
 	display: flex;
 }
+
+.del_friend_btn{
+	color: red;
+	font-size: 1.1em;
+	background: none;
+	border: none;
+	position: relative;
+	right: 10%;
+}

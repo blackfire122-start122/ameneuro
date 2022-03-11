@@ -397,6 +397,16 @@ main{
 	margin: 0 auto;
 }
 
+.inp_share{
+	background: none;
+	border: none;
+	font-size: 1.1em;
+	margin-top: 1%;
+	width: 100%;
+	outline: none;
+	color: white;
+}
+
 @media screen and (min-width: 1024px) {
 	.posts{
 		width: 50%;

@@ -185,22 +185,20 @@ function scroll_event_find(e) {
 }
 
 function want_add_friend(btn) {
-	$.ajax({
-		type: $(this).attr('post'),
-		url: want_add_friend_ajax,
-		data: {'id':btn.value},
-	})
+	conn_u.send(JSON.stringify({'type':'want_add_friend', "id":btn.value}))
 	btn.disabled = true
 	btn.style.display = "none"
 	document.getElementById(btn.value).style.display = "none"
 }
 
-function follow(btn) {
-	$.ajax({
-		type: $(this).attr('post'),
-		url: follow_ajax,
-		data: {'id':btn.value},
-	})
+function follow(btn,user) {
+	conn_u.send(JSON.stringify({'type':'follow', "id":btn.value}))
+	conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+user)	
+	conn_u_f.onopen = ()=>{
+		conn_u_f.send(JSON.stringify({'type':'activity'}))
+		conn_u_f.close()
+	}
+
 	btn.disabled = true
 	btn.style.color = "gray"
 	btn.style.fontSize = "1em"

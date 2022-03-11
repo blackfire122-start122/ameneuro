@@ -16,20 +16,22 @@
 			<a href="{% url 'user' user %}"><img class="link_user" src="{{ user.img.url }}"></a>
 		</div>
 		<div class="friends_and_user">
-			{% for f in user.friends.all %}
-				<a class="user_header" href="{% url 'user' f.username %}">
-					<img class="img_user" src="{{ f.img.url }}">
-					<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
-				</a>
-			{% endfor %}
-			{% for f in user.follow.all %}
-				{% if f not in user.friends.all %}
+			{% with all_friends=user.friends.all %}
+				{% for f in all_friends %}
 					<a class="user_header" href="{% url 'user' f.username %}">
 						<img class="img_user" src="{{ f.img.url }}">
 						<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
 					</a>
-				{% endif %}
-			{% endfor %}
+				{% endfor %}
+				{% for f in user.follow.all %}
+					{% if f not in user.all_friends %}
+						<a class="user_header" href="{% url 'user' f.username %}">
+							<img class="img_user" src="{{ f.img.url }}">
+							<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
+						</a>
+					{% endif %}
+				{% endfor %}
+			{% endwith %}
 		</div>
 	</header>
 	<div class="line"></div>
@@ -45,7 +47,9 @@
 
 			<a class="link_menu" href="{% url 'friends' %}"><div id ="friends" class="red_point"><p>0</p></div><img class="img_main_link" src="{% static 'home/images/user.png' %}"></a>
 
-			<a class="link_menu" href="{% url 'musics' %}"><div id ="musics" class="red_point"><p>0</p></div><img class="img_main_link" src="{{ user.theme_all.music_img }}"></a>
+			<a class="link_menu" href="{% url 'musics' %}"><div id ="musics" class="red_point"><p>{{ music_shared }}</p></div><img class="img_main_link" src="{{ user.theme_all.music_img }}"></a>
+
+			<a class="link_menu" href="{% url 'activity' %}"><div id ="activity" class="red_point"><p>{{ message_activity }}</p></div><img class="img_main_link" src="{% static 'home/images/activity.png' %}"></a>
 		</div>
 		<img onclick="menu_show(this)" class="link_menu" src="{% static 'home/images/menu.png' %}">
 		<div id ="menu_id" class="red_point"></div>
@@ -56,32 +60,20 @@
 		<div class="menu_post_share">
 			<div class="post_share"></div>
 			<div class="inputs_post_share">
-				<input type="text" placeholder="message">
-				<input type="text" placeholder="find user">
+				<input class="inp_share" id="mess_share" type="text" placeholder="message">
+				<input class="inp_share" oninput="find_user_share(this)" type="text" placeholder="find chat">
 			</div>
 		</div>
-		{% for ch in user.chats.all %}
-			<div class="f_share">
-				{% for u in ch.users.all %}
-					{% if u != user %}
-						<h3 class="name_sh">{{ u|truncatechars:10 }}</h3>
-						<button class="btn_sh" onclick="share_btn('{{ ch }}', '{{ u }}')">share</button>
-					{% endif %}
-				{% endfor %}
-			</div>
-		{% endfor %}
+
+		<div class="chats"></div>
 	</div>
 
 	<script>
 		let user = "{{ user }}"
 		let username = "{{ user }}"
-		let like_ajax = "{% url 'like_ajax' %}"
 		let comment_ajax = "{% url 'comment_ajax' %}"
-		let comment_like_ajax = "{% url 'comment_like_ajax' %}"
-		let comment_user_ajax = "{% url 'comment_user_ajax' %}"
-		let comment_reply_ajax = "{% url 'comment_reply_ajax' %}"
-		let delete_post_ajax = "{% url 'delete_post_ajax' %}"
 		let post_ajax = "{% url 'post_ajax' %}"
+		let share_ch_ajax = "{% url 'share_ch_ajax' %}"
 		let id_post = "{{ id }}"
 		let play_img = "{% static 'home/images/play.png' %}"
 		let pause_img = "{% static 'home/images/pause.png' %}"

@@ -43,3 +43,14 @@
 .point_none{
 	width: 10px;
 }
+
+.point_in{
+	display: none;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: green;
+	position: absolute;
+	left: 30px;
+	margin-top: -15px;
+}

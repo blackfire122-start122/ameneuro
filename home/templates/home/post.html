@@ -11,12 +11,7 @@
 {% block content %}	
 	<div class="posts"></div>
 	<script>
-		let like_ajax = "{% url 'like_ajax' %}"
 		let comment_ajax = "{% url 'comment_ajax' %}"
-		let comment_like_ajax = "{% url 'comment_like_ajax' %}"
-		let comment_user_ajax = "{% url 'comment_user_ajax' %}"
-		let comment_reply_ajax = "{% url 'comment_reply_ajax' %}"
-		let delete_post_ajax = "{% url 'delete_post_ajax' %}"
 		let post_ajax = "{% url 'post_ajax' %}"
 		let post_id = "{{ id }}"
 

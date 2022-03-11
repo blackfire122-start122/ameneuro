@@ -3,6 +3,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import *
 from django.db.models import Max
+from .services import *
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -119,14 +120,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps(event["text"]))
 
 class UserConsumer(AsyncWebsocketConsumer):
+    in_net = 0
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
-        self.theme = {}
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
+        self.in_net +=1 
         await self.accept()
  
     async def disconnect(self, close_code):
@@ -134,11 +136,20 @@ class UserConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
+        
+        self.text_data_json = {'type':'disconnect','user_in':self.user.username}
+
+        await self.channel_layer.group_send(
+            self.room_group_name,{
+                "type": "chat.message",
+                "text": self.text_data_json,
+            }
+        )
 
     @database_sync_to_async
     def first_conn(self):
         self.user = User.objects.get(username=self.text_data_json['user'])
-   
+        
     @database_sync_to_async
     def add_mus_share(self):
         mus = Music.objects.get(pk=self.text_data_json["id"])
@@ -159,7 +170,13 @@ class UserConsumer(AsyncWebsocketConsumer):
     
     @database_sync_to_async
     def mus_share(self):
-        User.objects.get(pk=int(self.text_data_json["to_user"])).music_shared.add(Music.objects.get(pk=self.text_data_json["id"]))
+        user = User.objects.get(pk=int(self.text_data_json["to_user"]))
+        mus = Music.objects.get(pk=self.text_data_json["id"])
+        user.music_shared.add(mus)
+
+        ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.user,readeble=False)
+        ma.save()
+        user.message_activity.add(ma)
 
     @database_sync_to_async
     def save_post(self):
@@ -169,13 +186,114 @@ class UserConsumer(AsyncWebsocketConsumer):
     def not_save(self):
         self.user.saves_posts.remove(Post.objects.get(pk=int(self.text_data_json["id"])))
 
+    @database_sync_to_async
+    def delete_friend(self):
+        self.user.friends.remove(self.text_data_json['id'])
+
+    @database_sync_to_async
+    def add_friend(self):
+        friend = User.objects.get(pk=self.text_data_json['id'])
+        self.user.friends.add(friend.id)
+        self.user.friend_want_add.remove(friend)
+
+    @database_sync_to_async
+    def want_add_friend(self):
+        friend = User.objects.get(pk=self.text_data_json['id'])
+        friend.friend_want_add.add(self.user.id)
+
+    @database_sync_to_async
+    def follow(self):
+        follow_to = User.objects.get(pk=self.text_data_json['id'])
+        follow_to.followers.add(self.user.id)
+        self.user.follow.add(follow_to.id)
+
+        ma = MessageActivity(text="on you follow: "+self.user.username,from_user=self.user,readeble=False)  
+        ma.save()
+        follow_to.message_activity.add(ma)
+
+    @database_sync_to_async
+    def add_chat(self):
+        friend = User.objects.get(pk=self.text_data_json["id"])
+
+        theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+self.user.username)
+        theme.save()
+
+        chat = Chat(chat_id=gen_rand_id(30))
+        chat.theme=theme
+        chat.save()
+
+        chat.users.add(self.user.id)
+        chat.users.add(friend.id)
+
+        self.user.chats.add(chat.id)
+        friend.chats.add(chat.id)
+
+        self.user.themes.add(theme.id)
+        friend.themes.add(theme.id)
+
+    @database_sync_to_async
+    def like(self):
+        post = Post.objects.get(pk=self.text_data_json["id"])
+        post.likes.add(self.user.id)
+
+    @database_sync_to_async
+    def comment_like(self):
+        com = Comment.objects.get(pk=self.text_data_json["id"])
+        com.likes.add(self.user.id)
+
+    @database_sync_to_async
+    def comment_user(self):
+        com = Comment(user=self.user,text=self.text_data_json["text"])
+        com.save()
+
+        post = Post.objects.get(pk=self.text_data_json["id"])
+        post.comments.add(com.id)
+
+    @database_sync_to_async
+    def comment_reply(self):
+        com = Comment(user=self.user,text=self.text_data_json["text"])
+        com.parent = Comment.objects.get(pk=int(self.text_data_json["com_id"]))
+        com.save()
+
+        post = Post.objects.get(pk=int(self.text_data_json["post_id"]))
+        post.comments.add(com.id)
+        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.user,file=post.file,readeble=False,type_f=post.type_p)
+        
+        ma.save()
+        com.parent.user.message_activity.add(ma)
+
+    @database_sync_to_async
+    def delete_post(self):
+        try:post = Post.objects.get(pk=self.text_data_json["id"])
+        except: self.text_data_json["data_text"] = "error"
+
+        if post.user_pub == self.user:
+            post.delete()
+            self.text_data_json["data_text"] = "OK"
+        else: self.text_data_json["data_text"] = "error"
+
+    @database_sync_to_async
+    def new_theme_all(self):
+        self.user.theme_all = AllTheme.objects.get(pk = self.text_data_json["id"])
+        self.user.save()
+
+    @database_sync_to_async
+    def delete_theme_all(self):
+        theme_del = AllTheme.objects.get(pk = self.text_data_json["id"])
+        if not theme_del.default:theme_del.delete()
+
+    @database_sync_to_async
+    def visible_ma(self):
+        ma = MessageActivity.objects.get(pk=self.text_data_json["id"])
+        ma.readeble=True
+        ma.save()
+
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
         if self.text_data_json['type']=='first_conn':
             await self.first_conn()
-            await self.send(text_data=json.dumps(self.text_data_json))
-            # print(self.room_name == self.user.username)
+            await self.send(text_data=json.dumps(self.text_data_json))            
             return
 
         elif self.text_data_json['type']=='add_mus_share':
@@ -198,7 +316,46 @@ class UserConsumer(AsyncWebsocketConsumer):
             return
         elif self.text_data_json['type']=='not_save':
             await self.not_save()
-            return            
+            return
+        elif self.text_data_json['type']=='delete_friend':
+            await self.delete_friend()
+            return  
+        elif self.text_data_json['type']=='add_friend':
+            await self.add_friend()
+            return
+        elif self.text_data_json['type']=='want_add_friend':
+            await self.want_add_friend()
+            return
+        elif self.text_data_json['type']=='follow':
+            await self.follow()
+            return
+        elif self.text_data_json['type']=='add_chat':
+            await self.add_chat()
+            return
+        elif self.text_data_json['type']=='like':
+            await self.like()
+            return
+        elif self.text_data_json['type']=='comment_like':
+            await self.comment_like()
+            return
+        elif self.text_data_json['type']=='comment_user':
+            await self.comment_user()
+            return
+        elif self.text_data_json['type']=='comment_reply':
+            await self.comment_reply()
+            return
+        elif self.text_data_json['type']=='delete_post':
+            await self.delete_post()
+        elif self.text_data_json['type']=='new_theme_all':
+            await self.new_theme_all()
+            return
+        elif self.text_data_json['type']=='delete_theme_all':
+            await self.delete_theme_all()
+            return
+        elif self.text_data_json['type']=='visible_ma':
+            await self.visible_ma()
+            return
+
         await self.channel_layer.group_send(
             self.room_group_name,{
                 "type": "chat.message",

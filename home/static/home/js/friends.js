@@ -1,26 +1,11 @@
 function add_chat(btn) {
-	$.ajax({
-		type: $(this).attr('post'),
-		url: add_chat_ajax,
-		data: {'id':btn.value},
-		error: function (response) {
-        },
-        success: function(response){
-        	window.location.href = response["url"]
-        }
-	})
+	conn_u.send(JSON.stringify({'type':'add_chat', "id":btn.value}))
+
 	btn.disabled=true
 	btn.style.display = "none"
 	document.getElementById(btn.value).style.display = "none"
 }
 
 function add_friend(btn) {
-	$.ajax({
-		type: $(this).attr('post'),
-		url: add_friend_ajax,
-		data: {'id':btn.value},
-		error: function (response) {
-            console.log(response.data_text)
-        }
-	})
+	conn_u.send(JSON.stringify({'type':'add_friend', "id":btn.value}))
 }

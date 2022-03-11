@@ -56,3 +56,28 @@ window.addEventListener('scroll', function(e){
 		}
 	}
 })
+
+let msg_point = document.getElementById('chats')
+let musics_point = document.getElementById('musics')
+let activity_point = document.getElementById('activity')
+
+if (msg_point){
+	if(msg_point.childNodes[0].innerText!=0){
+		msg_point.style.display = "block"
+		menu_id.style.display = "block"
+	}
+}
+
+if (musics_point){
+	if(musics_point.childNodes[0].innerText!=0){
+		musics_point.style.display = "block"
+		menu_id.style.display = "block"
+	}
+}
+
+if (activity_point){
+	if(activity_point.childNodes[0].innerText!=0){
+		activity_point.style.display = "block"
+		menu_id.style.display = "block"
+	}
+}

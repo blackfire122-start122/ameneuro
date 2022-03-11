@@ -3,76 +3,12 @@ from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist
 from .forms import ThemeForm,MessageForm,AllTheme
 from django.http import JsonResponse
 from ameneuro.settings import get_posts_how, get_mes_how, get_user_how
-
+from django.db.models import Q
 from .services import *
 
+from django.core import serializers
+
 # in all need defence
-
-def add_friend_ajax(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-		try:
-			friend = User.objects.get(pk=int(request.GET["id"]))
-			user.friends.add(friend.id)
-			user.friend_want_add.remove(friend)
-		except:return JsonResponse({"data_text":"Fail"}, status=400)
-		
-		return JsonResponse({"data_text":"OK"}, status=200)
-	return JsonResponse({"data_text":"Fail"}, status=400)
-
-def want_add_friend_ajax(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-		try:
-			friend = User.objects.get(pk=int(request.GET["id"]))
-			friend.friend_want_add.add(user.id)
-		except:return JsonResponse({"data_text":"Fail"}, status=400)
-		
-		return JsonResponse({"data_text":"OK"}, status=200)
-	return JsonResponse({"data_text":"Fail"}, status=400)
-
-def add_chat_ajax(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-
-		try:
-			friend = User.objects.get(pk=int(request.GET["id"]))
-			
-			theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+user.username)
-			theme.save()
-
-			chat = Chat(chat_id=gen_rand_id(30))
-			chat.theme=theme
-			chat.save()
-
-			chat.users.add(user.id)
-			chat.users.add(friend.id)
-
-			user.chats.add(chat.id)
-			friend.chats.add(chat.id)
-
-			user.themes.add(theme.id)
-			friend.themes.add(theme.id)
-
-		except:return JsonResponse({"data_text":"Fail"}, status=400)
-		
-		return JsonResponse({"url":"chat/"+chat.chat_id}, status=200)
-	return JsonResponse({"data_text":"Fail"}, status=400)
-
-def like_ajax(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-		try:
-			post = Post.objects.get(pk=int(request.GET["id"]))
-			post.likes.add(user.id)
-		except:return JsonResponse({"data_text":"Fail"}, status=400)
-
-		return JsonResponse({"data_text":"OK"},status=200)
-	return JsonResponse({"data_text":"Fail"}, status=400)
 
 def comment_ajax(request):
 	user = {}
@@ -85,52 +21,6 @@ def comment_ajax(request):
 		return render(request,"home/ajax_html/comments.html",{"post_id":post.id ,"comments":post.comments.all()})
 	return JsonResponse({"data_text":"Fail"}, status=400)
 
-def comment_like_ajax(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-
-		try:
-			com = Comment.objects.get(pk=int(request.GET["id"]))
-			com.likes.add(user.id)
-		except:return JsonResponse({"data_text":"Fail"}, status=400)
-
-		return JsonResponse({"data_text":"OK"},status=200)
-	return JsonResponse({"data_text":"Fail"}, status=400)
-
-def comment_user_ajax(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-
-		try:
-			com = Comment(user=user,text=request.GET["text"])
-			com.save()
-
-			post = Post.objects.get(pk=int(request.GET["id"]))
-			post.comments.add(com.id)
-
-		except:return JsonResponse({"data_text":"Fail"}, status=400)
-
-		return JsonResponse({"data_text":"OK"},status=200)
-	return JsonResponse({"data_text":"Fail"}, status=400)
-
-def comment_reply_ajax(request):
-	user = {}
-	if request.user.is_authenticated:
-		user = request.user
-		try:
-			com = Comment(user=user,text=request.GET["text"])
-			com.parent = Comment.objects.get(pk=int(request.GET["com_id"]))
-			com.save()
-
-			post = Post.objects.get(pk=int(request.GET["post_id"]))
-			post.comments.add(com.id)
-			return JsonResponse({"data_text":"OK"},status=200)
-		except:
-			return JsonResponse({"data_text":"Fail"}, status=400)
-	return JsonResponse({"data_text":"Fail"}, status=400)
-	
 def post_ajax(request):
 	if request.user.is_authenticated:user = request.user
 	else:return JsonResponse({"data_text":"Fail"}, status=400)
@@ -174,17 +64,6 @@ def chat_get_mess_ajax(request):
 
 	return render(request, "home/ajax_html/mess.html",{"mess":mess})
 
-def follow_ajax(request):
-	if request.user.is_authenticated:
-		user = request.user
-		try:
-			follow_to = User.objects.get(pk=request.GET["id"])
-			follow_to.followers.add(user.id)
-			user.follow.add(follow_to.id)
-		except:return JsonResponse({"data_text":"Fail"}, status=400)
-	else:return JsonResponse({"data_text":"Fail"}, status=400)
-	return JsonResponse({"data_text":"OK"}, status=200)
-
 def send_file_mes_ajax(request):
 	form = MessageForm()
 	error = ""
@@ -210,7 +89,6 @@ def send_file_mes_ajax(request):
 
 def musics_all_ajax(request):
 	mus = {}
-	print(request.GET["type"])
 	if request.GET["type"] == "music_share":
 		mus = request.user.music_shared
 	elif request.GET["type"] == "playlist":
@@ -218,19 +96,6 @@ def musics_all_ajax(request):
 	else:
 		mus = request.user.music
 	return render(request,"home/ajax_html/all_music.html",{"music":mus,'type':request.GET["type"]})
-
-def delete_post_ajax(request):
-	if request.user.is_authenticated:user = request.user
-	else:return JsonResponse({"data_text":"Fail"}, status=400)
-	try:post = Post.objects.get(pk=request.GET["id"])
-	except:return JsonResponse({"data_text":"Fail"}, status=400)
-
-	if post.user_pub == user:post.delete()
-	else:return JsonResponse({"data_text":"Fail"}, status=400)
-	
-	return JsonResponse({"data_text":"OK"}, status=200)
-
-from django.core import serializers
 
 def user_find_ajax(request):
 	if request.user.is_authenticated:user = request.user
@@ -258,29 +123,7 @@ def users_get_ajax(request):
 		except:return JsonResponse({"data_text":"Fail"}, status=400)
 
 
-	return render(request,"home/ajax_html/users.html",{"users":users})
-
-def new_theme_all_ajax(request):
-	if request.user.is_authenticated:user = request.user
-	else:return JsonResponse({"data_text":"Fail"}, status=400)
-
-	try:
-		user.theme_all = AllTheme.objects.get(pk = int(request.GET["id"]))
-		user.save()
-	except:return JsonResponse({"data_text":"Fail"}, status=400)
-	
-	return JsonResponse({"data_text":"OK"}, status=200)
-
-def delete_theme_all_ajax(request):
-	if request.user.is_authenticated:user = request.user
-	else:return JsonResponse({"data_text":"Fail"}, status=400)
-
-	try:
-		theme_del = AllTheme.objects.get(pk = int(request.GET["id"]))
-		if not theme_del.default:theme_del.delete()
-	except:return JsonResponse({"data_text":"Fail"}, status=400)
-	
-	return JsonResponse({"data_text":"OK"}, status=200)
+	return render(request,"home/ajax_html/users.html",{"users":users,"type":request.GET["type"]})
 
 def saves_posts_ajax(request):
 	if request.user.is_authenticated:user = request.user
@@ -310,12 +153,22 @@ def music_find_ajax(request):
 	# except:return JsonResponse({"data_text":"Fail"}, status=400)
 	return render(request,"home/ajax_html/all_music.html",{"music":music,'type':"user_music_add"})
 
-
 def video_get_ajax(request):
 	return JsonResponse({"data":"while not functions"})
 def video_find_ajax(request):
 	return JsonResponse({"data":"while not functions"})
 
 def playlists_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
 	playlists = request.user.playlists
 	return render(request,"home/ajax_html/playlists.html",{"playlists":playlists})
+
+def share_ch_ajax(request):
+	if request.user.is_authenticated:user = request.user
+	else:return JsonResponse({"data_text":"Fail"}, status=400)
+	if request.GET["type"] == 'find_ch':
+		chats = user.chats.all().filter(Q(users__username__contains=request.GET["find_ch"])&~Q(users=user))
+	else:
+		chats = user.chats.all
+	return render(request,"home/ajax_html/share_ch.html",{"chats":chats})

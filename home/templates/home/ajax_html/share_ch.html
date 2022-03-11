@@ -1,0 +1,10 @@
+{% for ch in chats %}
+	<div class="f_share">
+		{% for u in ch.users.all %}
+			{% if u != user %}
+				<h3 class="name_sh">{{ u|truncatechars:10 }}</h3>
+				<button class="btn_sh" onclick="share_btn('{{ ch }}', '{{ u }}')">share</button>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endfor %}

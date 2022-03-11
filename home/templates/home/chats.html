@@ -15,12 +15,16 @@
 			{% for user_ch in ch.users.all %}
 				{% if user_ch != user %}
 					<div class="user_chat">
-						<img class='user_img' src="{{ user_ch.img }}">
+						<div>
+							<img class='user_img' src="{{ user_ch.img }}">
+							<div class="point_in"></div>
+						</div>
+
 						<div class="name_end_mes">
-							<h4>{{ user_ch }}</h4>
+							<h4 class="user_ch">{{ user_ch }}</h4>
 							<span id="{{ ch.chat_id }}" class="end_mes" >{{ ch.messages.all.last }} </span>
 						</div>
-						{% if not ch.messages.all.last.readeble %}
+						{% if not ch.messages.all.last.readeble and ch.messages.all.last == "None" %}
 							<div class="point"></div>
 						{% else %}
 							<div class="point_none"></div>

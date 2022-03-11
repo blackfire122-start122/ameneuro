@@ -52,6 +52,7 @@ function onmessage(e){
 		div_.append(div)
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
+		end_readable_send()
 
 	}else if(data['type']=='new_theme'){
 		conn_u_f.send(JSON.stringify({'type':'msg','msg':data['msg_new_theme'],'from_user': user, "from_chat":chat}))
@@ -64,6 +65,7 @@ function onmessage(e){
 
 		div.append(p)
 		msg_div.append(div)
+		end_readable_send()
 
 	}else if(data['type']=='delete_theme'){
 		if (data["error"]){
@@ -169,6 +171,7 @@ function onmessage(e){
 		div_.append(div)
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
+		end_readable_send()
 	}
 	else if (data['type']=='share'){
 		let div_ = document.createElement('div')
@@ -210,12 +213,14 @@ function onmessage(e){
 		div_.append(div)
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
+		end_readable_send()
 	}
 	console.log(data)
 }
 
 conn.onopen = ()=>{
 	conn.send(JSON.stringify({'type':'first_msg','user': user}))	
+	end_readable_send()
 }
 
 function btn_send(){
@@ -233,12 +238,28 @@ function delete_theme(e,theme){
 }
 window.addEventListener('scroll',end_readable_send)
 
-jQuery.expr.filters.offscreen = function(el) {
-	let rect = el.getBoundingClientRect()
-	return ((rect.x + rect.width) < 0 
-					|| (rect.y + rect.height) < 0
-					|| (rect.x > window.innerWidth || rect.y > window.innerHeight)
-			 )
+function Visible(target) {
+  let targetPosition = {
+      top: window.pageYOffset + target.getBoundingClientRect().top,
+      left: window.pageXOffset + target.getBoundingClientRect().left,
+      right: window.pageXOffset + target.getBoundingClientRect().right,
+      bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+    },
+    windowPosition = {
+      top: window.pageYOffset,
+      left: window.pageXOffset,
+      right: window.pageXOffset + document.documentElement.clientWidth,
+      bottom: window.pageYOffset + document.documentElement.clientHeight
+    }
+
+  if (targetPosition.bottom > windowPosition.top &&
+    targetPosition.top < windowPosition.bottom &&
+    targetPosition.right > windowPosition.left &&
+    targetPosition.left < windowPosition.right) {
+    return true
+  } else {
+    return false
+  }
 }
 
 function end_readable_send(){
@@ -248,8 +269,8 @@ function end_readable_send(){
 
 	let messages = document.getElementsByClassName("other_msgs")
 	end_mes = messages[messages.length-1]
-	
-	if ($(end_mes).is(':offscreen') && conn.readyState){
+	console.log(messages)
+	if (Visible(end_mes) && conn.readyState){
 		conn.send(JSON.stringify({'type':'end_readable','user': user}))
 	}
 }

@@ -110,6 +110,7 @@ $.ajax({
     // window.scrollTo(0,1)
     intS = setInterval(scrollToEndPage,5)
     fon_msgs()
+    end_readable_send()
   }
 })
 

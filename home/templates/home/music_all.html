@@ -32,7 +32,7 @@
 		{% for i in user.friends.all %}
 			<div class="user_share">
 				<h2 class="name_sh">{{ i|truncatechars:10 }}</h2>
-				<button class="btn_sh" value="{{ i.id }}" onclick="mus_share(this)">Share</button>
+				<button class="btn_sh" value="{{ i.id }}" onclick="mus_share(this,'{{ i }}')">Share</button>
 			</div>
 		{% endfor %}
 	</div>

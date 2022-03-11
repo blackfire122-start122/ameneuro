@@ -1,4 +1,6 @@
 {% load static %}
+{% load split_mess %}
+
 {% for m in mess %}
 	{% if m.type_m.type_m == 'msg' %}
 		{% if m.user == user %}
@@ -75,50 +77,53 @@
 			{% endif %}
 		{% endif %}				
 	{% elif m.type_m.type_m == 'share' %}
-		{% if m.type_file.type_f == "audio" %}
-			{% if m.user == user %}
-				<div>
-					<div class="my_msgs">
-						<a href="{{ m.text }}">
-							<img class="file_mes" src="{{ user.theme_all.music_img.url }}">
-						</a>
-						<p>share</p>
-						<time class='time'>{{ m.date|date:"h:m" }}</time>
-					</div>
-				</div>
-			{% else %}
-				<div>
-					<div class="other_msgs">
-						<a href="{{ m.text }}">
-							<img class="file_mes" src="{{ user.theme_all.music_img.url }}">
-						</a>
-						<p>share</p>
-						<time class='time'>{{ m.date|date:"h:m" }}</time>
-					</div>
-				</div>
-			{% endif %}
-		{% else %}
-			{% if m.user == user %}
+		{% with m_list=m.text|split_mess:"#@;" %}
+			{% if m.type_file.type_f == "audio" %}
+				{% if m.user == user %}
+
 					<div>
 						<div class="my_msgs">
-							<a href="{{ m.text }}">
-								<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
+							<a href="{{ m_list.0 }}">
+								<img class="file_mes" src="{{ user.theme_all.music_img.url }}">
 							</a>
-							<p>share</p>
+							<p>{{ m_list.1 }}</p>
 							<time class='time'>{{ m.date|date:"h:m" }}</time>
 						</div>
 					</div>
-			{% else %}
-				<div>
-					<div class="other_msgs">
-						<a href="{{ m.text }}">
-							<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
-						</a>
-						<p>share</p>
-						<time class='time'>{{ m.date|date:"h:m" }}</time>
+				{% else %}
+					<div>
+						<div class="other_msgs">
+							<a href="{{ m_list.0 }}">
+								<img class="file_mes" src="{{ user.theme_all.music_img.url }}">
+							</a>
+							<p>{{ m_list.1 }}</p>
+							<time class='time'>{{ m.date|date:"h:m" }}</time>
+						</div>
 					</div>
-				</div>
+				{% endif %}
+			{% else %}
+				{% if m.user == user %}
+						<div>
+							<div class="my_msgs">
+								<a href="{{ m_list.0 }}">
+									<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
+								</a>
+								<p>{{ m_list.1 }}</p>
+								<time class='time'>{{ m.date|date:"h:m" }}</time>
+							</div>
+						</div>
+				{% else %}
+					<div>
+						<div class="other_msgs">
+							<a href="{{ m_list.0 }}">
+								<{{ m.type_file }} class="img_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
+							</a>
+							<p>{{ m_list.1 }}</p>
+							<time class='time'>{{ m.date|date:"h:m" }}</time>
+						</div>
+					</div>
+				{% endif %}
 			{% endif %}
-		{% endif %}
+		{% endwith %}
 	{% endif %}
 {% endfor %}

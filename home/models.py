@@ -59,6 +59,16 @@ class Message(models.Model):
 	def __str__(self):
 		return self.text
 
+class MessageActivity(models.Model):
+	text = models.TextField(null=True,blank=True) 
+	from_user = models.ForeignKey("User", on_delete=models.SET_NULL,null=True)
+	file = models.FileField(upload_to='message_activity_file',null=True,blank=True)
+	type_f = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_ma",null=True)
+	date = models.DateTimeField(null=True,auto_now=True)
+	readeble = models.BooleanField(null=True,default=False)
+	def __str__(self):
+		return self.text
+
 class Chat(models.Model):
 	users = models.ManyToManyField("User",null=True, related_name="user_chat")
 	messages = models.ManyToManyField("Message",null=True)
@@ -115,6 +125,7 @@ class User(AbstractUser):
 	theme_all = models.ForeignKey("AllTheme",default=def_all_theme,null=True,blank=True,on_delete=models.SET_DEFAULT,related_name="theme_all_user")
 	themes_all = models.ManyToManyField("AllTheme",null=True,blank=True, related_name="themes_all_user")
 	saves_posts = models.ManyToManyField("Post",null=True,blank=True, related_name="save_post_user")
+	message_activity = models.ManyToManyField("MessageActivity",null=True,blank=True, related_name="message_activity")
 
 	def __str__(self):
 		return self.username

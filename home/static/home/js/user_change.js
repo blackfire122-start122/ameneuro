@@ -17,23 +17,11 @@ function change_btn(e){
 }
 
 function select_theme(e,id){
-	$.ajax({
-		url: new_theme_all_ajax,
-		data: {'id':id},
-		error: function (response) {
-			console.log(response.data_text)
-		}
-	})
+	conn_u.send(JSON.stringify({'type':'new_theme_all', "id":id}))
 }
 
 function delete_theme(e,id){
-	$.ajax({
-		url: delete_theme_all_ajax,
-		data: {'id':id},
-		error: function (response) {
-			console.log(response.data_text)
-		}
-	})
+	conn_u.send(JSON.stringify({'type':'delete_theme_all', "id":id}))
 	e.parentNode.remove()
 }
 

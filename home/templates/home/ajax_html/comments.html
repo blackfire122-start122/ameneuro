@@ -20,7 +20,7 @@
 
 				<span>{{ c.likes.all|length }}</span>
 			</div>
-			<button value="{{ post_id }}" id="{{ c.id }}" onclick="select_reply(this)" class="reply">reply</button>
+			<button value="{{ post_id }}" id="{{ c.id }}" onclick="select_reply(this,'{{ c.user }}')" class="reply">reply</button>
 		</div>
 	</div>
 {% endfor %}

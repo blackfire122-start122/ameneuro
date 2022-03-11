@@ -41,7 +41,7 @@
 			<div class="left">
 				<img id={{ p.id }} onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
 
-				<span>{{ p.comments.all|length }}</span>
+				<span>{{ p.comments.count }}</span>
 				{% if p in user.saves_posts.all %}
 					<img class="not_save_post" onclick="not_save_post(this,{{ p.id }})" src="{{ user.theme_all.save_img.url }}">
 				{% else %}

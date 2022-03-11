@@ -58,13 +58,11 @@
 					{% else %}
 						<{{ p.type_p.type_f }} class="post_file" src="{{ p.file.url }}"></{{ p.type_p.type_f }}>
 					{% endif %}
-
 				</a>
 			</div>
 		{% endfor %}
 	</div>
 	<script>
-		let follow_ajax = "{% url "follow_ajax" %}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 		let id_user = "{{ user.id }}"
 		let users_get_ajax = "{% url 'users_get_ajax' %}"
