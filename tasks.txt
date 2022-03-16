@@ -32,20 +32,30 @@ add activity page *
 inducators *
 read chat *
 if none *
+lents in end bugs hard *
+new function sleep *
+websocket error in disconnect *
+Loginmixin *
+ООП *
 optimize sqls *** *** ***
 show name file in forms *** *** ***
 
 work with dark theme
 models pre_
-lents in end bugs hard
 videos as mini-youtube
 friends message btn and find
-
+ajax optimize
+save posts ajax dunamic 
+playlists_ajax dunamic
+chats musics many load
+post user dunamic
+buutton in home play in all (can page here need thinc and when play in all not play video and audio)
 
 defence:
-	is_digit
-	ajax_spoof
-	websocket defence
+	is_digit *
+	ajax_spoof *
+	websocket defence ***
+	view defence *
 
 css style:
 	add music form style

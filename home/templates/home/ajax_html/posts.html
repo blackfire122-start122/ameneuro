@@ -54,7 +54,7 @@
 				{% else %}			    
 					<img id={{ p.id }} onclick="like(this)" src="{{ user.theme_all.like_img.url }}" alt="">
 				{% endif %}
-				<span>{{ p.likes.all|length }}</span>
+				<span>{{ p.likes.count }}</span>
 			</div>
 			
 		</div>

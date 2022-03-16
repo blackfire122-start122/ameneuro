@@ -9,6 +9,7 @@
 {% block content %}
 	<link rel="stylesheet" href="{% static 'home/css/user_change.css' %}">
 	<span>{{ error }}</span>
+	
 	<div class="changes_btn">
 		<div>
 			<div class="change_btn" onclick="change_btn(this)">
@@ -134,6 +135,15 @@
 						<input onchange="select_file_name(this)" type="file" name="music_img" accept="image/*" id="id_music_img">
 						<label class="img_file" for="id_music_img">Image</label>
 						<img class="img_user" src="{{ user.theme_all.music_img }}">
+					</div>
+				</div>
+
+				<div class="form_opt">
+					<h3>add_img</h3>
+					<div class="file_img">
+						<input onchange="select_file_name(this)" type="file" name="add_img" accept="image/*" id="id_add_img">
+						<label class="img_file" for="id_add_img">Image</label>
+						<img class="img_user" src="{{ user.theme_all.add_img }}">
 					</div>
 				</div>
 

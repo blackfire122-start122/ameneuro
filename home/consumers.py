@@ -10,6 +10,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
         self.theme = {}
+
+        if self.scope["user"].is_anonymous:
+            return await self.close()
+
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
@@ -24,7 +28,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def first_conn(self):
-        self.user = User.objects.get(username=self.text_data_json['user'])
         self.chat = Chat.objects.get(chat_id=self.room_name)
         self.text_data_json['musics_url'] = []
 
@@ -35,10 +38,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def new_mes(self,text):
-        mes = Message(user = self.user,text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
+        mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
         mes.save()
         self.text_data_json["time"]=str(mes.date)
-        self.text_data_json["user"]=str(self.user)
+        self.text_data_json["user"]=str(self.scope["user"])
         self.chat.messages.add(mes)
 
     @database_sync_to_async
@@ -56,7 +59,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def end_readable(self):
         end_mes = self.chat.messages.last()
-        if end_mes.user != self.user:
+        if end_mes.user != self.scope["user"]:
             end_mes.readeble = True
             end_mes.save()
         self.text_data_json["readeble"]=str(end_mes.readeble)
@@ -64,16 +67,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def share(self):
         self.chat = Chat.objects.get(chat_id=self.room_name)
-        self.user = User.objects.get(username=self.text_data_json['user'])
+        self.scope["user"] = User.objects.get(username=self.text_data_json['user'])
 
     @database_sync_to_async
     def new_mes_share(self):
         post = Post.objects.get(pk=int(self.text_data_json["id_share"]))
-        mes = Message(type_file=post.type_p, file=post.file, user=self.user,text=self.text_data_json["msg"],type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
+        mes = Message(type_file=post.type_p, file=post.file, user=self.scope["user"],text=self.text_data_json["msg"],type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
         mes.save()
 
         self.text_data_json["time"]=str(mes.date)
-        self.text_data_json["user"]=str(self.user)
+        self.text_data_json["user"]=str(self.scope["user"])
         self.text_data_json["url_file"]=mes.file.url
         self.text_data_json["url_post"]="/post/" + str(post.id)
         self.chat.messages.add(mes)
@@ -94,8 +97,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json['type']=='new_theme':
             await self.new_theme()
-            await self.new_mes(self.user.username+" changed "+self.chat.theme.name)
-            self.text_data_json["msg_new_theme"]=self.user.username+" changed "+self.chat.theme.name
+            await self.new_mes(self.scope["user"].username+" changed "+self.chat.theme.name)
+            self.text_data_json["msg_new_theme"]=self.scope["user"].username+" changed "+self.chat.theme.name
 
         elif self.text_data_json['type']=='delete_theme':
             await self.delete_theme()
@@ -124,20 +127,19 @@ class UserConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
+
+        if self.scope["user"].is_anonymous:
+            return await self.close()
+
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
-        self.in_net +=1 
+        self.in_net +=1
         await self.accept()
- 
-    async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(
-            self.room_group_name,
-            self.channel_name
-        )
         
-        self.text_data_json = {'type':'disconnect','user_in':self.user.username}
+    async def disconnect(self, close_code):
+        self.text_data_json = {'type':'disconnect','user_in':self.scope["user"].username}
 
         await self.channel_layer.group_send(
             self.room_group_name,{
@@ -146,27 +148,28 @@ class UserConsumer(AsyncWebsocketConsumer):
             }
         )
 
-    @database_sync_to_async
-    def first_conn(self):
-        self.user = User.objects.get(username=self.text_data_json['user'])
-        
+        await self.channel_layer.group_discard(
+            self.room_group_name,
+            self.channel_name
+        )
+
     @database_sync_to_async
     def add_mus_share(self):
         mus = Music.objects.get(pk=self.text_data_json["id"])
-        self.user.music.add(mus)
-        self.user.music_shared.remove(mus)
+        self.scope["user"].music.add(mus)
+        self.scope["user"].music_shared.remove(mus)
 
     @database_sync_to_async
     def not_add_mus_share(self):
-        self.user.music_shared.remove(Music.objects.get(pk=self.text_data_json["id"]))
+        self.scope["user"].music_shared.remove(Music.objects.get(pk=self.text_data_json["id"]))
     
     @database_sync_to_async
     def add_to_me(self):
-        self.user.music.add(Music.objects.get(pk=self.text_data_json["id"]))
+        self.scope["user"].music.add(Music.objects.get(pk=self.text_data_json["id"]))
 
     @database_sync_to_async
     def delete_mus(self):
-        self.user.music.remove(Music.objects.get(pk=self.text_data_json["id"]))
+        self.scope["user"].music.remove(Music.objects.get(pk=self.text_data_json["id"]))
     
     @database_sync_to_async
     def mus_share(self):
@@ -174,40 +177,40 @@ class UserConsumer(AsyncWebsocketConsumer):
         mus = Music.objects.get(pk=self.text_data_json["id"])
         user.music_shared.add(mus)
 
-        ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.user,readeble=False)
+        ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.scope["user"],readeble=False)
         ma.save()
         user.message_activity.add(ma)
 
     @database_sync_to_async
     def save_post(self):
-        self.user.saves_posts.add(Post.objects.get(pk=int(self.text_data_json["id"])))
+        self.scope["user"].saves_posts.add(Post.objects.get(pk=int(self.text_data_json["id"])))
 
     @database_sync_to_async
     def not_save(self):
-        self.user.saves_posts.remove(Post.objects.get(pk=int(self.text_data_json["id"])))
+        self.scope["user"].saves_posts.remove(Post.objects.get(pk=int(self.text_data_json["id"])))
 
     @database_sync_to_async
     def delete_friend(self):
-        self.user.friends.remove(self.text_data_json['id'])
+        self.scope["user"].friends.remove(self.text_data_json['id'])
 
     @database_sync_to_async
     def add_friend(self):
         friend = User.objects.get(pk=self.text_data_json['id'])
-        self.user.friends.add(friend.id)
-        self.user.friend_want_add.remove(friend)
+        self.scope["user"].friends.add(friend.id)
+        self.scope["user"].friend_want_add.remove(friend)
 
     @database_sync_to_async
     def want_add_friend(self):
         friend = User.objects.get(pk=self.text_data_json['id'])
-        friend.friend_want_add.add(self.user.id)
+        friend.friend_want_add.add(self.scope["user"].id)
 
     @database_sync_to_async
     def follow(self):
         follow_to = User.objects.get(pk=self.text_data_json['id'])
-        follow_to.followers.add(self.user.id)
-        self.user.follow.add(follow_to.id)
+        follow_to.followers.add(self.scope["user"].id)
+        self.scope["user"].follow.add(follow_to.id)
 
-        ma = MessageActivity(text="on you follow: "+self.user.username,from_user=self.user,readeble=False)  
+        ma = MessageActivity(text="on you follow: "+self.scope["user"].username,from_user=self.scope["user"],readeble=False)  
         ma.save()
         follow_to.message_activity.add(ma)
 
@@ -215,35 +218,35 @@ class UserConsumer(AsyncWebsocketConsumer):
     def add_chat(self):
         friend = User.objects.get(pk=self.text_data_json["id"])
 
-        theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+self.user.username)
+        theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+self.scope["user"].username)
         theme.save()
 
         chat = Chat(chat_id=gen_rand_id(30))
         chat.theme=theme
         chat.save()
 
-        chat.users.add(self.user.id)
+        chat.users.add(self.scope["user"].id)
         chat.users.add(friend.id)
 
-        self.user.chats.add(chat.id)
+        self.scope["user"].chats.add(chat.id)
         friend.chats.add(chat.id)
 
-        self.user.themes.add(theme.id)
+        self.scope["user"].themes.add(theme.id)
         friend.themes.add(theme.id)
 
     @database_sync_to_async
     def like(self):
         post = Post.objects.get(pk=self.text_data_json["id"])
-        post.likes.add(self.user.id)
+        post.likes.add(self.scope["user"].id)
 
     @database_sync_to_async
     def comment_like(self):
         com = Comment.objects.get(pk=self.text_data_json["id"])
-        com.likes.add(self.user.id)
+        com.likes.add(self.scope["user"].id)
 
     @database_sync_to_async
     def comment_user(self):
-        com = Comment(user=self.user,text=self.text_data_json["text"])
+        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
         com.save()
 
         post = Post.objects.get(pk=self.text_data_json["id"])
@@ -251,13 +254,13 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def comment_reply(self):
-        com = Comment(user=self.user,text=self.text_data_json["text"])
+        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
         com.parent = Comment.objects.get(pk=int(self.text_data_json["com_id"]))
         com.save()
 
         post = Post.objects.get(pk=int(self.text_data_json["post_id"]))
         post.comments.add(com.id)
-        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.user,file=post.file,readeble=False,type_f=post.type_p)
+        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=post.file,readeble=False,type_f=post.type_p)
         
         ma.save()
         com.parent.user.message_activity.add(ma)
@@ -267,15 +270,15 @@ class UserConsumer(AsyncWebsocketConsumer):
         try:post = Post.objects.get(pk=self.text_data_json["id"])
         except: self.text_data_json["data_text"] = "error"
 
-        if post.user_pub == self.user:
+        if post.user_pub == self.scope["user"]:
             post.delete()
             self.text_data_json["data_text"] = "OK"
         else: self.text_data_json["data_text"] = "error"
 
     @database_sync_to_async
     def new_theme_all(self):
-        self.user.theme_all = AllTheme.objects.get(pk = self.text_data_json["id"])
-        self.user.save()
+        self.scope["user"].theme_all = AllTheme.objects.get(pk = self.text_data_json["id"])
+        self.scope["user"].save()
 
     @database_sync_to_async
     def delete_theme_all(self):
@@ -291,12 +294,7 @@ class UserConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
-        if self.text_data_json['type']=='first_conn':
-            await self.first_conn()
-            await self.send(text_data=json.dumps(self.text_data_json))            
-            return
-
-        elif self.text_data_json['type']=='add_mus_share':
+        if self.text_data_json['type']=='add_mus_share':
             await self.add_mus_share()
             return
         elif self.text_data_json['type']=='not_add_mus_share':

@@ -1,4 +1,11 @@
 conn_u = new WebSocket("ws://"+window.location.hostname+"/user/"+username)
+
+// conn_u_hac = new WebSocket("ws://"+window.location.hostname+"/user/"+"igor")
+// conn_u_hac.onopen = ()=>{
+// 	conn_u_hac.send(JSON.stringify({'type':'add_mus_share','id':3, 'hac':"test hac"}))
+// 	conn_u_hac.send(JSON.stringify({'type':'delete_theme','th_id':theme,'del_el':4}))
+// }
+
 conn_u.onmessage = onmessage_u
 
 let chats_point = []
@@ -70,7 +77,6 @@ function onmessage_u(e){
 }
 
 conn_u.onopen = ()=>{
-	conn_u.send(JSON.stringify({'type':'first_conn','user': username}))	
 	conn_u.send(JSON.stringify({'type':'yes_in_net','user_in': username}))
 }
 

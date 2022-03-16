@@ -59,7 +59,7 @@
 	background: red;
 }
 
-#id_img, #id_fon_img ,#id_comment_img ,#id_like_img ,#id_back_img ,#id_music_img, #id_save_img{
+#id_img, #id_fon_img ,#id_comment_img ,#id_like_img ,#id_back_img ,#id_music_img, #id_save_img, #id_add_img{
 	display: none;
 }
 

@@ -81,15 +81,21 @@ function get_followers(){
 
 function scroll_fr(e){
 	if(e.target.scrollHeight-e.target.scrollTop<500){
-		get_friends()
-		sleep(700)
+		if (get_fr_can) {
+			get_friends()
+	 		get_fr_can = false
+	 		get_can_fr_true()
+	 	}
 	}
 }
 
 function scroll_fl(e){
 	if(e.target.scrollHeight-e.target.scrollTop<500){
-		get_followers()
-		sleep(700)
+		if (get_fl_can) {
+			get_followers()
+	 		get_fl_can = false
+	 		get_can_fl_true()
+	 	}
 	}
 }
 
@@ -100,12 +106,19 @@ function close_followers(e){
 	e.parentNode.style.display = "none"
 }
 
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+let get_fr_can = true
+let get_fl_can = true
+
+async function get_can_fr_true() {
+	await sleep(700)
+	get_fr_can = true
+}
+async function get_can_fl_true() {
+	await sleep(700)
+	get_fl_can = true
 }
 
 function want_add_friend(btn) {

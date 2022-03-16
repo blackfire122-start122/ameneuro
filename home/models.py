@@ -98,6 +98,7 @@ class AllTheme(models.Model):
 	back_img = models.ImageField(upload_to="theme_all/back_imgs",default=None,null=True,blank=True)
 	music_img = models.ImageField(upload_to="theme_all/music_imgs",default=None,null=True,blank=True)
 	save_img = models.ImageField(upload_to="theme_all/save_img",default=None,null=True,blank=True)
+	add_img = models.ImageField(upload_to="theme_all/add_img",default=None,null=True,blank=True)
 	
 	def __str__(self):
 		return self.name
@@ -149,7 +150,14 @@ def AllTheme_delete(sender, instance, **kwargs):
 	try:
 		old_instance = AllTheme.objects.get(id=instance.id)
 
-		fields = {"comment_img":True,"like_img":True,"back_img":True,"fon_img":True,"music_img":True}
+		fields = {"comment_img":True,
+			"like_img":True,
+			"back_img":True,
+			"fon_img":True,
+			"music_img":True,
+			"save_img":True,
+			"add_img":True,
+		}
 
 		for i in AllTheme.objects.filter(default=True):
 			if i.comment_img == old_instance.comment_img:
@@ -164,6 +172,9 @@ def AllTheme_delete(sender, instance, **kwargs):
 				fields["music_img"] = False
 			if i.save_img == old_instance.save_img:
 				fields["save_img"] = False
+			if i.add_img == old_instance.add_img:
+				fields["add_img"] = False
+				
 
 		for i in fields:
 			if fields[i] and i == "comment_img":
@@ -178,6 +189,8 @@ def AllTheme_delete(sender, instance, **kwargs):
 				old_instance.music_img.delete(False)
 			if fields[i] and i == "save_img":
 				old_instance.save_img.delete(False)	
+			if fields[i] and i == "add_img":
+				old_instance.add_img.delete(False)	
 	except:pass
 
 @receiver(pre_save, sender=AllTheme)
@@ -185,7 +198,14 @@ def AllTheme_delete(sender, instance, **kwargs):
 	try:
 		old_instance = AllTheme.objects.get(id=instance.id)
 
-		fields = {"comment_img":True,"like_img":True,"back_img":True,"fon_img":True,"music_img":True,"save_img":True}
+		fields = {"comment_img":True,
+			"like_img":True,
+			"back_img":True,
+			"fon_img":True,
+			"music_img":True,
+			"save_img":True,
+			"add_img":True,
+		}
 
 		for i in AllTheme.objects.filter(default=True):
 			if i.comment_img == old_instance.comment_img:
@@ -200,7 +220,9 @@ def AllTheme_delete(sender, instance, **kwargs):
 				fields["music_img"] = False
 			if i.save_img == old_instance.save_img:
 				fields["save_img"] = False
-				
+			if i.add_img == old_instance.add_img:
+				fields["add_img"] = False
+
 		for i in fields:
 			if fields[i] and i == "comment_img":
 				old_instance.comment_img.delete(False)
@@ -213,7 +235,9 @@ def AllTheme_delete(sender, instance, **kwargs):
 			if fields[i] and i == "music_img":
 				old_instance.music_img.delete(False)
 			if fields[i] and i == "save_img":
-				old_instance.save_img.delete(False)				
+				old_instance.save_img.delete(False)	
+			if fields[i] and i == "add_img":
+				old_instance.add_img.delete(False)				
 	except:pass
 
 @receiver(pre_save, sender=User)

@@ -269,9 +269,11 @@ function end_readable_send(){
 
 	let messages = document.getElementsByClassName("other_msgs")
 	end_mes = messages[messages.length-1]
-	console.log(messages)
-	if (Visible(end_mes) && conn.readyState){
-		conn.send(JSON.stringify({'type':'end_readable','user': user}))
+	
+	if (end_mes){
+		if (Visible(end_mes) && conn.readyState){
+			conn.send(JSON.stringify({'type':'end_readable','user': user}))
+		}
 	}
 }
 

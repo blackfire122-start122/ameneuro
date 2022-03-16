@@ -96,7 +96,9 @@ class MessageForm(ModelForm):
 
 	def save(self):
 		mes = ModelForm.save(self)
-
+		if not mes.file:
+			return mes
+			
 		type_f = magic.from_buffer(open(str(settings.MEDIA_ROOT)+str(mes.file),"rb").read(2048))
 		for i in TypeFile.objects.all():
 			if i.type_f_magic in type_f:
@@ -123,6 +125,7 @@ class AllThemeForm(ModelForm):
 				"back_img",
 				"music_img",
 				"save_img",
+				"add_img",
 		]+fields_text
 		
 		widgets = {i:TextInput(attrs={'class':'form_name_change','placeholder':i}) for i in fields_text}
