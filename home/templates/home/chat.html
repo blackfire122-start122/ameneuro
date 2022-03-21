@@ -48,6 +48,23 @@
 		<h3 class="text_for_click">Click for not play chat music</h3>
 	</div>
 
+	<style>
+		body{
+			{% if chat.theme.background %}
+				background-image: url("{{ chat.theme.background.url }}");
+			{% endif %}
+
+			background-size: cover;
+			background-repeat: round;
+			background-attachment: fixed;
+		}
+		.messages, .id_file{
+			color: {{ chat.theme.color_mes }};
+		}
+	</style>
+{% endblock content %}
+
+{% block end_scripts %}
 	<script>
 		let user = "{{ user }}"
 
@@ -69,18 +86,4 @@
 	<script src="{% static 'home/js/chat.js' %}"></script>
 	<script src="{% static 'home/js/style_chat.js' %}"></script>
 
-	<style>
-		body{
-			{% if chat.theme.background %}
-				background-image: url("{{ chat.theme.background.url }}");
-			{% endif %}
-
-			background-size: cover;
-			background-repeat: round;
-			background-attachment: fixed;
-		}
-		.messages, .id_file{
-			color: {{ chat.theme.color_mes }};
-		}
-	</style>
-{% endblock content %}
+{% endblock end_scripts %}

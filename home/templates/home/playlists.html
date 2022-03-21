@@ -11,6 +11,9 @@
 {% block content %}
 	<div class="musics"></div>
 	<h3 class="ps_autor">{{ playlist.autor }}</h3>
+{% endblock content %}
+
+{% block end_scripts %}
 	<script>
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 		let playlist = "{{ playlist }}"
@@ -22,4 +25,4 @@
 			background-image: url("{{ playlist.img.url }}");
 		}
 	</style>
-{% endblock content %}
+{% endblock end_scripts %}

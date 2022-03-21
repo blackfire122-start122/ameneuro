@@ -184,7 +184,6 @@ try {
 		success: (data) =>{
 			if (data["info"] != "None post"){
 				posts_div.innerHTML += data
-				video = document.getElementsByClassName("video_post")
 			}
 		}
 	})

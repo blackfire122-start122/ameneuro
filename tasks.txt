@@ -39,17 +39,24 @@ Loginmixin *
 ООП *
 optimize sqls *** *** ***
 show name file in forms *** *** ***
+errors in new chat *
+post in not autorusation user *
+ajax login decorator *
+bug not user music in user *
+friends message btn and find dunamic *
 
 work with dark theme
 models pre_
 videos as mini-youtube
-friends message btn and find
 ajax optimize
 save posts ajax dunamic 
 playlists_ajax dunamic
 chats musics many load
 post user dunamic
-buutton in home play in all (can page here need thinc and when play in all not play video and audio)
+button in home play in all (can page here need thinc and when play in all not play video and audio) more music in all ***
+chat theme work
+optimize static
+seeked in play_all ***
 
 defence:
 	is_digit *
@@ -61,3 +68,4 @@ css style:
 	add music form style
 	one formats think think 
 	add post style
+	post from home css ***

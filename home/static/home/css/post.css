@@ -1,0 +1,236 @@
+.header_post{
+	display: flex;
+	justify-content: space-between;
+	height: 2em;
+}
+
+.header_post_user{
+	display: flex;
+	text-decoration: none;
+}
+.menu_post{
+	display: flex;
+	justify-content: space-between;
+	height: 2.5em;
+}
+
+.post_file{
+	width: 100%;
+}
+
+.post_desc{
+	position: relative;
+	left: 10%;
+	width: 90%;
+}
+
+.img_user_post{
+	border-radius: 50%;
+	height: 30px;
+	width: 30px;
+	object-fit:cover;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.name_user_post{
+	position: relative;
+	left: 10%;
+}
+
+.options_post_img{
+	height: 50%;
+}
+
+.comments{
+	position: relative;
+	display: none;
+	overflow-y: auto;
+	max-height: 30em;
+}
+
+.inp_comment{
+	outline: none;
+	border: none;
+	background: none;
+	font-size: 1.1em;
+}
+
+.inp_sub_com{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	position: sticky;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	padding: 2px;
+}
+
+.com_btn{
+	border: none;
+	background: none;
+	color: blue;
+	font-size: 1.1em;
+}
+
+.comment{
+	background-color: rgba(255, 255, 255, 0.1);
+	margin-top: 1%;
+}
+
+.img_user_comment{
+	height: 2em;
+	width: 2em;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.user_name_comment{
+	font-weight: bold;
+}
+
+.user_name_comment, .comment_text{
+	position: relative;
+	bottom: 0.5em;
+}
+
+.comment_menu{
+	display: flex;
+	position:relative;
+	justify-content: space-around;
+	color: gray;
+}
+
+.img_like_comment{
+	height: 1.2em;
+}
+
+.reply{
+	border: none;
+	background: none;
+	color: gray;
+}
+
+.options_menu{
+	position: absolute;
+	right: 5%;
+	display: none;
+	flex-direction: column;
+	background-color: black;
+	border: 1px solid gray ;
+	border-radius: 5px;
+	z-index: 2;
+	padding: 4px;
+}
+
+.save_post{
+	opacity: 1;
+}
+
+.not_save_post{
+	opacity: 0.5;
+}
+
+.left, .right{
+	display: flex;
+	height: 100%;
+}
+
+.btn_delete_post, .btn_not_post{
+	position: relative;
+	width: 90%;
+	background: white;
+	border: none;
+	font-size: 1.5em;
+	border-radius: 20px;
+	height: 50px;
+	right: 0;
+	margin: 5px auto;
+}
+
+.btn_delete_post{
+	background: red;
+}
+
+.popup{
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 20%;
+	width: 80%;
+	background: rgba(0,0,0,0.5);
+	padding: 30px 10px;
+	border-radius: 20px;
+	left: 8%;
+}
+.friends_share{
+	position: fixed;
+	bottom: 0;
+	display: none;
+	color: white;
+	width: 80%;
+	left: 10%;
+	padding: 10px;
+	background: rgba(0, 0, 0, 0.7);
+	border-radius: 20px 20px 0 0 ;
+  overflow-y: auto;
+  max-height: 20em;	
+}
+
+.f_share{
+	margin-top: 3%;
+	display: flex;
+	justify-content: space-around;
+}
+.name_sh{
+	width: 2em;
+}
+
+.close_sh{
+	position: absolute;
+	right: 10%;
+}
+.btn_sh{
+	background: black;
+	padding: 5px;
+	border-radius: 5px;
+	color: white;
+	border: none;
+}
+.my_like{
+	opacity: 0.5;
+}
+.post_share{
+	width: 50%;
+}
+.menu_post_share{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.inputs_post_share{
+	width: 50%;
+}
+.inp_share{
+	background: none;
+	border: none;
+	font-size: 1.1em;
+	margin-top: 1%;
+	width: 100%;
+	outline: none;
+	color: white;
+}
+
+.link_options_menu, .link_options_menu_red{
+	text-decoration: none;
+	padding: 1px;
+	font-size: 1.2em;
+	color: white;
+	border: none;
+	background: none;
+}
+
+.link_options_menu_red{
+	color: red;
+}

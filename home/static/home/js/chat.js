@@ -219,7 +219,7 @@ function onmessage(e){
 }
 
 conn.onopen = ()=>{
-	conn.send(JSON.stringify({'type':'first_msg','user': user}))	
+	conn.send(JSON.stringify({'type':'first_msg'}))	
 	end_readable_send()
 }
 

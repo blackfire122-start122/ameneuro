@@ -43,7 +43,7 @@ function get_users_find(){
 	$.ajax({
 		type: $(this).attr('post'),
 		url: user_find_ajax,
-		data: {"find_name":find_str,"users_find_start":users_find_start,"users_find_end":users_find_end},
+		data: {"type":"all", "find_name":find_str,"users_find_start":users_find_start,"users_find_end":users_find_end},
 		success: function (response){
 			if (clear){
 				users.innerHTML = response
@@ -160,27 +160,35 @@ function ajax_elements(){
 	}	
 }
 
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+let get_can = true
+
+async function get_can_true() {
+	await sleep(700)
+	get_can = true
 }
 
 
 window.addEventListener('scroll', scroll_event)
 function scroll_event(e) {
 	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
+		if (get_can) {
 	    ajax_elements()
-	    sleep(700)
+	    get_can = false
+	    get_can_true(700)
+		}
 	}
 }
 
 function scroll_event_find(e) {
 	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
+		if (get_can) {
 	    ajax_find_elements()
-	    sleep(700)
+	    get_can = false
+	    get_can_true(700)
+		}
 	}
 }
 

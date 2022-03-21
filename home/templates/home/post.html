@@ -5,16 +5,14 @@
 
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
-	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 {% endblock content_header %}
 
 {% block content %}	
 	<div class="posts"></div>
+{% endblock content %}
+
+{% block start_scripts %}
 	<script>
-		let comment_ajax = "{% url 'comment_ajax' %}"
-		let post_ajax = "{% url 'post_ajax' %}"
 		let post_id = "{{ id }}"
 	</script>
-	<script src="{% static 'home/js/posts.js' %}"></script>
-	<script src='{% static "home/js/music_all.js" %}' ></script>
-{% endblock content %}
+{% endblock start_scripts %}

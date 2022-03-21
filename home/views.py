@@ -28,7 +28,7 @@ class home(LoginRequiredMixin,TemplateView):
 		request.session["start_rec_user"] = 0
 		request.session["end_rec_user"] = get_user_how
 		request.session["defolt_posts"] = False
-
+		
 		self.chat_not_read_count = 0
 		for i in request.user.chats.all():
 			if i.messages.last() and not i.messages.last().readeble and i.messages.last().user != request.user:
@@ -152,17 +152,6 @@ def sigin_user(request):
 class friends(LoginRequiredMixin, TemplateView):
 	template_name = "home/friends.html"
 	login_url = 'login'
-
-	def get(self, request, *args, **kwargs):
-		self.user_friends_not_chat = list(request.user.friends.all())
-		self.user_friends_not_chat = del_friends(self.user_friends_not_chat,request.user)
-		
-		return super().get(request,*args, **kwargs)
-
-	def get_context_data(self,*args,**kwargs):
-		context = super().get_context_data(**kwargs)
-		context["user_friends_not_chat"] = self.user_friends_not_chat
-		return context
 
 def post(request,id):return render(request, "home/post.html",{"id":id})
 

@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="{% static 'home/css/find.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/users.css' %}">
 	<h4 class="userregname">{{ user }}</h4>
-	<input onkeydown="find_inp(this)" class='find_user' type="text">
+	<input onkeyup="find_inp(this)" class='find_user' type="text">
 {% endblock content_header %}
 
 {% block content %}
@@ -18,6 +18,9 @@
 	<div class="users"></div>
 	<div class="musics"></div>
 	<div class="videos"></div>
+{% endblock content %}
+
+{% block end_scripts %}
 	<script>
 		let user_find_ajax = "{% url 'user_find_ajax' %}"
 		let music_find_ajax = "{% url 'music_find_ajax' %}"
@@ -29,5 +32,4 @@
 	</script>
 	<script src="{% static 'home/js/find.js' %}"></script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>
-
-{% endblock content %}
+{% endblock end_scripts %}

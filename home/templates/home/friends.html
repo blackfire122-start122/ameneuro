@@ -6,44 +6,18 @@
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/friends.css' %}">
 	<h4 class="userregname">{{ user }}</h4>
-	<input class='find_chat' type="text" placeholder="find">
+	<input onkeyup="find_inp(this)" class='find_chat' type="text" placeholder="find">
 {% endblock content_header %}
 
 {% block content %}
-	<div class="friends">
-		{% for u in user.friend_want_add.all %}
-			<div class="u_f">
-				<div class="img_name">
-					<img class="img_f" src={{ u.img.url }}>
-					<h4> {{ u.username }}</h4>
-				</div>
-				<button value={{ u.id }} onclick="add_friend(this)">add</button>
-			</div>
-		{% endfor %}
-
-		{% for u in user.friends.all %}
-			{% if u not in user_friends_not_chat %}
-				<a href="{% url 'user' u.username %}" class="u_f">
-					<div class="img_name">
-						<img class="img_f" src={{ u.img.url }}>
-						<h4> {{ u.username }}</h4>
-					</div>
-				</a>
-			{% endif %}
-		{% endfor %}
-
-		{% for f in user_friends_not_chat %}
-			<div class="u_f">
-				<div class="img_name">
-					<img class="img_f" src={{ f.img.url }}>
-					<h4> {{ f.username }}</h4>
-				</div>
-				<div class="none_mes">
-					<p id="{{ f.id }}">More not messages </p>
-					<button class="write_btn" value={{ f.id }} onclick="add_chat(this)"> write</button>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
-	<script src="{% static 'home/js/friends.js' %}"></script>
+	<div class="friends"></div>
 {% endblock content %}	
+
+{% block end_scripts %}
+	<script>
+		let users_get_ajax = "{% url 'users_get_ajax' %}"
+		let id_user = "{{ user.id }}"
+		let user_find_ajax = "{% url 'user_find_ajax' %}"
+	</script>
+	<script src="{% static 'home/js/friends.js' %}"></script>
+{% endblock end_scripts %}

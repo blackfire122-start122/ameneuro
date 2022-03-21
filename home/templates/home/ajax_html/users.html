@@ -1,28 +1,74 @@
 {% load static %}
-{% for u in users %}
-	{% if u != user %}
-		<div class="user">
-			<a href="{% url 'user' u %}" class="img_name">
-				<img class="img_f" src={{ u.img.url }}>
-				<h4> {{ u.username }}</h4>
-			</a>
-			{% if u not in user.friends.all %}
-				<div class="friend_follow">
-					{% if not u in user.follow.all %}
-					    <button id="{{ u.id }}" value="{{ u.id }}" onclick="follow(this,'{{ u }}')" class="btn_follow" >Follow</button>
-					{% else %}
-						<p id="{{ u.id }}" class="follow">follow</p>
-					{% endif %}
+{% load users %}
 
-					<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this)">Add friend</button>
+{% if type == "friends" or type == "all" %}
+	{% for u in users %}
+		{% if u != user %}
+			<div class="user">
+				<a href="{% url 'user' u %}" class="img_name">
+					<img class="img_f" src={{ u.img.url }}>
+					<h4> {{ u.username }}</h4>
+				</a>
+				{% if u not in user.friends.all %}
+					<div class="friend_follow">
+						{% if not u in user.follow.all %}
+						    <button id="{{ u.id }}" value="{{ u.id }}" onclick="follow(this,'{{ u }}')" class="btn_follow" >Follow</button>
+						{% else %}
+							<p id="{{ u.id }}" class="follow">follow</p>
+						{% endif %}
+
+						<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this)">Add friend</button>
+					</div>
+				{% endif %}
+
+				{% if type == 'friends' %}
+					<button onclick="del_friend(this, {{ u.id }})" class="del_friend_btn">Delete friend</button>
+				{% endif %}
+
+			</div>
+		{% endif %}
+	{% endfor %}
+
+{% elif type == "friends_and_want" %}
+    {% with friend_want_add=user.friend_want_add.all %}
+		{% for u in users %}
+			{% define "continue" True %}
+			{% if u in friend_want_add %}
+				<div class="u_f">
+					<div class="img_name">
+						<img class="img_f" src={{ u.img.url }}>
+						<h4> {{ u.username }}</h4>
+					</div>
+					<button value={{ u.id }} onclick="add_friend(this)">add</button>
 				</div>
+				{% define "continue" False %}
 			{% endif %}
 
-			{% if type == 'friends' %}
-				<button onclick="del_friend(this, {{ u.id }})" class="del_friend_btn">Delete friend</button>
+			{% if continue %}
+				{% if user.chats.all|filter_ch:u %}
+					<div class="u_f">
+						<div class="img_name">
+							<img class="img_f" src={{ u.img.url }}>
+							<h4> {{ u.username }}</h4>
+						</div>
+						<div class="none_mes">
+							<p id="{{ f.id }}">More not messages </p>
+							<button class="write_btn" value={{ u.id }} onclick="add_chat(this)"> write</button>
+						</div>
+					</div>
+					{% define "continue" False %}
+				{% endif %}
+
 			{% endif %}
 
-		</div>
-	{% endif %}
-{% endfor %}
-
+			{% if continue %}
+				<a href="{% url 'user' u.username %}" class="u_f">
+					<div class="img_name">
+						<img class="img_f" src={{ u.img.url }}>
+						<h4> {{ u.username }}</h4>
+					</div>
+				</a>
+			{% endif %}
+		{% endfor %}
+	{% endwith %}
+{% endif %}

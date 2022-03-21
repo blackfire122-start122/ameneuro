@@ -35,5 +35,8 @@
 		{% endfor %}
 		</a>
 	</div>
-	<script src="{% static 'home/js/chats.js' %}"></script>
 {% endblock content %}
+
+{% block end_scripts %}
+	<script src="{% static 'home/js/chats.js' %}"></script>
+{% endblock end_scripts %}

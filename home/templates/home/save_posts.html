@@ -9,13 +9,14 @@
 {% block content %}	
 		<h3>Save posts</h3>
 		<div class="posts_save"></div>
-
-		<script>
-			let saves_posts_ajax = '{% url "saves_posts_ajax" %}'
-			let comment_ajax = "{% url 'comment_ajax' %}"
-		</script>
-		<script src="{% static 'home/js/save_post.js' %}"></script>
-		<script src="{% static 'home/js/posts.js' %}"></script>
-		<script src='{% static "home/js/music_all.js" %}' ></script>
-
 {% endblock content %}
+
+{% block end_scripts %}
+	<script>
+		let saves_posts_ajax = '{% url "saves_posts_ajax" %}'
+		let comment_ajax = "{% url 'comment_ajax' %}"
+	</script>
+	<script src="{% static 'home/js/save_post.js' %}"></script>
+	<script src='{% static "home/js/music_all.js" %}' ></script>
+
+{% endblock end_scripts %}

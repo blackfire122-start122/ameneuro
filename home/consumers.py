@@ -5,6 +5,13 @@ from .models import *
 from django.db.models import Max
 from .services import *
 
+close_less_chat = [
+    "end_readable",
+    "new_theme",
+    "delete_theme",
+    "msg"
+]
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -28,7 +35,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def first_conn(self):
-        self.chat = Chat.objects.get(chat_id=self.room_name)
+        try:self.chat = Chat.objects.get(chat_id=self.room_name)
+        except: self.close()
+
         self.text_data_json['musics_url'] = []
 
         for u in self.chat.users.all():
@@ -38,11 +47,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def new_mes(self,text):
-        mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
-        mes.save()
-        self.text_data_json["time"]=str(mes.date)
-        self.text_data_json["user"]=str(self.scope["user"])
-        self.chat.messages.add(mes)
+        if self.scope["user"] in self.chat.users.all():        
+            mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
+            mes.save()
+            self.text_data_json["time"]=str(mes.date)
+            self.text_data_json["user"]=str(self.scope["user"])
+            self.chat.messages.add(mes)
 
     @database_sync_to_async
     def new_theme(self):
@@ -86,6 +96,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
+        if self.__dict__.get("chat")==None and self.text_data_json["type"] in close_less_chat:
+            return await self.close()
+
         if self.text_data_json['type']=='first_msg':
             await self.first_conn()
             self.text_data_json['focus_mus']=1
@@ -123,7 +136,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps(event["text"]))
 
 class UserConsumer(AsyncWebsocketConsumer):
-    in_net = 0
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
@@ -135,7 +147,7 @@ class UserConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-        self.in_net +=1
+        # self.in_net +=1
         await self.accept()
         
     async def disconnect(self, close_code):
@@ -218,7 +230,7 @@ class UserConsumer(AsyncWebsocketConsumer):
     def add_chat(self):
         friend = User.objects.get(pk=self.text_data_json["id"])
 
-        theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='0,0,0,1',name=friend.username+self.scope["user"].username)
+        theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=friend.username+self.scope["user"].username)
         theme.save()
 
         chat = Chat(chat_id=gen_rand_id(30))
@@ -291,6 +303,11 @@ class UserConsumer(AsyncWebsocketConsumer):
         ma.readeble=True
         ma.save()
 
+    @database_sync_to_async
+    def play_in_all(self):
+        self.scope["session"]["music_play_in_all"]=self.text_data_json["id"]
+        self.scope["session"].save()
+
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
@@ -353,6 +370,11 @@ class UserConsumer(AsyncWebsocketConsumer):
         elif self.text_data_json['type']=='visible_ma':
             await self.visible_ma()
             return
+        elif self.text_data_json['type']=='play_in_all':
+            await self.play_in_all()
+            return
+        elif self.text_data_json['type']=='get_play_in_all':
+            self.text_data_json["id"]=self.scope["session"]["music_play_in_all"]
 
         await self.channel_layer.group_send(
             self.room_group_name,{

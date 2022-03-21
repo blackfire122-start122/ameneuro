@@ -20,15 +20,6 @@ def gen_rand_id(n):
         else:unicue = False
     return res
 
-def del_friends(user_friends,user):
-    for f in range(len(user_friends)):
-        for fc in user_friends[f].chats.all():
-            for uc in user.chats.all():
-                if uc == fc:
-                    del user_friends[f]
-                    return del_friends(user_friends,user)
-    return user_friends
-
 def ranged(file: IO[bytes],start: int = 0,end: int = None,block_size: int = 8192,) -> Generator[bytes, None, None]:
     consumed = 0
 

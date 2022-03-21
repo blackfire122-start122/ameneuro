@@ -1,3 +1,5 @@
+let rgba = hexToRgb(color_mes_bg)
+
 function toggleAudio_mess (btn) {
   audio = document.getElementById("audio_"+btn.value)
   timeline = document.getElementById("timeline_"+btn.value)
@@ -174,7 +176,6 @@ function hexToRgb(hex) {
           parseInt(result[3], 16)
           ]
 }
-let rgba = hexToRgb(color_mes_bg)
 
 function fon_msgs(){
   my_msgs = document.getElementsByClassName('my_msgs')

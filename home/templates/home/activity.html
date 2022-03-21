@@ -30,6 +30,8 @@
 			{% endif %}
 		</div>
 	{% endfor %}
-	<script src="{% static 'home/js/activity.js' %}"></script>
-
 {% endblock content %}
+
+{% block end_scripts %}
+	<script src="{% static 'home/js/activity.js' %}"></script>
+{% endblock end_scripts %}

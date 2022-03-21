@@ -62,8 +62,8 @@ function get_friends(){
 		}
 	})
 	close_followers(document.querySelector("#close_fl"))
-
 }
+
 function get_followers(){
 	$.ajax({
 		type: $(this).attr('post'),
