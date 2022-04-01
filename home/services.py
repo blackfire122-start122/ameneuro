@@ -122,5 +122,4 @@ def get_posts(request,user):
 
     request.session["start_element"]=start
     request.session["end_element"]=end
-
     return posts

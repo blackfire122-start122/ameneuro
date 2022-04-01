@@ -1,6 +1,6 @@
-function toggleAudio (btn) {
-  audio = document.getElementById("audio_"+btn.value)
-  timeline = document.getElementById("timeline_"+btn.value)
+function toggleAudio (btn,selector_audio="audio_",selector_timeline="timeline_") {
+  audio = document.getElementById(selector_audio+btn.value)
+  timeline = document.getElementById(selector_timeline+btn.value)
   
   audio.addEventListener("play",play_audio)
   audio.addEventListener("pause",pause_audio)

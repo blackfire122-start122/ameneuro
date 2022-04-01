@@ -44,25 +44,36 @@ post in not autorusation user *
 ajax login decorator *
 bug not user music in user *
 friends message btn and find dunamic *
+seeked in play_all *
+bag with sesions *
+button in home play in all (can page here need thinc and when play in all not play video and audio) more music, playlists in all *
+signin in network (need off csrf) *
+post user dunamic *
+celery neuro розпізнавання картинок або ai для розмов need crete page or new app ai and thinc there *
+save posts ajax dunamic *
+playlists_ajax and music dunamic *
+ai page *
+activity dunamic *
 
 work with dark theme
 models pre_
 videos as mini-youtube
 ajax optimize
-save posts ajax dunamic 
-playlists_ajax dunamic
 chats musics many load
-post user dunamic
-button in home play in all (can page here need thinc and when play in all not play video and audio) more music in all ***
+chats play in all bags 
 chat theme work
 optimize static
-seeked in play_all ***
+pages for not autoruzations 
+playlists share
+playlists add ***
+playlists music dunamic
 
 defence:
 	is_digit *
 	ajax_spoof *
 	websocket defence ***
 	view defence *
+	ai defence
 
 css style:
 	add music form style

@@ -8,30 +8,11 @@
 {% endblock content_header %}
 
 {% block content %}	
-	{% for ma in user.message_activity.all %}
-		<div class="ma" id="{{ ma.id }}">
-			<a href="{% url 'user' ma.from_user %}"><img class="img_from_user_ma" src="{{ ma.from_user.img }}"></a>
-
-			{% if not ma.readeble %}
-				<div class="point"></div>
-			{% else %}
-				<div class="not_point"></div>
-			{% endif %}
-			<p class="ma_text">{{ ma }} <br> <time class="ma_date">{{ ma.date }}</time></p>
-
-			{% if ma.type_f.type_f == 'img' %}
-				<img class="file_ma" src="{{ ma.file }}">
-			{% elif ma.type_f.type_f == 'audio' %}
-				<img class="file_ma" src="{{ user.theme_all.music_img }}">
-			{% elif ma.type_f.type_f == 'video' %}
-				<video class="file_ma" src="{{ ma.file }}"></video>
-			{% else %}
-				<div class="file_ma"></div>
-			{% endif %}
-		</div>
-	{% endfor %}
 {% endblock content %}
 
 {% block end_scripts %}
+	<script>
+		let activity_mess_ajax = "{% url 'activity_mess_ajax' %}"
+	</script>
 	<script src="{% static 'home/js/activity.js' %}"></script>
 {% endblock end_scripts %}

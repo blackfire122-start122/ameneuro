@@ -3,6 +3,7 @@ from . import ajax_views
 
 urlpatterns = [
     path('post', ajax_views.post_ajax, name='post_ajax'),
+    path('post_user', ajax_views.post_user_ajax, name='post_user_ajax'),
     path('comment', ajax_views.comment_ajax, name='comment_ajax'),
     path('chat_options', ajax_views.chat_options_ajax, name='chat_options_ajax'),
     path('chat_get_mess', ajax_views.chat_get_mess_ajax, name='chat_get_mess_ajax'),
@@ -17,5 +18,6 @@ urlpatterns = [
     path('video_find', ajax_views.video_find_ajax, name='video_find_ajax'),
     path('playlists', ajax_views.playlists_ajax, name='playlists_ajax'),
     path('share_ch', ajax_views.share_ch_ajax, name='share_ch_ajax'),
+    path('activity_mess', ajax_views.activity_mess_ajax, name='activity_mess_ajax'),
 
 ]

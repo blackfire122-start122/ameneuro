@@ -47,7 +47,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def new_mes(self,text):
-        if self.scope["user"] in self.chat.users.all():        
+        if self.scope["user"] in self.chat.users.all():  
             mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
             mes.save()
             self.text_data_json["time"]=str(mes.date)
@@ -139,7 +139,6 @@ class UserConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
-
         if self.scope["user"].is_anonymous:
             return await self.close()
 
@@ -147,7 +146,6 @@ class UserConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-        # self.in_net +=1
         await self.accept()
         
     async def disconnect(self, close_code):
@@ -165,6 +163,8 @@ class UserConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
+        await self.session_save()
+        
     @database_sync_to_async
     def add_mus_share(self):
         mus = Music.objects.get(pk=self.text_data_json["id"])
@@ -304,9 +304,12 @@ class UserConsumer(AsyncWebsocketConsumer):
         ma.save()
 
     @database_sync_to_async
-    def play_in_all(self):
-        self.scope["session"]["music_play_in_all"]=self.text_data_json["id"]
+    def session_save(self):
         self.scope["session"].save()
+
+    @database_sync_to_async
+    def get_first_music(self):
+        self.text_data_json["id"] = Playlist.objects.get(pk=self.text_data_json["id_playlist"]).musics.all()[0].id
 
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
@@ -371,10 +374,27 @@ class UserConsumer(AsyncWebsocketConsumer):
             await self.visible_ma()
             return
         elif self.text_data_json['type']=='play_in_all':
-            await self.play_in_all()
+            if self.text_data_json["type_media"]=="playlist":
+                self.scope["session"]["playlist_play_in_all"]=self.text_data_json["id_playlist"]
+                if self.text_data_json["id"]=="first_id_music":
+                    await self.get_first_music()
+                else:self.scope["session"]["music_play_in_all"] = self.text_data_json["id"]
+            else:self.scope["session"]["music_play_in_all"] = self.text_data_json["id"]
+            self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json["currentTime"]
+            self.scope["session"]["music_play_in_all_type"]=self.text_data_json["type_media"]
             return
+
         elif self.text_data_json['type']=='get_play_in_all':
-            self.text_data_json["id"]=self.scope["session"]["music_play_in_all"]
+            if self.scope["session"].get("music_play_in_all_type")=='playlist':
+                self.text_data_json["id_playlist"]=self.scope["session"]["playlist_play_in_all"]    
+            
+            self.text_data_json["id"]=self.scope["session"].get("music_play_in_all")
+            self.text_data_json["currentTime"]=self.scope["session"].get("music_play_in_all_currentTime")
+            self.text_data_json["type_media"]=self.scope["session"].get("music_play_in_all_type")
+
+        elif self.text_data_json['type']=='play_in_all_current_time':
+            self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json["currentTime"]
+            return
 
         await self.channel_layer.group_send(
             self.room_group_name,{

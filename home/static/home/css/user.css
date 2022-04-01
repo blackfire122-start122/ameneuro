@@ -48,6 +48,13 @@
 	height: 35px;
 }
 
+.ai_img{
+	position: absolute;
+	right: 15%;
+	top: 1%;
+	height: 35px;
+}
+
 .musics{
 	display: none;
 	position: absolute;

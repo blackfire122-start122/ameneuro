@@ -1,7 +1,7 @@
 {% load static %}
 {% load users %}
 
-{% if type == "friends" or type == "all" %}
+{% if type == "friends" or type == "all" or type == "followers"%}
 	{% for u in users %}
 		{% if u != user %}
 			<div class="user">

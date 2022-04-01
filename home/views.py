@@ -46,11 +46,8 @@ class home(LoginRequiredMixin,TemplateView):
 		context["message_activity"] = self.message_activity
 		return context
 
-class user(LoginRequiredMixin,ListView):
-	model = Post
-	context_object_name = "posts"
+class user(TemplateView):
 	template_name = "home/user.html"
-	login_url = 'login'
 
 	def get(self, request, *args, **kwargs):
 		self.user_reg = request.user
@@ -65,10 +62,6 @@ class user(LoginRequiredMixin,ListView):
 		context["user"] = self.user
 		context["user_reg"] = self.user_reg
 		return context
-
-	def get_queryset(self):
-		# не брати всі
-		return Post.objects.filter(user_pub=self.user.id).order_by("-date")
 
 class chats(LoginRequiredMixin,TemplateView):
 	template_name = "home/chats.html"
@@ -267,7 +260,7 @@ class add_music(LoginRequiredMixin,CreateView):
 	login_url = "login"
 
 	def form_valid(self, form):
-		request.user.music.add(form.save())
+		self.request.user.music.add(form.save())
 		return redirect('musics')
 
 def streaming_mess(request,id):

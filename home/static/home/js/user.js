@@ -1,4 +1,5 @@
 musics = document.querySelector('.musics')
+posts = document.querySelector('.posts')
 
 let musics_s = true
 let how_get = 20
@@ -8,6 +9,9 @@ let friends_end = how_get
 
 let followers_start = 0
 let followers_end = how_get
+
+let posts_start = 0
+let posts_end = how_get
 
 let = friends_show = document.querySelector(".friends_show")
 let = followers_show = document.querySelector(".followers_show")
@@ -127,3 +131,39 @@ function want_add_friend(btn) {
 	btn.style.display = "none"
 	document.getElementById(btn.value).style.display = "none"
 }
+
+function pu_ajax(){
+	$.ajax({
+		type: $(this).attr('post'),
+		url: post_user_ajax,
+		data: {"user":id_user,"posts_start":posts_start,"posts_end":posts_end},
+		success: function (response){
+			posts.innerHTML += response
+			posts_start+=how_get
+			posts_end+=how_get
+		}
+	})
+}
+
+pu_ajax()
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+let get_can = true
+
+async function get_can_true() {
+	await sleep(700)
+	get_can = true
+}
+
+window.addEventListener('scroll', async function(e) {
+	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
+	  if (get_can) {
+	 		pu_ajax()
+	 		get_can = false
+	 		get_can_true()
+	 	}
+	}
+})
+

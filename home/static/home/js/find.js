@@ -63,7 +63,7 @@ function get_musics_find(){
 	$.ajax({
 		type: $(this).attr('post'),
 		url: music_find_ajax,
-		data: {"find_name":find_str,"music_find_start":music_find_start,"music_find_end":music_find_end},
+		data: {"type":"user_music_add", "find_name":find_str,"music_find_start":music_find_start,"music_find_end":music_find_end},
 		success: function (response){
 			if (clear){
 				musics.innerHTML = response
@@ -117,7 +117,7 @@ function get_musics(){
 	$.ajax({
 		type: $(this).attr('post'),
 		url: music_get_ajax,
-		data: {"music_start":music_start,"music_end":music_end},
+		data: {"type":"user_music_add","music_start":music_start,"music_end":music_end},
 		success: function (response){
 			musics.innerHTML += response
 			music_start+=how_get

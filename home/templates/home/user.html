@@ -9,6 +9,9 @@
 		<a href="{% url 'user_change' %}">
 			<img class="set_img" src="{% static 'home/images/settings.png' %}" alt="">
 		</a>
+		<a href="{% url 'recognize' %}">
+			<img class="ai_img" src="{% static 'home/images/ai.png' %}" alt="">
+		</a>
 	{% endif %}
 {% endblock content_header %}
 {% block content %}	
@@ -48,27 +51,14 @@
 		</div>
 	</div>
 
-	<div class="posts">
-		{% for p in posts %}
-			<div class="post">
-				<a href="{% url 'post' p.id %}">
-					{% if p.type_p.type_f == "audio" %}
-						<h3 class="name_audio">{{ p.description|truncatechars:10 }}</h3>
-						<img class="post_file" src="{{ user.theme_all.music_img.url }}">
-					{% else %}
-						<{{ p.type_p.type_f }} class="post_file" src="{{ p.file.url }}"></{{ p.type_p.type_f }}>
-					{% endif %}
-				</a>
-			</div>
-		{% endfor %}
-	</div>
+	<div class="posts"></div>
 {% endblock content %}
 
 {% block end_scripts %}
 	<script>
-		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 		let id_user = "{{ user.id }}"
 		let users_get_ajax = "{% url 'users_get_ajax' %}"
+		let post_user_ajax = "{% url 'post_user_ajax' %}"
 
 	</script>
 	<script src='{% static "home/js/user.js" %}' ></script>

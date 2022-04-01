@@ -7,7 +7,7 @@
 				<img class="img_user_post" src="{{ p.user_pub.img.url }}" alt="">
 				<h4 class="name_user_post">{{ p.user_pub }}</h4>
 			</a>
-			{% if type != "play_in_all" %}
+			{% if data_get.type != "play_in_all" %}
 				<img id="{{ p.id }}" onclick="options(this)" class="options_post_img" src="{% static 'home/images/options.png' %}" alt="">
 
 				<div class="options_menu" id='opt_{{ p.id }}'>
@@ -30,7 +30,7 @@
 		{% elif p.type_p.type_f == 'img' %}
 			<img class="post_file" src="{{ p.file.url }}">
 		{% elif p.type_p.type_f == 'audio' %}
-			{% if type == "play_in_all" %}
+			{% if data_get.type == "play_in_all" %}
 				<div class="player_play_in_all">
 					<h4 class="name_mus">audio</h4>
 					<audio class="audio_ap" id="audio_play_in_all" src="{% url 'stream_post' p.id %}"></audio>
@@ -47,12 +47,12 @@
 						<button value="{{ p.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
 						<input id="timeline_{{ p.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
 					</div>
-					<img onclick="play_in_all(this,{{p.id}})" class="play_in_all" src="{% static 'home/images/play.png' %}">
+					<img onclick="play_in_all(this,{{p.id}},'post')" class="play_in_all" src="{% static 'home/images/play_in_all.png' %}">
 				</div>
 			{% endif %}
 		{% endif %}
 
-		{% if not user.is_anonymous and type != "play_in_all" %}
+		{% if not user.is_anonymous and data_get.type != "play_in_all" %}
 			<div class="menu_post">
 				<div class="left">
 					<img id={{ p.id }} onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
@@ -75,7 +75,7 @@
 			</div>
 		{% endif %}
 		
-		{% if type != "play_in_all" %}	
+		{% if data_get.type != "play_in_all" %}	
 			<p class="post_desc">{{ p.description }}</p>
 			<time>{{ p.date }}</time>
 

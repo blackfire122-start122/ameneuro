@@ -2,36 +2,47 @@ let find_now = "musics"
 musics = document.querySelector(".music_all")
 playlists = document.querySelector(".playlists")
 
+let how_get = 20
+let playlists_start = 0
+let playlists_end = how_get
+
+let musics_start = 0
+let musics_end = how_get
+
 function music_share(e){
 	$.ajax({
-	  type: $(this).attr('post'),
-	  url: musics_all_ajax,
-	  data: {'id':id_user,
-			'type':'music_share'},
-	  success: function (response) {
-	    document.querySelector(".musics_share").innerHTML = response
-	  }
+		type: $(this).attr('post'),
+		url: musics_all_ajax,
+		data: {'id':id_user,'type':'music_share'},
+		success: function (response) {
+			document.querySelector(".musics_share").innerHTML = response
+		}
 	})
 }
 
 function get_musics(){
 	$.ajax({
-	  type: $(this).attr('post'),
-	  url: musics_all_ajax,
-	  data: {'type':'user_my_music'},
-	  success: function (response) {
-	     document.querySelector(".music_all").innerHTML += response
-	  }
+		type: $(this).attr('post'),
+		url: musics_all_ajax,
+		data: {'type':'user_my_music',"musics_start":musics_start,"musics_end":musics_end},
+		success: function (response) {
+			document.querySelector(".music_all").innerHTML += response
+			musics_start+=how_get
+			musics_end+=how_get
+		}
 	})
 }
 
 function get_playlists(){
 	$.ajax({
-	  type: $(this).attr('post'),
-	  url: playlists_ajax,
-	  success: function (response) {
-	     document.querySelector(".playlists").innerHTML += response
-	  }
+		type: $(this).attr('post'),
+		url: playlists_ajax,
+		data: {"playlists_start":playlists_start,"playlists_end":playlists_end},
+		success: function (response) {
+			document.querySelector(".playlists").innerHTML += response
+			playlists_start+=how_get
+			playlists_end+=how_get
+		}
 	})
 }
 
@@ -77,3 +88,23 @@ function ajax_elements(){
 }
 
 ajax_elements()
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+let get_can = true
+
+async function get_can_true() {
+	await sleep(700)
+	get_can = true
+}
+
+window.addEventListener('scroll', async function(e) {
+	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
+		if (get_can) {
+	 		ajax_elements()
+	 		get_can = false
+	 		get_can_true()
+	 	}
+	}
+})

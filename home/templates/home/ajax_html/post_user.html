@@ -1,0 +1,12 @@
+{% for p in posts %}
+	<div class="post">
+		<a href="{% url 'post' p.id %}">
+			{% if p.type_p.type_f == "audio" %}
+				<h3 class="name_audio">{{ p.description|truncatechars:10 }}</h3>
+				<img class="post_file" src="{{ user.theme_all.music_img.url }}">
+			{% else %}
+				<{{ p.type_p.type_f }} class="post_file" src="{{ p.file.url }}"></{{ p.type_p.type_f }}>
+			{% endif %}
+		</a>
+	</div>
+{% endfor %}

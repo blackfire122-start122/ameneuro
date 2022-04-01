@@ -15,8 +15,7 @@
 
 {% block end_scripts %}
 	<script>
-		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
-		let playlist = "{{ playlist }}"
+		let playlist = "{{ playlist.id }}"
 	</script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>
 	<script src="{% static 'home/js/playlist.js' %}"></script>

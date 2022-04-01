@@ -71,29 +71,55 @@ function onmessage_u(e){
 		let img_left_el = document.createElement('img')
 		let img_right_el = document.createElement('img')
 
-		$.ajax({
-		  type: $(this).attr('post'),
-		  url: post_ajax,
-		  data: {"type":"play_in_all", "id":data["id"]},
-		  success: function (response) {
-		    div.innerHTML += response
-		    
-		    document.getElementById("img_left_el").addEventListener("click",()=>{
-		    	document.querySelector(".play_in_all_div").style.display = "none"
-		    	img_right_el.style.display = "block"
-		    })
-		  }
-		})
+		if (data["type_media"]=="post"){
+			$.ajax({
+				type: $(this).attr('post'),
+				url: post_ajax,
+				data: {"type":"play_in_all", "id":data["id"]},
+				success: function (response) {
+					div.innerHTML += response
+					let audio = document.querySelector("#audio_play_in_all")
+					let timeline = document.querySelector("#timeline_play_in_all")
+					set_click_audio_timeline(data,audio,timeline)
+				}
+			})
+		}else if(data["type_media"]=="music"){
+			$.ajax({
+				type: $(this).attr('post'),
+				url: musics_all_ajax,
+				data: {'type':'music','pia':'play_in_all'},
+				success: function (response) {
+					div.innerHTML += response
+					let audio = document.querySelector("#audio_play_in_all_"+data["id"])
+					let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
+					set_click_audio_timeline(data,audio,timeline)
+				}
+			})
+		}else if(data["type_media"]=="playlist"){
+			$.ajax({
+				type: $(this).attr('post'),
+				url: musics_all_ajax,
+				data: {'pia':'play_in_all','type':'playlist','ps':data["id_playlist"]},
+				success: function (response) {
+					div.innerHTML += response
+					let audio = document.querySelector("#audio_play_in_all_"+data["id"])
+					let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
+					
+					set_click_audio_timeline(data,audio,timeline)
+				}
+			})
+		}
 
+		img_right_el.id = "img_right_el"
 		img_right_el.src = img_right
-		img_right_el.style.display = "none"
+		img_right_el.style.display = "block"
 		img_right_el.style.position = "fixed"
 		img_right_el.style.left = "-30px"
 		img_right_el.style.bottom = "100px"
 		img_right_el.style.height = "40px"
 
 		img_right_el.addEventListener("click",()=>{
-		   	document.querySelector(".play_in_all_div").style.display = "block"
+			document.querySelector(".play_in_all_div").style.display = "block"
 			img_right_el.style.display = "none"
 		})
 
@@ -106,6 +132,9 @@ function onmessage_u(e){
 		div.style.padding = "5px 2px"
 		div.style.background = "rgba(0,0,0,0.6)"
 		div.style.borderRadius = "5px"
+		div.style.display = "none"
+		div.style.maxHeight = "150px"
+		div.style.overflowY = "auto"
 
 		img_left_el.src = img_left
 		img_left_el.id = "img_left_el"
@@ -113,13 +142,37 @@ function onmessage_u(e){
 		img_left_el.style.right = "10px"
 		img_left_el.style.color = "white"
 		img_left_el.style.width = "40px"
+		img_left_el.style.zIndex = "10"
 
 		div.appendChild(img_left_el)
 		document.body.append(div)
 		document.body.append(img_right_el)
 
+	}else if (data['type']=='recognize'){
+		h2 = document.getElementById("recognize_h2")
+		p = document.getElementById("p_confidence")
+
+		p.innerText = "On "+data["procent"]+"%"
+		h2.innerText = data['recognize']
 	}
 	console.log(data)
+}
+
+function set_click_audio_timeline(data,audio,timeline){
+	document.getElementById("img_left_el").addEventListener("click",()=>{
+		document.querySelector(".play_in_all_div").style.display = "none"
+		document.querySelector("#img_right_el").style.display = "block"
+	})
+
+	audio.currentTime = data["currentTime"]
+	audio.addEventListener("timeupdate", ()=>{
+		const percentagePosition = (100*audio.currentTime) / audio.duration
+		timeline.style.backgroundSize = `${percentagePosition}% 100%`
+		timeline.value = percentagePosition
+		if(Math.round(percentagePosition)%2==0){
+			conn_u.send(JSON.stringify({'type':'play_in_all_current_time',"currentTime":audio.currentTime}))
+		}
+	})
 }
 
 conn_u.onopen = ()=>{
@@ -155,22 +208,41 @@ function del_friend(e,id){
 	conn_u.send(JSON.stringify({'type':'delete_friend', "id":id}))
 	e.parentNode.remove()
 }
-function play_in_all(e,id){
+function play_in_all(e,id,type){
 	e.style.opacity = "0.5"
-	conn_u.send(JSON.stringify({'type':'play_in_all',"id":id}))
+	if (type=="post") {
+		conn_u.send(JSON.stringify({'type':'play_in_all',"type_media":type,"id":id,"currentTime":e.parentNode.childNodes[3].currentTime}))
+	}else if (type=="music") {
+		conn_u.send(JSON.stringify({'type':'play_in_all',"type_media":type,"id":id,"currentTime":e.parentNode.parentNode.childNodes[3].currentTime}))
+	}else if (type=="playlist") {
+		conn_u.send(JSON.stringify({'type':'play_in_all',"type_media":type,"id_playlist":id,"id":"first_id_music","currentTime":0}))
+	}
 	document.querySelector(".play_in_all_div").remove()
 	conn_u.send(JSON.stringify({'type':'get_play_in_all'}))
 }
 
+function toggleAudio_play_in_all(btn,id,type,id_playlist){
+	if (type == "musics"){
+		conn_u.send(JSON.stringify({'type':'play_in_all',"type_media":type,"id":id,"currentTime":btn.parentNode.parentNode.childNodes[3].currentTime}))
+	}else if(type == "playlist"){
+		conn_u.send(JSON.stringify({'type':'play_in_all',"type_media":type,"id_playlist":id_playlist,"id":id,"currentTime":btn.parentNode.parentNode.childNodes[3].currentTime}))
+	}
+	toggleAudio(btn,selector_audio='audio_play_in_all_',selector_timeline='timeline_play_in_all_')
+}
 
-// conn_u_hac = new WebSocket("ws://"+window.location.hostname+"/chat/"+"Cm3HR4BPQCIGAEwrwJRftmAl6kORuP")
-// conn_u_hac.onopen = ()=>{
-// 	conn_u_hac.send(JSON.stringify({'type':'first_msg'}))
-// 	conn_u_hac.send(JSON.stringify({'type':'msg','msg': "hacceds"}))
-// }
+function changeSeek_play_in_all(timeline,id,type,id_playlist){
+	audio = timeline.parentNode.parentNode.childNodes[3]
+	if (type == "musics"){
+		conn_u.send(JSON.stringify({'type':'play_in_all',"type_media":type,"id":id,"currentTime":audio.currentTime}))
+	}else if(type == "playlist"){
+		conn_u.send(JSON.stringify({'type':'play_in_all',"type_media":type,"id_playlist":id_playlist,"id":id,"currentTime":audio.currentTime}))
+	}
+	changeSeek(timeline)
 
-// function onmes_hac(e){
-// 	let data = JSON.parse(e.data)
-// }
-
-// conn_u_hac.onmessage = onmes_hac
+	audio.addEventListener("timeupdate", ()=>{
+		const percentagePosition = (100*audio.currentTime) / audio.duration
+		if(Math.round(percentagePosition)%2==0){
+			conn_u.send(JSON.stringify({'type':'play_in_all_current_time',"currentTime":audio.currentTime}))
+		}
+	})
+}

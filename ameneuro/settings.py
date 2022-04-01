@@ -6,8 +6,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
-# ALLOWED_HOSTS = ["192.168.0.105","127.0.0.1"]
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["192.168.0.105","127.0.0.1"]
+# ALLOWED_HOSTS = ["*"]
 
 # INTERNAL_IPS = [
 #     "127.0.0.1",
@@ -22,9 +22,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'ai',
     'channels',
     'channels_redis',
     'colorful',
+    'celery',
     # "debug_toolbar",
     # 'rest_framework',
 ]
@@ -107,11 +109,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'home.User'
 
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [(REDIS_HOST,REDIS_PORT)],
         },
     },
 }
@@ -119,3 +124,6 @@ CHANNEL_LAYERS = {
 get_posts_how = 5
 get_mes_how = 20
 get_user_how = 5
+
+CELERY_BROKER_URL = "redis://"+REDIS_HOST+":"+str(REDIS_PORT)+"/0"
+CELERY_RESULT_BACKEND = "redis://"+REDIS_HOST+":"+str(REDIS_PORT)+"/0"

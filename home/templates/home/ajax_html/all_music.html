@@ -4,22 +4,31 @@
 	{% for m in music.all %}
 		<div class="audio-player">
 			<h4 class="name_mus">{{ m }}</h4>
-			<audio class="audio_ap" id="audio_{{ m.id }}" src="{% url 'streaming_music' m.id %}"></audio>
-			<div class="controls">
-				<button value="{{ m.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
-				<input id="timeline_{{ m.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
-			</div>
-			{% if type == "music_share" %}
+			{% if data_get.pia == "play_in_all" %}
+				<audio class="audio_ap" id="audio_play_in_all_{{ m.id }}" src="{% url 'streaming_music' m.id %}"></audio>
+				<div class="controls">
+					<button value="{{ m.id }}" onclick="toggleAudio_play_in_all(this,{{m.id}},'{{ data_get.type }}','{{ data_get.ps }}')" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+					<input id="timeline_play_in_all_{{ m.id }}" onchange ="changeSeek_play_in_all(this,{{m.id}},'{{ data_get.type }}','{{ data_get.ps }}')" type="range" class="timeline" max="100" value="0">
+				</div>
+			{% else %}
+				<audio class="audio_ap" id="audio_{{ m.id }}" src="{% url 'streaming_music' m.id %}"></audio>
+				<div class="controls">
+					<button value="{{ m.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+					<input id="timeline_{{ m.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
+				</div>
+			{% endif %}
+			{% if data_get.type == "music_share" %}
 				<div class="menu_player">
 					<button class="btn_menu_player" value="{{ m.id }}" onclick="add_mus_share(this)">Add</button>
 					<button class="btn_menu_player" value="{{ m.id }}" onclick="not_add_mus_share(this)">not add</button>
 				</div>
-			{% elif type == "user_my_music" %}
+			{% elif data_get.type == "user_my_music" %}
 				<div class="menu_player">
 					<img id="{{ m.id }}" onclick="share_menu(this)" class="m_s_img" src="{% static 'home/images/music_share.png' %}">
 					<button class="btn_menu_player" value="{{ m.id }}" onclick="delete_mus(this)">Delete</button>
+					<img onclick="play_in_all(this,{{m.id}},'music')" class="play_in_all" src="{% static 'home/images/play_in_all.png' %}">
 				</div>
-			{% elif type == "user_music_add" %}
+			{% elif data_get.type == "user_music_add" %}
 				<div class="menu_player">
 					{% if not m in user.music.all %}
 						<button class="btn_menu_player" value="{{ m.id }}" onclick="add_mus(this)">Add to me</button>
