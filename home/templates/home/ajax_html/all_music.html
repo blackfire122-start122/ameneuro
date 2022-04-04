@@ -1,6 +1,5 @@
 {% if music %}
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
 	{% for m in music.all %}
 		<div class="audio-player">
 			<h4 class="name_mus">{{ m }}</h4>
@@ -34,7 +33,12 @@
 						<button class="btn_menu_player" value="{{ m.id }}" onclick="add_mus(this)">Add to me</button>
 					{% endif %}
 				</div>
-			{% endif %}			
+			{% elif data_get.type == "music_select" %}
+				<input id="music_select_{{ m.id }}" class="music_select" type="checkbox" name="musics" value="{{ m.id }}">
+				<label for="music_select_{{ m.id }}">
+					<img onclick="sel_mus(this)" class="img_mus_select" src="{{ user.theme_all.add_img.url }}">
+				</label>
+			{% endif %}
 		</div>
 	{% endfor %}
 {% endif %}

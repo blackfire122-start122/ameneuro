@@ -2,13 +2,17 @@ main{
 	margin-top: 16%;
 }
 
-.add_mus{
+.add_mus, .add_playlist{
 	background: gray;
 	text-decoration: none;
 	color: black;
 	font-size: 1.3em;
 	padding: 3px;
 	border-radius: 10px;
+}
+
+.add_playlist{
+	display: none;
 }
 
 .music_share{

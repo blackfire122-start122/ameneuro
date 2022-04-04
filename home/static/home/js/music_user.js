@@ -70,10 +70,12 @@ function what_find(e,find_text){
 		playlists.style.display = "none"
 		musics.style.display = "block"
 		document.querySelector(".add_mus").style.display = "block"
+		document.querySelector(".add_playlist").style.display = "none"
 	}else	if (find_text=="playlists"){
 		musics.style.display = "none"
 		playlists.style.display = "block"
 		document.querySelector(".add_mus").style.display = "none"
+		document.querySelector(".add_playlist").style.display = "block"
 	}
 	e.style.borderBottom = "2px solid white";
 	ajax_elements()

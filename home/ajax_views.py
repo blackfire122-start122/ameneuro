@@ -189,7 +189,7 @@ def music_get_ajax(request):
 
 	try:music = Music.objects.all()[int(request.GET["music_start"]):int(request.GET["music_end"])]
 	except: return HttpResponseNotFound()
-	
+
 	return render(request,"home/ajax_html/all_music.html",{"music":music,"data_get":request.GET})
 
 @login_required(login_url='login')

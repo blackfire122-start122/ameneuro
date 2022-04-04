@@ -1,0 +1,35 @@
+{% extends 'home/shablons/base.html' %}
+{% load static %}
+{% block title %}Chats{% endblock title %}
+
+{% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/add_playlist.css' %}">
+	<h4 class="username">{{ user }}</h4>
+{% endblock content_header %}
+
+{% block content %}	
+	<form class="form_playlist" method='post' enctype="multipart/form-data">
+		{% csrf_token %}
+
+		<div class="info_playlists_form">
+			<input placeholder="name" type="text" name="name" maxlength="15" required="" id="id_name">
+			<input onchange="img_set(this)" type="file" name="img" accept="image/*" required="" id="id_img">
+			<label for="id_img">
+				<img class="img_input" src="{% static 'home/images/default.png' %}">
+			</label>
+		</div>
+		
+		<div id="id_musics"></div>
+
+		<input class="submit" type="submit">
+		<span>{{ error }}</span>
+	</form>
+{% endblock content %}
+
+{% block end_scripts %}
+	<script>
+		let music_find_ajax = "{% url 'music_find_ajax' %}"
+		let music_get_ajax = "{% url 'music_get_ajax' %}"
+	</script>
+	<script src="{% static 'home/js/add_playlist.js' %}"></script>
+{% endblock end_scripts %}

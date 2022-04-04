@@ -145,6 +145,12 @@ class Playlist(models.Model):
 	def __str__(self):
 		return self.name
 
+
+@receiver(pre_delete, sender=Playlist)
+def Playlist_delete(sender, instance, **kwargs):
+	try:instance.img.delete(False)
+	except:pass
+
 @receiver(pre_delete, sender=AllTheme)
 def AllTheme_delete(sender, instance, **kwargs):
 	try:

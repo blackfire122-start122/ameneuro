@@ -10,7 +10,7 @@ from django.forms import(ModelForm,
 						FileInput,
 						Select,
 						FileField)
-from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes
+from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes, Playlist
 from django.conf import settings
 import magic
 
@@ -129,4 +129,8 @@ class AllThemeForm(ModelForm):
 		]+fields_text
 		
 		widgets = {i:TextInput(attrs={'class':'form_name_change','placeholder':i}) for i in fields_text}
-		
+
+class PlaylistForm(ModelForm):
+	class Meta:
+		model = Playlist
+		fields = ["name","img","musics","autor"]

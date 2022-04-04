@@ -6,7 +6,8 @@ from .forms import (RegisterForm,
 					ChangeForm,
 					ThemeForm,
 					MusicForm,
-					AllThemeForm)
+					AllThemeForm,
+					PlaylistForm)
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import StreamingHttpResponse, HttpResponseNotFound
@@ -296,3 +297,32 @@ class playlists(LoginRequiredMixin,TemplateView):
 class activity(LoginRequiredMixin,TemplateView):
 	template_name = "home/activity.html"
 	login_url = "login"
+
+class add_playlist(LoginRequiredMixin,TemplateView):
+	template_name = "home/add_playlist.html"
+	login_url = "login"
+
+	def get(self, request, *args, **kwargs):
+		self.form = PlaylistForm()
+		self.error = ''
+		return super().get(request,*args, **kwargs)
+	
+	def post(self, request, *args, **kwargs):
+		self.error = ''
+		post_data = request.POST.copy()
+		post_data["autor"]=request.user.id
+		
+		self.form = PlaylistForm(post_data,request.FILES)
+		if self.form.is_valid():
+			request.user.playlists.add(self.form.save(request.user))
+			return redirect('musics')
+			pass
+		else:error = self.form.errors
+
+		return super().get(request,*args, **kwargs)
+
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context["form"] = self.form
+		context["error"] = self.error
+		return context

@@ -54,6 +54,7 @@ save posts ajax dunamic *
 playlists_ajax and music dunamic *
 ai page *
 activity dunamic *
+playlists add *
 
 work with dark theme
 models pre_
@@ -65,8 +66,9 @@ chat theme work
 optimize static
 pages for not autoruzations 
 playlists share
-playlists add ***
+change playlists
 playlists music dunamic
+find music and playlists
 
 defence:
 	is_digit *

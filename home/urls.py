@@ -20,15 +20,16 @@ urlpatterns = [
     path('add_post', views.add_post.as_view(), name='add_post'),
 
     path('stream_post/<int:id>',views.streaming_post,name='stream_post'),
-
     path('stream_mess/<int:id>',views.streaming_mess,name='stream_mess'),
-    
     path('streaming_music/<int:id>',views.streaming_music,name='streaming_music'),
+    
     path('musics', views.musics_all.as_view(), name='musics'),
     path('add_music', views.add_music.as_view(), name='add_music'),
-    path('saves_posts', views.saves_posts.as_view(), name='saves_posts'),
     path('playlists/<name>', views.playlists.as_view(), name='playlists'),
+    path('add_playlist', views.add_playlist.as_view(), name='add_playlist'),
+ 
     path('activity', views.activity.as_view(), name='activity'),
+    path('saves_posts', views.saves_posts.as_view(), name='saves_posts'),
 
     path('ajax/', include("home.urls_ajax"))
 ]
