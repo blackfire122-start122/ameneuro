@@ -311,6 +311,20 @@ class UserConsumer(AsyncWebsocketConsumer):
     def get_first_music(self):
         self.text_data_json["id"] = Playlist.objects.get(pk=self.text_data_json["id_playlist"]).musics.all()[0].id
 
+    @database_sync_to_async
+    def add_to_playlists(self):
+        ps = Playlist.objects.get(pk=self.text_data_json["playlist_id"])
+        if self.scope["user"]!=ps.autor:
+            return
+        ps.musics.add(self.text_data_json["music_id"])
+
+    @database_sync_to_async
+    def not_add_to_playlists(self):
+        ps = Playlist.objects.get(pk=self.text_data_json["playlist_id"])
+        if self.scope["user"]!=ps.autor:
+            return
+        ps.musics.remove(self.text_data_json["music_id"])
+
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
@@ -395,6 +409,11 @@ class UserConsumer(AsyncWebsocketConsumer):
         elif self.text_data_json['type']=='play_in_all_current_time':
             self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json["currentTime"]
             return
+
+        elif self.text_data_json['type']=='add_to_playlists':
+            await self.add_to_playlists()
+        elif self.text_data_json['type']=='not_add_to_playlists':
+            await self.not_add_to_playlists()
 
         await self.channel_layer.group_send(
             self.room_group_name,{

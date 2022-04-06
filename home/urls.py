@@ -27,6 +27,7 @@ urlpatterns = [
     path('add_music', views.add_music.as_view(), name='add_music'),
     path('playlists/<name>', views.playlists.as_view(), name='playlists'),
     path('add_playlist', views.add_playlist.as_view(), name='add_playlist'),
+    path('change_playlist/<name>', views.change_playlist.as_view(), name='change_playlist'),
  
     path('activity', views.activity.as_view(), name='activity'),
     path('saves_posts', views.saves_posts.as_view(), name='saves_posts'),

@@ -34,10 +34,12 @@
 					{% endif %}
 				</div>
 			{% elif data_get.type == "music_select" %}
-				<input id="music_select_{{ m.id }}" class="music_select" type="checkbox" name="musics" value="{{ m.id }}">
-				<label for="music_select_{{ m.id }}">
-					<img onclick="sel_mus(this)" class="img_mus_select" src="{{ user.theme_all.add_img.url }}">
-				</label>
+				{% if m in playlist.musics.all %}
+				    <img style="opacity:0.5" onclick="sel_mus(this,'{{ m.id }}','{{ m }}')" class="img_mus_select" src="{{ user.theme_all.add_img.url }}">
+				{% else %}
+					<img onclick="sel_mus(this,'{{ m.id }}','{{ m }}')" class="img_mus_select" src="{{ user.theme_all.add_img.url }}">
+				{% endif %}
+
 			{% endif %}
 		</div>
 	{% endfor %}

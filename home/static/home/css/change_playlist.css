@@ -1,0 +1,53 @@
+#id_musics{
+	display: block;
+	width: 80%;
+	height: 400px;
+	overflow-y: auto;
+	position: relative;
+	right: 0;
+	margin: 0 auto;
+}
+.form_playlist, main, body, html{
+	height: 100%;
+	overflow: hidden;
+}
+.music_select{
+	display: none;
+}
+.img_mus_select{
+	height: 30px;
+	display: block;
+	position: absolute;
+	right: 0;
+	margin-top:-3em;
+	opacity: 1;
+}
+
+.find_mus{
+	border: none;
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 20px 20px 0px 0px;
+	height: 1.5em;
+	width: 78%;
+	padding: 5px;
+	font-size: 1.1em;
+	position: relative;
+	right: 0;
+	margin: 0 auto;
+	display: block;
+}
+
+.musics_in_playlists{
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	right: 0;
+	margin: 0 auto;
+	width: 80%;
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+.musics_in_playlists p{
+	padding: 5px;
+}

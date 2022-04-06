@@ -1,0 +1,30 @@
+{% extends 'home/shablons/base.html' %}
+{% load static %}
+{% block title %}Chats{% endblock title %}
+
+{% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/change_playlist.css' %}">
+	<h1>{{ playlist }}</h1>
+	<h4 class="username">{{ user }}</h4>
+{% endblock content_header %}
+
+{% block content %}	
+		<div class="musics_in_playlists">
+			{% for m in playlist.musics.all %}
+				<p>{{ m }},</p>
+			{% endfor %}
+		</div>
+
+		<input onkeyup="inp_find(this)" class="find_mus" type="text" placeholder="find">
+		<div id="id_musics"></div>
+
+{% endblock content %}
+
+{% block end_scripts %}
+	<script>
+		let music_find_ajax = "{% url 'music_find_ajax' %}"
+		let music_get_ajax = "{% url 'music_get_ajax' %}"
+		let playlist_id = "{{ playlist.id }}"
+	</script>
+	<script src="{% static 'home/js/change_playlist.js' %}"></script>
+{% endblock end_scripts %}

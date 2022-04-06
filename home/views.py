@@ -10,7 +10,7 @@ from .forms import (RegisterForm,
 					PlaylistForm)
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import StreamingHttpResponse, HttpResponseNotFound
+from django.http import StreamingHttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.generic import ListView, TemplateView, CreateView
 from ameneuro.settings import get_posts_how, get_mes_how, get_user_how
 
@@ -315,8 +315,7 @@ class add_playlist(LoginRequiredMixin,TemplateView):
 		self.form = PlaylistForm(post_data,request.FILES)
 		if self.form.is_valid():
 			request.user.playlists.add(self.form.save(request.user))
-			return redirect('musics')
-			pass
+			return redirect('change_playlist',post_data['name'])
 		else:error = self.form.errors
 
 		return super().get(request,*args, **kwargs)
@@ -325,4 +324,19 @@ class add_playlist(LoginRequiredMixin,TemplateView):
 		context = super().get_context_data(**kwargs)
 		context["form"] = self.form
 		context["error"] = self.error
+		return context
+
+class change_playlist(LoginRequiredMixin,TemplateView):
+	template_name = "home/change_playlist.html"
+	login_url = "login"
+
+	def get(self, request, *args, **kwargs):
+		self.playlist = Playlist.objects.get(name=self.kwargs["name"])
+		if request.user != self.playlist.autor:
+			return HttpResponseBadRequest()
+		return super().get(request,*args, **kwargs)
+
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context["playlist"] = self.playlist
 		return context

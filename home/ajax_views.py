@@ -189,6 +189,11 @@ def music_get_ajax(request):
 
 	try:music = Music.objects.all()[int(request.GET["music_start"]):int(request.GET["music_end"])]
 	except: return HttpResponseNotFound()
+	
+	if request.GET.get("type") == "music_select":
+		try:ps = Playlist.objects.get(pk=request.GET.get("playlist_id"))
+		except:return HttpResponseNotFound()
+		return render(request,"home/ajax_html/all_music.html",{"music":music,"data_get":request.GET,'playlist':ps})
 
 	return render(request,"home/ajax_html/all_music.html",{"music":music,"data_get":request.GET})
 
@@ -201,7 +206,12 @@ def music_find_ajax(request):
 
 	try:music = Music.objects.filter(name__contains=request.GET["find_name"])[int(request.GET["music_find_start"]):int(request.GET["music_find_end"])]
 	except:return HttpResponseNotFound()
-	
+
+	if request.GET.get("type") == "music_select":
+		try:ps = Playlist.objects.get(pk=request.GET.get("playlist_id"))
+		except:return HttpResponseNotFound()
+		return render(request,"home/ajax_html/all_music.html",{"music":music,"data_get":request.GET,'playlist':ps})
+
 	return render(request,"home/ajax_html/all_music.html",{"music":music,"data_get":request.GET})
 
 def video_get_ajax(request):

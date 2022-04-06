@@ -154,6 +154,17 @@ function onmessage_u(e){
 
 		p.innerText = "On "+data["procent"]+"%"
 		h2.innerText = data['recognize']
+	}else if(data['type']=='add_to_playlists'){
+		p = document.createElement("p")
+		p.innerText = data["name_mus"]+','
+		document.querySelector(".musics_in_playlists").append(p)
+	}else if(data['type']=='not_add_to_playlists'){
+		mip = document.querySelector(".musics_in_playlists").childNodes
+		for (var i = mip.length - 1; i >= 0; i--) {
+			if(mip[i].innerText==data["name_mus"]+','){
+				mip[i].remove()
+			}
+		}
 	}
 	console.log(data)
 }

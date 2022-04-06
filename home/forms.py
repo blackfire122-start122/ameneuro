@@ -133,4 +133,4 @@ class AllThemeForm(ModelForm):
 class PlaylistForm(ModelForm):
 	class Meta:
 		model = Playlist
-		fields = ["name","img","musics","autor"]
+		fields = ["name","img","autor"]
