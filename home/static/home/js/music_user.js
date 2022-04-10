@@ -2,7 +2,6 @@ let find_now = "musics"
 musics = document.querySelector(".music_all")
 playlists = document.querySelector(".playlists")
 
-let how_get = 20
 let playlists_start = 0
 let playlists_end = how_get
 

@@ -29,6 +29,16 @@ class home(LoginRequiredMixin,TemplateView):
 		request.session["start_rec_user"] = 0
 		request.session["end_rec_user"] = get_user_how
 		request.session["defolt_posts"] = False
+
+		request.session["start_element_video"] = 0
+		request.session["end_element_video"] = get_posts_how
+		request.session["end_video_friend"] = None
+		request.session["start_rec_video"] = 0
+		request.session["end_rec_video"] = get_posts_how
+		request.session["start_rec_video_user"] = 0
+		request.session["end_rec_video_user"] = get_user_how
+		request.session["defolt_video"] = False
+
 		
 		self.chat_not_read_count = 0
 		for i in request.user.chats.all():
@@ -148,6 +158,10 @@ class friends(LoginRequiredMixin, TemplateView):
 	login_url = 'login'
 
 def post(request,id):return render(request, "home/post.html",{"id":id})
+def video(request,name):
+	try:video = Video.objects.get(name=name)
+	except:return HttpResponseNotFound()
+	return render(request, "home/video.html",{"video":video})
 
 class add_post(LoginRequiredMixin,TemplateView):
 	template_name = "home/add_post.html"
@@ -176,6 +190,16 @@ class add_post(LoginRequiredMixin,TemplateView):
 		context["form"] = self.form
 		context["error"] = self.error
 		return context
+
+def stream_video(request,id):
+	file, status_code, content_length, content_range = open_file(request,id,'video')
+	response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
+
+	response['Accept-Ranges'] = 'bytes'
+	response['Content-Length'] = str(content_length)
+	response['Cache-Control'] = 'no-cache'
+	response['Content-Range'] = content_range
+	return response
 
 def streaming_post(request,id):
 	file, status_code, content_length, content_range = open_file(request,id,'post')

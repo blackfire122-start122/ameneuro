@@ -2,7 +2,6 @@ musics = document.querySelector('.musics')
 posts = document.querySelector('.posts')
 
 let musics_s = true
-let how_get = 20
 
 let friends_start = 0
 let friends_end = how_get

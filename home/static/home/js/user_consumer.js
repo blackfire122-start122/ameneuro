@@ -1,8 +1,10 @@
 conn_u = new WebSocket("ws://"+window.location.hostname+"/user/"+username)
-
 conn_u.onmessage = onmessage_u
-
 let chats_point = []
+
+let how_get = 20
+let musics_start_pia = 0
+let musics_end_pia = how_get
 
 function onmessage_u(e){
 	let data = JSON.parse(e.data)
@@ -71,44 +73,28 @@ function onmessage_u(e){
 		let img_left_el = document.createElement('img')
 		let img_right_el = document.createElement('img')
 
+		let get_pia
+
 		if (data["type_media"]=="post"){
-			$.ajax({
-				type: $(this).attr('post'),
-				url: post_ajax,
-				data: {"type":"play_in_all", "id":data["id"]},
-				success: function (response) {
-					div.innerHTML += response
-					let audio = document.querySelector("#audio_play_in_all")
-					let timeline = document.querySelector("#timeline_play_in_all")
-					set_click_audio_timeline(data,audio,timeline)
-				}
-			})
+			post_pia(data,div)
+			get_pia = post_pia 
 		}else if(data["type_media"]=="music"){
-			$.ajax({
-				type: $(this).attr('post'),
-				url: musics_all_ajax,
-				data: {'type':'music','pia':'play_in_all'},
-				success: function (response) {
-					div.innerHTML += response
-					let audio = document.querySelector("#audio_play_in_all_"+data["id"])
-					let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
-					set_click_audio_timeline(data,audio,timeline)
-				}
-			})
+			music_pia(data,div)
+			get_pia = music_pia
 		}else if(data["type_media"]=="playlist"){
-			$.ajax({
-				type: $(this).attr('post'),
-				url: musics_all_ajax,
-				data: {'pia':'play_in_all','type':'playlist','ps':data["id_playlist"]},
-				success: function (response) {
-					div.innerHTML += response
-					let audio = document.querySelector("#audio_play_in_all_"+data["id"])
-					let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
-					
-					set_click_audio_timeline(data,audio,timeline)
-				}
-			})
+			playlist_pia(data,div)
+			get_pia = playlist_pia
 		}
+
+		div.addEventListener('scroll', ()=>{
+			if(div.scrollHeight-$(div).scrollTop()<200){
+			  if (get_can_pia) {
+			 		get_pia(data,div)
+			 		get_can_pia = false
+			 		get_can_true_pia()
+			 	}
+			}
+		})
 
 		img_right_el.id = "img_right_el"
 		img_right_el.src = img_right
@@ -174,7 +160,6 @@ function set_click_audio_timeline(data,audio,timeline){
 		document.querySelector(".play_in_all_div").style.display = "none"
 		document.querySelector("#img_right_el").style.display = "block"
 	})
-
 	audio.currentTime = data["currentTime"]
 	audio.addEventListener("timeupdate", ()=>{
 		const percentagePosition = (100*audio.currentTime) / audio.duration
@@ -256,4 +241,60 @@ function changeSeek_play_in_all(timeline,id,type,id_playlist){
 			conn_u.send(JSON.stringify({'type':'play_in_all_current_time',"currentTime":audio.currentTime}))
 		}
 	})
+}
+
+function playlist_pia(data,div){
+	$.ajax({
+		type: $(this).attr('post'),
+		url: musics_all_ajax,
+		data: {'pia':'play_in_all','type':'playlist','ps':data["id_playlist"],"musics_start":musics_start_pia, "musics_end":musics_end_pia},
+		success: function (response) {
+			div.innerHTML += response
+			let audio = document.querySelector("#audio_play_in_all_"+data["id"])
+			let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
+			musics_start_pia += how_get
+			musics_end_pia += how_get
+			set_click_audio_timeline(data,audio,timeline)
+		}
+	})
+}
+
+function music_pia(data,div){
+	$.ajax({
+		type: $(this).attr('post'),
+		url: musics_all_ajax,
+		data: {'type':'music','pia':'play_in_all',"musics_start":musics_start_pia, "musics_end":musics_end_pia},
+		success: function (response) {
+			div.innerHTML += response
+			let audio = document.querySelector("#audio_play_in_all_"+data["id"])
+			let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
+			musics_start_pia += how_get
+			musics_end_pia += how_get
+			set_click_audio_timeline(data,audio,timeline)
+		}
+	})
+}
+
+function post_pia(data,div){
+	$.ajax({
+		type: $(this).attr('post'),
+		url: post_ajax,
+		data: {"type":"play_in_all", "id":data["id"]},
+		success: function (response) {
+			div.innerHTML += response
+			let audio = document.querySelector("#audio_play_in_all")
+			let timeline = document.querySelector("#timeline_play_in_all")
+			set_click_audio_timeline(data,audio,timeline)
+		}
+	})
+}
+
+function sleep_pia(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+let get_can_pia = true
+
+async function get_can_true_pia() {
+	await sleep_pia(700)
+	get_can_pia = true
 }

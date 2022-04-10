@@ -1,8 +1,6 @@
 let musics = document.getElementById("id_musics")
 let ajax_get_now = "all"
 
-let how_get = 20
-
 let music_start = 0
 let music_end = how_get
 

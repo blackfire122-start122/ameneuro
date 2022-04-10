@@ -51,7 +51,6 @@ conn_u.onopen = ()=>{
 	}
 }
 
-let how_get = 20
 let mess_start = 0
 let mess_end = how_get
 

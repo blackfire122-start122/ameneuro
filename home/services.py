@@ -1,11 +1,11 @@
 from pathlib import Path
 from typing import IO, Generator
 from django.shortcuts import get_object_or_404
-from .models import Post, Music, Chat, Message, User
+from .models import Post, Music, Chat, Message, User, Video
 
 import random
 import string
-from ameneuro.settings import get_posts_how, get_mes_how, get_user_how
+from ameneuro.settings import get_videos_how, get_posts_how, get_mes_how, get_user_how
 
 strings = string.ascii_letters+string.digits
 
@@ -47,6 +47,8 @@ def open_file(request, id, type_s) -> tuple:
     elif type_s == 'mess':
         _file = get_object_or_404(Message, pk=id)
         request.session['music_id'] = id
+    elif type_s == 'video':
+        _file = get_object_or_404(Video, pk=id)
 
     path = Path(_file.file.path)
 
@@ -123,3 +125,56 @@ def get_posts(request,user):
     request.session["start_element"]=start
     request.session["end_element"]=end
     return posts
+
+
+def get_videos(request):
+    videos = {}
+    start = request.session["start_element_video"]
+    end = request.session["end_element_video"]
+
+    try:
+        friends = request.user.friends.all()
+        follow = request.user.follow.all()
+        videos = Video.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
+        if len(videos)<get_videos_how:
+            start_rec_video = request.session["start_rec_video"]
+            end_rec_video = request.session["end_rec_video"]
+
+            start_rec_video_user = request.session["start_rec_video_user"]
+            end_rec_video_user = request.session["end_rec_video_user"]
+
+            rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_video_user:end_rec_video_user]
+            videos |= Video.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_video:end_rec_video]
+        
+            if request.session["defolt_video"]: 
+                start_rec_video = 0
+                end_rec_video = get_videos_how
+                request.session["defolt_video"] = False
+            
+            if request.session["start_rec_video_user"] > User.objects.count():
+                return videos
+            if len(videos)<get_videos_how:
+                request.session["defolt_video"] = True
+
+                start_rec_video_user+=get_user_how
+                end_rec_video_user+=get_user_how
+
+                request.session["start_rec_video_user"]=start_rec_video_user
+                request.session["end_rec_video_user"]=end_rec_video_user
+
+                videos |= get_videos(request)
+
+            start_rec_video+=get_videos_how
+            end_rec_video+=get_videos_how
+
+            request.session["start_rec_video"]=start_rec_video
+            request.session["end_rec_video"]=end_rec_video
+
+    except:return {}
+
+    start+=get_videos_how
+    end+=get_videos_how
+
+    request.session["start_element_video"]=start
+    request.session["end_element_video"]=end
+    return videos

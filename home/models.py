@@ -33,6 +33,18 @@ class Post(models.Model):
 	def __str__(self):
 		return self.file.url
 
+class Video(models.Model):
+	name = models.CharField(max_length=100)
+	user_pub = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="user_pub_video")
+	date = models.DateTimeField(auto_now=True)
+	file = models.FileField(upload_to='videos')
+	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_video")
+	description = models.TextField(blank=True,null=True)
+	comments = models.ManyToManyField("Comment",null=True,blank=True)
+	preview = models.ImageField(upload_to="videos_preview",default=None)
+	def __str__(self):
+		return self.name
+
 class Theme(models.Model):
 	color_mes = RGBColorField(null=True)
 	color_mes_bg = RGBColorField(null=True)

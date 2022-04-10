@@ -56,10 +56,13 @@ ai page *
 activity dunamic *
 playlists add *
 change playlists *
+playlists music dunamic *
+find music and playlists *
+videos as mini-youtube *
+pia bags *
 
 work with dark theme
 models pre_
-videos as mini-youtube
 ajax optimize
 chats musics many load
 chats play in all bags 
@@ -67,8 +70,6 @@ chat theme work
 optimize static
 pages for not autoruzations 
 playlists share
-playlists music dunamic
-find music and playlists
 
 defence:
 	is_digit *

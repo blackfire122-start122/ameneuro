@@ -1,4 +1,6 @@
 let menu_show_v = true
+let posts = document.querySelector('.posts')
+let videos = document.querySelector('.videos')
 
 function menu_show(e){
 	if (menu_show_v) {
@@ -11,23 +13,28 @@ function menu_show(e){
 }
 
 function get_posts(){
-	let posts_div = document.querySelector('.posts')
-
 	$.ajax({
 		url: post_ajax,
-		data: {'id':id_post},
 		error: (data)=> {
 			console.log(data.data_text)
 		},
 		success: (data) =>{
-			if (data["info"] != "None post"){
-				posts_div.innerHTML += data
-			}
+			posts.innerHTML += data
 		}
 	})
 }
 
-get_posts()
+function get_videos(){
+	$.ajax({
+		url: video_ajax,
+		error: (data)=> {
+			console.log(data.data_text)
+		},
+		success: (data) =>{
+			videos.innerHTML += data
+		}
+	})
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -39,19 +46,24 @@ async function get_can_true() {
 	get_can = true
 }
 
-if (!id_post){
-	window.addEventListener('scroll', async function(e) {
-		if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
-		  if (get_can) {
-		 		get_posts()
-		 		get_can = false
-		 		get_can_true()
-		 	}
-		}
-	})
+function remove_all_listener_window(){
+	window.removeEventListener('scroll',scroll_get_posts);
+	window.removeEventListener('scroll',scroll_pause_media);
+	window.removeEventListener('scroll',scroll_get_videos);
+	window.removeEventListener('scroll',scroll_pause_videos);
 }
 
-window.addEventListener('scroll', function(e){
+async function scroll_get_posts() {
+	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
+	  if (get_can) {
+	 		get_posts()
+	 		get_can = false
+	 		get_can_true()
+	 	}
+	}
+}
+
+function scroll_pause_media(){
 	let video = document.getElementsByClassName("video_post")
 	let audio = document.getElementsByClassName("audio-player")
 	for (let i = video.length-1;i>=0;i--){
@@ -62,10 +74,44 @@ window.addEventListener('scroll', function(e){
 	for (let i = audio.length-1;i>=0;i--){
 		if (!Visible(audio[i])){
 			audio[i].childNodes[3].pause()
-  		audio[i].parentNode.childNodes[5].childNodes[1].childNodes[0].src = pause_img
+			if (audio[i].parentNode.childNodes[5].childNodes[1]) {
+	  		audio[i].parentNode.childNodes[5].childNodes[1].childNodes[0].src = pause_img
+			}
 		}
 	}
-})
+}
+
+async function scroll_get_videos() {
+	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
+	  if (get_can) {
+	 		get_videos()
+	 		get_can = false
+	 		get_can_true()
+	 	}
+	}
+}
+
+function scroll_pause_videos(){
+	let video = document.getElementsByClassName("video_video")
+	for (let i = video.length-1;i>=0;i--){
+		if (!Visible(video[i])){
+			video[i].pause()
+		}
+	}
+}
+
+function start_posts(){
+	get_posts()
+
+	window.addEventListener('scroll',scroll_get_posts)
+	window.addEventListener('scroll',scroll_pause_media)
+}
+
+function start_videos(){
+	get_videos()
+	window.addEventListener('scroll',scroll_get_videos)
+	window.addEventListener('scroll',scroll_pause_videos)
+}
 
 let msg_point = document.getElementById('chats')
 let musics_point = document.getElementById('musics')
@@ -115,3 +161,26 @@ function Visible(target) {
     return false
   }
 }
+
+function wath_now(e,now){
+	btns = document.getElementsByClassName('btn_wath_now')
+
+	for (var i = btns.length - 1; i >= 0; i--) {
+		btns[i].style.opacity = "1"
+	}
+	e.style.opacity = '0.5'
+	remove_all_listener_window()
+	if (now=="posts") {
+		posts.style.display = "block"
+		videos.style.display = "none"
+
+		start_posts()
+	}else if (now =="videos") {
+		videos.style.display = "block"
+		posts.style.display = "none"
+
+		start_videos()
+	}
+}
+
+wath_now(document.getElementById("posts"),'posts')

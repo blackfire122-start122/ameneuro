@@ -1,0 +1,14 @@
+{% load static %}
+{% for v in videos %}
+	<div class="video">
+		<a href="{% url 'video' v.name %}">
+			<img class="preview_video" src="{{ v.preview.url }}">
+		</a>
+		<div class='menu_video'>
+			<img class="img_user_video" src="{{ v.user_pub.img }}">
+			<h3>{{ v.name|truncatechars:25 }}</h3>
+			<time class="time">{{ v.date }}</time>
+		</div>
+	</div>
+	<div class="line"></div>
+{% endfor %}

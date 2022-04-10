@@ -6,14 +6,14 @@ let find_now = "users"
 let input_find = document.querySelector(".find_user")
 input_find.placeholder = "Find "+find_now
 
-let how_get = 20
-
 let users_start = 0
 let users_end = how_get
 let music_start = 0
 let music_end = how_get
 let video_start = 0
 let video_end = how_get
+let playlist_start = 0
+let playlist_end = how_get
 
 let users_find_start = 0
 let users_find_end = how_get
@@ -21,6 +21,8 @@ let music_find_start = 0
 let music_find_end = how_get
 let video_find_start = 0
 let video_find_end = how_get
+let playlist_find_start = 0
+let playlist_find_end = how_get
 
 let clear = true
 let find_str
@@ -60,6 +62,24 @@ function get_users_find(){
 }
 
 function get_musics_find(){
+	$.ajax({
+		type: $(this).attr('post'),
+		url: playlist_find_ajax,
+		data: {"find_name":find_str,"playlist_find_start":playlist_find_start,"playlist_find_end":playlist_find_end},
+		success: function (response){
+			if (clear){
+				musics.innerHTML = response
+				clear = false
+			}else{
+				musics.innerHTML += response
+			}
+			window.removeEventListener('scroll',scroll_event);
+			window.addEventListener('scroll', scroll_event_find)
+			playlist_find_start+=how_get
+			playlist_find_end+=how_get
+		}
+	})
+
 	$.ajax({
 		type: $(this).attr('post'),
 		url: music_find_ajax,
@@ -116,6 +136,16 @@ function get_users(){
 function get_musics(){
 	$.ajax({
 		type: $(this).attr('post'),
+		url: playlist_get_ajax,
+		data: {"playlist_start":playlist_start,"playlist_end":playlist_end},
+		success: function (response){
+			musics.innerHTML += response
+			playlist_start+=how_get
+			playlist_end+=how_get
+		}
+	})
+	$.ajax({
+		type: $(this).attr('post'),
 		url: music_get_ajax,
 		data: {"type":"user_music_add","music_start":music_start,"music_end":music_end},
 		success: function (response){
@@ -125,7 +155,6 @@ function get_musics(){
 		}
 	})
 }
-
 
 function get_videos(){
 	$.ajax({

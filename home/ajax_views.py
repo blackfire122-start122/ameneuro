@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist
+from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist,Video
 from .forms import ThemeForm,MessageForm,AllTheme
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseForbidden
 from ameneuro.settings import get_posts_how, get_mes_how, get_user_how
@@ -22,9 +22,23 @@ def comment_ajax(request):
 
 	return render(request,"home/ajax_html/comments.html",{"post_id":post.id ,"comments":post.comments.all()})
 
+@login_required(login_url='login')
+def comment_video_ajax(request):
+	try:
+		if not all([request.GET.get("start_comments").isdigit(),request.GET.get("end_comments").isdigit(),request.GET.get("id").isdigit()]):return HttpResponseBadRequest()
+		if int(request.GET.get("start_comments"))-int(request.GET.get("end_comments"))!=-20:return HttpResponse('Payload Too Large', status=413)
+	except:return HttpResponseBadRequest()
+
+	try:
+		video = Video.objects.get(pk=request.GET["id"])
+		comments = video.comments.all()[int(request.GET["start_comments"]):int(request.GET["end_comments"])]
+	except:return HttpResponseNotFound()
+
+	return render(request,"home/ajax_html/comments_video.html",{"video_id":video.id,"comments":comments})
+
 def post_ajax(request):
 	posts = {}
-	if request.GET["id"]:
+	if request.GET.get("id"):
 		try:
 			if not request.GET["id"].isdigit():return HttpResponseBadRequest()
 		except:return HttpResponseBadRequest()
@@ -35,6 +49,14 @@ def post_ajax(request):
 
 	if not posts:return HttpResponse("None post", status=200)
 	return render(request, "home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET})
+
+def video_ajax(request):
+	try:videos = get_videos(request)
+	except: return HttpResponseNotFound()
+
+	if not videos:return HttpResponse("None video", status=200)
+	return render(request, "home/ajax_html/videos.html",{"videos":videos,"data_get":request.GET})
+
 
 @login_required(login_url='login')
 def chat_options_ajax(request):
@@ -100,8 +122,14 @@ def send_file_mes_ajax(request):
 def musics_all_ajax(request):
 	if request.GET["type"] == "music_share":mus = request.user.music_shared
 	elif request.GET["type"] == "playlist":
-		try:mus = Playlist.objects.get(pk=request.GET["ps"]).musics
+		try:
+			if not all([request.GET.get("musics_start").isdigit(),request.GET.get("musics_end").isdigit()]):return HttpResponseBadRequest()
+			if int(request.GET.get("musics_start"))-int(request.GET.get("musics_end"))!=-20:return HttpResponse('Payload Too Large', status=413)
+		except:return HttpResponseBadRequest()
+
+		try:mus = Playlist.objects.get(pk=request.GET["ps"]).musics.all()[int(request.GET["musics_start"]):int(request.GET["musics_end"])]
 		except:return HttpResponseNotFound()
+
 	elif request.GET["type"] == "user_music_add":
 		try:mus = User.objects.get(pk=request.GET["id"]).music
 		except:return HttpResponseNotFound()
@@ -213,6 +241,30 @@ def music_find_ajax(request):
 		return render(request,"home/ajax_html/all_music.html",{"music":music,"data_get":request.GET,'playlist':ps})
 
 	return render(request,"home/ajax_html/all_music.html",{"music":music,"data_get":request.GET})
+
+@login_required(login_url='login')
+def playlist_get_ajax(request):
+	try:
+		if not all([request.GET["playlist_start"].isdigit(), request.GET["playlist_end"].isdigit()]):return HttpResponseBadRequest()
+		if int(request.GET["playlist_start"])-int(request.GET["playlist_end"])!=-20:return HttpResponse('Payload Too Large', status=413)
+	except:return HttpResponseBadRequest()
+
+	try:ps = Playlist.objects.all()[int(request.GET["playlist_start"]):int(request.GET["playlist_end"])]
+	except: return HttpResponseNotFound()
+	
+	return render(request,"home/ajax_html/playlists.html",{"playlists":ps})
+
+@login_required(login_url='login')
+def playlist_find_ajax(request):
+	try:
+		if not all([request.GET["playlist_find_start"].isdigit(), request.GET["playlist_find_end"].isdigit()]):return HttpResponseBadRequest()
+		if int(request.GET["playlist_find_start"])-int(request.GET["playlist_find_end"])!=-20:return HttpResponse('Payload Too Large', status=413)
+	except:return HttpResponseBadRequest()
+
+	try:ps = Playlist.objects.filter(name__contains=request.GET["find_name"])[int(request.GET["playlist_find_start"]):int(request.GET["playlist_find_end"])]
+	except:return HttpResponseNotFound()
+
+	return render(request,"home/ajax_html/playlists.html",{"playlists":ps})
 
 def video_get_ajax(request):
 	return JsonResponse({"data":"while not functions"})

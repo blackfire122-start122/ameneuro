@@ -4,15 +4,19 @@
 {% block title %}Post{% endblock title %}
 
 {% block content_header %}
-	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/post.css' %}">
+
 {% endblock content_header %}
 
 {% block content %}	
 	<div class="posts"></div>
 {% endblock content %}
 
-{% block start_scripts %}
+{% block end_scripts %}
 	<script>
 		let post_id = "{{ id }}"
+		let comment_ajax = "{% url 'comment_ajax' %}"
 	</script>
-{% endblock start_scripts %}
+	<script src="{% static 'home/js/posts.js' %}"></script>
+
+{% endblock end_scripts %}

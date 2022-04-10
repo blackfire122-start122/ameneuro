@@ -5,6 +5,7 @@
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/find.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/users.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/playlists.css' %}">
 	<h4 class="userregname">{{ user }}</h4>
 	<input onkeyup="find_inp(this)" class='find_user' type="text">
 {% endblock content_header %}
@@ -25,10 +26,12 @@
 		let user_find_ajax = "{% url 'user_find_ajax' %}"
 		let music_find_ajax = "{% url 'music_find_ajax' %}"
 		let video_find_ajax = "{% url 'video_find_ajax' %}"
+		let playlist_find_ajax = "{% url 'playlist_find_ajax' %}"
 
 		let users_get_ajax = "{% url 'users_get_ajax' %}"
 		let music_get_ajax = "{% url 'music_get_ajax' %}"
 		let video_get_ajax = "{% url 'video_get_ajax' %}"
+		let playlist_get_ajax = "{% url 'playlist_get_ajax' %}"
 	</script>
 	<script src="{% static 'home/js/find.js' %}"></script>
 	<script src='{% static "home/js/music_all.js" %}' ></script>

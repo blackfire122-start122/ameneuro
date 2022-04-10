@@ -75,3 +75,7 @@ main{
 .music_all, .playlists{
 	margin-top: 1%;
 }
+
+.m_s_img{
+  height: 2em;
+}

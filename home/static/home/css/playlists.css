@@ -23,3 +23,10 @@
 .ps_link_user{
 	text-decoration: none;
 }
+
+.play_in_all_ps{
+  margin-top: 25px;
+  width: 20px;
+  position: absolute;
+  right: 0;
+}

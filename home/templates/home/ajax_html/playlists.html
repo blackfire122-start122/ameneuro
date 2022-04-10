@@ -8,6 +8,6 @@
 		</div>
 		<time class="time_ps">{{ p.date }}</time>
 		<a href='{% url "change_playlist" p %}'> Change </a>
-		<img onclick="play_in_all(this,{{p.id}},'playlist')" class="play_in_all" src="{% static 'home/images/play_in_all.png' %}">
+		<img onclick="play_in_all(this,{{p.id}},'playlist')" class="play_in_all_ps" src="{% static 'home/images/play_in_all.png' %}">
 	</div>
 {% endfor %}

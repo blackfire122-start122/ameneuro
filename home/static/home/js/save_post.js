@@ -1,6 +1,5 @@
 let posts_save = document.querySelector(".posts_save")
 
-let how_get = 20
 let start_post = 0
 let end_post = how_get
 

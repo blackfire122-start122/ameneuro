@@ -19,7 +19,10 @@ urlpatterns = [
     path('post/<int:id>', views.post, name='post'),
     path('add_post', views.add_post.as_view(), name='add_post'),
 
+    path('video/<str:name>', views.video, name='video'),
+
     path('stream_post/<int:id>',views.streaming_post,name='stream_post'),
+    path('stream_video/<int:id>',views.stream_video,name='stream_video'),
     path('stream_mess/<int:id>',views.streaming_mess,name='stream_mess'),
     path('streaming_music/<int:id>',views.streaming_music,name='streaming_music'),
     

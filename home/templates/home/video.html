@@ -1,0 +1,50 @@
+{% extends 'home/shablons/base.html' %}
+{% load static %}
+
+{% block title %}Post{% endblock title %}
+
+{% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/video.css' %}">
+{% endblock content_header %}
+
+{% block content %}	
+	<video controls class="video_video" src="{% url 'stream_video' video.id %}"></video>
+	<div class='menu_video'>
+		<img class="img_user_video" src="{{ video.user_pub.img.url }}">
+		<h3>{{ video.name|truncatechars:25 }}</h3>
+		<time class="time">{{ video.date }}</time>
+		{% if user in video.likes.all %}
+			<img style="opacity:0.5" class="like" src="{{ user.theme_all.like_img.url }}" alt="">
+		{% else %}			    
+			<img class="like" onclick="like_video(this,'{{ video.id }}')" src="{{ user.theme_all.like_img.url }}">
+		{% endif %}
+		<span id="like_count">{{ video.likes.count }}</span>
+	</div>
+
+	<p>{{ video.description }}</p>
+
+	<div class="comments_btn">
+		<div>
+			<img class="comments_img" onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
+			<span>{{ video.comments.count }}</span>
+		</div>
+
+		<h3>Comments</h3>
+	</div>
+	<div class="comments"></div>
+
+	<div class="inp_sub_com">
+		<input placeholder="Comment " class="inp_comment" type="text">
+		<button class="com_btn" value="{{ video.id }}" onclick="comment_video_user(this)">Comment</button>
+	</div>
+
+
+{% endblock content %}
+
+{% block end_scripts %}
+	<script>
+		let comment_video_ajax = "{% url 'comment_video_ajax' %}"
+		let id_video = '{{ video.id }}'
+	</script>
+	<script src="{% static 'home/js/video.js' %}"></script>
+{% endblock end_scripts %}

@@ -325,6 +325,33 @@ class UserConsumer(AsyncWebsocketConsumer):
             return
         ps.musics.remove(self.text_data_json["music_id"])
 
+    @database_sync_to_async
+    def like_video(self):
+        Video.objects.get(pk=self.text_data_json["id"]).likes.add(self.scope["user"])
+
+    @database_sync_to_async
+    def comment_video_user(self):
+        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
+        com.save()
+
+        video = Video.objects.get(pk=self.text_data_json["id"])
+        video.comments.add(com.id)
+
+    @database_sync_to_async
+    def comment_video_reply(self):
+        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
+        com.parent = Comment.objects.get(pk=int(self.text_data_json["com_id"]))
+        com.save()
+
+        video = Video.objects.get(pk=int(self.text_data_json["video_id"]))
+        video.comments.add(com.id)
+        type_f = TypeFile.objects.get(type_f="video")
+        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=video.file,readeble=False,type_f=type_f)
+        
+        ma.save()
+        com.parent.user.message_activity.add(ma)
+
+
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
@@ -412,8 +439,19 @@ class UserConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json['type']=='add_to_playlists':
             await self.add_to_playlists()
+
         elif self.text_data_json['type']=='not_add_to_playlists':
             await self.not_add_to_playlists()
+
+        elif self.text_data_json['type']=='like_video':
+            await self.like_video()
+            return
+        elif self.text_data_json['type']=='comment_video_user':
+            await self.comment_video_user()
+            return
+        elif self.text_data_json['type']=='comment_video_reply':
+            await self.comment_video_reply()
+            return
 
         await self.channel_layer.group_send(
             self.room_group_name,{

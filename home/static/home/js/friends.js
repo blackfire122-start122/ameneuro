@@ -1,7 +1,5 @@
 friends = document.querySelector(".friends")
 
-let how_get = 20
-
 let friends_start = 0
 let friends_end = how_get
 

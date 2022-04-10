@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="{% static 'home/css/shablons/base.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/post.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
 	
 	<title>{% block title %}{% endblock title %}</title>
 	{% include 'home/shablons/css_theme.html' %}
@@ -42,7 +43,6 @@
 		</script>
 		<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
 		<script src="{% static 'home/js/user_consumer.js' %}"></script>
-		<script src="{% static 'home/js/posts.js' %}"></script>
 		<script src='{% static "home/js/music_all.js" %}'></script>
 		{% block end_scripts %}
 		{% endblock end_scripts %}
