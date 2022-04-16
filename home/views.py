@@ -10,9 +10,10 @@ from .forms import (RegisterForm,
 					PlaylistForm)
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import StreamingHttpResponse, HttpResponseNotFound, HttpResponseBadRequest
+from django.http import StreamingHttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.generic import ListView, TemplateView, CreateView
-from ameneuro.settings import get_posts_how, get_mes_how, get_user_how
+from ameneuro.settings import get_posts_how, get_user_how
+from django.core.files.base import ContentFile
 
 from .services import *
 
@@ -39,7 +40,6 @@ class home(LoginRequiredMixin,TemplateView):
 		request.session["end_rec_video_user"] = get_user_how
 		request.session["defolt_video"] = False
 
-		
 		self.chat_not_read_count = 0
 		for i in request.user.chats.all():
 			if i.messages.last() and not i.messages.last().readeble and i.messages.last().user != request.user:
@@ -86,8 +86,9 @@ class chat(LoginRequiredMixin,TemplateView):
 		try:self.chat = Chat.objects.get(chat_id=self.kwargs["chat_id"])
 		except:return HttpResponseNotFound()
 		
+		if not request.user in self.chat.users.all():return HttpResponseForbidden()
+
 		self.error = ""
-		request.session['end_mes_wath'] = 0
 		return super().get(request,*args, **kwargs)
 	
 	def post(self, request, *args, **kwargs):
@@ -158,6 +159,7 @@ class friends(LoginRequiredMixin, TemplateView):
 	login_url = 'login'
 
 def post(request,id):return render(request, "home/post.html",{"id":id})
+
 def video(request,name):
 	try:video = Video.objects.get(name=name)
 	except:return HttpResponseNotFound()
@@ -220,6 +222,10 @@ class user_change(LoginRequiredMixin,TemplateView):
 		self.form_theme = AllThemeForm(instance=request.user.theme_all)
 		self.default_themes = AllTheme.objects.filter(default=True)
 		self.error = ''
+		self.fields = []
+
+		for i in request.user.theme_all.__dict__:
+			if i.endswith("img"):self.fields.append(i)
 
 		return super().get(request,*args, **kwargs)
 
@@ -228,7 +234,11 @@ class user_change(LoginRequiredMixin,TemplateView):
 		self.form_theme = AllThemeForm(instance=request.user.theme_all)
 		self.default_themes = AllTheme.objects.filter(default=True)
 		self.error = ''
-
+		self.fields = []
+		
+		for i in request.user.theme_all.__dict__:
+			if i.endswith("img"):self.fields.append(i)
+			
 		if request.POST['submit'] == 'Save changes':
 			self.form_user = ChangeForm(request.POST,request.FILES,instance=request.user)
 			if self.form_user.is_valid():
@@ -245,10 +255,26 @@ class user_change(LoginRequiredMixin,TemplateView):
 				new_theme.pk = None
 				new_theme.default = False
 				new_theme.save()
+
 				request.user.theme_all = new_theme
 			self.form_theme = AllThemeForm(request.POST,request.FILES,instance=request.user.theme_all)
+
 			if self.form_theme.is_valid():
 				theme_all_update = self.form_theme.save()
+
+				if request.POST['submit'] == 'Save new theme':
+					fields = []
+					for i in theme_all_update.__dict__:
+						if i.endswith("img"):fields.append(i)
+
+					for i in fields:
+						if getattr(theme_all_update,i).name:
+							new_file = ContentFile(getattr(theme_all_update,i).read())
+							new_file.name = getattr(theme_all_update,i).name.split("/")[-1]
+							theme_all_update.__dict__[i] = new_file
+
+					theme_all_update.save()
+
 				request.user.theme_all = theme_all_update
 				request.user.themes_all.add(theme_all_update)
 				request.user.save()
@@ -261,6 +287,7 @@ class user_change(LoginRequiredMixin,TemplateView):
 		context["form_theme"]= self.form_theme
 		context["default_themes"]= self.default_themes
 		context["error"]= self.error
+		context["fields"]= self.fields
 
 		return context
 

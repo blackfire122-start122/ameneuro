@@ -14,7 +14,6 @@ function add_chat(btn) {
 
 	btn.disabled=true
 	btn.style.display = "none"
-	document.getElementById(btn.value).style.display = "none"
 }
 
 function add_friend(btn) {

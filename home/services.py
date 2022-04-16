@@ -5,7 +5,7 @@ from .models import Post, Music, Chat, Message, User, Video
 
 import random
 import string
-from ameneuro.settings import get_videos_how, get_posts_how, get_mes_how, get_user_how
+from ameneuro.settings import get_videos_how, get_posts_how, get_elements_how, get_user_how
 
 strings = string.ascii_letters+string.digits
 
@@ -178,3 +178,9 @@ def get_videos(request):
     request.session["start_element_video"]=start
     request.session["end_element_video"]=end
     return videos
+
+def defence_isdigit(*args):
+    return all([str(i).isdigit() for i in args])
+
+def defence_ptl(a,b):
+    return int(a)-int(b)==-get_elements_how

@@ -111,6 +111,20 @@ class AllTheme(models.Model):
 	music_img = models.ImageField(upload_to="theme_all/music_imgs",default=None,null=True,blank=True)
 	save_img = models.ImageField(upload_to="theme_all/save_img",default=None,null=True,blank=True)
 	add_img = models.ImageField(upload_to="theme_all/add_img",default=None,null=True,blank=True)
+	chats_img = models.ImageField(upload_to="theme_all/chats_img",default=None,null=True,blank=True)
+	find_img = models.ImageField(upload_to="theme_all/find_img",default=None,null=True,blank=True)
+	friends_img = models.ImageField(upload_to="theme_all/friends_img",default=None,null=True,blank=True)
+	activity_img = models.ImageField(upload_to="theme_all/activity_img",default=None,null=True,blank=True)
+	menu_img = models.ImageField(upload_to="theme_all/menu_img",default=None,null=True,blank=True)
+	settings_img = models.ImageField(upload_to="theme_all/settings_img",default=None,null=True,blank=True)
+	play_in_all_img = models.ImageField(upload_to="theme_all/play_in_all_img",default=None,null=True,blank=True)
+	ai_img = models.ImageField(upload_to="theme_all/ai_img",default=None,null=True,blank=True)
+	no_media_img = models.ImageField(upload_to="theme_all/no_media_img",default=None,null=True,blank=True)
+	file_send_img = models.ImageField(upload_to="theme_all/file_send_img",default=None,null=True,blank=True)
+	options_img = models.ImageField(upload_to="theme_all/options_img",default=None,null=True,blank=True)
+	pause_img = models.ImageField(upload_to="theme_all/pause_img",default=None,null=True,blank=True)
+	play_img = models.ImageField(upload_to="theme_all/play_img",default=None,null=True,blank=True)
+	music_share_img = models.ImageField(upload_to="theme_all/music_share_img",default=None,null=True,blank=True)
 	
 	def __str__(self):
 		return self.name
@@ -163,99 +177,48 @@ def Playlist_delete(sender, instance, **kwargs):
 	try:instance.img.delete(False)
 	except:pass
 
+
 @receiver(pre_delete, sender=AllTheme)
 def AllTheme_delete(sender, instance, **kwargs):
 	try:
 		old_instance = AllTheme.objects.get(id=instance.id)
 
-		fields = {"comment_img":True,
-			"like_img":True,
-			"back_img":True,
-			"fon_img":True,
-			"music_img":True,
-			"save_img":True,
-			"add_img":True,
-		}
+		fields = {}
+		for i in old_instance.__dict__:
+			if i.endswith("img"):fields[i] = True
 
 		for i in AllTheme.objects.filter(default=True):
-			if i.comment_img == old_instance.comment_img:
-				fields["comment_img"] = False
-			if i.like_img == old_instance.like_img:
-				fields["like_img"] = False
-			if i.back_img == old_instance.back_img:
-				fields["back_img"] = False
-			if i.fon_img == old_instance.fon_img:
-				fields["fon_img"] = False
-			if i.music_img == old_instance.music_img:
-				fields["music_img"] = False
-			if i.save_img == old_instance.save_img:
-				fields["save_img"] = False
-			if i.add_img == old_instance.add_img:
-				fields["add_img"] = False
-				
-
+			for e in fields:
+				if i.__dict__.get(e) == old_instance.__dict__.get(e):
+					fields[e] = False
+		
 		for i in fields:
-			if fields[i] and i == "comment_img":
-				old_instance.comment_img.delete(False)
-			if fields[i] and i == "like_img":
-				old_instance.like_img.delete(False)
-			if fields[i] and i == "back_img":
-				old_instance.back_img.delete(False)
-			if fields[i] and i == "fon_img":
-				old_instance.fon_img.delete(False)
-			if fields[i] and i == "music_img":
-				old_instance.music_img.delete(False)
-			if fields[i] and i == "save_img":
-				old_instance.save_img.delete(False)	
-			if fields[i] and i == "add_img":
-				old_instance.add_img.delete(False)	
+			if fields[i]:
+				getattr(old_instance,i).delete(False)
 	except:pass
 
 @receiver(pre_save, sender=AllTheme)
-def AllTheme_delete(sender, instance, **kwargs):
+def AllTheme_delete_old(sender, instance, **kwargs):
 	try:
-		old_instance = AllTheme.objects.get(id=instance.id)
+		if instance.id:
+			old_instance = AllTheme.objects.get(id=instance.id)
 
-		fields = {"comment_img":True,
-			"like_img":True,
-			"back_img":True,
-			"fon_img":True,
-			"music_img":True,
-			"save_img":True,
-			"add_img":True,
-		}
+			fields = {}
+			for i in old_instance.__dict__:
+				if i.endswith("img"):fields[i] = True
 
-		for i in AllTheme.objects.filter(default=True):
-			if i.comment_img == old_instance.comment_img:
-				fields["comment_img"] = False
-			if i.like_img == old_instance.like_img:
-				fields["like_img"] = False
-			if i.back_img == old_instance.back_img:
-				fields["back_img"] = False
-			if i.fon_img == old_instance.fon_img:
-				fields["fon_img"] = False
-			if i.music_img == old_instance.music_img:
-				fields["music_img"] = False
-			if i.save_img == old_instance.save_img:
-				fields["save_img"] = False
-			if i.add_img == old_instance.add_img:
-				fields["add_img"] = False
+			for i in AllTheme.objects.filter(default=True):
+				for e in fields:
+					if i.__dict__.get(e) == old_instance.__dict__.get(e):
+						fields[e] = False
 
-		for i in fields:
-			if fields[i] and i == "comment_img":
-				old_instance.comment_img.delete(False)
-			if fields[i] and i == "like_img":
-				old_instance.like_img.delete(False)
-			if fields[i] and i == "back_img":
-				old_instance.back_img.delete(False)
-			if fields[i] and i == "fon_img":
-				old_instance.fon_img.delete(False)
-			if fields[i] and i == "music_img":
-				old_instance.music_img.delete(False)
-			if fields[i] and i == "save_img":
-				old_instance.save_img.delete(False)	
-			if fields[i] and i == "add_img":
-				old_instance.add_img.delete(False)				
+			for i in fields:
+				if old_instance.__dict__.get(i) == instance.__dict__.get(i):
+					fields[i] = False
+
+			for i in fields:
+				if fields[i]:
+					getattr(old_instance,i).delete(False)
 	except:pass
 
 @receiver(pre_save, sender=User)
@@ -274,22 +237,14 @@ def User_delete(sender, instance, **kwargs):
 
 @receiver(pre_delete, sender=Post)
 def Post_delete(sender, instance, **kwargs):
-	try:
-		instance.file.delete(False)
+	try:instance.file.delete(False)
 	except:pass
 
 @receiver(pre_delete, sender=Theme)
 def Theme_delete(sender, instance, **kwargs):
 	try:
 		old_instance = Theme.objects.get(id=instance.id)
-		if old_instance.background.url != '/themes/default.jpg':instance.background.delete(False)
-	except:pass
-
-@receiver(pre_save, sender=Theme)
-def Theme_delete_old(sender, instance, **kwargs):
-	try:
-		old_instance = Theme.objects.get(id=instance.id)
-		if instance.background.url!=old_instance.background.url:old_instance.background.delete(False)
+		instance.background.delete(False)
 	except:pass
 
 @receiver(pre_delete, sender=Music)
@@ -303,4 +258,11 @@ def Messge_delete(sender, instance, **kwargs):
 	try:
 		if instance.file.url[:6] != "/posts":
 			instance.file.delete(False)
+	except:pass
+
+@receiver(pre_delete, sender=Video)
+def Video_delete(sender, instance, **kwargs):
+	try:
+		instance.file.delete(False)
+		instance.preview.delete(False)
 	except:pass

@@ -38,12 +38,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
         try:self.chat = Chat.objects.get(chat_id=self.room_name)
         except: self.close()
 
-        self.text_data_json['musics_url'] = []
+        # self.text_data_json['musics_url'] = []
 
-        for u in self.chat.users.all():
-            for m in u.music.all():
-                if not ('/streaming_music/'+str(m.id),m.id) in self.text_data_json['musics_url']:
-                    self.text_data_json['musics_url'].append(('/streaming_music/'+str(m.id),m.id))
+        # for u in self.chat.users.all():
+        #     for m in u.music.all():
+        #         if not ('/streaming_music/'+str(m.id),m.id) in self.text_data_json['musics_url']:
+        #             self.text_data_json['musics_url'].append(('/streaming_music/'+str(m.id),m.id))
 
     @database_sync_to_async
     def new_mes(self,text):
@@ -294,7 +294,8 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def delete_theme_all(self):
-        theme_del = AllTheme.objects.get(pk = self.text_data_json["id"])
+        try:theme_del = AllTheme.objects.get(pk = self.text_data_json["id"])
+        except:pass
         if not theme_del.default:theme_del.delete()
 
     @database_sync_to_async

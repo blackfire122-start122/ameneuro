@@ -7,13 +7,13 @@
 				<h4 class="name_user_post">{{ p.user_pub }}</h4>
 			</a>
 			{% if data_get.type != "play_in_all" %}
-				<img id="{{ p.id }}" onclick="options(this)" class="options_post_img" src="{% static 'home/images/options.png' %}" alt="">
+				<img id="{{ p.id }}" onclick="options(this)" class="options_post_img" src="{{ user.theme_all.options_img.url }}" alt="">
 
 				<div class="options_menu" id='opt_{{ p.id }}'>
 					<button value="{% url 'post' p.id %}" onclick="copy_link(this)" class="link_options_menu" href="">Скопіювати</button>
-
-					<button onclick="share('{{ p.id }}')" class="link_options_menu">Поширити</button>
-
+					{% if not user.is_anonymous %}
+						<button onclick="share('{{ p.id }}')" class="link_options_menu">Поширити</button>
+					{% endif %}
 					{% if p.user_pub == user %}
 						<button onclick="delete_post({{ p.id }})" class="link_options_menu">Видалити</button>
 					{% endif %}
@@ -34,7 +34,7 @@
 					<h4 class="name_mus">audio</h4>
 					<audio class="audio_ap" id="audio_play_in_all" src="{% url 'stream_post' p.id %}"></audio>
 					<div class="controls">
-						<button value="play_in_all" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+						<button value="play_in_all" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{{ user.theme_all.pause_img.url }}"></button>
 						<input id="timeline_play_in_all" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
 					</div>
 				</div>
@@ -43,10 +43,10 @@
 					<h4 class="name_mus">audio</h4>
 					<audio class="audio_ap" id="audio_{{ p.id }}" src="{% url 'stream_post' p.id %}"></audio>
 					<div class="controls">
-						<button value="{{ p.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+						<button value="{{ p.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{{ user.theme_all.pause_img.url }}"></button>
 						<input id="timeline_{{ p.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
 					</div>
-					<img onclick="play_in_all(this,{{p.id}},'post')" class="play_in_all" src="{% static 'home/images/play_in_all.png' %}">
+					<img onclick="play_in_all(this,{{p.id}},'post')" class="play_in_all" src="{{ user.theme_all.play_in_all_img.url }}">
 				</div>
 			{% endif %}
 		{% endif %}

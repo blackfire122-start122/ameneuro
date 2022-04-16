@@ -123,7 +123,7 @@ CHANNEL_LAYERS = {
 
 get_posts_how = 5
 get_videos_how = 5
-get_mes_how = 20
+get_elements_how = 20
 get_user_how = 5
 
 CELERY_BROKER_URL = "redis://"+REDIS_HOST+":"+str(REDIS_PORT)+"/0"

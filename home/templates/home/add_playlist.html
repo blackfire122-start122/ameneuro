@@ -15,7 +15,7 @@
 			<input placeholder="name" type="text" name="name" maxlength="15" required="" id="id_name">
 			<input onchange="img_set(this)" type="file" name="img" accept="image/*" required="" id="id_img">
 			<label for="id_img">
-				<img class="img_input" src="{% static 'home/images/default.png' %}">
+				<img class="img_input" src="{{ user.theme_all.no_media_img.url }}">
 			</label>
 		</div>
 

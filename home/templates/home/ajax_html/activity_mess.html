@@ -1,4 +1,3 @@
-{% load static %}
 {% for ma in mess %}
 	<div class="ma" id="{{ ma.id }}">
 		<a href="{% url 'user' ma.from_user %}"><img class="img_from_user_ma" src="{{ ma.from_user.img }}"></a>
@@ -11,11 +10,11 @@
 		<p class="ma_text">{{ ma }} <br> <time class="ma_date">{{ ma.date }}</time></p>
 
 		{% if ma.type_f.type_f == 'img' %}
-			<img class="file_ma" src="{{ ma.file }}" onerror="this.src='{% static 'home/images/default.png' %}'">
+			<img class="file_ma" src="{{ ma.file }}" onerror="this.src='{{ user.theme_all.no_media_img }}'">
 		{% elif ma.type_f.type_f == 'audio' %}
-			<img class="file_ma" src="{{ user.theme_all.music_img }}" onerror="this.src='{% static 'home/imagesdefaulto.png' %}'">
+			<img class="file_ma" src="{{ user.theme_all.music_img }}" onerror="this.src='{{ user.theme_all.no_media_img }}'">
 		{% elif ma.type_f.type_f == 'video' %}
-			<video class="file_ma" src="{{ ma.file }}" onerror="this.src='{% static 'home/images/default.png' %}'"></video>
+			<video class="file_ma" src="{{ ma.file }}" onerror="this.src='{{ user.theme_all.no_media_img }}'"></video>
 		{% else %}
 			<div class="file_ma"></div>
 		{% endif %}

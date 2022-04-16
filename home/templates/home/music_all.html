@@ -5,7 +5,7 @@
 
 {% block content_header %}
 	<div class="shared_musics">
-		<img onclick="music_share(this)" class="m_s_img" src="{% static 'home/images/music_share.png' %}">
+		<img onclick="music_share(this)" class="m_s_img" src="{{ user.theme_all.music_share_img.url }}">
 		{% if user.music_shared.all.count != 0 %}
 		    <div class="red_point"></div>
 		{% endif %}

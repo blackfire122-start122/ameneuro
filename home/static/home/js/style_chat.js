@@ -1,5 +1,8 @@
 let rgba = hexToRgb(color_mes_bg)
 
+let mess_start = 0 
+let mess_end = how_get
+
 function toggleAudio_mess (btn) {
   audio = document.getElementById("audio_"+btn.value)
   timeline = document.getElementById("timeline_"+btn.value)
@@ -70,11 +73,12 @@ function file_see(e){
     div.remove()
   })
 
-
   div.append(span)
   div.append(file)
 
   document.body.append(div)
+
+  console.log(e)
 }
 
 musics_s = true
@@ -93,8 +97,10 @@ window.addEventListener('scroll',()=>{
   
   $.ajax({
     url: chat_get_mess_ajax,
-    data: {'chat_id':chat_id},
+    data: {'chat_id':chat_id,"mess_start":mess_start,"mess_end":mess_end},
     success: function (response) {
+      mess_start += how_get
+      mess_end += how_get
       msgs = msg_div.innerHTML 
       msg_div.innerHTML = response+msgs
       // window.scrollTo(0,1)
@@ -105,8 +111,10 @@ window.addEventListener('scroll',()=>{
 
 $.ajax({
   url: chat_get_mess_ajax,
-  data: {'chat_id':chat_id},
+  data: {'chat_id':chat_id,"mess_start":mess_start,"mess_end":mess_end},
   success: function (response) {
+    mess_start += how_get
+    mess_end += how_get
     msgs = msg_div.innerHTML 
     msg_div.innerHTML = response+msgs
     // window.scrollTo(0,1)

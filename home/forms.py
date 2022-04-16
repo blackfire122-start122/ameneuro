@@ -126,6 +126,21 @@ class AllThemeForm(ModelForm):
 				"music_img",
 				"save_img",
 				"add_img",
+				"chats_img",
+				"find_img",
+				"friends_img",
+				"activity_img",
+				"menu_img",
+				"settings_img",
+				"play_in_all_img",
+				"ai_img",
+				"no_media_img",
+				"file_send_img",
+				"options_img",
+				"pause_img",
+				"play_img",
+				"music_share_img",
+
 		]+fields_text
 		
 		widgets = {i:TextInput(attrs={'class':'form_name_change','placeholder':i}) for i in fields_text}

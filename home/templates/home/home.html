@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/post.css' %}">
 	<link rel="stylesheet" href="{% static 'home/css/all_music.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/videos.css' %}">
 </head>
 <body>
 	<header class="header-home">
@@ -47,17 +48,17 @@
 
 	<div class="menu_home_btn">
 		<div class="menu_home">
-			<a class="link_menu" href="{% url 'chats' %}"><div id ="chats" class="red_point"><p>{{ chat_not_read_count }}</p></div><img class="img_main_link" src="{% static 'home/images/direct.png' %}"></a>
+			<a class="link_menu" href="{% url 'chats' %}"><div id ="chats" class="red_point"><p>{{ chat_not_read_count }}</p></div><img class="img_main_link" src="{{ user.theme_all.chats_img.url }}"></a>
 
-			<a class="link_menu" href="{% url 'find' %}"><img class="img_main_link" src="{% static 'home/images/find.png' %}"></a>
+			<a class="link_menu" href="{% url 'find' %}"><img class="img_main_link" src="{{ user.theme_all.find_img.url }}"></a>
 
-			<a class="link_menu" href="{% url 'friends' %}"><div id ="friends" class="red_point"><p>0</p></div><img class="img_main_link" src="{% static 'home/images/user.png' %}"></a>
+			<a class="link_menu" href="{% url 'friends' %}"><div id ="friends" class="red_point"><p>0</p></div><img class="img_main_link" src="{{ user.theme_all.friends_img.url }}"></a>
 
 			<a class="link_menu" href="{% url 'musics' %}"><div id ="musics" class="red_point"><p>{{ music_shared }}</p></div><img class="img_main_link" src="{{ user.theme_all.music_img }}"></a>
 
-			<a class="link_menu" href="{% url 'activity' %}"><div id ="activity" class="red_point"><p>{{ message_activity }}</p></div><img class="img_main_link" src="{% static 'home/images/activity.png' %}"></a>
+			<a class="link_menu" href="{% url 'activity' %}"><div id ="activity" class="red_point"><p>{{ message_activity }}</p></div><img class="img_main_link" src="{{ user.theme_all.activity_img.url }}"></a>
 		</div>
-		<img onclick="menu_show(this)" class="link_menu" src="{% static 'home/images/menu.png' %}">
+		<img onclick="menu_show(this)" class="link_menu" src="{{ user.theme_all.menu_img.url }}">
 		<div id ="menu_id" class="red_point"></div>
 	</div>
 
@@ -81,8 +82,8 @@
 		let post_ajax = "{% url 'post_ajax' %}"
 		let video_ajax = "{% url 'video_ajax' %}"
 		let share_ch_ajax = "{% url 'share_ch_ajax' %}"
-		let play_img = "{% static 'home/images/play.png' %}"
-		let pause_img = "{% static 'home/images/pause.png' %}"
+		let play_img = "{{ user.theme_all.play_img.url }}"
+		let pause_img = "{{ user.theme_all.pause_img.url }}"
 		let img_left = "{% static 'home/images/left.png' %}"
 		let img_right = "{% static 'home/images/right.png' %}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"

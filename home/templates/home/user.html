@@ -7,10 +7,10 @@
 	<link rel="stylesheet" href="{% static 'home/css/users.css' %}">
 	{% if user_reg == user %}
 		<a href="{% url 'user_change' %}">
-			<img class="set_img" src="{% static 'home/images/settings.png' %}" alt="">
+			<img class="set_img" src="{{ user.theme_all.settings_img.url }}">
 		</a>
 		<a href="{% url 'recognize' %}">
-			<img class="ai_img" src="{% static 'home/images/ai.png' %}" alt="">
+			<img class="ai_img" src="{{ user.theme_all.ai_img.url }}">
 		</a>
 	{% endif %}
 {% endblock content_header %}

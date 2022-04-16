@@ -58,17 +58,19 @@ playlists add *
 change playlists *
 playlists music dunamic *
 find music and playlists *
-videos as mini-youtube *
+videos as mini-youtube * ***
 pia bags *
+chats play in all bags *
+pages for not autoruzations *
+models pre_ *
+if default or no add 2 class as indentufiator *
+theme_all bags *
+work with dark theme *
 
-work with dark theme
-models pre_
 ajax optimize
-chats musics many load
-chats play in all bags 
+chats musics many load *** *** ***
 chat theme work
 optimize static
-pages for not autoruzations 
 playlists share
 
 defence:

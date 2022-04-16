@@ -14,15 +14,15 @@ m_time = true
 function onmessage(e){
 	let data = JSON.parse(e.data)
 	if (data['type']=='first_msg'){
-		for (i=0;i<data['musics_url'].length;i++){
+		// for (i=0;i<data['musics_url'].length;i++){
 
-			musics.innerHTML += `<div class="audio-player"><h4 class="name_mus">` + "name" +
-			`</h4><audio onseeked="seeked_m(this)" onplay="play_m(this)" onpause="pause_m(this)" class="music" id="` + data['musics_url'][i][1] + 
-			`" src="` + data['musics_url'][i][0] + 
-			`"></audio><div class="controls"><button value="` + data['musics_url'][i][1] + 
-			`" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="/static/home/images/pause.png" alt=""></button><input id="timeline_` + data['musics_url'][i][1] + 
-			`" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0"></div></div>`	
-		}
+		// 	musics.innerHTML += `<div class="audio-player"><h4 class="name_mus">` + "name" +
+		// 	`</h4><audio onseeked="seeked_m(this)" onplay="play_m(this)" onpause="pause_m(this)" class="music" id="` + data['musics_url'][i][1] + 
+		// 	`" src="` + data['musics_url'][i][0] + 
+		// 	`"></audio><div class="controls"><button value="` + data['musics_url'][i][1] + 
+		// 	`" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="/static/home/images/pause.png" alt=""></button><input id="timeline_` + data['musics_url'][i][1] + 
+		// 	`" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0"></div></div>`	
+		// }
 
 	}else if (data['type']=='msg'){
 		conn_u_f.send(JSON.stringify({'type':'msg','msg':data["msg"],'from_user': user, "from_chat":chat}))
@@ -53,7 +53,8 @@ function onmessage(e){
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
 		end_readable_send()
-
+		scrollToEndPage()
+		
 	}else if(data['type']=='new_theme'){
 		conn_u_f.send(JSON.stringify({'type':'msg','msg':data['msg_new_theme'],'from_user': user, "from_chat":chat}))
 
@@ -277,57 +278,57 @@ function end_readable_send(){
 	}
 }
 
-function play_m(music_e){
-	update_time = false
-	setInterval(()=>{
-		update_time = true
-	},1000)
-	timeline = document.getElementById("timeline_"+music_e.id)
-	all_pause()
-	music.play()
-	music_e.ontimeupdate = ()=>{
-		if (update_time){
-			const percentagePosition = (100*music_e.currentTime) / music_e.duration
-			timeline.style.backgroundSize = `${percentagePosition}% 100%`
-			timeline.value = percentagePosition
-			update_time = false
-			if(timeline.value >= 100){
-				toggleAudio(music_e.parentNode.nextSibling.childNodes[2].childNodes[0])
-			}
-		}
-	}
-	conn.send(JSON.stringify({'type':'play_mus','m_id':music_e.id}))
-	style_play_audio(music_e)
+// function play_m(music_e){
+// 	update_time = false
+// 	setInterval(()=>{
+// 		update_time = true
+// 	},1000)
+// 	timeline = document.getElementById("timeline_"+music_e.id)
+// 	all_pause()
+// 	music.play()
+// 	music_e.ontimeupdate = ()=>{
+// 		if (update_time){
+// 			const percentagePosition = (100*music_e.currentTime) / music_e.duration
+// 			timeline.style.backgroundSize = `${percentagePosition}% 100%`
+// 			timeline.value = percentagePosition
+// 			update_time = false
+// 			if(timeline.value >= 100){
+// 				toggleAudio(music_e.parentNode.nextSibling.childNodes[2].childNodes[0])
+// 			}
+// 		}
+// 	}
+// 	conn.send(JSON.stringify({'type':'play_mus','m_id':music_e.id}))
+// 	style_play_audio(music_e)
 
-}
+// }
 
-function pause_m(music){
-	all_pause()
-	if (m_pause){
-		conn.send(JSON.stringify({'type':'pause_mus','m_id':music.id}))
-		style_pause_audio(music)
-	}
-	m_pause = false
-}
+// function pause_m(music){
+// 	all_pause()
+// 	if (m_pause){
+// 		conn.send(JSON.stringify({'type':'pause_mus','m_id':music.id}))
+// 		style_pause_audio(music)
+// 	}
+// 	m_pause = false
+// }
 
-function seeked_m(music){
-	all_pause()
-	if (m_time){
-		conn.send(JSON.stringify({'type':'seeked','m_id':music.id,'time':music.currentTime}))
-		music.play()
-	}
-	m_time = false
-}
+// function seeked_m(music){
+// 	all_pause()
+// 	if (m_time){
+// 		conn.send(JSON.stringify({'type':'seeked','m_id':music.id,'time':music.currentTime}))
+// 		music.play()
+// 	}
+// 	m_time = false
+// }
 
-function all_pause(){
-	let musics = document.getElementsByClassName('music')
-	for (i=0;i<musics.length;i++){
-		if (musics[i]!=music){
-			musics[i].ontimeupdate = null
-			musics[i].pause()
-		}
-	}
-}
+// function all_pause(){
+// 	let musics = document.getElementsByClassName('music')
+// 	for (i=0;i<musics.length;i++){
+// 		if (musics[i]!=music){
+// 			musics[i].ontimeupdate = null
+// 			musics[i].pause()
+// 		}
+// 	}
+// }
 
 function close_popups(){
 	document.querySelector(".click_mus").style.display = "none"
@@ -406,29 +407,29 @@ function inp_msg_user(inp){
 	 }
 }
 
-function toggleAudio (btn) {
-	music = document.getElementById(btn.value)
-	if (music.paused) {
-		music.play()
-	} else {
-		music.pause()
-	}
-}
+// function toggleAudio (btn) {
+// 	music = document.getElementById(btn.value)
+// 	if (music.paused) {
+// 		music.play()
+// 	} else {
+// 		music.pause()
+// 	}
+// }
 
-function changeSeek(timeline) {
-	music = document.getElementById(String(timeline.id).slice(9))
-	const time = (timeline.value * music.duration) / 100
-	music.currentTime = time
+// function changeSeek(timeline) {
+// 	music = document.getElementById(String(timeline.id).slice(9))
+// 	const time = (timeline.value * music.duration) / 100
+// 	music.currentTime = time
 
-	const percentagePosition = (100*music.currentTime) / music.duration
-	timeline.style.backgroundSize = `${percentagePosition}% 100%`
-	timeline.value = percentagePosition
-}
+// 	const percentagePosition = (100*music.currentTime) / music.duration
+// 	timeline.style.backgroundSize = `${percentagePosition}% 100%`
+// 	timeline.value = percentagePosition
+// }
 
-function style_pause_audio(music){
-	music.parentNode.childNodes[2].childNodes[0].childNodes[0].src = pause_img
-}
+// function style_pause_audio(music){
+// 	music.parentNode.childNodes[2].childNodes[0].childNodes[0].src = pause_img
+// }
 
-function style_play_audio(music){
-	music.parentNode.childNodes[2].childNodes[0].childNodes[0].src = play_img
-}
+// function style_play_audio(music){
+// 	music.parentNode.childNodes[2].childNodes[0].childNodes[0].src = play_img
+// }

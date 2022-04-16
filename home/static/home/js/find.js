@@ -113,8 +113,8 @@ function get_videos_find(){
 			}
 			window.removeEventListener('scroll',scroll_event);
 			window.addEventListener('scroll', scroll_event_find)
-			music_find_start+=how_get
-			music_find_end+=how_get
+			video_find_start+=how_get
+			video_find_end+=how_get
 		}
 	})
 }

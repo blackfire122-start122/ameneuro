@@ -32,8 +32,9 @@
 			{% else %}
 				let username = "{{ user }}"
 			{% endif %}
-			let play_img = "{% static 'home/images/play.png' %}"
-			let pause_img = "{% static 'home/images/pause.png' %}"
+
+			let play_img = "{{ user.theme_all.play_img.url }}"
+			let pause_img = "{{ user.theme_all.pause_img.url }}"
 			let post_ajax = "{% url 'post_ajax' %}"
 			let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 			let share_ch_ajax = "{% url 'share_ch_ajax' %}"

@@ -1,4 +1,3 @@
-{% load static %}
 {% load split_mess %}
 
 {% for m in mess %}
@@ -33,7 +32,7 @@
 							<h4 class="name_mus">{{ m }}</h4>
 							<audio class="audio_ap" id="audio_{{ m.id }}" src="{% url 'stream_mess' m.id %}"></audio>
 							<div class="controls">
-								<button value="{{ m.id }}" onclick="toggleAudio_mess(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+								<button value="{{ m.id }}" onclick="toggleAudio_mess(this)" class="player-button"><img class="play_pause_img" src="{{ user.theme_all.pause_img.url }}" alt=""></button>
 								<input id="timeline_{{ m.id }}" onchange ="changeSeek_mess(this)" type="range" class="timeline" max="100" value="0">
 							</div>
 						</div>
@@ -48,7 +47,7 @@
 							<h4 class="name_mus">{{ m }}</h4>
 							<audio class="audio_ap" id="audio_{{ m.id }}" src="{% url 'stream_mess' m.id %}"></audio>
 							<div class="controls">
-								<button value="{{ m.id }}" onclick="toggleAudio_mess(this)" class="player-button"><img class="play_pause_img" src="{% static 'home/images/pause.png' %}" alt=""></button>
+								<button value="{{ m.id }}" onclick="toggleAudio_mess(this)" class="player-button"><img class="play_pause_img" src="{{ user.theme_all.pause_img.url }}" alt=""></button>
 								<input id="timeline_{{ m.id }}" onchange ="changeSeek_mess(this)" type="range" class="timeline" max="100" value="0">
 							</div>
 						</div>

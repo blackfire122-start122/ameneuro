@@ -11,7 +11,7 @@
 		{% csrf_token %}
 		<input onchange="img_set(this)" id='id_img' name="img" type="file">
 		<label for="id_img">
-			<img src="{% static 'home/images/default.png' %}" id="img_recognize">
+			<img src="{{ user.theme_all.no_media_img.url }}" id="img_recognize">
 		</label>
 		<div class='info_recognize'>
 			<h2 onclick="send_img_recognize(this)" id="recognize_h2">Recognize</h2>

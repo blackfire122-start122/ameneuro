@@ -1,5 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
+{% load url_from_options %}
 {% block title %}Change{% endblock title %}
 
 {% block content_header %}
@@ -84,7 +85,7 @@
 						</div>
 					{% endif %}
 					<div class="file_img">
-						<input onchange="select_file_name(this)" type="file" name="fon_img" accept="image/*" id="id_fon_img">
+						<input class="inp_opt_img"  onchange="select_file_name(this)" type="file" name="fon_img" accept="image/*" id="id_fon_img">
 						<label class="img_file" for="id_fon_img">Image</label>
 						{% if user.theme_all.fon_img %}
 						    <img class="img_user" src="{{ user.theme_all.fon_img }}">
@@ -93,83 +94,45 @@
 					</div>
 				</div>
 
-				<div class="form_opt">
-					<h3>comment_img</h3>
-					<div class="file_img">
-						<input onchange="select_file_name(this)" type="file" name="comment_img" accept="image/*" id="id_comment_img">
-						<label class="img_file" for="id_comment_img">Image</label>
-						<img class="img_user" src="{{ user.theme_all.comment_img }}">
-					</div>
-				</div>
-
-				<div class="form_opt">
-					<h3>like_img</h3>
-					<div class="file_img">
-						<input onchange="select_file_name(this)" type="file" name="like_img" accept="image/*" id="id_like_img">
-						<label class="img_file" for="id_like_img">Image</label>
-						<img class="img_user" src="{{ user.theme_all.like_img }}">
-					</div>
-				</div>
-
-				<div class="form_opt">
-					<h3>save_img</h3>
-					<div class="file_img">
-						<input onchange="select_file_name(this)" type="file" name="save_img" accept="image/*" id="id_save_img">
-						<label class="img_file" for="id_save_img">Image</label>
-						<img class="img_user" src="{{ user.theme_all.save_img }}">
-					</div>
-				</div>
-
-				<div class="form_opt">
-					<h3>back_img</h3>
-					<div class="file_img">
-						<input onchange="select_file_name(this)" type="file" name="back_img" accept="image/*" id="id_back_img">
-						<label class="img_file" for="id_back_img">Image</label>
-						<img class="img_user" src="{{ user.theme_all.back_img }}">
-					</div>
-				</div>
-
-				<div class="form_opt">
-					<h3>music_img</h3>
-					<div class="file_img">
-						<input onchange="select_file_name(this)" type="file" name="music_img" accept="image/*" id="id_music_img">
-						<label class="img_file" for="id_music_img">Image</label>
-						<img class="img_user" src="{{ user.theme_all.music_img }}">
-					</div>
-				</div>
-
-				<div class="form_opt">
-					<h3>add_img</h3>
-					<div class="file_img">
-						<input onchange="select_file_name(this)" type="file" name="add_img" accept="image/*" id="id_add_img">
-						<label class="img_file" for="id_add_img">Image</label>
-						<img class="img_user" src="{{ user.theme_all.add_img }}">
-					</div>
-				</div>
+				{% for opt_th in fields %}
+					{% if opt_th != "fon_img" %}
+						<div class="form_opt">
+							<h3>{{ opt_th }}</h3>
+							<div class="file_img">
+								<input class="inp_opt_img" onchange="select_file_name(this)" type="file" name="{{ opt_th }}" accept="image/*" id="id_{{ opt_th }}">
+								<label class="img_file" for="id_{{ opt_th }}">Image</label>
+								<img class="img_user" src="{{ user.theme_all|url_from_options:opt_th }}">
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
 
 				<div class="def_themes">
 					<h2>Default themes</h2>
 					{% for i in default_themes %}
 						{% if user.theme_all == i %}
-							   <div class="def_th_user">
+							<script>
+								let select_theme_now = "{{ i.id }}"
+							</script>
+							<div class="def_th_user" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.comment_img }}">
 									<img class="img_theme" src="{{ i.like_img }}">
-									<img class="img_theme" src="{{ i.back_img }}">
 									<img class="img_theme" src="{{ i.music_img }}">
-									<img class="img_theme" src="{{ i.save_img }}">
+									<img class="img_theme" src="{{ i.friends_img }}">
+									<img class="img_theme" src="{{ i.settings_img }}">
+									<img class="img_theme" src="{{ i.find_img }}">
 								</div>
 							</div>
 						{% else %}
-							<div class="def_th">
+							<div class="def_th" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.comment_img }}">
 									<img class="img_theme" src="{{ i.like_img }}">
-									<img class="img_theme" src="{{ i.back_img }}">
 									<img class="img_theme" src="{{ i.music_img }}">
-									<img class="img_theme" src="{{ i.save_img }}">		
+									<img class="img_theme" src="{{ i.friends_img }}">
+									<img class="img_theme" src="{{ i.settings_img }}">
+									<img class="img_theme" src="{{ i.find_img }}">		
 								</div>
 							</div>
 						{% endif %}
@@ -180,28 +143,31 @@
 					<h2>User themes</h2>
 					{% for i in user.themes_all.all %}
 						{% if user.theme_all == i %}
-							   <div class="def_th_user">
+							<script>
+								let select_theme_now = "{{ i.id }}"
+							</script>
+							<div class="th_user" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.comment_img }}">
 									<img class="img_theme" src="{{ i.like_img }}">
-									<img class="img_theme" src="{{ i.back_img }}">
 									<img class="img_theme" src="{{ i.music_img }}">
-									<img class="img_theme" src="{{ i.save_img }}">
+									<img class="img_theme" src="{{ i.friends_img }}">
+									<img class="img_theme" src="{{ i.settings_img }}">
+									<img class="img_theme" src="{{ i.find_img }}">
 								</div>
 								<div class="end_element"></div>
 							</div>
 						{% else %}
-							<div class="def_th">
+							<div class="th" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.comment_img }}">
 									<img class="img_theme" src="{{ i.like_img }}">
-									<img class="img_theme" src="{{ i.back_img }}">
 									<img class="img_theme" src="{{ i.music_img }}">
-									<img class="img_theme" src="{{ i.save_img }}">
+									<img class="img_theme" src="{{ i.friends_img }}">
+									<img class="img_theme" src="{{ i.settings_img }}">
+									<img class="img_theme" src="{{ i.find_img }}">
 								</div>
-								<button class="end_element" type='button' onclick="delete_theme(this,'{{ i.id }}')">Delete</button>
+								<button class="end_element" type='button' onclick="delete_theme(this)">Delete</button>
 							</div>
 						{% endif %}
 					{% endfor %}

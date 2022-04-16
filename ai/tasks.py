@@ -13,6 +13,9 @@
 # channel_layer = get_channel_layer()
 
 # @app.task
+
+from home.models import AllTheme
+
 def recognize_task(img,username):
 	img = Image.open(io.BytesIO(binascii.a2b_base64(img)))
 	img = img.convert(mode='RGB')

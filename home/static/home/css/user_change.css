@@ -59,7 +59,7 @@
 	background: red;
 }
 
-#id_img, #id_fon_img ,#id_comment_img ,#id_like_img ,#id_back_img ,#id_music_img, #id_save_img, #id_add_img{
+.inp_opt_img{
 	display: none;
 }
 
@@ -121,7 +121,7 @@
 	color: white;
 }
 
-.def_th, .def_th_user{
+.def_th, .def_th_user, .th, .th_user{
 	display: flex;
 	justify-content: space-between;
 	background-color: #303245;
@@ -129,7 +129,7 @@
 	margin-top: 1%;
 	border-radius: 15px;
 }
-.def_th_user{
+.def_th_user, .th_user{
 	background-color: #212230;
 }
 

@@ -13,30 +13,36 @@
 		<img class="img_user_video" src="{{ video.user_pub.img.url }}">
 		<h3>{{ video.name|truncatechars:25 }}</h3>
 		<time class="time">{{ video.date }}</time>
-		{% if user in video.likes.all %}
+		{% if user in video.likes.all and not user.is_anonymous %}
 			<img style="opacity:0.5" class="like" src="{{ user.theme_all.like_img.url }}" alt="">
-		{% else %}			    
+			<span id="like_count">{{ video.likes.count }}</span>
+		{% elif not user.is_anonymous %}			    
 			<img class="like" onclick="like_video(this,'{{ video.id }}')" src="{{ user.theme_all.like_img.url }}">
+			<span id="like_count">{{ video.likes.count }}</span>
 		{% endif %}
-		<span id="like_count">{{ video.likes.count }}</span>
 	</div>
 
 	<p>{{ video.description }}</p>
 
-	<div class="comments_btn">
-		<div>
-			<img class="comments_img" onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
-			<span>{{ video.comments.count }}</span>
+	{% if not user.is_anonymous %}
+	    
+		<div class="comments_btn">
+			<div>
+				<img class="comments_img" onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
+				<span>{{ video.comments.count }}</span>
+			</div>
+
+			<h3>Comments</h3>
 		</div>
 
-		<h3>Comments</h3>
-	</div>
-	<div class="comments"></div>
+		<div class="comments"></div>
 
-	<div class="inp_sub_com">
-		<input placeholder="Comment " class="inp_comment" type="text">
-		<button class="com_btn" value="{{ video.id }}" onclick="comment_video_user(this)">Comment</button>
-	</div>
+		<div class="inp_sub_com">
+			<input placeholder="Comment " class="inp_comment" type="text">
+			<button class="com_btn" value="{{ video.id }}" onclick="comment_video_user(this)">Comment</button>
+		</div>
+
+	{% endif %}
 
 
 {% endblock content %}
