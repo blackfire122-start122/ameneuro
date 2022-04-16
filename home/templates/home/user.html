@@ -50,8 +50,13 @@
 			<div class="musics"></div>
 		</div>
 	</div>
+	<div class="what_show">
+		<button id="start_show" class="what_show_btn" onclick="what_find(this,'posts')">Posts</button>
+		<button class="what_show_btn" onclick="what_find(this,'videos')">Videos</button>
+	</div>
 
 	<div class="posts"></div>
+	<div class="videos"></div>
 {% endblock content %}
 
 {% block end_scripts %}
@@ -59,6 +64,7 @@
 		let id_user = "{{ user.id }}"
 		let users_get_ajax = "{% url 'users_get_ajax' %}"
 		let post_user_ajax = "{% url 'post_user_ajax' %}"
+		let video_user_ajax = "{% url 'video_user_ajax' %}"
 
 	</script>
 	<script src='{% static "home/js/user.js" %}' ></script>

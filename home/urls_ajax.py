@@ -5,6 +5,7 @@ urlpatterns = [
     path('post', ajax_views.post_ajax, name='post_ajax'),
     path('video', ajax_views.video_ajax, name='video_ajax'),
     path('post_user', ajax_views.post_user_ajax, name='post_user_ajax'),
+    path('video_user', ajax_views.video_user_ajax, name='video_user_ajax'),
     path('comment', ajax_views.comment_ajax, name='comment_ajax'),
     path('comment_video', ajax_views.comment_video_ajax, name='comment_video_ajax'),
     path('chat_options', ajax_views.chat_options_ajax, name='chat_options_ajax'),
@@ -25,3 +26,4 @@ urlpatterns = [
     path('activity_mess', ajax_views.activity_mess_ajax, name='activity_mess_ajax'),
 
 ]
+

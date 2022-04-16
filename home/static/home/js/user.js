@@ -1,5 +1,6 @@
 musics = document.querySelector('.musics')
 posts = document.querySelector('.posts')
+videos = document.querySelector('.videos')
 
 let musics_s = true
 
@@ -12,11 +13,19 @@ let followers_end = how_get
 let posts_start = 0
 let posts_end = how_get
 
+let videos_start = 0
+let videos_end = how_get
+
 let = friends_show = document.querySelector(".friends_show")
 let = followers_show = document.querySelector(".followers_show")
 
+let show_now = "posts"
+
 friends_show.addEventListener("scroll",scroll_fr)
 followers_show.addEventListener("scroll",scroll_fl)
+
+document.getElementById("start_show").style.borderBottom = "2px solid white";
+
 
 function music_show(){
 	if(musics_s){
@@ -144,7 +153,18 @@ function pu_ajax(){
 	})
 }
 
-pu_ajax()
+function vu_ajax(){
+	$.ajax({
+		type: $(this).attr('post'),
+		url: video_user_ajax,
+		data: {"user":id_user,"videos_start":videos_start,"videos_end":videos_end},
+		success: function (response){
+			videos.innerHTML += response
+			videos_start+=how_get
+			videos_end+=how_get
+		}
+	})
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -159,10 +179,41 @@ async function get_can_true() {
 window.addEventListener('scroll', async function(e) {
 	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){
 	  if (get_can) {
-	 		pu_ajax()
+	 		ajax_elements()
 	 		get_can = false
 	 		get_can_true()
 	 	}
 	}
 })
 
+
+function ajax_elements(){
+	if (show_now == "posts"){
+		pu_ajax()
+	}else if (show_now == "videos"){
+		vu_ajax()
+	}
+}
+
+function all_border_black(){
+	btns = document.getElementsByClassName('what_show_btn')
+	for(let i=btns.length-1;i>=0; i--){
+			btns[i].style.borderBottom = "2px solid black";
+	}
+}
+
+function what_find(e,show_text){
+	show_now = show_text
+	all_border_black()
+	if (show_text=="posts"){
+		posts.style.display = "grid"
+		videos.style.display = "none"
+	}else	if (show_text=="videos"){
+		posts.style.display = "none"
+		videos.style.display = "grid"
+	}
+	e.style.borderBottom = "2px solid white"
+	ajax_elements()
+}
+
+ajax_elements()

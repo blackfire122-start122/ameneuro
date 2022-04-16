@@ -1,0 +1,7 @@
+{% for v in videos %}
+	<div class="video">
+		<a href="{% url 'video' v.name %}">
+			<img class="video_file" src="{{ v.preview.url }}">
+		</a>
+	</div>
+{% endfor %}

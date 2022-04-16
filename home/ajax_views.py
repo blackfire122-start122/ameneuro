@@ -311,6 +311,16 @@ def post_user_ajax(request):
 	except:return HttpResponseNotFound()
 	return render(request,"home/ajax_html/post_user.html",{"posts":posts})
 
+def video_user_ajax(request):
+	try:
+		if not defence_isdigit(request.GET.get("videos_start"), request.GET.get("videos_end"), request.GET.get("user")):return HttpResponseBadRequest()
+		if not defence_ptl(request.GET.get("videos_start"),request.GET.get("videos_end")):return HttpResponse('Payload Too Large', status=413)
+	except:return HttpResponseBadRequest()
+
+	try:videos = Video.objects.filter(user_pub=request.GET.get("user")).order_by("-date")[int(request.GET.get("videos_start")):int(request.GET.get("videos_end"))]
+	except:return HttpResponseNotFound()
+	return render(request,"home/ajax_html/video_user.html",{"videos":videos})
+
 @login_required(login_url='login')
 def activity_mess_ajax(request):
 	try:
