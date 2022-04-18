@@ -115,3 +115,11 @@ main{
 	color: gray;
 }
 
+.del_video{
+	background: none;
+	color: red;
+	font-size: 1.1em;
+	border: none;
+	position: relative;
+	right: 10%;
+}

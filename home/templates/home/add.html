@@ -1,0 +1,37 @@
+{% extends 'home/shablons/base.html' %}
+{% load static %}
+{% block title %}Chats{% endblock title %}
+
+{% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/add.css' %}">
+	<h4 class="username">{{ user }}</h4>
+{% endblock content_header %}
+
+{% block content %}	
+	<div class="btns">
+		<button onclick="what_add(this,'post')" class="btn_add">Post</button>
+		<button onclick="what_add(this,'video')" class="btn_add">Video</button>
+	</div>
+
+	<div class="add_post">
+		<form method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form_post }}
+			<input name='submit' value="Add post" type="submit">
+			<span>{{ error }}</span>
+		</form>
+	</div>
+	<div class="add_video">
+		<form method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form_video }}
+			<input name='submit' value="Add video" type="submit">
+			<span>{{ error }}</span>
+		</form>
+	</div>
+
+{% endblock content %}
+
+{% block end_scripts %}
+	<script src="{% static 'home/js/add.js' %}"></script>
+{% endblock end_scripts %}

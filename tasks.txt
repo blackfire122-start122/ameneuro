@@ -58,7 +58,8 @@ playlists add *
 change playlists *
 playlists music dunamic *
 find music and playlists *
-videos as mini-youtube * ***
+videos as mini-youtube *
+video add, delete *
 pia bags *
 chats play in all bags *
 pages for not autoruzations *

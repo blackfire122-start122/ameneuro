@@ -10,7 +10,7 @@ from django.forms import(ModelForm,
 						FileInput,
 						Select,
 						FileField)
-from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes, Playlist
+from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes, Playlist, Video
 from django.conf import settings
 import magic
 
@@ -149,3 +149,13 @@ class PlaylistForm(ModelForm):
 	class Meta:
 		model = Playlist
 		fields = ["name","img","autor"]
+
+class VideoForm(ModelForm):
+	class Meta:
+		model = Video
+		fields = ["name","file","description","preview"]
+
+	def save(self,user):
+		video = ModelForm.save(self)
+		video.user_pub = user
+		video.save()

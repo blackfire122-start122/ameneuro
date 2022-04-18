@@ -7,7 +7,8 @@ from .forms import (RegisterForm,
 					ThemeForm,
 					MusicForm,
 					AllThemeForm,
-					PlaylistForm)
+					PlaylistForm,
+					VideoForm)
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import StreamingHttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden
@@ -165,31 +166,47 @@ def video(request,name):
 	except:return HttpResponseNotFound()
 	return render(request, "home/video.html",{"video":video})
 
-class add_post(LoginRequiredMixin,TemplateView):
-	template_name = "home/add_post.html"
+class add(LoginRequiredMixin,TemplateView):
+	template_name = "home/add.html"
 	login_url = "login"
 
 	def get(self, request, *args, **kwargs):
-		self.form = PostForm()
+		self.form_post = PostForm()
+		self.form_video = VideoForm()
 		self.error = ''
 		return super().get(request,*args, **kwargs)
 	
 	def post(self, request, *args, **kwargs):
-		self.error = ''
-		post_data = request.POST.copy()
-		post_data["user_pub"]=request.user.id
+		self.form_post = PostForm()
+		self.form_video = VideoForm()
 
-		self.form = PostForm(post_data,request.FILES)
-		if self.form.is_valid():
-			self.form.save(request.user)
-			return redirect('user',request.user.username)
-		else:error = self.form.errors
+		self.error = ''
+		if request.POST.get('submit')=="Add video":
+			video_data = request.POST.copy()
+			video_data["user_pub"]=request.user.id
+
+			self.form_video = VideoForm(video_data,request.FILES)
+			if self.form_video.is_valid():
+				self.form_video.save(request.user)
+				return redirect('user',request.user.username)
+			else:error = self.form_video.errors
+
+		elif request.POST.get('submit')=="Add post":
+			post_data = request.POST.copy()
+			post_data["user_pub"]=request.user.id
+
+			self.form_post = PostForm(post_data,request.FILES)
+			if self.form_post.is_valid():
+				self.form_post.save(request.user)
+				return redirect('user',request.user.username)
+			else:error = self.form_post.errors
 
 		return super().get(request,*args, **kwargs)
 
 	def get_context_data(self,*args,**kwargs):
 		context = super().get_context_data(**kwargs)
-		context["form"] = self.form
+		context["form_post"] = self.form_post
+		context["form_video"] = self.form_video
 		context["error"] = self.error
 		return context
 

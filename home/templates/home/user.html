@@ -34,7 +34,7 @@
 	<div class="menu_user">
 		<b class="user_name">{{ user.username|truncatechars:11 }}</b>
 		{% if user_reg == user %}
-			<a class="add_post" href="{% url 'add_post' %}"><img class="add_post_img" src="{{ user.theme_all.add_img.url }}" alt=""></a>
+			<a class="add_post" href="{% url 'add' %}"><img class="add_post_img" src="{{ user.theme_all.add_img.url }}" alt=""></a>
 		{% elif not user in user_reg.friends.all and not user in user_reg.follow.all %}
 		    <button value="{{ user.id }}" class="btn_follow" onclick="follow(this)">Follow</button>
 		{% else %}

@@ -89,3 +89,8 @@ function select_video_reply(e,user){
 	}
 	btn_reply = e
 }
+
+function delete_video(e){
+	e.remove()
+	conn_u.send(JSON.stringify({'type':'delete_video', "id":id_video}))
+}

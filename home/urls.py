@@ -17,7 +17,7 @@ urlpatterns = [
     path('friends', views.friends.as_view(), name='friends'),
 
     path('post/<int:id>', views.post, name='post'),
-    path('add_post', views.add_post.as_view(), name='add_post'),
+    path('add', views.add.as_view(), name='add'),
 
     path('video/<str:name>', views.video, name='video'),
 

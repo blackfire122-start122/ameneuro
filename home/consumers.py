@@ -288,6 +288,16 @@ class UserConsumer(AsyncWebsocketConsumer):
         else: self.text_data_json["data_text"] = "error"
 
     @database_sync_to_async
+    def delete_video(self):
+        try:video = Video.objects.get(pk=self.text_data_json["id"])
+        except: self.text_data_json["data_text"] = "error"
+
+        if video.user_pub == self.scope["user"]:
+            video.delete()
+            self.text_data_json["data_text"] = "OK"
+        else: self.text_data_json["data_text"] = "error"
+
+    @database_sync_to_async
     def new_theme_all(self):
         self.scope["user"].theme_all = AllTheme.objects.get(pk = self.text_data_json["id"])
         self.scope["user"].save()
@@ -453,6 +463,8 @@ class UserConsumer(AsyncWebsocketConsumer):
         elif self.text_data_json['type']=='comment_video_reply':
             await self.comment_video_reply()
             return
+        elif self.text_data_json['type']=='delete_video':
+            await self.delete_video()
 
         await self.channel_layer.group_send(
             self.room_group_name,{
