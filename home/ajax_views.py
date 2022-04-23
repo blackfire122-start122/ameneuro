@@ -110,6 +110,7 @@ def send_file_mes_ajax(request):
 			src = "/stream_mess/"+str(mes.id)
 			chat = Chat.objects.get(pk=request.POST["chat_id"])
 			chat.messages.add(mes)
+			chat.chat_friend.messages.add(mes)
 		else:return HttpResponseBadRequest()
 		return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
 
