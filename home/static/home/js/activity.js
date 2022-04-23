@@ -5,6 +5,7 @@ jQuery.expr.filters.visible = function( elem ) {
 let ma = document.getElementsByClassName("ma")
 
 window.addEventListener("scroll",()=>{
+  ma = document.getElementsByClassName("ma")
 	for (let i = ma.length - 1; i >= 0; i--) {
 		if (Visible(ma[i])){
       if (ma[i].childNodes[3].className == "point"){
@@ -63,6 +64,15 @@ function get_mess(){
       document.querySelector("main").innerHTML += response
       mess_start+=how_get
       mess_end+=how_get
+      ma = document.getElementsByClassName("ma")
+      for (let i = ma.length - 1; i >= 0; i--) {
+        if (Visible(ma[i])){
+          if (ma[i].childNodes[3].className == "point"){
+            conn_u.send(JSON.stringify({'type':'visible_ma','id': ma[i].id}))
+            ma[i].childNodes[3].className = "not_point"
+          }
+        }
+      }
     }
   })
 }
