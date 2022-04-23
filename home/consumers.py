@@ -37,13 +37,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def first_conn(self):
         try:self.chat = Chat.objects.get(pk=self.text_data_json["chat"])
         except:return "close"
-        # self.text_data_json['musics_url'] = []
-
-        # for u in self.chat.users.all():
-        #     for m in u.music.all():
-        #         if not ('/streaming_music/'+str(m.id),m.id) in self.text_data_json['musics_url']:
-        #             self.text_data_json['musics_url'].append(('/streaming_music/'+str(m.id),m.id))
-
     @database_sync_to_async
     def new_mes(self,text):
         if self.scope["user"] == self.chat.user:
@@ -255,9 +248,6 @@ class UserConsumer(AsyncWebsocketConsumer):
 
         self.scope["user"].chats.add(chat.id)
         friend.chats.add(chat_friend.id)
-
-        # self.scope["user"].themes.add(theme_chat.id)
-        # friend.themes.add(friend_theme_chat.id)
 
     @database_sync_to_async
     def like(self):

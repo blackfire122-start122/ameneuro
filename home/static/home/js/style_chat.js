@@ -50,14 +50,6 @@ function all_pause_mess(){
   }
 }
 
-function play_audio(e){
-  e.target.parentNode.childNodes[5].childNodes[1].childNodes[0].src = play_img
-}
-
-function pause_audio(e){
-  e.target.parentNode.childNodes[5].childNodes[1].childNodes[0].src = pause_img
-}
-
 function file_see(e){
   file = e.cloneNode()
   file.className = "file_see_js"
@@ -77,20 +69,8 @@ function file_see(e){
   div.append(file)
 
   document.body.append(div)
-
-  console.log(e)
 }
 
-musics_s = true
-function music_show(){
-  let musics = document.querySelector('.musics')
-  if (musics_s){
-    musics.style.display = 'block'
-  }else{
-    musics.style.display = 'none'
-  }
-  musics_s = !musics_s
-}
 
 window.addEventListener('scroll',()=>{
   if(window.scrollY!=0){return}
