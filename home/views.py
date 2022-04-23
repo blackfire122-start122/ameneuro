@@ -84,33 +84,35 @@ class chat(LoginRequiredMixin,TemplateView):
 	login_url = 'login'
 
 	def get(self, request, *args, **kwargs):
-		try:self.chat = Chat.objects.get(chat_id=self.kwargs["chat_id"])
+		try:self.chat = Chat.objects.get(chat_id=self.kwargs["chat_id"], user=request.user)
 		except:return HttpResponseNotFound()
 		
-		if not request.user in self.chat.users.all():return HttpResponseForbidden()
+		if request.user != self.chat.user:return HttpResponseForbidden()
 
 		self.error = ""
 		return super().get(request,*args, **kwargs)
 	
 	def post(self, request, *args, **kwargs):
-		try:self.chat = Chat.objects.get(chat_id=self.kwargs["chat_id"])
+		try:self.chat = Chat.objects.get(chat_id=self.kwargs["chat_id"], user=request.user)
 		except:return HttpResponseNotFound()
 		
 		self.error = ""
 
-		how_save = 0
+		save = False
 
 		if request.POST['how_save']=='Save changes':
 			form = ThemeForm(request.POST,request.FILES,instance=self.chat.theme)
-			how_save = 0
+			save = False
 		elif request.POST['how_save']=='Save theme':
 			form = ThemeForm(request.POST,request.FILES)
-			how_save = 1
+			save = True
 
 		if form.is_valid():
-			if how_save:
+			if save:
 				theme = form.save()
 				try:
+					if not self.chat.theme in request.user.themes.all():self.chat.theme.delete()
+
 					request.user.themes.add(theme.id)
 					self.chat.theme = theme
 					self.chat.save()

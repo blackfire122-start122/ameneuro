@@ -82,7 +82,8 @@ class MessageActivity(models.Model):
 		return self.text
 
 class Chat(models.Model):
-	users = models.ManyToManyField("User",null=True, related_name="user_chat")
+	user = models.ForeignKey("User",null=True, on_delete=models.SET_NULL,related_name="user_chat")
+	chat_friend = models.ForeignKey("Chat",null=True, on_delete=models.SET_NULL,related_name="chat_friend_chat")
 	messages = models.ManyToManyField("Message",null=True)
 	theme = models.ForeignKey("Theme",null=True,on_delete=models.SET_NULL)
 	chat_id = models.CharField(max_length=255,null=True, blank=False)
@@ -145,7 +146,7 @@ class User(AbstractUser):
 	playlists = models.ManyToManyField("Playlist",symmetrical=False,null=True,blank=True,related_name="playlist_user")
 	music_shared = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_shared_user")
 	chats = models.ManyToManyField("Chat",symmetrical=False,null=True,blank=True,related_name="chats_user")
-	themes = models.ManyToManyField("Theme",null=True,blank=True, related_name="themes_user")
+	themes = models.ManyToManyField("Theme",null=True,blank=True, related_name="themes_user",symmetrical=False)
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")
 	followers = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="followers_user")
 	follow = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="follow_user")

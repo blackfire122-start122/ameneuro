@@ -55,19 +55,6 @@ function onmessage(e){
 		end_readable_send()
 		scrollToEndPage()
 		
-	}else if(data['type']=='new_theme'){
-		conn_u_f.send(JSON.stringify({'type':'msg','msg':data['msg_new_theme'],'from_user': user, "from_chat":chat}))
-
-		let div = document.createElement('div')
-		let p = document.createElement('p')
-
-		div.className = "new_theme"
-		p.innerText = data['msg_new_theme']
-
-		div.append(p)
-		msg_div.append(div)
-		end_readable_send()
-
 	}else if(data['type']=='delete_theme'){
 		if (data["error"]){
 			let error = document.querySelector('#error')
@@ -220,7 +207,7 @@ function onmessage(e){
 }
 
 conn.onopen = ()=>{
-	conn.send(JSON.stringify({'type':'first_msg'}))	
+	conn.send(JSON.stringify({'type':'first_msg',"chat":chat_id}))	
 	end_readable_send()
 }
 

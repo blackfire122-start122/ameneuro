@@ -8,7 +8,7 @@ def define(context, name, val=None):
 
 @register.filter
 def filter_ch(query,user):
-	if query.filter(users=user):
+	if query.filter(chat_friend__user=user):
 		return False
 	return True
 

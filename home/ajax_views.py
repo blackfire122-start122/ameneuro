@@ -65,7 +65,7 @@ def chat_options_ajax(request):
 	try:chat = Chat.objects.get(pk=request.GET.get('chat_id'))
 	except:return HttpResponseNotFound()
 
-	if not request.user in chat.users.all():return HttpResponseForbidden()
+	if request.user != chat.user:return HttpResponseForbidden()
 
 	form = ThemeForm()
 
@@ -85,7 +85,7 @@ def chat_get_mess_ajax(request):
 	try:chat = Chat.objects.get(pk=request.GET.get('chat_id'))
 	except:return HttpResponseNotFound()
 
-	if not request.user in chat.users.all():return HttpResponseForbidden()
+	if request.user != chat.user:return HttpResponseForbidden()
 	mess = chat.messages.order_by('-date')[int(request.GET.get("mess_start")):int(request.GET.get("mess_end"))][::-1]
 
 	return render(request, "home/ajax_html/mess.html",{"mess":mess})
@@ -297,7 +297,7 @@ def playlists_ajax(request):
 
 @login_required(login_url='login')
 def share_ch_ajax(request):
-	if request.GET.get("type") == 'find_ch':chats = request.user.chats.all().filter(Q(users__username__contains=request.GET.get("find_ch"))&~Q(users=request.user))
+	if request.GET.get("type") == 'find_ch':chats = request.user.chats.all().filter(Q(user__username__contains=request.GET.get("find_ch"))&~Q(users=request.user))
 	else:chats = request.user.chats.all()
 	return render(request,"home/ajax_html/share_ch.html",{"chats":chats})
 

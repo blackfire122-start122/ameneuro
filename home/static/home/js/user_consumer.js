@@ -5,6 +5,7 @@ let chats_point = []
 let how_get = 20
 let musics_start_pia = 0
 let musics_end_pia = how_get
+let user_ch = false;
 
 function onmessage_u(e){
 	let data = JSON.parse(e.data)
@@ -54,20 +55,25 @@ function onmessage_u(e){
 		if (data["user_in"] == username){
 			conn_u.send(JSON.stringify({'type':'yes_in_net','user_in': username}))	
 		}
-	} else if (data['type']=='yes_in_net'){
-		if(data["user_in"]!=username){
-			for (var i = user_ch.length - 1; i >= 0; i--) {
-				if(user_ch[i].innerText==data["user_in"]){
-					user_ch[i].parentNode.parentNode.childNodes[1].childNodes[3].style.display = "block"
+	}else if (data['type']=='yes_in_net'){
+		if (user_ch){
+			if(data["user_in"]!=username){
+				for (var i = user_ch.length - 1; i >= 0; i--) {
+					if(user_ch[i].innerText==data["user_in"]){
+						user_ch[i].parentNode.parentNode.childNodes[1].childNodes[3].style.display = "block"
+					}
 				}
 			}
 		}
-	} else if (data['type']=='disconnect'){
-		for (var i = user_ch.length - 1; i >= 0; i--) {
-			if(user_ch[i].innerText==data["user_in"]){
-				user_ch[i].parentNode.parentNode.childNodes[1].childNodes[3].style.display = "none"
+	}else if (data['type']=='disconnect'){
+		if (user_ch){
+			for (var i = user_ch.length - 1; i >= 0; i--) {
+				if(user_ch[i].innerText==data["user_in"]){
+					user_ch[i].parentNode.parentNode.childNodes[1].childNodes[3].style.display = "none"
+				}
 			}
 		}
+
 	}else if (data['type']=='get_play_in_all'){
 		let div = document.createElement('div')
 		let img_left_el = document.createElement('img')

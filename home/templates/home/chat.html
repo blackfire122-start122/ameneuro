@@ -67,12 +67,7 @@
 {% block end_scripts %}
 	<script>
 		let user = "{{ user }}"
-
-		{% for u in chat.users.all %}
-			{% if u != user %}
-			    let friend = "{{ u }}"
-			{% endif %}
-		{% endfor %}
+		let friend = "{{ chat.chat_friend.user }}"
 
 		let chat = "{{ chat }}"
 		let chat_id = "{{ chat.id }}"

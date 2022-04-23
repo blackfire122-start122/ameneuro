@@ -36,8 +36,16 @@
 	</div>
 </form>
 
-<h1 class="my_themes">My themes</h1>
 
+<h1 class="my_themes">Chat theme</h1>
+<button id="theme_{{ i.id }}" class="theme th_sel">
+	<h3>{{ chat.theme }}</h3>
+	{% if chat.theme.background %}
+		<img class='theme_bg' src="{{ chat.theme.background.url }}">
+	{% endif %}
+</button>
+
+<h1 class="my_themes">My themes</h1>
 <div class="themes_user">
 	{% for i in user.themes.all %}
 		{% if i == chat.theme %}

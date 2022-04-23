@@ -35,9 +35,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def first_conn(self):
-        try:self.chat = Chat.objects.get(chat_id=self.room_name)
-        except: self.close()
-
+        try:self.chat = Chat.objects.get(pk=self.text_data_json["chat"])
+        except:return "close"
         # self.text_data_json['musics_url'] = []
 
         # for u in self.chat.users.all():
@@ -47,12 +46,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def new_mes(self,text):
-        if self.scope["user"] in self.chat.users.all():  
+        if self.scope["user"] == self.chat.user:
             mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
             mes.save()
             self.text_data_json["time"]=str(mes.date)
             self.text_data_json["user"]=str(self.scope["user"])
             self.chat.messages.add(mes)
+            self.chat.chat_friend.messages.add(mes)
 
     @database_sync_to_async
     def new_theme(self):
@@ -76,7 +76,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def share(self):
-        self.chat = Chat.objects.get(chat_id=self.room_name)
+        self.chat = Chat.objects.get(pk=self.text_data_json["chat"])
         self.scope["user"] = User.objects.get(username=self.text_data_json['user'])
 
     @database_sync_to_async
@@ -90,6 +90,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.text_data_json["url_file"]=mes.file.url
         self.text_data_json["url_post"]="/post/" + str(post.id)
         self.chat.messages.add(mes)
+        self.chat.chat_friend.messages.add(mes)
         self.text_data_json["type_file"] = post.type_p.type_f
 
 
@@ -100,7 +101,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             return await self.close()
 
         if self.text_data_json['type']=='first_msg':
-            await self.first_conn()
+            if await self.first_conn() == "close":
+                return await self.close()
             self.text_data_json['focus_mus']=1
             await self.send(text_data=json.dumps(self.text_data_json))
             return
@@ -110,9 +112,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json['type']=='new_theme':
             await self.new_theme()
-            await self.new_mes(self.scope["user"].username+" changed "+self.chat.theme.name)
-            self.text_data_json["msg_new_theme"]=self.scope["user"].username+" changed "+self.chat.theme.name
-
         elif self.text_data_json['type']=='delete_theme':
             await self.delete_theme()
             await self.send(text_data=json.dumps(self.text_data_json))
@@ -230,21 +229,35 @@ class UserConsumer(AsyncWebsocketConsumer):
     def add_chat(self):
         friend = User.objects.get(pk=self.text_data_json["id"])
 
-        theme = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=friend.username+self.scope["user"].username)
-        theme.save()
+        theme_chat = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=friend.username+self.scope["user"].username)
+        friend_theme_chat = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=self.scope["user"].username+friend.username)
+        friend_theme_chat.save()
+        theme_chat.save()
 
         chat = Chat(chat_id=gen_rand_id(30))
-        chat.theme=theme
-        chat.save()
+        chat_friend = Chat()
+        chat_friend.chat_id = chat.chat_id
+        
+        chat.theme=theme_chat
+        chat_friend.theme=friend_theme_chat
 
-        chat.users.add(self.scope["user"].id)
-        chat.users.add(friend.id)
+        chat.user=self.scope["user"]
+        chat_friend.user = friend
+
+        chat.save()
+        chat_friend.save()
+
+        chat.chat_friend=chat_friend
+        chat_friend.chat_friend = chat
+
+        chat.save()
+        chat_friend.save()
 
         self.scope["user"].chats.add(chat.id)
-        friend.chats.add(chat.id)
+        friend.chats.add(chat_friend.id)
 
-        self.scope["user"].themes.add(theme.id)
-        friend.themes.add(theme.id)
+        # self.scope["user"].themes.add(theme_chat.id)
+        # friend.themes.add(friend_theme_chat.id)
 
     @database_sync_to_async
     def like(self):
