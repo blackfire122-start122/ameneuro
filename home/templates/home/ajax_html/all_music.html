@@ -27,7 +27,7 @@
 				</div>
 			{% elif data_get.type == "user_my_music" %}
 				<div class="menu_player">
-					<img id="{{ m.id }}" onclick="share_menu(this)" class="m_s_img" src="{{ user.theme_all.music_share_img.url }}">
+					<img id="{{ m.id }}" onclick="share_menu(this,'mus')" class="m_s_img" src="{{ user.theme_all.music_share_img.url }}">
 					<button class="btn_menu_player" value="{{ m.id }}" onclick="delete_mus(this)">Delete</button>
 					<img onclick="play_in_all(this,{{m.id}},'music')" class="play_in_all" src="{{ user.theme_all.play_in_all_img.url }}">
 				</div>

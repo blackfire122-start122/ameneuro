@@ -67,14 +67,11 @@ models pre_ *
 if default or no add 2 class as indentufiator *
 theme_all bags *
 work with dark theme *
+chat theme work *
 
 ajax optimize
-chats musics many load *** *** ***
-chat theme work ***
-
-
 optimize static
-playlists share
+playlists share ***
 
 defence:
 	is_digit *

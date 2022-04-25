@@ -145,6 +145,7 @@ class User(AbstractUser):
 	music = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_user")
 	playlists = models.ManyToManyField("Playlist",symmetrical=False,null=True,blank=True,related_name="playlist_user")
 	music_shared = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="music_shared_user")
+	playlists_shared = models.ManyToManyField("Playlist",symmetrical=False,null=True,blank=True,related_name="playlists_shared_user")
 	chats = models.ManyToManyField("Chat",symmetrical=False,null=True,blank=True,related_name="chats_user")
 	themes = models.ManyToManyField("Theme",null=True,blank=True, related_name="themes_user",symmetrical=False)
 	friend_want_add = models.ManyToManyField("User",symmetrical=False,null=True,blank=True,related_name="friend_want_add_user")

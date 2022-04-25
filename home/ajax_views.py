@@ -289,12 +289,14 @@ def video_find_ajax(request):
 
 @login_required(login_url='login')
 def playlists_ajax(request):
-	try:
-		if not defence_isdigit(request.GET.get("playlists_start"),request.GET.get("playlists_end")):return HttpResponseBadRequest()
-		if not defence_ptl(request.GET.get("playlists_start"),request.GET.get("playlists_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
-	playlists = request.user.playlists.all()[int(request.GET.get("playlists_start")):int(request.GET.get("playlists_end"))]
-	return render(request,"home/ajax_html/playlists.html",{"playlists":playlists})
+	if request.GET.get("type") == "ps_share":playlists = request.user.playlists_shared
+	else:
+		try:
+			if not defence_isdigit(request.GET.get("playlists_start"),request.GET.get("playlists_end")):return HttpResponseBadRequest()
+			if not defence_ptl(request.GET.get("playlists_start"),request.GET.get("playlists_end")):return HttpResponse('Payload Too Large', status=413)
+		except:return HttpResponseBadRequest()
+		playlists = request.user.playlists.all()[int(request.GET.get("playlists_start")):int(request.GET.get("playlists_end"))]
+	return render(request,"home/ajax_html/playlists.html",{"playlists":playlists,"data_get":request.GET})
 
 @login_required(login_url='login')
 def share_ch_ajax(request):

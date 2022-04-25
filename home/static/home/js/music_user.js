@@ -14,7 +14,15 @@ function music_share(e){
 		url: musics_all_ajax,
 		data: {'id':id_user,'type':'music_share'},
 		success: function (response) {
-			document.querySelector(".musics_share").innerHTML = response
+			document.querySelector(".musics_share").innerHTML += response
+		}
+	})
+	$.ajax({
+		type: $(this).attr('post'),
+		url: playlists_ajax,
+		data: {'id':id_user,'type':'ps_share'},
+		success: function (response) {
+			document.querySelector(".musics_share").innerHTML += response
 		}
 	})
 }
@@ -45,10 +53,12 @@ function get_playlists(){
 	})
 }
 
-let music_share_id
+let share_id
+let share_now
 
-function share_menu(e){
-	music_share_id = e.id
+function share_menu(e,how){
+	share_id = e.id
+	share_now = how
 	document.querySelector(".music_share").style.display = "block"
 }
 function close_sh(e){

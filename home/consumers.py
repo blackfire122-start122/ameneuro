@@ -177,13 +177,14 @@ class UserConsumer(AsyncWebsocketConsumer):
     
     @database_sync_to_async
     def mus_share(self):
-        user = User.objects.get(pk=int(self.text_data_json["to_user"]))
-        mus = Music.objects.get(pk=self.text_data_json["id"])
-        user.music_shared.add(mus)
+        if self.text_data_json.get("to_user") and self.text_data_json.get("id"):
+            user = User.objects.get(pk=int(self.text_data_json["to_user"]))
+            mus = Music.objects.get(pk=self.text_data_json["id"])
+            user.music_shared.add(mus)
 
-        ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.scope["user"],readeble=False)
-        ma.save()
-        user.message_activity.add(ma)
+            ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.scope["user"],readeble=False)
+            ma.save()
+            user.message_activity.add(ma)
 
     @database_sync_to_async
     def save_post(self):
@@ -365,6 +366,26 @@ class UserConsumer(AsyncWebsocketConsumer):
         ma.save()
         com.parent.user.message_activity.add(ma)
 
+    @database_sync_to_async
+    def add_ps_share(self):
+        ps = Playlist.objects.get(pk=self.text_data_json["id"])
+        self.scope["user"].playlists.add(ps)
+        self.scope["user"].playlists_shared.remove(ps)
+
+    @database_sync_to_async
+    def not_add_ps_share(self):
+        self.scope["user"].playlists_shared.remove(Playlist.objects.get(pk=self.text_data_json["id"]))
+
+    @database_sync_to_async
+    def ps_share(self):
+        if self.text_data_json.get("to_user") and self.text_data_json.get("id"):
+            user = User.objects.get(pk=int(self.text_data_json["to_user"]))
+            ps = Playlist.objects.get(pk=self.text_data_json["id"])
+            user.playlists_shared.add(ps)
+
+            ma = MessageActivity(text="you shared playlist: "+ps.name,from_user=self.scope["user"],readeble=False)
+            ma.save()
+            user.message_activity.add(ma)
 
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
@@ -468,6 +489,15 @@ class UserConsumer(AsyncWebsocketConsumer):
             return
         elif self.text_data_json['type']=='delete_video':
             await self.delete_video()
+        elif self.text_data_json['type']=='ps_share':
+            await self.ps_share()
+            return
+        elif self.text_data_json['type']=='add_ps_share':
+            await self.add_ps_share()
+            return
+        elif self.text_data_json['type']=='not_add_ps_share':
+            await self.not_add_ps_share()
+            return
 
         await self.channel_layer.group_send(
             self.room_group_name,{

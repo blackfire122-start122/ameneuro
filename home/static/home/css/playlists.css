@@ -16,17 +16,36 @@
 	text-decoration: none;
 }
 
-.time_ps{
-	margin-top: 7%;
-}
-
 .ps_link_user{
 	text-decoration: none;
 }
 
-.play_in_all_ps{
-  margin-top: 25px;
-  width: 20px;
-  position: absolute;
-  right: 0;
+.play_in_all_ps, .p_s_img{
+  margin-right: 3px;
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+}
+
+.ps_menu{
+	display: flex;
+	justify-content: space-between;
+}
+
+.ps_prew{
+	display: flex;
+	width: 50%;
+}
+
+.autor_name{
+	margin-left: 2%;
+}
+
+.ch_ps{
+	margin-left:65%;
+}
+
+.menu_ps{
+	display: flex;
+	justify-content: space-around;
 }

@@ -189,15 +189,27 @@ function not_add_mus_share(e){
 	conn_u.send(JSON.stringify({'type':'not_add_mus_share', "id":e.value}))
 }
 function mus_share(e,name){
-	e.style.opacity = "0.5"
-	conn_u.send(JSON.stringify({'type':'mus_share', "id":music_share_id, "to_user":e.value}))
-	conn_share_mus = new WebSocket("ws://"+window.location.hostname+"/user/"+name)
-	
-	conn_share_mus.onopen = ()=>{
-		conn_share_mus.send(JSON.stringify({'type':'share_mus'}))
-		conn_share_mus.send(JSON.stringify({'type':'activity'}))
-		conn_share_mus.close()
+	if (share_now == "ps"){
+		conn_u.send(JSON.stringify({'type':'ps_share', "id":share_id, "to_user":e.value}))
+		conn_share_ps = new WebSocket("ws://"+window.location.hostname+"/user/"+name)
+		
+		conn_share_ps.onopen = ()=>{
+			conn_share_ps.send(JSON.stringify({'type':'share_mus'}))
+			conn_share_ps.send(JSON.stringify({'type':'activity'}))
+			conn_share_ps.close()
+		}
+
+	}else if(share_now == "mus"){
+		conn_u.send(JSON.stringify({'type':'mus_share', "id":share_id, "to_user":e.value}))
+		conn_share_mus = new WebSocket("ws://"+window.location.hostname+"/user/"+name)
+		
+		conn_share_mus.onopen = ()=>{
+			conn_share_mus.send(JSON.stringify({'type':'share_mus'}))
+			conn_share_mus.send(JSON.stringify({'type':'activity'}))
+			conn_share_mus.close()
+		}
 	}
+	e.style.opacity = "0.5"
 }
 function add_mus(e){
 	e.remove()
@@ -303,4 +315,11 @@ let get_can_pia = true
 async function get_can_true_pia() {
 	await sleep_pia(700)
 	get_can_pia = true
+}
+
+function add_ps_share(e){	
+	conn_u.send(JSON.stringify({'type':'add_ps_share', "id":e.value}))
+}
+function not_add_ps_share(e){
+	conn_u.send(JSON.stringify({'type':'not_add_ps_share', "id":e.value}))
 }
