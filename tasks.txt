@@ -68,10 +68,10 @@ if default or no add 2 class as indentufiator *
 theme_all bags *
 work with dark theme *
 chat theme work *
+playlists share *
 
 ajax optimize
 optimize static
-playlists share ***
 
 defence:
 	is_digit *

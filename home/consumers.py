@@ -181,8 +181,9 @@ class UserConsumer(AsyncWebsocketConsumer):
             user = User.objects.get(pk=int(self.text_data_json["to_user"]))
             mus = Music.objects.get(pk=self.text_data_json["id"])
             user.music_shared.add(mus)
+            type_f = TypeFile.objects.get(type_f="audio")
 
-            ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.scope["user"],readeble=False)
+            ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.scope["user"],readeble=False,type_f=type_f)
             ma.save()
             user.message_activity.add(ma)
 
@@ -382,8 +383,9 @@ class UserConsumer(AsyncWebsocketConsumer):
             user = User.objects.get(pk=int(self.text_data_json["to_user"]))
             ps = Playlist.objects.get(pk=self.text_data_json["id"])
             user.playlists_shared.add(ps)
+            type_f = TypeFile.objects.get(type_f="audio")
 
-            ma = MessageActivity(text="you shared playlist: "+ps.name,from_user=self.scope["user"],readeble=False)
+            ma = MessageActivity(text="you shared playlist: "+ps.name,from_user=self.scope["user"],readeble=False,type_f=type_f)
             ma.save()
             user.message_activity.add(ma)
 

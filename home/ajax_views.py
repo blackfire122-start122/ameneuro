@@ -331,6 +331,6 @@ def activity_mess_ajax(request):
 		if not defence_ptl(request.GET.get("mess_start"),request.GET.get("mess_end")):return HttpResponse('Payload Too Large', status=413)
 	except:return HttpResponseBadRequest()
 	
-	try:mess = request.user.message_activity.all()[int(request.GET.get('mess_start')):int(request.GET.get('mess_end'))]
+	try:mess = request.user.message_activity.all().order_by("-date")[int(request.GET.get('mess_start')):int(request.GET.get('mess_end'))]
 	except:return HttpResponseNotFound()
 	return render(request, "home/ajax_html/activity_mess.html",{"mess":mess})
