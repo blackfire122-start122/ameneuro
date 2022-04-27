@@ -37,8 +37,7 @@ new function sleep *
 websocket error in disconnect *
 Loginmixin *
 ООП *
-optimize sqls *** *** ***
-show name file in forms *** *** ***
+optimize sqls *
 errors in new chat *
 post in not autorusation user *
 ajax login decorator *
@@ -71,17 +70,18 @@ chat theme work *
 playlists share *
 ajax optimize html *
 comments dunamic post *
-defence:
+defence: *
 	is_digit *
 	ajax_spoof *
 	websocket defence *
 	view defence *
 	ai defence *
 
-optimise services
+optimise services ***
 
 css style:
 	add music form style
 	one formats think think 
 	add post style
-	post from home css ***
+	post from home css 
+	show name file in forms 

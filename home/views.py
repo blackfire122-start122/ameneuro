@@ -56,6 +56,8 @@ class home(LoginRequiredMixin,TemplateView):
 		context["chat_not_read_count"] = self.chat_not_read_count
 		context["music_shared"] = self.music_shared
 		context["message_activity"] = self.message_activity
+		context["get_posts_how"] = get_posts_how
+		context["get_user_how"] = get_user_how
 		return context
 
 class user(TemplateView):

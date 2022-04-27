@@ -71,61 +71,111 @@ def open_file(request, id, type_s) -> tuple:
 
     return file, status_code, content_length, content_range
 
-def get_posts(request,user):
-    # need recomendations and hard work
-    # bags
+# def get_posts(request,user):
 
+#     posts = {}
+#     start = request.session["start_element"]
+#     end = request.session["end_element"]
+
+#     try:
+#         friends = user.friends.all()
+#         follow = user.follow.all()
+#         posts = Post.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
+#         if len(posts)<get_posts_how:
+#             start_rec_post = request.session["start_rec_post"]
+#             end_rec_post = request.session["end_rec_post"]
+
+#             start_rec_user = request.session["start_rec_user"]
+#             end_rec_user = request.session["end_rec_user"]
+
+#             rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_user:end_rec_user]
+#             posts |= Post.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_post:end_rec_post]
+        
+#             if request.session["defolt_posts"]: 
+#                 start_rec_post = 0
+#                 end_rec_post = get_posts_how
+#                 request.session["defolt_posts"] = False
+            
+#             if request.session["start_rec_user"] > User.objects.count():
+#                 return posts
+#             if len(posts)<get_posts_how:
+#                 request.session["defolt_posts"] = True
+
+#                 start_rec_user+=get_user_how
+#                 end_rec_user+=get_user_how
+
+#                 request.session["start_rec_user"]=start_rec_user
+#                 request.session["end_rec_user"]=end_rec_user
+
+#                 posts |= get_posts(request,user)
+
+#             start_rec_post+=get_posts_how
+#             end_rec_post+=get_posts_how
+
+#             request.session["start_rec_post"]=start_rec_post
+#             request.session["end_rec_post"]=end_rec_post
+
+#     except:return {}
+
+#     start+=get_posts_how
+#     end+=get_posts_how
+
+#     request.session["start_element"]=start
+#     request.session["end_element"]=end
+#     return posts
+
+
+def get_posts(data,user):
     posts = {}
-    start = request.session["start_element"]
-    end = request.session["end_element"]
+    start = int(data.get("start_element"))
+    end = int(data.get("end_element"))
 
     try:
         friends = user.friends.all()
         follow = user.follow.all()
         posts = Post.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
         if len(posts)<get_posts_how:
-            start_rec_post = request.session["start_rec_post"]
-            end_rec_post = request.session["end_rec_post"]
+            start_rec_post = int(data.get("start_rec_post"))
+            end_rec_post = int(data.get("end_rec_post"))
 
-            start_rec_user = request.session["start_rec_user"]
-            end_rec_user = request.session["end_rec_user"]
+            start_rec_user = int(data.get("start_rec_user"))
+            end_rec_user = int(data.get("end_rec_user"))
 
             rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_user:end_rec_user]
             posts |= Post.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_post:end_rec_post]
-        
-            if request.session["defolt_posts"]: 
+            
+            if int(data.get("defolt_posts"))==1: 
                 start_rec_post = 0
                 end_rec_post = get_posts_how
-                request.session["defolt_posts"] = False
+                data["defolt_posts"]=0
             
-            if request.session["start_rec_user"] > User.objects.count():
-                return posts
+            if int(data.get("start_rec_user")) > User.objects.count():
+                return [posts,data]
             if len(posts)<get_posts_how:
-                request.session["defolt_posts"] = True
+                data["defolt_posts"]=1
 
                 start_rec_user+=get_user_how
                 end_rec_user+=get_user_how
 
-                request.session["start_rec_user"]=start_rec_user
-                request.session["end_rec_user"]=end_rec_user
+                data["start_rec_user"]=start_rec_user
+                data["end_rec_user"]=end_rec_user
 
-                posts |= get_posts(request,user)
+                posts |= get_posts(data,user)[0]
 
             start_rec_post+=get_posts_how
             end_rec_post+=get_posts_how
 
-            request.session["start_rec_post"]=start_rec_post
-            request.session["end_rec_post"]=end_rec_post
+            data["start_rec_post"]=start_rec_post
+            data["end_rec_post"]=end_rec_post
 
-    except:return {}
+    except:return [None,None]
 
     start+=get_posts_how
     end+=get_posts_how
 
-    request.session["start_element"]=start
-    request.session["end_element"]=end
-    return posts
-
+    data["start_element"]=start
+    data["end_element"]=end
+    return [posts,data]
 
 def get_videos(request):
     videos = {}

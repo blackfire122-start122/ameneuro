@@ -11,10 +11,11 @@ function like(e){
 
 let get_com_can = true
 
-async function get_can_true() {
+async function get_can_com_true() {
 	await sleep(700)
 	get_com_can = true
 }
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -33,7 +34,7 @@ function get_comments(e,comments_div){
 				  if (get_com_can) {
 				 		get_comments(e,comments_div)
 				 		get_com_can = false
-				 		get_can_true()
+				 		get_can_com_true()
 				 	}
 				}
 			})

@@ -36,9 +36,10 @@ def comment_video_ajax(request):
 	except:return HttpResponseNotFound()
 
 	return render(request,"home/ajax_html/comments_video.html",{"video_id":video.id,"comments":comments})
-
+from django.template.loader import render_to_string
 def post_ajax(request):
 	posts = {}
+	next_data = {}
 	if request.GET.get("id"):
 		try:
 			if not defence_isdigit(request.GET.get("id")):return HttpResponseBadRequest()
@@ -46,8 +47,10 @@ def post_ajax(request):
 		
 		try:posts = Post.objects.filter(pk=request.GET.get("id"))
 		except: HttpResponseNotFound()
-	else:posts = get_posts(request,request.user)
-
+	else:
+		posts, next_data = get_posts(request.GET.copy(),request.user)
+		return JsonResponse({"html":render_to_string("home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET,"user":request.user}),"next_data":next_data})
+	
 	if not posts:return HttpResponse("None post", status=200)
 	return render(request, "home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET})
 
