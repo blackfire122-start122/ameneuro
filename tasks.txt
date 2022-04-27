@@ -70,14 +70,14 @@ chat theme work *
 playlists share *
 ajax optimize html *
 comments dunamic post *
+optimise services *
+
 defence: *
 	is_digit *
 	ajax_spoof *
 	websocket defence *
 	view defence *
 	ai defence *
-
-optimise services ***
 
 css style:
 	add music form style

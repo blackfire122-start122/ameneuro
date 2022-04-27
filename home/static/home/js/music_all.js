@@ -36,7 +36,6 @@ function changeSeek(timeline) {
   audio.addEventListener("pause",pause_audio)
   
   all_pause()
-  audio.play()
 
   audio.ontimeupdate = ()=>{
     const percentagePosition = (100*audio.currentTime) / audio.duration

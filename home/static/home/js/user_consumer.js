@@ -76,8 +76,8 @@ function onmessage_u(e){
 
 	}else if (data['type']=='get_play_in_all'){
 		let div = document.createElement('div')
-		let img_left_el = document.createElement('img')
 		let img_right_el = document.createElement('img')
+		let img_left_el = document.createElement('img')
 
 		let get_pia
 
@@ -102,24 +102,24 @@ function onmessage_u(e){
 			}
 		})
 
-		img_right_el.id = "img_right_el"
-		img_right_el.src = img_right
-		img_right_el.style.display = "block"
-		img_right_el.style.position = "fixed"
-		img_right_el.style.left = "-30px"
-		img_right_el.style.bottom = "100px"
-		img_right_el.style.height = "40px"
+		img_left_el.id = "img_left_el"
+		img_left_el.src = img_left
+		img_left_el.style.display = "block"
+		img_left_el.style.position = "fixed"
+		img_left_el.style.right = "-30px"
+		img_left_el.style.bottom = "120px"
+		img_left_el.style.height = "40px"
 
-		img_right_el.addEventListener("click",()=>{
+		img_left_el.addEventListener("click",()=>{
 			document.querySelector(".play_in_all_div").style.display = "block"
-			img_right_el.style.display = "none"
+			img_left_el.style.display = "none"
 		})
 
 		div.className = "play_in_all_div"
 		div.style.position = "fixed"
-		div.style.bottom = "0"
-		div.style.left = "0"
-		div.style.width = "50%"
+		div.style.bottom = "8%"
+		div.style.right = "0"
+		div.style.width = "60%"
 		div.style.marginLeft = "0 auto"
 		div.style.padding = "5px 2px"
 		div.style.background = "rgba(0,0,0,0.6)"
@@ -128,17 +128,17 @@ function onmessage_u(e){
 		div.style.maxHeight = "150px"
 		div.style.overflowY = "auto"
 
-		img_left_el.src = img_left
-		img_left_el.id = "img_left_el"
-		img_left_el.style.position = "absolute"
-		img_left_el.style.right = "10px"
-		img_left_el.style.color = "white"
-		img_left_el.style.width = "40px"
-		img_left_el.style.zIndex = "10"
+		img_right_el.src = img_right
+		img_right_el.id = "img_right_el"
+		img_right_el.style.position = "absolute"
+		img_right_el.style.right = "10px"
+		img_right_el.style.color = "white"
+		img_right_el.style.width = "40px"
+		img_right_el.style.zIndex = "10"
 
-		div.appendChild(img_left_el)
+		div.appendChild(img_right_el)
 		document.body.append(div)
-		document.body.append(img_right_el)
+		document.body.append(img_left_el)
 
 	}else if (data['type']=='recognize'){
 		h2 = document.getElementById("recognize_h2")
@@ -158,13 +158,12 @@ function onmessage_u(e){
 			}
 		}
 	}
-	console.log(data)
 }
 
 function set_click_audio_timeline(data,audio,timeline){
-	document.getElementById("img_left_el").addEventListener("click",()=>{
+	document.getElementById("img_right_el").addEventListener("click",()=>{
 		document.querySelector(".play_in_all_div").style.display = "none"
-		document.querySelector("#img_right_el").style.display = "block"
+		document.querySelector("#img_left_el").style.display = "block"
 	})
 	audio.currentTime = data["currentTime"]
 	audio.addEventListener("timeupdate", ()=>{
