@@ -70,10 +70,9 @@ work with dark theme *
 chat theme work *
 playlists share *
 ajax optimize html *
+comments dunamic post *
 
-ajax optimize views ***
-optimize static
-comments dunamic post 
+optimise services
 
 defence:
 	is_digit *

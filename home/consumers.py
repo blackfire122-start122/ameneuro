@@ -35,12 +35,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def first_conn(self):
-        try:self.chat = Chat.objects.get(pk=self.text_data_json["chat"])
+        try:self.chat = Chat.objects.get(pk=self.text_data_json.get("chat"))
         except:return "close"
     @database_sync_to_async
     def new_mes(self,text):
         if self.scope["user"] == self.chat.user:
-            mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
+            mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json.get("type")))
             mes.save()
             self.text_data_json["time"]=str(mes.date)
             self.text_data_json["user"]=str(self.scope["user"])
@@ -49,15 +49,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def new_theme(self):
-        self.chat.theme = Theme.objects.get(pk = int(self.text_data_json['theme_id']))
+        self.chat.theme = Theme.objects.get(pk = int(self.text_data_json.get('theme_id')))
         self.chat.save()
 
     @database_sync_to_async
     def delete_theme(self):
-        if self.chat.theme.id == int(self.text_data_json['th_id']):
+        if self.chat.theme.id == int(self.text_data_json.get('th_id')):
             self.text_data_json['error'] = "This chat theme"
         else:
-            Theme.objects.get(pk = int(self.text_data_json['th_id'])).delete()
+            Theme.objects.get(pk = int(self.text_data_json.get('th_id'))).delete()
 
     @database_sync_to_async
     def end_readable(self):
@@ -69,13 +69,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def share(self):
-        self.chat = Chat.objects.get(pk=self.text_data_json["chat"])
-        self.scope["user"] = User.objects.get(username=self.text_data_json['user'])
+        self.chat = Chat.objects.get(pk=self.text_data_json.get("chat"))
+        self.scope["user"] = User.objects.get(username=self.text_data_json.get('user'))
 
     @database_sync_to_async
     def new_mes_share(self):
-        post = Post.objects.get(pk=int(self.text_data_json["id_share"]))
-        mes = Message(type_file=post.type_p, file=post.file, user=self.scope["user"],text=self.text_data_json["msg"],type_m=TypeMes.objects.get(type_m=self.text_data_json["type"]))
+        post = Post.objects.get(pk=int(self.text_data_json.get("id_share")))
+        mes = Message(type_file=post.type_p, file=post.file, user=self.scope["user"],text=self.text_data_json.get("msg"),type_m=TypeMes.objects.get(type_m=self.text_data_json.get("type")))
         mes.save()
 
         self.text_data_json["time"]=str(mes.date)
@@ -90,30 +90,30 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
-        if self.__dict__.get("chat")==None and self.text_data_json["type"] in close_less_chat:
+        if self.__dict__.get("chat")==None and self.text_data_json.get("type") in close_less_chat:
             return await self.close()
 
-        if self.text_data_json['type']=='first_msg':
+        if self.text_data_json.get('type')=='first_msg':
             if await self.first_conn() == "close":
                 return await self.close()
             self.text_data_json['focus_mus']=1
             await self.send(text_data=json.dumps(self.text_data_json))
             return
             
-        elif self.text_data_json['type']=='end_readable':
+        elif self.text_data_json.get('type')=='end_readable':
             await self.end_readable()
 
-        elif self.text_data_json['type']=='new_theme':
+        elif self.text_data_json.get('type')=='new_theme':
             await self.new_theme()
-        elif self.text_data_json['type']=='delete_theme':
+        elif self.text_data_json.get('type')=='delete_theme':
             await self.delete_theme()
             await self.send(text_data=json.dumps(self.text_data_json))
             return
 
-        elif self.text_data_json['type']=='msg':
-            await self.new_mes(self.text_data_json['msg'])
+        elif self.text_data_json.get('type')=='msg':
+            await self.new_mes(self.text_data_json.get('msg'))
         
-        elif self.text_data_json['type']=='share':
+        elif self.text_data_json.get('type')=='share':
             await self.share()
             await self.new_mes_share()
 
@@ -159,27 +159,27 @@ class UserConsumer(AsyncWebsocketConsumer):
         
     @database_sync_to_async
     def add_mus_share(self):
-        mus = Music.objects.get(pk=self.text_data_json["id"])
+        mus = Music.objects.get(pk=self.text_data_json.get("id"))
         self.scope["user"].music.add(mus)
         self.scope["user"].music_shared.remove(mus)
 
     @database_sync_to_async
     def not_add_mus_share(self):
-        self.scope["user"].music_shared.remove(Music.objects.get(pk=self.text_data_json["id"]))
+        self.scope["user"].music_shared.remove(Music.objects.get(pk=self.text_data_json.get("id")))
     
     @database_sync_to_async
     def add_to_me(self):
-        self.scope["user"].music.add(Music.objects.get(pk=self.text_data_json["id"]))
+        self.scope["user"].music.add(Music.objects.get(pk=self.text_data_json.get("id")))
 
     @database_sync_to_async
     def delete_mus(self):
-        self.scope["user"].music.remove(Music.objects.get(pk=self.text_data_json["id"]))
+        self.scope["user"].music.remove(Music.objects.get(pk=self.text_data_json.get("id")))
     
     @database_sync_to_async
     def mus_share(self):
         if self.text_data_json.get("to_user") and self.text_data_json.get("id"):
-            user = User.objects.get(pk=int(self.text_data_json["to_user"]))
-            mus = Music.objects.get(pk=self.text_data_json["id"])
+            user = User.objects.get(pk=int(self.text_data_json.get("to_user")))
+            mus = Music.objects.get(pk=self.text_data_json.get("id"))
             user.music_shared.add(mus)
             type_f = TypeFile.objects.get(type_f="audio")
 
@@ -189,30 +189,30 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def save_post(self):
-        self.scope["user"].saves_posts.add(Post.objects.get(pk=int(self.text_data_json["id"])))
+        self.scope["user"].saves_posts.add(Post.objects.get(pk=int(self.text_data_json.get("id"))))
 
     @database_sync_to_async
     def not_save(self):
-        self.scope["user"].saves_posts.remove(Post.objects.get(pk=int(self.text_data_json["id"])))
+        self.scope["user"].saves_posts.remove(Post.objects.get(pk=int(self.text_data_json.get("id"))))
 
     @database_sync_to_async
     def delete_friend(self):
-        self.scope["user"].friends.remove(self.text_data_json['id'])
+        self.scope["user"].friends.remove(self.text_data_json.get('id'))
 
     @database_sync_to_async
     def add_friend(self):
-        friend = User.objects.get(pk=self.text_data_json['id'])
+        friend = User.objects.get(pk=self.text_data_json.get('id'))
         self.scope["user"].friends.add(friend.id)
         self.scope["user"].friend_want_add.remove(friend)
 
     @database_sync_to_async
     def want_add_friend(self):
-        friend = User.objects.get(pk=self.text_data_json['id'])
+        friend = User.objects.get(pk=self.text_data_json.get('id'))
         friend.friend_want_add.add(self.scope["user"].id)
 
     @database_sync_to_async
     def follow(self):
-        follow_to = User.objects.get(pk=self.text_data_json['id'])
+        follow_to = User.objects.get(pk=self.text_data_json.get('id'))
         follow_to.followers.add(self.scope["user"].id)
         self.scope["user"].follow.add(follow_to.id)
 
@@ -222,7 +222,7 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def add_chat(self):
-        friend = User.objects.get(pk=self.text_data_json["id"])
+        friend = User.objects.get(pk=self.text_data_json.get("id"))
 
         theme_chat = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=friend.username+self.scope["user"].username)
         friend_theme_chat = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=self.scope["user"].username+friend.username)
@@ -253,29 +253,29 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def like(self):
-        post = Post.objects.get(pk=self.text_data_json["id"])
+        post = Post.objects.get(pk=self.text_data_json.get("id"))
         post.likes.add(self.scope["user"].id)
 
     @database_sync_to_async
     def comment_like(self):
-        com = Comment.objects.get(pk=self.text_data_json["id"])
+        com = Comment.objects.get(pk=self.text_data_json.get("id"))
         com.likes.add(self.scope["user"].id)
 
     @database_sync_to_async
     def comment_user(self):
-        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
+        com = Comment(user=self.scope["user"],text=self.text_data_json.get("text"))
         com.save()
 
-        post = Post.objects.get(pk=self.text_data_json["id"])
+        post = Post.objects.get(pk=self.text_data_json.get("id"))
         post.comments.add(com.id)
 
     @database_sync_to_async
     def comment_reply(self):
-        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
-        com.parent = Comment.objects.get(pk=int(self.text_data_json["com_id"]))
+        com = Comment(user=self.scope["user"],text=self.text_data_json.get("text"))
+        com.parent = Comment.objects.get(pk=int(self.text_data_json.get("com_id")))
         com.save()
 
-        post = Post.objects.get(pk=int(self.text_data_json["post_id"]))
+        post = Post.objects.get(pk=int(self.text_data_json.get("post_id")))
         post.comments.add(com.id)
         ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=post.file,readeble=False,type_f=post.type_p)
         
@@ -284,7 +284,7 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def delete_post(self):
-        try:post = Post.objects.get(pk=self.text_data_json["id"])
+        try:post = Post.objects.get(pk=self.text_data_json.get("id"))
         except: self.text_data_json["data_text"] = "error"
 
         if post.user_pub == self.scope["user"]:
@@ -294,7 +294,7 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def delete_video(self):
-        try:video = Video.objects.get(pk=self.text_data_json["id"])
+        try:video = Video.objects.get(pk=self.text_data_json.get("id"))
         except: self.text_data_json["data_text"] = "error"
 
         if video.user_pub == self.scope["user"]:
@@ -304,18 +304,18 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def new_theme_all(self):
-        self.scope["user"].theme_all = AllTheme.objects.get(pk = self.text_data_json["id"])
+        self.scope["user"].theme_all = AllTheme.objects.get(pk = self.text_data_json.get("id"))
         self.scope["user"].save()
 
     @database_sync_to_async
     def delete_theme_all(self):
-        try:theme_del = AllTheme.objects.get(pk = self.text_data_json["id"])
+        try:theme_del = AllTheme.objects.get(pk = self.text_data_json.get("id"))
         except:pass
         if not theme_del.default:theme_del.delete()
 
     @database_sync_to_async
     def visible_ma(self):
-        ma = MessageActivity.objects.get(pk=self.text_data_json["id"])
+        ma = MessageActivity.objects.get(pk=self.text_data_json.get("id"))
         ma.readeble=True
         ma.save()
 
@@ -325,41 +325,41 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def get_first_music(self):
-        self.text_data_json["id"] = Playlist.objects.get(pk=self.text_data_json["id_playlist"]).musics.all()[0].id
+        self.text_data_json["id"] = Playlist.objects.get(pk=self.text_data_json.get("id_playlist")).musics.all()[0].id
 
     @database_sync_to_async
     def add_to_playlists(self):
-        ps = Playlist.objects.get(pk=self.text_data_json["playlist_id"])
+        ps = Playlist.objects.get(pk=self.text_data_json.get("playlist_id"))
         if self.scope["user"]!=ps.autor:
             return
-        ps.musics.add(self.text_data_json["music_id"])
+        ps.musics.add(self.text_data_json.get("music_id"))
 
     @database_sync_to_async
     def not_add_to_playlists(self):
-        ps = Playlist.objects.get(pk=self.text_data_json["playlist_id"])
+        ps = Playlist.objects.get(pk=self.text_data_json.get("playlist_id"))
         if self.scope["user"]!=ps.autor:
             return
-        ps.musics.remove(self.text_data_json["music_id"])
+        ps.musics.remove(self.text_data_json.get("music_id"))
 
     @database_sync_to_async
     def like_video(self):
-        Video.objects.get(pk=self.text_data_json["id"]).likes.add(self.scope["user"])
+        Video.objects.get(pk=self.text_data_json.get("id")).likes.add(self.scope["user"])
 
     @database_sync_to_async
     def comment_video_user(self):
-        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
+        com = Comment(user=self.scope["user"],text=self.text_data_json.get("text"))
         com.save()
 
-        video = Video.objects.get(pk=self.text_data_json["id"])
+        video = Video.objects.get(pk=self.text_data_json.get("id"))
         video.comments.add(com.id)
 
     @database_sync_to_async
     def comment_video_reply(self):
-        com = Comment(user=self.scope["user"],text=self.text_data_json["text"])
-        com.parent = Comment.objects.get(pk=int(self.text_data_json["com_id"]))
+        com = Comment(user=self.scope["user"],text=self.text_data_json.get("text"))
+        com.parent = Comment.objects.get(pk=int(self.text_data_json.get("com_id")))
         com.save()
 
-        video = Video.objects.get(pk=int(self.text_data_json["video_id"]))
+        video = Video.objects.get(pk=int(self.text_data_json.get("video_id")))
         video.comments.add(com.id)
         type_f = TypeFile.objects.get(type_f="video")
         ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=video.file,readeble=False,type_f=type_f)
@@ -369,19 +369,19 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def add_ps_share(self):
-        ps = Playlist.objects.get(pk=self.text_data_json["id"])
+        ps = Playlist.objects.get(pk=self.text_data_json.get("id"))
         self.scope["user"].playlists.add(ps)
         self.scope["user"].playlists_shared.remove(ps)
 
     @database_sync_to_async
     def not_add_ps_share(self):
-        self.scope["user"].playlists_shared.remove(Playlist.objects.get(pk=self.text_data_json["id"]))
+        self.scope["user"].playlists_shared.remove(Playlist.objects.get(pk=self.text_data_json.get("id")))
 
     @database_sync_to_async
     def ps_share(self):
         if self.text_data_json.get("to_user") and self.text_data_json.get("id"):
-            user = User.objects.get(pk=int(self.text_data_json["to_user"]))
-            ps = Playlist.objects.get(pk=self.text_data_json["id"])
+            user = User.objects.get(pk=int(self.text_data_json.get("to_user")))
+            ps = Playlist.objects.get(pk=self.text_data_json.get("id"))
             user.playlists_shared.add(ps)
             type_f = TypeFile.objects.get(type_f="audio")
 
@@ -392,77 +392,77 @@ class UserConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
-        if self.text_data_json['type']=='add_mus_share':
+        if self.text_data_json.get('type')=='add_mus_share':
             await self.add_mus_share()
             return
-        elif self.text_data_json['type']=='not_add_mus_share':
+        elif self.text_data_json.get('type')=='not_add_mus_share':
             await self.not_add_mus_share()
             return
-        elif self.text_data_json['type']=='add_to_me':
+        elif self.text_data_json.get('type')=='add_to_me':
             await self.add_to_me()
             return
-        elif self.text_data_json['type']=='delete_mus':
+        elif self.text_data_json.get('type')=='delete_mus':
             await self.delete_mus()
             return
-        elif self.text_data_json['type']=='mus_share':
+        elif self.text_data_json.get('type')=='mus_share':
             await self.mus_share()
             return
-        elif self.text_data_json['type']=='save_post':
+        elif self.text_data_json.get('type')=='save_post':
             await self.save_post()
             return
-        elif self.text_data_json['type']=='not_save':
+        elif self.text_data_json.get('type')=='not_save':
             await self.not_save()
             return
-        elif self.text_data_json['type']=='delete_friend':
+        elif self.text_data_json.get('type')=='delete_friend':
             await self.delete_friend()
             return  
-        elif self.text_data_json['type']=='add_friend':
+        elif self.text_data_json.get('type')=='add_friend':
             await self.add_friend()
             return
-        elif self.text_data_json['type']=='want_add_friend':
+        elif self.text_data_json.get('type')=='want_add_friend':
             await self.want_add_friend()
             return
-        elif self.text_data_json['type']=='follow':
+        elif self.text_data_json.get('type')=='follow':
             await self.follow()
             return
-        elif self.text_data_json['type']=='add_chat':
+        elif self.text_data_json.get('type')=='add_chat':
             await self.add_chat()
             return
-        elif self.text_data_json['type']=='like':
+        elif self.text_data_json.get('type')=='like':
             await self.like()
             return
-        elif self.text_data_json['type']=='comment_like':
+        elif self.text_data_json.get('type')=='comment_like':
             await self.comment_like()
             return
-        elif self.text_data_json['type']=='comment_user':
+        elif self.text_data_json.get('type')=='comment_user':
             await self.comment_user()
             return
-        elif self.text_data_json['type']=='comment_reply':
+        elif self.text_data_json.get('type')=='comment_reply':
             await self.comment_reply()
             return
-        elif self.text_data_json['type']=='delete_post':
+        elif self.text_data_json.get('type')=='delete_post':
             await self.delete_post()
-        elif self.text_data_json['type']=='new_theme_all':
+        elif self.text_data_json.get('type')=='new_theme_all':
             await self.new_theme_all()
             return
-        elif self.text_data_json['type']=='delete_theme_all':
+        elif self.text_data_json.get('type')=='delete_theme_all':
             await self.delete_theme_all()
             return
-        elif self.text_data_json['type']=='visible_ma':
+        elif self.text_data_json.get('type')=='visible_ma':
             await self.visible_ma()
             return
-        elif self.text_data_json['type']=='play_in_all':
-            if self.text_data_json["type_media"]=="playlist":
-                self.scope["session"]["playlist_play_in_all"]=self.text_data_json["id_playlist"]
-                if self.text_data_json["id"]=="first_id_music":
+        elif self.text_data_json.get('type')=='play_in_all':
+            if self.text_data_json.get("type_media")=="playlist":
+                self.scope["session"]["playlist_play_in_all"]=self.text_data_json.get("id_playlist")
+                if self.text_data_json.get("id")=="first_id_music":
                     await self.get_first_music()
-                else:self.scope["session"]["music_play_in_all"] = self.text_data_json["id"]
-            else:self.scope["session"]["music_play_in_all"] = self.text_data_json["id"]
-            self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json["currentTime"]
-            self.scope["session"]["music_play_in_all_type"]=self.text_data_json["type_media"]
+                else:self.scope["session"]["music_play_in_all"] = self.text_data_json.get("id")
+            else:self.scope["session"]["music_play_in_all"] = self.text_data_json.get("id")
+            self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json.get("currentTime")
+            self.scope["session"]["music_play_in_all_type"]=self.text_data_json.get("type_media")
             return
 
-        elif self.text_data_json['type']=='get_play_in_all':
+        elif self.text_data_json.get('type')=='get_play_in_all':
             if self.scope["session"].get("music_play_in_all_type")=='playlist':
                 self.text_data_json["id_playlist"]=self.scope["session"]["playlist_play_in_all"]    
             
@@ -470,34 +470,34 @@ class UserConsumer(AsyncWebsocketConsumer):
             self.text_data_json["currentTime"]=self.scope["session"].get("music_play_in_all_currentTime")
             self.text_data_json["type_media"]=self.scope["session"].get("music_play_in_all_type")
 
-        elif self.text_data_json['type']=='play_in_all_current_time':
-            self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json["currentTime"]
+        elif self.text_data_json.get('type')=='play_in_all_current_time':
+            self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json.get("currentTime")
             return
 
-        elif self.text_data_json['type']=='add_to_playlists':
+        elif self.text_data_json.get('type')=='add_to_playlists':
             await self.add_to_playlists()
 
-        elif self.text_data_json['type']=='not_add_to_playlists':
+        elif self.text_data_json.get('type')=='not_add_to_playlists':
             await self.not_add_to_playlists()
 
-        elif self.text_data_json['type']=='like_video':
+        elif self.text_data_json.get('type')=='like_video':
             await self.like_video()
             return
-        elif self.text_data_json['type']=='comment_video_user':
+        elif self.text_data_json.get('type')=='comment_video_user':
             await self.comment_video_user()
             return
-        elif self.text_data_json['type']=='comment_video_reply':
+        elif self.text_data_json.get('type')=='comment_video_reply':
             await self.comment_video_reply()
             return
-        elif self.text_data_json['type']=='delete_video':
+        elif self.text_data_json.get('type')=='delete_video':
             await self.delete_video()
-        elif self.text_data_json['type']=='ps_share':
+        elif self.text_data_json.get('type')=='ps_share':
             await self.ps_share()
             return
-        elif self.text_data_json['type']=='add_ps_share':
+        elif self.text_data_json.get('type')=='add_ps_share':
             await self.add_ps_share()
             return
-        elif self.text_data_json['type']=='not_add_ps_share':
+        elif self.text_data_json.get('type')=='not_add_ps_share':
             await self.not_add_ps_share()
             return
 
