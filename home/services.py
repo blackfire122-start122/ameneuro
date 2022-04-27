@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import IO, Generator
 from django.shortcuts import get_object_or_404
 from .models import Post, Music, Chat, Message, User, Video
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseForbidden
 
 import random
 import string
@@ -71,62 +72,17 @@ def open_file(request, id, type_s) -> tuple:
 
     return file, status_code, content_length, content_range
 
-# def get_posts(request,user):
-
-#     posts = {}
-#     start = request.session["start_element"]
-#     end = request.session["end_element"]
-
-#     try:
-#         friends = user.friends.all()
-#         follow = user.follow.all()
-#         posts = Post.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
-#         if len(posts)<get_posts_how:
-#             start_rec_post = request.session["start_rec_post"]
-#             end_rec_post = request.session["end_rec_post"]
-
-#             start_rec_user = request.session["start_rec_user"]
-#             end_rec_user = request.session["end_rec_user"]
-
-#             rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_user:end_rec_user]
-#             posts |= Post.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_post:end_rec_post]
-        
-#             if request.session["defolt_posts"]: 
-#                 start_rec_post = 0
-#                 end_rec_post = get_posts_how
-#                 request.session["defolt_posts"] = False
-            
-#             if request.session["start_rec_user"] > User.objects.count():
-#                 return posts
-#             if len(posts)<get_posts_how:
-#                 request.session["defolt_posts"] = True
-
-#                 start_rec_user+=get_user_how
-#                 end_rec_user+=get_user_how
-
-#                 request.session["start_rec_user"]=start_rec_user
-#                 request.session["end_rec_user"]=end_rec_user
-
-#                 posts |= get_posts(request,user)
-
-#             start_rec_post+=get_posts_how
-#             end_rec_post+=get_posts_how
-
-#             request.session["start_rec_post"]=start_rec_post
-#             request.session["end_rec_post"]=end_rec_post
-
-#     except:return {}
-
-#     start+=get_posts_how
-#     end+=get_posts_how
-
-#     request.session["start_element"]=start
-#     request.session["end_element"]=end
-#     return posts
-
-
 def get_posts(data,user):
     posts = {}
+    if not defence_isdigit(data.get("start_element"),
+        data.get("end_element"),
+        data.get("start_rec_post"),
+        data.get("end_rec_post"),
+        data.get("start_rec_user"),
+        data.get("end_rec_user"),
+        data.get("defolt_posts")
+    ):return [None,None,HttpResponseBadRequest]
+
     start = int(data.get("start_element"))
     end = int(data.get("end_element"))
 
@@ -150,7 +106,7 @@ def get_posts(data,user):
                 data["defolt_posts"]=0
             
             if int(data.get("start_rec_user")) > User.objects.count():
-                return [posts,data]
+                return [posts,data,None]
             if len(posts)<get_posts_how:
                 data["defolt_posts"]=1
 
@@ -168,14 +124,14 @@ def get_posts(data,user):
             data["start_rec_post"]=start_rec_post
             data["end_rec_post"]=end_rec_post
 
-    except:return [None,None]
+    except:return [None,None,None]
 
     start+=get_posts_how
     end+=get_posts_how
 
     data["start_element"]=start
     data["end_element"]=end
-    return [posts,data]
+    return [posts,data,None]
 
 def get_videos(request):
     videos = {}

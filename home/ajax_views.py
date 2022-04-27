@@ -3,6 +3,7 @@ from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist,Video
 from .forms import ThemeForm,MessageForm,AllTheme
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
 from django.db.models import Q
 from .services import *
 
@@ -36,7 +37,7 @@ def comment_video_ajax(request):
 	except:return HttpResponseNotFound()
 
 	return render(request,"home/ajax_html/comments_video.html",{"video_id":video.id,"comments":comments})
-from django.template.loader import render_to_string
+
 def post_ajax(request):
 	posts = {}
 	next_data = {}
@@ -48,7 +49,9 @@ def post_ajax(request):
 		try:posts = Post.objects.filter(pk=request.GET.get("id"))
 		except: HttpResponseNotFound()
 	else:
-		posts, next_data = get_posts(request.GET.copy(),request.user)
+		posts, next_data, error_response = get_posts(request.GET.copy(),request.user)
+		if error_response:
+			return error_response()
 		return JsonResponse({"html":render_to_string("home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET,"user":request.user}),"next_data":next_data})
 	
 	if not posts:return HttpResponse("None post", status=200)
