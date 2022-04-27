@@ -1,21 +1,19 @@
-# from ameneuro.celery import app
+from ameneuro.celery import app
 
-# from tensorflow.keras.datasets import mnist
-# from tensorflow import keras
-# from keras.applications.vgg16 import decode_predictions
-# from PIL import Image
-# import numpy as np
-# import io
-# import binascii
-# from channels.layers import get_channel_layer
-# from asgiref.sync import async_to_sync
-# model = keras.applications.VGG16()
-# channel_layer = get_channel_layer()
+from tensorflow.keras.datasets import mnist
+from tensorflow import keras
+from keras.applications.vgg16 import decode_predictions
+from PIL import Image
+import numpy as np
+import io
+import binascii
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+model = keras.applications.VGG16()
+channel_layer = get_channel_layer()
 
-# @app.task
 
-from home.models import AllTheme
-
+@app.task
 def recognize_task(img,username):
 	img = Image.open(io.BytesIO(binascii.a2b_base64(img)))
 	img = img.convert(mode='RGB')
