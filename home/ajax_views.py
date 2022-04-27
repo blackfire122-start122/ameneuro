@@ -53,17 +53,14 @@ def post_ajax(request):
 		if error_response:
 			return error_response()
 		return JsonResponse({"html":render_to_string("home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET,"user":request.user}),"next_data":next_data})
-	
-	if not posts:return HttpResponse("None post", status=200)
 	return render(request, "home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET})
 
 def video_ajax(request):
-	try:videos = get_videos(request)
-	except: return HttpResponseNotFound()
-
-	if not videos:return HttpResponse("None video", status=200)
-	return render(request, "home/ajax_html/videos.html",{"videos":videos,"data_get":request.GET})
-
+	try:videos, next_data, error_response = get_videos(request.GET.copy(),request.user)
+	except:return HttpResponseNotFound()
+	if error_response:
+		return error_response()
+	return JsonResponse({"html":render_to_string("home/ajax_html/videos.html",{"videos":videos,"data_get":request.GET,"user":request.user}),"next_data":next_data})
 
 @login_required(login_url='login')
 def chat_options_ajax(request):

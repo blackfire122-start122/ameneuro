@@ -23,24 +23,6 @@ class home(LoginRequiredMixin,TemplateView):
 	login_url = 'login'
 
 	def get(self, request, *args, **kwargs):
-		request.session["start_element"] = 0
-		request.session["end_element"] = get_posts_how
-		request.session["end_post_friend"] = None
-		request.session["start_rec_post"] = 0
-		request.session["end_rec_post"] = get_posts_how
-		request.session["start_rec_user"] = 0
-		request.session["end_rec_user"] = get_user_how
-		request.session["defolt_posts"] = False
-
-		request.session["start_element_video"] = 0
-		request.session["end_element_video"] = get_posts_how
-		request.session["end_video_friend"] = None
-		request.session["start_rec_video"] = 0
-		request.session["end_rec_video"] = get_posts_how
-		request.session["start_rec_video_user"] = 0
-		request.session["end_rec_video_user"] = get_user_how
-		request.session["defolt_video"] = False
-
 		self.chat_not_read_count = 0
 		for i in request.user.chats.all():
 			if i.messages.last() and not i.messages.last().readeble and i.messages.last().user != request.user:

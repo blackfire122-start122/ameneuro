@@ -73,16 +73,18 @@ def open_file(request, id, type_s) -> tuple:
     return file, status_code, content_length, content_range
 
 def get_posts(data,user):
-    posts = {}
-    if not defence_isdigit(data.get("start_element"),
-        data.get("end_element"),
-        data.get("start_rec_post"),
-        data.get("end_rec_post"),
-        data.get("start_rec_user"),
-        data.get("end_rec_user"),
-        data.get("defolt_posts")
-    ):return [None,None,HttpResponseBadRequest]
+    try:
+        if not defence_isdigit(data.get("start_element"),
+            data.get("end_element"),
+            data.get("start_rec_post"),
+            data.get("end_rec_post"),
+            data.get("start_rec_user"),
+            data.get("end_rec_user"),
+            data.get("defolt_posts")
+        ):return [None,None,HttpResponseBadRequest]
+    except:return [None,None,HttpResponseBadRequest]
 
+    posts = {}
     start = int(data.get("start_element"))
     end = int(data.get("end_element"))
 
@@ -133,57 +135,68 @@ def get_posts(data,user):
     data["end_element"]=end
     return [posts,data,None]
 
-def get_videos(request):
+def get_videos(data,user):
+    try:
+        if not defence_isdigit(data.get("start_element_video"),
+            data.get("end_element_video"),
+            data.get("start_rec_video"),
+            data.get("end_rec_video"),
+            data.get("start_rec_video_user"),
+            data.get("end_rec_video_user"),
+            data.get("defolt_video")
+        ):return [None,None,HttpResponseBadRequest]
+    except:return [None,None,HttpResponseBadRequest]
+
     videos = {}
-    start = request.session["start_element_video"]
-    end = request.session["end_element_video"]
+    start = int(data.get("start_element_video"))
+    end = int(data.get("end_element_video"))
 
     try:
-        friends = request.user.friends.all()
-        follow = request.user.follow.all()
+        friends = user.friends.all()
+        follow = user.follow.all()
         videos = Video.objects.filter(user_pub__in=friends|follow).order_by("-date")[start:end]
         if len(videos)<get_videos_how:
-            start_rec_video = request.session["start_rec_video"]
-            end_rec_video = request.session["end_rec_video"]
+            start_rec_video = int(data.get("start_rec_video"))
+            end_rec_video = int(data.get("end_rec_video"))
 
-            start_rec_video_user = request.session["start_rec_video_user"]
-            end_rec_video_user = request.session["end_rec_video_user"]
+            start_rec_video_user = int(data.get("start_rec_video_user"))
+            end_rec_video_user = int(data.get("end_rec_video_user"))
 
             rec_user = User.objects.exclude(pk__in=friends|follow)[start_rec_video_user:end_rec_video_user]
             videos |= Video.objects.filter(user_pub__in=rec_user).order_by("-date")[start_rec_video:end_rec_video]
         
-            if request.session["defolt_video"]: 
+            if int(data.get("defolt_video"))==1: 
                 start_rec_video = 0
                 end_rec_video = get_videos_how
-                request.session["defolt_video"] = False
+                data["defolt_video"] = 0
             
-            if request.session["start_rec_video_user"] > User.objects.count():
-                return videos
+            if int(data.get("start_rec_video_user")) > User.objects.count():
+                return [videos,data,None]
             if len(videos)<get_videos_how:
-                request.session["defolt_video"] = True
+                data["defolt_video"] = 1
 
                 start_rec_video_user+=get_user_how
                 end_rec_video_user+=get_user_how
 
-                request.session["start_rec_video_user"]=start_rec_video_user
-                request.session["end_rec_video_user"]=end_rec_video_user
+                data["start_rec_video_user"]=start_rec_video_user
+                data["end_rec_video_user"]=end_rec_video_user
 
-                videos |= get_videos(request)
+                videos |= get_videos(data,user)[0]
 
             start_rec_video+=get_videos_how
             end_rec_video+=get_videos_how
 
-            request.session["start_rec_video"]=start_rec_video
-            request.session["end_rec_video"]=end_rec_video
+            data["start_rec_video"]=start_rec_video
+            data["end_rec_video"]=end_rec_video
 
-    except:return {}
+    except:return [None,None,None]
 
     start+=get_videos_how
     end+=get_videos_how
 
-    request.session["start_element_video"]=start
-    request.session["end_element_video"]=end
-    return videos
+    data["start_element_video"]=start
+    data["end_element_video"]=end
+    return [videos,data,None]
 
 def defence_isdigit(*args):
     return all([str(i).isdigit() for i in args])

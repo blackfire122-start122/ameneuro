@@ -4,7 +4,6 @@ let videos = document.querySelector('.videos')
 
 let start_element = 0
 let end_element = get_posts_how
-let end_post_friend
 let start_rec_post = 0
 let end_rec_post = get_posts_how
 let start_rec_user = 0
@@ -12,7 +11,6 @@ let end_rec_user = get_user_how
 let defolt_posts = 0
 let start_element_video = 0
 let end_element_video = get_posts_how
-let end_video_friend
 let start_rec_video = 0
 let end_rec_video = get_posts_how
 let start_rec_video_user = 0
@@ -33,7 +31,6 @@ function get_posts(){
 	$.ajax({
 		data:{"start_element":start_element,
 				"end_element":end_element,
-				"end_post_friend":end_post_friend,
 				"start_rec_post":start_rec_post,
 				"end_rec_post":end_rec_post,
 				"start_rec_user":start_rec_user,
@@ -46,7 +43,6 @@ function get_posts(){
 
 			start_element=data["next_data"]["start_element"]
 			end_element=data["next_data"]["end_element"]
-			end_post_friend=data["next_data"]["end_post_friend"]
 			start_rec_post=data["next_data"]["start_rec_post"]
 			end_rec_post=data["next_data"]["end_rec_post"]
 			start_rec_user=data["next_data"]["start_rec_user"]
@@ -58,15 +54,24 @@ function get_posts(){
 
 function get_videos(){
 	$.ajax({
-		data:{
-
+		data:{"start_element_video":start_element_video,
+				"end_element_video":end_element_video,
+				"start_rec_video":start_rec_video,
+				"end_rec_video":end_rec_video,
+				"start_rec_video_user":start_rec_video_user,
+				"end_rec_video_user":end_rec_video_user,
+				"defolt_video":defolt_video,
 		},
 		url: video_ajax,
-		error: (data)=> {
-			console.log(data.data_text)
-		},
 		success: (data) =>{
-			videos.innerHTML += data
+			videos.innerHTML += data["html"]
+			start_element_video=data["next_data"]["start_element_video"]
+			end_element_video=data["next_data"]["end_element_video"]
+			start_rec_video=data["next_data"]["start_rec_video"]
+			end_rec_video=data["next_data"]["end_rec_video"]
+			start_rec_video_user=data["next_data"]["start_rec_video_user"]
+			end_rec_video_user=data["next_data"]["end_rec_video_user"]
+			defolt_video=data["next_data"]["defolt_video"]
 		}
 	})
 }
