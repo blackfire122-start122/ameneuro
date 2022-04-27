@@ -1,3 +1,6 @@
+let start_comments = {}
+let end_comments = {}
+
 function like(e){
 	conn_u.send(JSON.stringify({'type':'like', "id":e.id}))
 
@@ -6,31 +9,59 @@ function like(e){
 	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
 }
 
-function comments(e){
-	let div_menu_post = document.querySelector(".post_"+e.id)
-	
-	function show_comment(){
-		div_menu_post.childNodes[11].style.display = "block"
-		e.onclick = close_comment
-	}
+let get_com_can = true
 
-	function close_comment(){
-		div_menu_post.childNodes[11].style.display = "none"
-		e.onclick = show_comment
-	}
-
-	e.onclick = close_comment 
-
+async function get_can_true() {
+	await sleep(700)
+	get_com_can = true
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+function get_comments(e,comments_div){
 	$.ajax({
 		url: comment_ajax,
-		data: {'id':e.id},
+		data: {'id':e.id,"start_comments":start_comments[e.id],"end_comments":end_comments[e.id]},
 		success: function (response) {
-			div_menu_post.childNodes[11].innerHTML += response
-			div_menu_post.childNodes[11].style.display = "block"
+			comments_div.innerHTML += response
+			comments_div.style.display = "block"
+			start_comments[e.id]+=how_get
+			end_comments[e.id]+=how_get
+
+			comments_div.addEventListener('scroll', async function() {
+				if($(comments_div).scrollTop()+$(comments_div).height()>=$(comments_div).height()-300){
+				  if (get_com_can) {
+				 		get_comments(e,comments_div)
+				 		get_com_can = false
+				 		get_can_true()
+				 	}
+				}
+			})
+
 		}
 	})
-
 }
+
+function show_comment(comments_div,e){
+	comments_div.style.display = "block"
+	e.onclick = ()=>{close_comment(comments_div,e)}
+}
+
+function close_comment(comments_div,e){
+	comments_div.style.display = "none"
+	e.onclick = ()=>{show_comment(comments_div,e)}
+}
+
+function comments(e){
+	start_comments[e.id] = 0
+	end_comments[e.id] = how_get
+	div_menu_post = document.querySelector(".post_"+e.id)
+	comments_div = div_menu_post.childNodes[11]
+	
+	e.onclick = ()=>{close_comment(comments_div,e)}
+	get_comments(e,comments_div)
+}
+
 
 function like_comment(e){
 	conn_u.send(JSON.stringify({'type':'comment_like', "id":e.id}))

@@ -73,6 +73,7 @@ ajax optimize html *
 
 ajax optimize views ***
 optimize static
+comments dunamic post 
 
 defence:
 	is_digit *

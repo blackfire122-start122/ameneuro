@@ -12,12 +12,16 @@ from django.core import serializers
 def comment_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("id")):return HttpResponseBadRequest()
+		if not defence_isdigit(request.GET.get("start_comments"),request.GET.get("end_comments"),request.GET.get("id")):return HttpResponseBadRequest()
+		if not defence_ptl(request.GET.get("start_comments"),request.GET.get("end_comments")):return HttpResponse('Payload Too Large', status=413)
 	except:return HttpResponseBadRequest()
 
-	try:post = Post.objects.get(pk=request.GET.get("id"))
+	try:
+		post = Post.objects.get(pk=request.GET.get("id"))
+		comments = post.comments.all()[int(request.GET.get("start_comments")):int(request.GET.get("end_comments"))]
 	except:return HttpResponseNotFound()
 
-	return render(request,"home/ajax_html/comments.html",{"post_id":post.id ,"comments":post.comments.all()})
+	return render(request,"home/ajax_html/comments.html",{"post_id":post.id ,"comments":comments})
 
 @login_required(login_url='login')
 def comment_video_ajax(request):

@@ -56,11 +56,14 @@
 }
 
 .inp_sub_com{
+	z-index: 2;
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
+	width: 90%;
 	position: sticky;
-	bottom: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 94%;
 	background: rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
 	padding: 2px;

@@ -79,7 +79,12 @@
 				<p class="post_desc">{{ p.description }}</p>
 				<time>{{ p.date }}</time>
 
-				<div class="comments"></div>
+				<div class="comments">
+					<div class="inp_sub_com">
+						<input placeholder="Comment " class=" inp_comment inp_comment{{ p.id }}" type="text">
+						<button class="com_btn" value="{{ p.id }}" onclick="comment_user(this)">Comment</button>
+					</div>
+				</div>
 			{% endif %}
 		</div>
 		<div class="line"></div>
