@@ -1,8 +1,15 @@
 {% for c in comments %}
-	<div class="comment com_{{ c.id }}">
-		{% if c.parent %}
-		    <p>{{ c.parent }}</p>
-		{% endif %}
+	{% if c.parent %}
+		<div class="parent_com">
+			<p class="comment_text">{{ c.parent }}</p>
+			<div class="parent_user">
+				<img class="img_user_comment" src="{{ c.parent.user.img.url }}">
+				<span class="user_name_comment">{{ c.parent.user|truncatechars:5 }}</span>
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="comment com_{{ c.id }} {% if c.parent %} have_parent {% endif %}">
 		<img class="img_user_comment" src="{{ c.user.img.url }}" alt="">
 		<span class="user_name_comment">{{ c.user }}</span>
 		<span class="comment_text"> {{ c }}</span>
@@ -16,7 +23,7 @@
 					<img id={{ c.id }} onclick="like_comment(this)" class='img_like_comment' src="{{ user.theme_all.like_img.url }}">
 				{% endif %}
 
-				<span>{{ c.likes.all|length }}</span>
+				<span>{{ c.likes.all.count }}</span>
 			</div>
 			<button value="{{ video_id }}" id="{{ c.id }}" onclick="select_video_reply(this,'{{ c.user }}')" class="reply">reply</button>
 		</div>

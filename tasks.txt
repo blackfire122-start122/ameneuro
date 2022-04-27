@@ -82,6 +82,8 @@ defence: *
 css style:
 	pia *
 	this end *
+	headers *
+	comments reply *
 	add music form style
 	one formats think think 
 	add post style

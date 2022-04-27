@@ -50,8 +50,6 @@ main{
 	right: 2em;
 }
 
-
-
 .inp_comment{
 	outline: none;
 	border: none;
@@ -96,6 +94,7 @@ main{
 .user_name_comment, .comment_text{
 	position: relative;
 	bottom: 0.5em;
+	overflow-wrap: anywhere;
 }
 
 .comment_menu{
@@ -128,4 +127,19 @@ main{
 	position: relative;
 	right: 0;
 	margin: 0 auto;
+}
+
+.have_parent{
+	margin-left: 7%;
+}
+
+.parent_com{
+	display: flex;
+	justify-content: space-between;
+	margin-left: 4%;
+	margin-top: 1%;
+}
+
+.parent_user{
+	margin-right: 7%;
 }

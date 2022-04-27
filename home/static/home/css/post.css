@@ -95,6 +95,7 @@
 .user_name_comment, .comment_text{
 	position: relative;
 	bottom: 0.5em;
+	overflow-wrap: anywhere;
 }
 
 .comment_menu{
@@ -236,4 +237,19 @@
 
 .link_options_menu_red{
 	color: red;
+}
+
+.have_parent{
+	margin-left: 7%;
+}
+
+.parent_com{
+	display: flex;
+	justify-content: space-between;
+	margin-left: 4%;
+	margin-top: 1%;
+}
+
+.parent_user{
+	margin-right: 7%;
 }

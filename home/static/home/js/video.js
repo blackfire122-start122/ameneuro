@@ -16,6 +16,14 @@ function comments(e){
 
 }
 
+function like_comment(e){
+	conn_u.send(JSON.stringify({'type':'comment_like', "id":e.id}))
+
+	e.style.opacity = "0.5"
+	e.onclick = null
+	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
+}
+
 function get_comments(){
 	$.ajax({
 		url: comment_video_ajax,

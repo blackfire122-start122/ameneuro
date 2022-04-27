@@ -1,9 +1,15 @@
 {% for c in comments %}
-	<div class="comment com_{{ c.id }}">
-		{% if c.parent %}
-		    <p>{{ c.parent }}</p>
-		{% endif %}
-		<img class="img_user_comment" src="{{ c.user.img.url }}" alt="">
+	{% if c.parent %}
+		<div class="parent_com">
+			<p class="comment_text">{{ c.parent }}</p>
+			<div class="parent_user">
+				<img class="img_user_comment" src="{{ c.parent.user.img }}">
+				<span class="user_name_comment">{{ c.parent.user |truncatechars:5 }}</span>
+			</div>
+		</div>
+	{% endif %}
+	<div class="comment com_{{ c.id }} {% if c.parent %} have_parent {% endif %}">
+		<img class="img_user_comment" src="{{ c.user.img.url }}">
 		<span class="user_name_comment">{{ c.user }}</span>
 		<span class="comment_text"> {{ c }}</span>
 
