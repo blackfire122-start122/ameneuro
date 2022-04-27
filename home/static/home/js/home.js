@@ -16,6 +16,8 @@ let end_rec_video = get_posts_how
 let start_rec_video_user = 0
 let end_rec_video_user = get_user_how
 let defolt_video = 0
+let end_scroll = 0
+let end_scroll_video = 0
 
 function menu_show(e){
 	if (menu_show_v) {
@@ -36,6 +38,7 @@ function get_posts(){
 				"start_rec_user":start_rec_user,
 				"end_rec_user":end_rec_user,
 				"defolt_posts":defolt_posts,
+				"end_scroll":end_scroll,
 			},
 		url: post_ajax,
 		success: (data) =>{
@@ -48,6 +51,7 @@ function get_posts(){
 			start_rec_user=data["next_data"]["start_rec_user"]
 			end_rec_user=data["next_data"]["end_rec_user"]
 			defolt_posts=data["next_data"]["defolt_posts"]
+			end_scroll=data["next_data"]["end_scroll"]
 		}
 	})
 }
@@ -61,6 +65,7 @@ function get_videos(){
 				"start_rec_video_user":start_rec_video_user,
 				"end_rec_video_user":end_rec_video_user,
 				"defolt_video":defolt_video,
+				"end_scroll_video":end_scroll_video,
 		},
 		url: video_ajax,
 		success: (data) =>{
@@ -72,6 +77,7 @@ function get_videos(){
 			start_rec_video_user=data["next_data"]["start_rec_video_user"]
 			end_rec_video_user=data["next_data"]["end_rec_video_user"]
 			defolt_video=data["next_data"]["defolt_video"]
+			end_scroll_video=data["next_data"]["end_scroll_video"]
 		}
 	})
 }

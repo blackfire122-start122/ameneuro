@@ -49,18 +49,36 @@ def post_ajax(request):
 		try:posts = Post.objects.filter(pk=request.GET.get("id"))
 		except: HttpResponseNotFound()
 	else:
-		posts, next_data, error_response = get_posts(request.GET.copy(),request.user)
-		if error_response:
-			return error_response()
-		return JsonResponse({"html":render_to_string("home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET,"user":request.user}),"next_data":next_data})
+		try:
+			if not defence_isdigit(request.GET.get("end_scroll")):return HttpResponseBadRequest()
+		except:return HttpResponseBadRequest()
+		if int(request.GET.get("end_scroll")) == 0:
+			posts, next_data, error_response = get_posts(request.GET.copy(),request.user)
+			if error_response:
+				return error_response()
+			if not posts:
+				next_data["end_scroll"]=1
+				return JsonResponse({"html":render_to_string("home/ajax_html/End_scroll.html",{"user":request.user}),"next_data":next_data})
+			return JsonResponse({"html":render_to_string("home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET,"user":request.user}),"next_data":next_data})
+		return JsonResponse({"html":"","next_data":request.GET})
 	return render(request, "home/ajax_html/posts.html",{"posts":posts,"data_get":request.GET})
 
 def video_ajax(request):
-	try:videos, next_data, error_response = get_videos(request.GET.copy(),request.user)
-	except:return HttpResponseNotFound()
-	if error_response:
-		return error_response()
-	return JsonResponse({"html":render_to_string("home/ajax_html/videos.html",{"videos":videos,"data_get":request.GET,"user":request.user}),"next_data":next_data})
+	try:
+		if not defence_isdigit(request.GET.get("end_scroll_video")):return HttpResponseBadRequest()
+	except:return HttpResponseBadRequest()
+	videos = {}
+	next_data = {}
+	if int(request.GET.get("end_scroll_video")) == 0:
+		try:videos, next_data, error_response = get_videos(request.GET.copy(),request.user)
+		except:return HttpResponseNotFound()
+		if error_response:
+			return error_response()
+		if not videos:
+			next_data["end_scroll_video"]=1
+			return JsonResponse({"html":render_to_string("home/ajax_html/End_scroll.html",{"user":request.user}),"next_data":next_data})
+		return JsonResponse({"html":render_to_string("home/ajax_html/videos.html",{"videos":videos,"data_get":request.GET,"user":request.user}),"next_data":next_data})
+	return JsonResponse({"html":"","next_data":request.GET})
 
 @login_required(login_url='login')
 def chat_options_ajax(request):

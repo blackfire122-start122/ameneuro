@@ -126,6 +126,9 @@ class AllTheme(models.Model):
 	pause_img = models.ImageField(upload_to="theme_all/pause_img",default=None,null=True,blank=True)
 	play_img = models.ImageField(upload_to="theme_all/play_img",default=None,null=True,blank=True)
 	music_share_img = models.ImageField(upload_to="theme_all/music_share_img",default=None,null=True,blank=True)
+	end_scroll_img = models.ImageField(upload_to="theme_all/end_scroll_img",default=None,null=True,blank=True)
+	music_left_img = models.ImageField(upload_to="theme_all/music_left_img",default=None,null=True,blank=True)
+	music_right_img = models.ImageField(upload_to="theme_all/music_right_img",default=None,null=True,blank=True)
 	
 	def __str__(self):
 		return self.name

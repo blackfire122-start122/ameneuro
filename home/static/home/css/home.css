@@ -170,6 +170,15 @@ main{
 	top: 20%;
 }
 
+.end_scroll_img{
+	width: 100%;
+}
+
+.no_more_media{
+	width: 100%;
+	text-align: center;
+}
+
 @media screen and (min-width: 1024px) {
 	.posts_videos{
 		width: 50%;

@@ -84,8 +84,8 @@
 		let share_ch_ajax = "{% url 'share_ch_ajax' %}"
 		let play_img = "{{ user.theme_all.play_img.url }}"
 		let pause_img = "{{ user.theme_all.pause_img.url }}"
-		let img_left = "{% static 'home/images/left.png' %}"
-		let img_right = "{% static 'home/images/right.png' %}"
+		let img_left = "{{ user.theme_all.music_left_img }}"
+		let img_right = "{{ user.theme_all.music_right_img }}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 
 		let get_posts_how = {{ get_posts_how }}
