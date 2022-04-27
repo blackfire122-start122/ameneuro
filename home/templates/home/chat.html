@@ -5,13 +5,7 @@
 
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/chat.css' %}">
-	<h4 class="userregname">
-		{% for n in chat.users.all %}
-			{% if n != user %}
-				{{ n }}
-			{% endif %}
-		{% endfor %}
-	</h4>
+	<h4 class="username">{{ chat.chat_friend.user }}</h4>
 	<div class="opt_mus">
 		<img onclick="chat_options(this)" class='img_opt' src="{{ user.theme_all.options_img.url }}">
 	</div>

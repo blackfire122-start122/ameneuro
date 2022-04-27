@@ -159,3 +159,8 @@
 	background: none;
 	font-size: 1.05em;
 }
+
+.username{
+	position: relative;
+	right: 35%;
+}

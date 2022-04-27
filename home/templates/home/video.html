@@ -5,6 +5,7 @@
 
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/video.css' %}">
+	<h3 class="video_autor">{{ video.user_pub }}</h3>
 	{% if user == video.user_pub %}
 		<button class="del_video" onclick="delete_video(this)">Delete</button>
 	{% endif %}

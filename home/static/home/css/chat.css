@@ -182,9 +182,10 @@ body{
 }
 
 .readeble{
-	position: fixed;
+	width: 100%;
+	position: absolute;
 	top: 3%;
-	left: 45%;
+	text-align: center;
 	z-index: 5;
 }
 

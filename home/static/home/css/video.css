@@ -123,3 +123,9 @@ main{
 	position: relative;
 	right: 10%;
 }
+
+.video_autor{
+	position: relative;
+	right: 0;
+	margin: 0 auto;
+}
