@@ -4,7 +4,6 @@ from .forms import ThemeForm,MessageForm,AllTheme
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
-from django.db.models import Q
 from .services import *
 
 from django.core import serializers
@@ -325,7 +324,7 @@ def playlists_ajax(request):
 
 @login_required(login_url='login')
 def share_ch_ajax(request):
-	if request.GET.get("type") == 'find_ch':chats = request.user.chats.all().filter(Q(user__username__contains=request.GET.get("find_ch"))&~Q(users=request.user))
+	if request.GET.get("type") == 'find_ch':chats = request.user.chats.all().filter(chat_friend__user__username__contains=request.GET.get("find_ch"))
 	else:chats = request.user.chats.all()
 	return render(request,"home/ajax_html/share_ch.html",{"chats":chats})
 

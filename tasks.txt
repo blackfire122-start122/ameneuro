@@ -94,5 +94,5 @@ css style:
 	music scroll
 
 chats find
-share bugs
+share bugs *
 activitys friend 

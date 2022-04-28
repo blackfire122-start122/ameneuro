@@ -150,7 +150,7 @@ function onmessage(e){
 
 		time.className = 'time'
 		time.innerText = data["time"].slice(11,16)
-		p.innerText = "share"
+		p.innerText = data["msg"].split("#@;")[1]
 
 		a.append(file)
 		div.append(a)
@@ -161,7 +161,6 @@ function onmessage(e){
 		readeble.innerText = 'not read'
 		end_readable_send()
 	}
-	console.log(data)
 }
 
 conn.onopen = ()=>{

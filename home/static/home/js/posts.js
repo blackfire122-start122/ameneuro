@@ -158,7 +158,7 @@ function share_btn(ch_id,friend,ch_pk){
 	conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+friend)
  
 	conn.onopen = ()=>{
-		conn.send(JSON.stringify({'type':'share','chat':ch_pk,'user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share+ "#@" +document.querySelector("#mess_share").value}))
+		conn.send(JSON.stringify({'type':'share','chat':ch_pk,'user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share+ "#@;" +document.querySelector("#mess_share").value}))
 		conn.close()
 	}
 	conn_u_f.onopen = ()=>{
@@ -210,9 +210,6 @@ try {
 	$.ajax({
 		url: post_ajax,
 		data: {'id':post_id},
-		error: (data)=> {
-			console.log(data)
-		},
 		success: (data) =>{
 			if (data["info"] != "None post"){
 				posts_div.innerHTML += data
