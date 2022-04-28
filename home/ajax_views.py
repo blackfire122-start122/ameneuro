@@ -358,3 +358,25 @@ def activity_mess_ajax(request):
 	try:mess = request.user.message_activity.all().order_by("-date")[int(request.GET.get('mess_start')):int(request.GET.get('mess_end'))]
 	except:return HttpResponseNotFound()
 	return render(request, "home/ajax_html/activity_mess.html",{"mess":mess})
+
+@login_required(login_url='login')
+def chat_find_ajax(request):
+	try:
+		if not defence_isdigit(request.GET.get("start_chat"), request.GET.get("end_chat")):return HttpResponseBadRequest()
+		if not defence_ptl(request.GET.get("start_chat"),request.GET.get("end_chat")):return HttpResponse('Payload Too Large', status=413)
+	except:return HttpResponseBadRequest()
+	
+	try:chats = request.user.chats.filter(chat_friend__user__username__contains=request.GET.get("find_ch"))[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+	except:return HttpResponseNotFound()
+	return render(request, "home/ajax_html/chats.html",{"chats":chats})
+
+@login_required(login_url='login')
+def get_chats_ajax(request):
+	try:
+		if not defence_isdigit(request.GET.get("start_chat"), request.GET.get("end_chat")):return HttpResponseBadRequest()
+		if not defence_ptl(request.GET.get("start_chat"),request.GET.get("end_chat")):return HttpResponse('Payload Too Large', status=413)
+	except:return HttpResponseBadRequest()
+	
+	try:chats = request.user.chats.all()[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+	except:return HttpResponseNotFound()
+	return render(request, "home/ajax_html/chats.html",{"chats":chats})

@@ -24,6 +24,6 @@ urlpatterns = [
     path('playlists', ajax_views.playlists_ajax, name='playlists_ajax'),
     path('share_ch', ajax_views.share_ch_ajax, name='share_ch_ajax'),
     path('activity_mess', ajax_views.activity_mess_ajax, name='activity_mess_ajax'),
-
+    path('chat_find', ajax_views.chat_find_ajax, name='chat_find_ajax'),
+    path('get_chats', ajax_views.get_chats_ajax, name='get_chats_ajax'),
 ]
-

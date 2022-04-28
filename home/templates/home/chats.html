@@ -5,34 +5,17 @@
 {% block content_header %}
 	<link rel="stylesheet" href="{% static 'home/css/chats.css' %}">
 	<h4 class="userregname">{{ user }}</h4>
-	<input class='find_chat' type="text" placeholder="find chat">
+	<input onkeyup="find_inp(this)" class='find_chat' type="text" placeholder="find chat">
 {% endblock content_header %}
 
 {% block content %}	
-	<div class="chats">
-		{% for ch in user.chats.all %}
-			<a class="chat_link" href="{% url 'chat' ch.chat_id %}">
-			<div class="user_chat">
-				<div>
-					<img class='user_img' src="{{ ch.chat_friend.user.img }}">
-					<div class="point_in"></div>
-				</div>
-
-				<div class="name_end_mes">
-					<h4 class="user_ch">{{ ch.chat_friend.user }}</h4>
-					<span id="{{ ch.chat_id }}" class="end_mes" >{{ ch.messages.all.last }} </span>
-				</div>
-				{% if not ch.messages.all.last.readeble and ch.messages.all.last == "None" %}
-					<div class="point"></div>
-				{% else %}
-					<div class="point_none"></div>
-				{% endif %}
-			</div>
-		{% endfor %}
-		</a>
-	</div>
+	<div class="chats"></div>
 {% endblock content %}
 
 {% block end_scripts %}
+	<script>
+		let chat_find_ajax = "{% url 'chat_find_ajax' %}"
+		let get_chats_ajax = "{% url 'get_chats_ajax' %}"
+	</script>
 	<script src="{% static 'home/js/chats.js' %}"></script>
 {% endblock end_scripts %}

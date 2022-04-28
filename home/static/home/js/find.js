@@ -199,7 +199,6 @@ async function get_can_true() {
 	get_can = true
 }
 
-
 window.addEventListener('scroll', scroll_event)
 function scroll_event(e) {
 	if($(window).scrollTop()+$(window).height()>=$(document).height()-500){

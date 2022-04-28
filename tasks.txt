@@ -73,6 +73,8 @@ comments dunamic post *
 optimise services *
 share bugs *
 activitys friend *
+chats find *
+chats dunamic *
 
 defence: *
 	is_digit *
@@ -94,5 +96,3 @@ css style:
 	post from home css 
 	show name file in forms 
 	music scroll
-
-chats find
