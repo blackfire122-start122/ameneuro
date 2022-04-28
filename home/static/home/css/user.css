@@ -14,8 +14,8 @@
 	margin-right:auto;
 }
 .post_file, .video_file{
-	height: 7em;
-	width: 7em;
+	height: 100%;
+	width: 100%;
    	object-fit:cover;
 }
 
@@ -133,4 +133,8 @@
 	background: none;
 	border-bottom: 3px solid black;
 	font-size: 1.1em;
+}
+
+main{
+	overflow: hidden;
 }

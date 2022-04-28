@@ -8,7 +8,7 @@
   border-radius: 3px;
   --player-button-width: 3em;
   --space: .5em;
-  width: 90%;
+  width: 100%;
 }
 
 .controls {
@@ -17,6 +17,7 @@
   align-items: center;
   width: 100%;
   margin-top: 10px;
+  overflow: hidden;
 }
 
 .player-button {
@@ -141,6 +142,7 @@
 .menu_player{
   display: flex;
   justify-content: space-around;
+  overflow: hidden;
 }
 
 .btn_menu_player{
@@ -154,7 +156,7 @@
 
 .play_in_all{
   width: 20px;
-  position: absolute;
-  right: 0;
-  margin-top: -50px;
+  height: 20px;
+  object-fit: cover;
+  position: relative;
 }
