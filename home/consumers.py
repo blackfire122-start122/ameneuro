@@ -209,6 +209,12 @@ class UserConsumer(AsyncWebsocketConsumer):
     def want_add_friend(self):
         friend = User.objects.get(pk=self.text_data_json.get('id'))
         friend.friend_want_add.add(self.scope["user"].id)
+ 
+        type_f = TypeFile.objects.filter(type_f="img")[0]
+
+        ma = MessageActivity(text="to you what add to friends: "+friend.username,from_user=self.scope["user"],readeble=False,type_f=type_f,file=friend.img.url)
+        ma.save()
+        friend.message_activity.add(ma)
 
     @database_sync_to_async
     def follow(self):

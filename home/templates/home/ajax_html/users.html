@@ -16,7 +16,7 @@
 							<p id="{{ u.id }}" class="follow">follow</p>
 						{% endif %}
 
-						<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this)">Add friend</button>
+						<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this,'{{ u }}')">Add friend</button>
 					</div>
 				{% endif %}
 

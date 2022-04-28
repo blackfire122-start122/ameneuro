@@ -71,6 +71,8 @@ playlists share *
 ajax optimize html *
 comments dunamic post *
 optimise services *
+share bugs *
+activitys friend *
 
 defence: *
 	is_digit *
@@ -94,5 +96,3 @@ css style:
 	music scroll
 
 chats find
-share bugs *
-activitys friend 
