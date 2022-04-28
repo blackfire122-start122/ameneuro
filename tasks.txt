@@ -84,10 +84,15 @@ css style:
 	this end *
 	headers *
 	comments reply *
+	user post videos
+	find inputs *
 	add music form style
 	one formats think think 
 	add post style
 	post from home css 
 	show name file in forms 
+	music scroll
 
 chats find
+share bugs
+activitys friend 

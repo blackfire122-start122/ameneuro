@@ -28,9 +28,13 @@
 }
 
 .find_chat{
-	width: 8em;
-	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	border-radius:5px;
+	outline: none;
 	padding: 5px;
+	position: relative;
+	right: 5%;
 }
 
 .point{
