@@ -153,7 +153,7 @@ def musics_all_ajax(request):
 		except:return HttpResponseNotFound()
 
 	elif request.GET.get("type") == "user_music_add":
-		try:mus = User.objects.get(pk=request.GET.get("id")).music.order_by("-date")
+		try:mus = User.objects.get(pk=request.GET.get("id")).music.order_by("-date")[int(request.GET.get("musics_start")):int(request.GET.get("musics_end"))]
 		except:return HttpResponseNotFound()
 	else:
 		try:

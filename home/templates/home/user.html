@@ -45,9 +45,10 @@
 				<a class="save_post_link" href="{% url 'saves_posts' %}"><h3>Save posts</h3></a>
 			</div>
 		{% endif %}
-		<div onclick="music_show()" class='musics_user'>
-			<h3>Musics</h3>
+		<div class='musics_user'>
+			<h3 onclick="music_show()">Musics</h3>
 			<div class="musics"></div>
+			<span onclick="close_musics_f()" class="close_musics">X</span>
 		</div>
 	</div>
 	<div class="what_show">

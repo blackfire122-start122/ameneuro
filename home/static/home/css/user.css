@@ -65,6 +65,8 @@
 	overflow-y: auto;
 	right: 0;
 	padding: 5px;
+	border-radius: 20px;
+	z-index: 3;
 }
 
 .music{
@@ -137,4 +139,14 @@
 
 main{
 	overflow: hidden;
+}
+
+.close_musics{
+	display: none;
+	z-index: 5;
+	color: white;
+	font-size: 1.1em;
+	position: absolute;
+	margin-top: 2%;
+	right: 4%;
 }

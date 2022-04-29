@@ -1,8 +1,7 @@
 musics = document.querySelector('.musics')
 posts = document.querySelector('.posts')
 videos = document.querySelector('.videos')
-
-let musics_s = true
+close_musics = document.querySelector(".close_musics")
 
 let friends_start = 0
 let friends_end = how_get
@@ -16,6 +15,9 @@ let posts_end = how_get
 let videos_start = 0
 let videos_end = how_get
 
+let musics_start = 0
+let musics_end = how_get
+
 let = friends_show = document.querySelector(".friends_show")
 let = followers_show = document.querySelector(".followers_show")
 
@@ -26,14 +28,15 @@ followers_show.addEventListener("scroll",scroll_fl)
 
 document.getElementById("start_show").style.borderBottom = "2px solid white";
 
-
 function music_show(){
-	if(musics_s){
-		musics.style.display = 'block'
-	}else{
-		musics.style.display = 'none'
-	}
-	musics_s = !musics_s
+	close_musics.style.display = "block"
+	musics.style.display = 'block'
+	get_my_musics()
+}
+
+function close_musics_f(){
+	close_musics.style.display = "none"
+	musics.style.display = 'none'
 }
 
 function follow(btn,user) {
@@ -51,14 +54,27 @@ function follow(btn,user) {
 	btn.innerText = "follow"
 }
 
-$.ajax({
-  type: $(this).attr('post'),
-  url: musics_all_ajax,
-  data: {'id':id_user,
-				'type':'user_music_add'},
-  success: function (response){
-    document.querySelector(".musics").innerHTML = response
-  }
+function get_my_musics(){
+	$.ajax({
+	  type: $(this).attr('post'),
+	  url: musics_all_ajax,
+	  data: {'id':id_user,'type':'user_music_add',"musics_start":musics_start,"musics_end":musics_end},
+	  success: function (response){
+	    document.querySelector(".musics").innerHTML += response
+	    musics_start += how_get
+			musics_end += how_get
+	  }
+	})
+}
+
+musics.addEventListener("scroll", ()=>{
+	if(musics.scrollHeight-musics.scrollTop<500){
+		if (get_can) {
+			get_my_musics()
+	 		get_can = false
+	 		get_can_true()
+	 	}
+	}
 })
 
 function get_friends(){
@@ -93,20 +109,20 @@ function get_followers(){
 
 function scroll_fr(e){
 	if(e.target.scrollHeight-e.target.scrollTop<500){
-		if (get_fr_can) {
+		if (get_can) {
 			get_friends()
-	 		get_fr_can = false
-	 		get_can_fr_true()
+	 		get_can = false
+	 		get_can_true()
 	 	}
 	}
 }
 
 function scroll_fl(e){
 	if(e.target.scrollHeight-e.target.scrollTop<500){
-		if (get_fl_can) {
+		if (get_can) {
 			get_followers()
-	 		get_fl_can = false
-	 		get_can_fl_true()
+	 		get_can = false
+	 		get_can_true()
 	 	}
 	}
 }
@@ -120,17 +136,6 @@ function close_followers(e){
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
-let get_fr_can = true
-let get_fl_can = true
-
-async function get_can_fr_true() {
-	await sleep(700)
-	get_fr_can = true
-}
-async function get_can_fl_true() {
-	await sleep(700)
-	get_fl_can = true
 }
 
 function want_add_friend(btn) {

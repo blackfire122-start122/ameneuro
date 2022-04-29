@@ -75,6 +75,8 @@ share bugs *
 activitys friend *
 chats find *
 chats dunamic *
+music sort on date *
+dunamic music in user profile *
 
 defence: *
 	is_digit *
@@ -96,6 +98,4 @@ css style:
 	show name file in forms 
 	music scroll *
 	user post videos scroll *
-
-music sort on date *
-dunamic music in user profile
+	close (not span X) img in theme_all 
