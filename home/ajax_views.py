@@ -153,7 +153,7 @@ def musics_all_ajax(request):
 		except:return HttpResponseNotFound()
 
 	elif request.GET.get("type") == "user_music_add":
-		try:mus = User.objects.get(pk=request.GET.get("id")).music
+		try:mus = User.objects.get(pk=request.GET.get("id")).music.order_by("-date")
 		except:return HttpResponseNotFound()
 	else:
 		try:
@@ -161,7 +161,7 @@ def musics_all_ajax(request):
 			if not defence_ptl(request.GET.get("musics_start"),request.GET.get("musics_end")):return HttpResponse('Payload Too Large', status=413)
 		except:return HttpResponseBadRequest()
 
-		mus = request.user.music.all()[int(request.GET.get("musics_start")):int(request.GET.get("musics_end"))]
+		mus = request.user.music.all().order_by("-date")[int(request.GET.get("musics_start")):int(request.GET.get("musics_end"))]
 	return render(request,"home/ajax_html/all_music.html",{"music":mus,"data_get":request.GET})
 
 @login_required(login_url='login')
@@ -237,7 +237,7 @@ def music_get_ajax(request):
 		if not defence_ptl(request.GET.get("music_start"),request.GET.get("music_end")):return HttpResponse('Payload Too Large', status=413)
 	except:return HttpResponseBadRequest()
 
-	try:music = Music.objects.all()[int(request.GET.get("music_start")):int(request.GET.get("music_end"))]
+	try:music = Music.objects.all().order_by("-date")[int(request.GET.get("music_start")):int(request.GET.get("music_end"))]
 	except: return HttpResponseNotFound()
 	
 	if request.GET.get("type") == "music_select":
@@ -254,7 +254,7 @@ def music_find_ajax(request):
 		if not defence_ptl(request.GET.get("music_find_start"),request.GET.get("music_find_end")):return HttpResponse('Payload Too Large', status=413)
 	except:return HttpResponseBadRequest()
 
-	try:music = Music.objects.filter(name__contains=request.GET.get("find_name"))[int(request.GET.get("music_find_start")):int(request.GET.get("music_find_end"))]
+	try:music = Music.objects.filter(name__contains=request.GET.get("find_name")).order_by("-date")[int(request.GET.get("music_find_start")):int(request.GET.get("music_find_end"))]
 	except:return HttpResponseNotFound()
 
 	if request.GET.get("type") == "music_select":

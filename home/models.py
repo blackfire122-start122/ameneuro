@@ -94,6 +94,7 @@ class Chat(models.Model):
 class Music(models.Model):
 	file = models.FileField(upload_to='music',null=False,blank=False)
 	name = models.CharField(max_length=15)
+	date = models.DateTimeField(null=True,auto_now=True)
 	def __str__(self):
 		return self.name
 

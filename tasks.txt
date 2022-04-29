@@ -97,4 +97,5 @@ css style:
 	music scroll *
 	user post videos scroll *
 
-music sort on date
+music sort on date *
+dunamic music in user profile
