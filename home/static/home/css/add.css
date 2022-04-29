@@ -1,14 +1,48 @@
 .btns{
+	position: absolute;
+	width: 75%;
 	display: flex;
 	justify-content: space-between;
 }
 
 .btn_add{
+	color: white;
 	font-size: 1.5em;
 	width:100%;
 	background: none;
 	border: none;
+	border-bottom: 3px solid black;
+	margin-top: 1%;
 }
 .add_video{
 	display: none;
+}
+
+.textarea_form{
+  resize: none;
+}
+
+.file_inp_form{
+	display: none;
+}
+
+.label_file_inp{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	z-index: 1;
+}
+
+#file_post_file, #video_video, #prewiew_img{
+	position: absolute;
+	object-fit: cover;
+	width: 50px;
+	height: 50px;
+	margin-left: 75%;
+	margin-top: -1.5%;
+	border-radius: 0 12px 12px 0;
+}
+
+.start_white_bb{
+	border-bottom: 3px solid white;
 }

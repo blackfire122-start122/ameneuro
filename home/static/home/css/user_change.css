@@ -3,10 +3,6 @@
 	padding: 0;
 }
 
-.back_img{
-	height: 100%;
-}
-
 .form_change{
 	margin-top:-35px ;
 	flex-direction: column;
