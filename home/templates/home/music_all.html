@@ -4,6 +4,10 @@
 {% block title %}Music{% endblock title %}
 
 {% block content_header %}
+	<div class="add_now">
+		<a class="add_mus" href="{% url 'add_music' %}">Add music</a>
+		<a class="add_playlist" href="{% url 'add_playlist' %}">Add playlist</a>
+	</div>
 	<div class="shared_musics">
 		<img onclick="music_share(this)" class="m_s_img" src="{{ user.theme_all.music_share_img.url }}">
 		{% if user.music_shared.all.count != 0 or user.playlists_shared.all.count != 0 %}
@@ -24,9 +28,6 @@
 	</div>
 	<div class="music_all"></div>
 	<div class="playlists"></div>
-
-	<a class="add_mus" href="{% url 'add_music' %}">Add music</a>
-	<a class="add_playlist" href="{% url 'add_playlist' %}">Add playlist</a>
 
 	<div class="music_share">
 		<span class="close_sh" onclick="close_sh()">X</span>

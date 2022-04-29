@@ -1,0 +1,10 @@
+.file_inp_form{
+	display: none;
+}
+
+.label_file_inp{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	z-index: 1;
+}

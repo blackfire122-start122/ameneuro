@@ -4,9 +4,8 @@ main{
 }
 
 .add_mus, .add_playlist{
-	background: gray;
+	background: #303245;
 	text-decoration: none;
-	color: black;
 	font-size: 1.3em;
 	padding: 3px;
 	border-radius: 10px;
@@ -18,16 +17,16 @@ main{
 
 .music_share{
 	position: fixed;
-    bottom: 0;
-    display: none;
-    color: white;
-    width: 80%;
-    left: 10%;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 20px 20px 0 0;
-    overflow-y: auto;
-    max-height: 20em;
+  bottom: 0;
+  display: none;
+  color: white;
+  width: 80%;
+  left: 10%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 20px 20px 0 0;
+  overflow-y: auto;
+  max-height: 20em;
 }
 
 .user_share{

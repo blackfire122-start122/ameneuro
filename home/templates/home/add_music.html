@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-	<form method='post' enctype="multipart/form-data">
+{% extends 'home/shablons/base.html' %}
+{% load static %}
+{% block title %}Chats{% endblock title %}
+
+{% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/form_style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/add_mus.css' %}">
+
+	<h4 class="username">{{ user }}</h4>
+{% endblock content_header %}
+
+{% block content %}	
+	<form class="form" method="post" enctype="multipart/form-data">	
 		{% csrf_token %}
-		{{ form }}
-		<input type="submit">
+		<div class="input-container ic1">
+		    <input placeholder=" " class="input" type="text" name="name" maxlength="15" required="" id="id_name">
+		    
+		    <div class="cut"></div>
+			
+			<label for="id_name" class="placeholder">Name</label>
+		</div>
+
+		<div class="input-container ic2">
+	    	<input onchange="set_name_music(this)" class="file_inp_form" type="file" name="file" required="" id="id_file">
+	    	<label class="input label_file_inp" for="id_file"><h3>Music</h3></label>
+		</div>
+		<input class="submit" type="submit">
+		
 		<span>{{ error }}</span>
+	
 	</form>
-</body>
-</html>
+
+{% endblock content %}
+
+{% block end_scripts %}
+	<script src="{% static 'home/js/add_mus.js' %}"></script>
+{% endblock end_scripts %}
