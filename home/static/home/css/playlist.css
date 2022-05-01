@@ -8,3 +8,10 @@
 	bottom: 1%;
 	right: 1%;
 }
+
+.musics{
+	width:80%;
+	position: relative;
+	right: 0;
+	margin: 0 auto;
+}

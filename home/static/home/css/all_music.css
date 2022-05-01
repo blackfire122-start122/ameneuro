@@ -9,6 +9,8 @@
   --player-button-width: 3em;
   --space: .5em;
   width: 100%;
+  margin-top: 1%;
+  background:rgba(255, 255, 255, 0.1);
 }
 
 .controls {

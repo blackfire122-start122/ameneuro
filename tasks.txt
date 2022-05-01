@@ -101,10 +101,13 @@ css style:
 	user post videos scroll *
 	close (not span X) img in theme_all *
 	theme all form when select img set new img blob *
-	playlists style 
-	user img normal style select *********
+	user img normal style select *
+	playlists style *
 	ai new style modern
+	friend style
 
+playlists add in find
+playlists delete from me
 ____________________________v2____________________________
 button поскаржитися new page
 forgot password 
