@@ -103,6 +103,7 @@ css style:
 	theme all form when select img set new img blob *
 	user img normal style select *
 	playlists style *
+	post audio bugs pia *
 	ai new style modern
 	friend style
 

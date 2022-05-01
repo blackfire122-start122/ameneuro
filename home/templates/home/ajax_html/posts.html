@@ -46,8 +46,9 @@
 						<div class="controls">
 							<button value="{{ p.id }}" onclick="toggleAudio(this)" class="player-button"><img class="play_pause_img" src="{{ user.theme_all.pause_img.url }}"></button>
 							<input id="timeline_{{ p.id }}" onchange ="changeSeek(this)" type="range" class="timeline" max="100" value="0">
+							<img onclick="play_in_all(this,{{p.id}},'post')" class="play_in_all" src="{{ user.theme_all.play_in_all_img.url }}">
 						</div>
-						<img onclick="play_in_all(this,{{p.id}},'post')" class="play_in_all" src="{{ user.theme_all.play_in_all_img.url }}">
+						
 					</div>
 				{% endif %}
 			{% endif %}
