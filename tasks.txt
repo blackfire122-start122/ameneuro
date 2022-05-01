@@ -94,13 +94,12 @@ css style:
 	comments reply *
 	user post videos *
 	find inputs *
-	add music form style
 	one formats form *
-	playlists style 
 	show name file in forms *
 	music scroll *
 	user post videos scroll *
-	close (not span X) img in theme_all 
+	close (not span X) img in theme_all *
+	playlists style 
 	theme all form when select img set new img blob
 	user img normal style select
 	ai new style modern

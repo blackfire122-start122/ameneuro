@@ -193,6 +193,7 @@
 .close_sh{
 	position: absolute;
 	right: 10%;
+	width: 10%;
 }
 .btn_sh{
 	background: black;

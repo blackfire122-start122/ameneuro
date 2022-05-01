@@ -30,7 +30,7 @@
 	<div class="playlists"></div>
 
 	<div class="music_share">
-		<span class="close_sh" onclick="close_sh()">X</span>
+		<img src="{{ user.theme_all.close_img }}" class="close_sh" onclick="close_sh()">
 		{% for i in user.friends.all %}
 			<div class="user_share">
 				<h2 class="name_sh">{{ i|truncatechars:10 }}</h2>

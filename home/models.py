@@ -130,6 +130,7 @@ class AllTheme(models.Model):
 	end_scroll_img = models.ImageField(upload_to="theme_all/end_scroll_img",default=None,null=True,blank=True)
 	music_left_img = models.ImageField(upload_to="theme_all/music_left_img",default=None,null=True,blank=True)
 	music_right_img = models.ImageField(upload_to="theme_all/music_right_img",default=None,null=True,blank=True)
+	close_img = models.ImageField(upload_to="theme_all/close_img",default=None,null=True,blank=True)
 	
 	def __str__(self):
 		return self.name
