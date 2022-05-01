@@ -100,9 +100,9 @@ css style:
 	music scroll *
 	user post videos scroll *
 	close (not span X) img in theme_all *
+	theme all form when select img set new img blob *
 	playlists style 
-	theme all form when select img set new img blob ******
-	user img normal style select
+	user img normal style select *********
 	ai new style modern
 
 ____________________________v2____________________________

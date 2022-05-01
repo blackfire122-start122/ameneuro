@@ -55,7 +55,7 @@
 	background: red;
 }
 
-.inp_opt_img{
+.inp_opt_img, #id_img{
 	display: none;
 }
 
