@@ -69,4 +69,8 @@ function delete_theme(e){
 function select_file_name(file){
 	path = file.value.split("\\")
 	file.parentNode.childNodes[3].innerText = path[path.length -1]
+
+	file_inp = file.files[0]
+	file_file = file.nextSibling.nextSibling.nextSibling.nextSibling
+	file_file.src = window.URL.createObjectURL(file_inp)
 }

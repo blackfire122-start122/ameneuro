@@ -40,7 +40,6 @@ function inp_file_change(e){
 }
 
 function file_set(e,id){
-	console.log(id)
 	file = e.files[0]
 	file_file = document.getElementById(id)
 	file_file.src = window.URL.createObjectURL(file)
