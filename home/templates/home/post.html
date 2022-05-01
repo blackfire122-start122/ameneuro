@@ -10,12 +10,26 @@
 
 {% block content %}	
 	<div class="posts"></div>
+
+	<div class="friends_share">
+		<img src="{{ user.theme_all.close_img.url }}" class="close_sh" onclick="close_sh()">
+		<div class="menu_post_share">
+			<div class="post_share"></div>
+			<div class="inputs_post_share">
+				<input class="inp_share" id="mess_share" type="text" placeholder="message">
+				<input class="inp_share" oninput="find_user_share(this)" type="text" placeholder="find chat">
+			</div>
+		</div>
+
+		<div class="chats"></div>
+	</div>
 {% endblock content %}
 
 {% block end_scripts %}
 	<script>
 		let post_id = "{{ id }}"
 		let comment_ajax = "{% url 'comment_ajax' %}"
+		let user = "{{ user }}"
 	</script>
 	<script src="{% static 'home/js/posts.js' %}"></script>
 
