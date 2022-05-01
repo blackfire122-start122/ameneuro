@@ -20,8 +20,15 @@ function like_comment(e){
 	conn_u.send(JSON.stringify({'type':'comment_like', "id":e.id}))
 
 	e.style.opacity = "0.5"
-	e.onclick = null
+	e.onclick = ()=>{not_like_comment(e)}
 	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
+}
+function not_like_comment(e){
+	conn_u.send(JSON.stringify({'type':'not_comment_like', "id":e.id}))
+
+	e.style.opacity = "1"
+	e.onclick = ()=>{like_comment(e)}
+	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)-1
 }
 
 function get_comments(){
@@ -38,15 +45,20 @@ function get_comments(){
 }
 
 function like_video(e,id){
-	if (e.style.opacity == "0.5"){
-		return
-	}
+	conn_u.send(JSON.stringify({'type':'like_video', "id":id}))
 
 	e.style.opacity = "0.5"
-
-	conn_u.send(JSON.stringify({'type':'like_video','id':id}))
+	e.onclick = ()=>{not_like_video(e,id)}
 	like_count = document.getElementById("like_count")
 	like_count.innerText = parseInt(like_count.innerText)+1
+}
+
+function not_like_video(e,id){
+	conn_u.send(JSON.stringify({'type':'not_like_video', "id":id}))
+
+	e.style.opacity = "1"
+	e.onclick = ()=>{like_video(e,id)}
+	like_count.innerText = parseInt(like_count.innerText)-1
 }
 
 function sleep(ms) {

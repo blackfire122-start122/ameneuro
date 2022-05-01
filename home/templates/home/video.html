@@ -18,7 +18,7 @@
 		<h3>{{ video.name|truncatechars:25 }}</h3>
 		<time class="time">{{ video.date }}</time>
 		{% if user in video.likes.all and not user.is_anonymous %}
-			<img style="opacity:0.5" class="like" src="{{ user.theme_all.like_img.url }}" alt="">
+			<img onclick="not_like_video(this,'{{ video.id }}')" style="opacity:0.5" class="like" src="{{ user.theme_all.like_img.url }}">
 			<span id="like_count">{{ video.likes.count }}</span>
 		{% elif not user.is_anonymous %}			    
 			<img class="like" onclick="like_video(this,'{{ video.id }}')" src="{{ user.theme_all.like_img.url }}">

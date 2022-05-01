@@ -263,9 +263,19 @@ class UserConsumer(AsyncWebsocketConsumer):
         post.likes.add(self.scope["user"].id)
 
     @database_sync_to_async
+    def not_like(self):
+        post = Post.objects.get(pk=self.text_data_json.get("id"))
+        post.likes.remove(self.scope["user"].id)
+
+    @database_sync_to_async
     def comment_like(self):
         com = Comment.objects.get(pk=self.text_data_json.get("id"))
         com.likes.add(self.scope["user"].id)
+
+    @database_sync_to_async
+    def not_comment_like(self):
+        com = Comment.objects.get(pk=self.text_data_json.get("id"))
+        com.likes.remove(self.scope["user"].id)
 
     @database_sync_to_async
     def comment_user(self):
@@ -350,6 +360,10 @@ class UserConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def like_video(self):
         Video.objects.get(pk=self.text_data_json.get("id")).likes.add(self.scope["user"])
+    
+    @database_sync_to_async
+    def not_like_video(self):
+        Video.objects.get(pk=self.text_data_json.get("id")).likes.remove(self.scope["user"])
 
     @database_sync_to_async
     def comment_video_user(self):
@@ -437,8 +451,14 @@ class UserConsumer(AsyncWebsocketConsumer):
         elif self.text_data_json.get('type')=='like':
             await self.like()
             return
+        elif self.text_data_json.get('type')=='not_like':
+            await self.not_like()
+            return
         elif self.text_data_json.get('type')=='comment_like':
             await self.comment_like()
+            return
+        elif self.text_data_json.get('type')=='not_comment_like':
+            await self.not_comment_like()
             return
         elif self.text_data_json.get('type')=='comment_user':
             await self.comment_user()
@@ -488,6 +508,9 @@ class UserConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json.get('type')=='like_video':
             await self.like_video()
+            return
+        elif self.text_data_json.get('type')=='not_like_video':
+            await self.not_like_video()
             return
         elif self.text_data_json.get('type')=='comment_video_user':
             await self.comment_video_user()

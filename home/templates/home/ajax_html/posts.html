@@ -66,7 +66,7 @@
 					</div>
 					<div class="right">
 						{% if user in p.likes.all %}
-							<img class="my_like" id={{ p.id }} src="{{ user.theme_all.like_img.url }}" alt="">
+							<img class="my_like" onclick="not_like(this)" id={{ p.id }} src="{{ user.theme_all.like_img.url }}" alt="">
 						{% else %}			    
 							<img id={{ p.id }} onclick="like(this)" src="{{ user.theme_all.like_img.url }}" alt="">
 						{% endif %}

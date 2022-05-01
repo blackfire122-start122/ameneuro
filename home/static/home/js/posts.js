@@ -5,9 +5,18 @@ function like(e){
 	conn_u.send(JSON.stringify({'type':'like', "id":e.id}))
 
 	e.style.opacity = "0.5"
-	e.onclick = null
+	e.onclick = ()=>{not_like(e)}
 	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
 }
+
+function not_like(e){
+	conn_u.send(JSON.stringify({'type':'not_like', "id":e.id}))
+
+	e.style.opacity = "1"
+	e.onclick = ()=>{like(e)}
+	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)-1
+}
+
 
 let get_com_can = true
 
@@ -68,8 +77,15 @@ function like_comment(e){
 	conn_u.send(JSON.stringify({'type':'comment_like', "id":e.id}))
 
 	e.style.opacity = "0.5"
-	e.onclick = null
+	e.onclick = ()=>{not_like_comment(e)}
 	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)+1
+}
+function not_like_comment(e){
+	conn_u.send(JSON.stringify({'type':'not_comment_like', "id":e.id}))
+
+	e.style.opacity = "1"
+	e.onclick = ()=>{like_comment(e)}
+	e.parentNode.childNodes[3].innerText = parseInt(e.parentNode.childNodes[3].innerText)-1
 }
 
 let reply = false

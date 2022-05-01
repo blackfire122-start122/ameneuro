@@ -17,7 +17,7 @@
 			<time>{{ c.date }}</time>
 			<div>
 				{% if user in c.likes.all %}
-					<img id={{ c.id }} class='img_like_comment my_like' src="{{ user.theme_all.like_img.url }}">
+					<img id={{ c.id }} class='img_like_comment my_like' src="{{ user.theme_all.like_img.url }}" onclick="not_like_comment(this)">
 				{% else %}			    
 					<img id={{ c.id }} onclick="like_comment(this)" class='img_like_comment' src="{{ user.theme_all.like_img.url }}">
 				{% endif %}
