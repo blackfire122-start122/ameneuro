@@ -38,7 +38,7 @@
 						<img class="img_f" src={{ u.img.url }}>
 						<h4> {{ u.username }}</h4>
 					</div>
-					<button value={{ u.id }} onclick="add_friend(this)">add</button>
+					<button class="btn_friend_add" value={{ u.id }} onclick="add_friend(this)">Add</button>
 				</div>
 				{% define "continue" False %}
 			{% endif %}
@@ -50,10 +50,7 @@
 							<img class="img_f" src={{ u.img.url }}>
 							<h4> {{ u.username }}</h4>
 						</div>
-						<div class="none_mes">
-							<p id="{{ f.id }}">More not messages </p>
-							<button class="write_btn" value="{{ u.id }}" onclick="add_chat(this)"> write</button>
-						</div>
+						<button class="write_btn" value="{{ u.id }}" onclick="add_chat(this)"> Add chat</button>
 					</div>
 					{% define "continue" False %}
 				{% endif %}

@@ -108,9 +108,10 @@ css style:
 	post audio bugs pia *
 	close shared menu in music *
 	music scroll pause(add as elements) *
+	music menu margin *
+	friend style *
+	chat theme style
 	ai new style modern
-	friend style
-	music menu margin ***
 
 ____________________________v2____________________________
 button поскаржитися new page

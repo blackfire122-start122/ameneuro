@@ -11,13 +11,12 @@ let find_str
 
 function add_chat(btn) {
 	conn_u.send(JSON.stringify({'type':'add_chat', "id":btn.value}))
-
-	btn.disabled=true
 	btn.style.display = "none"
 }
 
 function add_friend(btn) {
 	conn_u.send(JSON.stringify({'type':'add_friend', "id":btn.value}))
+	btn.style.display = "none"
 }
 
 function get_friends(){
