@@ -110,7 +110,7 @@ css style:
 	music scroll pause(add as elements) *
 	ai new style modern
 	friend style
-	music menu margin
+	music menu margin ***
 
 ____________________________v2____________________________
 button поскаржитися new page

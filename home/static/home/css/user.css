@@ -67,6 +67,7 @@
 	padding: 5px;
 	border-radius: 20px;
 	z-index: 3;
+	overflow-x: hidden;
 }
 
 .music{
