@@ -9,7 +9,6 @@ function get_posts(){
 		url: saves_posts_ajax,
 		data: {"start_post":start_post,"end_post":end_post},
 		error: function (response) {
-			console.log(response)
 	    },
 	    success: function(response){
 	    	posts_save.innerHTML += response
