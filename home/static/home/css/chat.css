@@ -73,7 +73,6 @@ body{
 	display: flex;
 	flex-direction: column;
 	align-items: start;
-	background-color: rgba(0, 0, 0, 0.8);
 	width: 100%;
 	margin-top: 2%;
 }
@@ -84,13 +83,15 @@ body{
 	font-size: 1.1em;
 	border: none;
 	background: none;
-	color: white;
 }
 
 .opt_value{
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.1);
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	margin-top: 1%;
 }
 
 .backgraund_opt{
@@ -99,22 +100,37 @@ body{
 	object-fit: cover;
 }
 
-.inp_color{
-	padding: 0;
+.inp_color, .inp_color2{
 	background: none;
 	border: none;
+}
+
+.inp_color{
+	position: relative;
+	right: 14%;
+}
+
+.inp_opt_div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	right: 5%;
 }
 
 .form_save{
 	border: none;
 	background: none;
-	text-decoration: underline;
-	font-size: 1.1em;
+	text-decoration: none;
+	font-size: 1.2em;
+	padding: 2px;
+	margin-bottom: 1%;
 }
 
 .form{
 	display: flex;
 	flex-direction: column;
+	margin-top: -7%;
 }
 
 .theme_bg{
@@ -131,13 +147,14 @@ body{
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1%;
+	padding: 5px;
 }
 
 .name_theme{
 	border: none;
 	background: none;
 	outline: none;
-	color: white;
+	font-size: 1.1em;
 }
 
 .file_theme::-webkit-file-upload-button {
@@ -157,7 +174,7 @@ body{
 
 .theme_file_select{
 	position: relative;
-	left: 10%;
+	right: 5%;
 	background: rgba(255,255,255,0.1);
 	display: flex;
 	flex-direction: column;
@@ -398,7 +415,7 @@ body{
 }
 
 .th_sel{
-	background: rgba(255, 255, 255, 0.3);
+	background: rgba(255, 255, 255, 0.2);
 }
 
 .file_see{

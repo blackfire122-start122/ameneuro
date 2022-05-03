@@ -110,7 +110,7 @@ css style:
 	music scroll pause(add as elements) *
 	music menu margin *
 	friend style *
-	chat theme style
+	chat theme style *
 	ai new style modern
 
 ____________________________v2____________________________

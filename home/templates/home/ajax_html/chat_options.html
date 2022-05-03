@@ -2,24 +2,24 @@
 	{% csrf_token %}
 	<div class="chat_opt_blocks">
 		<div class="opt_value">
-			<p class="opt">name</p>
+			<p class="opt">Name</p>
 			<input class='name_theme' type="text" name="name" value="{{ chat.theme.name }}">
 		</div>
 		<div class="opt_value">
-			<p class="opt">color message</p>
+			<p class="opt">Color message</p>
 			<input class="inp_color" value="{{ chat.theme.color_mes }}" name="color_mes" type="color">
 		</div>
 		<div class="opt_value">
-			<p class="opt">background color mesaage</p>
-			<div>
-			<input id="bg_op" oninput="inp_ran(this)" class="inp_op" name='color_mes_bg_op' value="{{ chat.theme.color_mes_bg_op }}" type="range" min=0 max=1 step="0.1" >
-			<input class="inp_color" id="mes_bg" name="color_mes_bg" value="{{ chat.theme.color_mes_bg }}" type="color">
+			<p class="opt">Background color mesaage</p>
+			<div class="inp_opt_div">
+				<input class="inp_color2" id="mes_bg" name="color_mes_bg" value="{{ chat.theme.color_mes_bg }}" type="color">
+				<input id="bg_op" oninput="inp_ran(this)" class="inp_op" name='color_mes_bg_op' value="{{ chat.theme.color_mes_bg_op }}" type="range" min=0 max=1 step="0.1" >
 			</div>
 		</div>
 	</div>
 	<div class="chat_opt_blocks">
 		<div class="opt_value">
-			<p class="opt">img background</p>
+			<p class="opt">Img background</p>
 			<div class="theme_file_select">
 				<label for="file_theme" class="file_theme_button">Select fon</label><br>
 				<input id ='file_theme' class='file_theme' value="{{ chat.theme.background }}" type="file" name="background">
@@ -31,11 +31,10 @@
 	</div>
 	
 	<div class="how_save">
-		<input name='how_save' class=form_save type="submit" value="Save changes">
-		<input name='how_save' class=form_save type="submit" value="Save theme">
+		<input name='how_save' class="form_save" type="submit" value="Save changes">
+		<input name='how_save' class="form_save" type="submit" value="Save theme">
 	</div>
 </form>
-
 
 <h1 class="my_themes">Chat theme</h1>
 <button id="theme_{{ i.id }}" class="theme th_sel">
