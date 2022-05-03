@@ -398,6 +398,10 @@ class UserConsumer(AsyncWebsocketConsumer):
         self.scope["user"].playlists_shared.remove(Playlist.objects.get(pk=self.text_data_json.get("id")))
 
     @database_sync_to_async
+    def delete_ps_form_me(self):
+        self.scope["user"].playlists.remove(Playlist.objects.get(pk=self.text_data_json.get("id")))
+
+    @database_sync_to_async
     def ps_share(self):
         if self.text_data_json.get("to_user") and self.text_data_json.get("id"):
             user = User.objects.get(pk=int(self.text_data_json.get("to_user")))
@@ -528,6 +532,9 @@ class UserConsumer(AsyncWebsocketConsumer):
             return
         elif self.text_data_json.get('type')=='not_add_ps_share':
             await self.not_add_ps_share()
+            return
+        elif self.text_data_json.get('type')=='delete_ps_form_me':
+            await self.delete_ps_form_me()
             return
 
         await self.channel_layer.group_send(

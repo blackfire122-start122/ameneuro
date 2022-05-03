@@ -1,29 +1,37 @@
-{% for p in playlists.all %}
-	<div class="playlist">
-		<div class="ps_prew">
-			<img class="img_ps" src="{{ p.img }}">
-			<div class="autor_name">
-				<a class="link_name_ps" href="{% url 'playlists' p %} "><h3>{{ p }}</h3></a>
-				<h4><a class="ps_link_user" href="{% url 'user' p.autor %}">{{ p.autor }}</a></h4>
+{% with user_ps=user.playlists.all %}
+	{% for p in playlists.all %}
+		<div class="playlist">
+			<div class="ps_prew">
+				<img class="img_ps" src="{{ p.img }}">
+				<div class="autor_name">
+					<a class="link_name_ps" href="{% url 'playlists' p %} "><h3>{{ p }}</h3></a>
+					<h4><a class="ps_link_user" href="{% url 'user' p.autor %}">{{ p.autor }}</a></h4>
+				</div>
+			</div>
+			<div class="all_menu_ps">
+				<div class="menu_ps">
+					{% if user == p.autor and data_get.type != "ps_share" %}
+						<a class="ch_ps" href='{% url "change_playlist" p %}'> Change </a>
+					{% else %}
+					    <div></div>
+					{% endif %}
+					{% if data_get.type == "ps_share" %}
+						<button class="btn_menu_player" value="{{ p.id }}" onclick="add_ps_share(this)">Add</button>
+						<button class="btn_menu_player" value="{{ p.id }}" onclick="not_add_ps_share(this)">Not add</button>
+					{% elif type == "add to me" and not p in user_ps %}
+						<button class="btn_menu_player" value="{{ p.id }}" onclick="add_ps_share(this)">Add</button>
+					{% else %}
+						<button class="btn_menu_player" value="{{ p.id }}" onclick="delete_ps_form_me(this)">Delete</button>   
+					{% endif %}
+				</div>
+				<div class="ps_menu">
+					<img id="{{ p.id }}" onclick="share_menu(this,'ps')" class="p_s_img" src="{{ user.theme_all.music_share_img.url }}">
+
+					<img id="{{ p.id }}" onclick="play_in_all(this,{{p.id}},'playlist')" class="play_in_all_ps" src="{{ user.theme_all.play_in_all_img.url }}">
+
+					<time class="time_ps">{{ p.date }}</time>
+				</div>
 			</div>
 		</div>
-		<div>
-			{% if user == p.autor %}
-				<a class="ch_ps" href='{% url "change_playlist" p %}'> Change </a>
-			{% endif %}
-			<div class="ps_menu">
-				<img id="{{ p.id }}" onclick="share_menu(this,'ps')" class="p_s_img" src="{{ user.theme_all.music_share_img.url }}">
-
-				<img id="{{ p.id }}" onclick="play_in_all(this,{{p.id}},'playlist')" class="play_in_all_ps" src="{{ user.theme_all.play_in_all_img.url }}">
-
-				<time class="time_ps">{{ p.date }}</time>
-			</div>
-		</div>
-	</div>
-	{% if data_get.type == "ps_share" %}
-    	<div class="menu_ps">
-			<button class="btn_menu_player" value="{{ p.id }}" onclick="add_ps_share(this)">Add</button>
-			<button class="btn_menu_player" value="{{ p.id }}" onclick="not_add_ps_share(this)">not add</button>
-		</div>
-	{% endif %}
-{% endfor %}
+	{% endfor %}
+{% endwith %}

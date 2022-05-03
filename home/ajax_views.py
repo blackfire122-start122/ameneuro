@@ -274,7 +274,7 @@ def playlist_get_ajax(request):
 	try:ps = Playlist.objects.all()[int(request.GET.get("playlist_start")):int(request.GET.get("playlist_end"))]
 	except: return HttpResponseNotFound()
 	
-	return render(request,"home/ajax_html/playlists.html",{"playlists":ps})
+	return render(request,"home/ajax_html/playlists.html",{"playlists":ps,"type":"add to me"})
 
 @login_required(login_url='login')
 def playlist_find_ajax(request):
@@ -286,7 +286,7 @@ def playlist_find_ajax(request):
 	try:ps = Playlist.objects.filter(name__contains=request.GET.get("find_name"))[int(request.GET.get("playlist_find_start")):int(request.GET.get("playlist_find_end"))]
 	except:return HttpResponseNotFound()
 
-	return render(request,"home/ajax_html/playlists.html",{"playlists":ps})
+	return render(request,"home/ajax_html/playlists.html",{"playlists":ps,"type":"add to me"})
 
 def video_get_ajax(request):
 	try:

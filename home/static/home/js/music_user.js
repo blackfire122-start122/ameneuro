@@ -1,4 +1,5 @@
 let find_now = "musics"
+
 musics = document.querySelector(".music_all")
 playlists = document.querySelector(".playlists")
 
@@ -14,7 +15,7 @@ function music_share(e){
 		url: musics_all_ajax,
 		data: {'id':id_user,'type':'music_share'},
 		success: function (response) {
-			document.querySelector(".musics_share").innerHTML += response
+			document.querySelector(".musics_share").innerHTML = response
 		}
 	})
 	$.ajax({
@@ -22,7 +23,15 @@ function music_share(e){
 		url: playlists_ajax,
 		data: {'id':id_user,'type':'ps_share'},
 		success: function (response) {
-			document.querySelector(".musics_share").innerHTML += response
+			musics_share = document.querySelector(".musics_share")
+			musics_share.innerHTML = response
+
+			all_menu_ps = musics_share.getElementsByClassName("all_menu_ps")
+
+			for (let i = all_menu_ps.length - 1; i >= 0; i--) {
+				all_menu_ps[i].style.width = "60%"
+			}
+
 		}
 	})
 }

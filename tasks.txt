@@ -80,6 +80,8 @@ music sort on date *
 dunamic music in user profile *
 like not like in all(coments posts video) *
 posts share div *
+playlists add in find *
+playlists delete from me *
 
 defence: *
 	is_digit *
@@ -106,9 +108,9 @@ css style:
 	post audio bugs pia *
 	ai new style modern
 	friend style
+	close shared menu in music ***
+	music menu margin
 
-playlists add in find
-playlists delete from me
 ____________________________v2____________________________
 button поскаржитися new page
 forgot password 

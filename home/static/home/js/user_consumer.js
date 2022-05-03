@@ -322,3 +322,6 @@ function add_ps_share(e){
 function not_add_ps_share(e){
 	conn_u.send(JSON.stringify({'type':'not_add_ps_share', "id":e.value}))
 }
+function delete_ps_form_me(e){
+	conn_u.send(JSON.stringify({'type':'delete_ps_form_me', "id":e.value}))
+}

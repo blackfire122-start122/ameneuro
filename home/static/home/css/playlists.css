@@ -44,11 +44,16 @@
 }
 
 .ch_ps{
-	margin-left:50%;
 	font-size:1.2em;
 }
 
 .menu_ps{
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.all_menu_ps{
+	width: 40%;
+	position: relative;
 }
