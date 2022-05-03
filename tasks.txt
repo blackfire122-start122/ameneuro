@@ -107,9 +107,9 @@ css style:
 	playlists style *
 	post audio bugs pia *
 	close shared menu in music *
+	music scroll pause(add as elements) *
 	ai new style modern
 	friend style
-	music scroll pause(add as elements)
 	music menu margin
 
 ____________________________v2____________________________

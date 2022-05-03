@@ -52,7 +52,11 @@ function get_musics(){
 		url: musics_all_ajax,
 		data: {'type':'user_my_music',"musics_start":musics_start,"musics_end":musics_end},
 		success: function (response) {
-			document.querySelector(".music_all").innerHTML += response
+			resp = $(response)
+			for (var i = resp.length - 1; i >= 0; i--) {
+				musics.append(resp[i])
+			}
+			
 			musics_start+=how_get
 			musics_end+=how_get
 		}
