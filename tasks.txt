@@ -111,7 +111,7 @@ css style:
 	music menu margin *
 	friend style *
 	chat theme style *
-	ai new style modern
+	ai new style modern *
 
 ____________________________v2____________________________
 button поскаржитися new page

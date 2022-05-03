@@ -141,11 +141,9 @@ function onmessage_u(e){
 		document.body.append(img_left_el)
 
 	}else if (data['type']=='recognize'){
-		h2 = document.getElementById("recognize_h2")
 		p = document.getElementById("p_confidence")
 
-		p.innerText = "On "+data["procent"]+"%"
-		h2.innerText = data['recognize']
+		p.innerText = data['recognize']+" on "+data["procent"].slice(0,5)+"%"
 	}else if(data['type']=='add_to_playlists'){
 		p = document.createElement("p")
 		p.innerText = data["name_mus"]+','

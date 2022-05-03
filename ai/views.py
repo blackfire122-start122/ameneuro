@@ -13,7 +13,10 @@ class recognize(LoginRequiredMixin,TemplateView):
 
 @login_required(login_url='login')
 def form_recognize_ajax(request):
-	if not request.FILES["img"].content_type in allowed_types:return HttpResponseBadRequest()
-	img = binascii.b2a_base64(request.FILES["img"].__dict__["file"].read())
-	recognize_task.delay(img=img.decode('utf8'),username=request.user.username)
-	return JsonResponse({"data":"on recognize"})
+	try:
+		if not request.FILES["img"].content_type in allowed_types:return HttpResponseBadRequest()
+		img = binascii.b2a_base64(request.FILES["img"].__dict__["file"].read())
+		recognize_task.delay(img=img.decode('utf8'),username=request.user.username)
+		return JsonResponse({"data":"Recognize"})
+	except:
+		return JsonResponse({"data":"Error"})

@@ -7,6 +7,7 @@
 {% endblock content_header %}
 
 {% block content %}
+	<video src="{% static 'ai/videos/video_oboi.mp4' %}" type="video/mp4" id="background-video" autoplay loop muted></video>
 	<form class="form_send_recognize" method='post' enctype="multipart/form-data">
 		{% csrf_token %}
 		<input onchange="img_set(this)" id='id_img' name="img" type="file">

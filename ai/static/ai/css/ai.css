@@ -4,7 +4,9 @@
 .info_recognize{
 	width: 100%;
 	display: flex;
-	justify-content:space-around;
+	flex-direction: column;
+	align-items:center;
+	color: white;
 }
 
 .form_send_recognize{
@@ -15,4 +17,26 @@
 
 #id_img{
 	display: none;
+}
+
+#background-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+#recognize_h2{
+	background: rgba(0, 0, 0, 0.4);
+	padding:5px;
+	border-radius: 10px;
+}
+
+#p_confidence{
+	font-size: 1.2em;
 }
