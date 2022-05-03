@@ -106,9 +106,10 @@ css style:
 	user img normal style select *
 	playlists style *
 	post audio bugs pia *
+	close shared menu in music *
 	ai new style modern
 	friend style
-	close shared menu in music ***
+	music scroll pause(add as elements)
 	music menu margin
 
 ____________________________v2____________________________

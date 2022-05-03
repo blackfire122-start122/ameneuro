@@ -132,15 +132,6 @@
   right: 7%;
 }
 
-.musics_share{
-  background-color: rgba(0, 0, 0, 0.8);
-  width: 16em;
-  max-height: 20em;
-  overflow-y: auto;
-  position: fixed;
-  right: 0;
-}
-
 .menu_player{
   display: flex;
   justify-content: space-around;

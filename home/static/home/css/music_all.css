@@ -86,3 +86,22 @@ main{
 .m_s_img{
   height: 2em;
 }
+
+.close_sh_me{
+	width: 100%;
+	position: absolute;
+	display: none;
+	z-index: 3;
+	left: 40%;
+}
+
+.musics_share{
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 17em;
+  max-height: 20em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  right: 1%;
+  display: none;
+}

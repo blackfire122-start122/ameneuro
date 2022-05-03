@@ -1,3 +1,6 @@
+let musics_share = document.querySelector(".musics_share")
+let close_sh_me = document.querySelector(".close_sh_me")
+
 let find_now = "musics"
 
 musics = document.querySelector(".music_all")
@@ -9,13 +12,21 @@ let playlists_end = how_get
 let musics_start = 0
 let musics_end = how_get
 
+function close_sh_me_f(){
+	close_sh_me.style.display = "none"
+	musics_share.style.display = "none"
+}
+
 function music_share(e){
+	close_sh_me.style.display = "block"
+	musics_share.style.display = "block"
+
 	$.ajax({
 		type: $(this).attr('post'),
 		url: musics_all_ajax,
 		data: {'id':id_user,'type':'music_share'},
 		success: function (response) {
-			document.querySelector(".musics_share").innerHTML = response
+			musics_share.innerHTML = response
 		}
 	})
 	$.ajax({
@@ -23,8 +34,7 @@ function music_share(e){
 		url: playlists_ajax,
 		data: {'id':id_user,'type':'ps_share'},
 		success: function (response) {
-			musics_share = document.querySelector(".musics_share")
-			musics_share.innerHTML = response
+			musics_share.innerHTML += response
 
 			all_menu_ps = musics_share.getElementsByClassName("all_menu_ps")
 
