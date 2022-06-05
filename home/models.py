@@ -179,6 +179,15 @@ class Playlist(models.Model):
 	def __str__(self):
 		return self.name
 
+class ComplainPost(models.Model):
+	theme = models.CharField(max_length=40)
+	description = models.TextField(null=True,blank=True)
+	date = models.DateField(null=True,auto_now=True)
+	autor = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="autor_complain_post")
+	fixed = models.BooleanField(default=False)
+
+	def __str__(self):
+		return self.theme
 
 @receiver(pre_delete, sender=Playlist)
 def Playlist_delete(sender, instance, **kwargs):

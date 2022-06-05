@@ -1,0 +1,30 @@
+{% extends 'home/shablons/base.html' %}
+{% load static %}
+{% block title %}Complain{% endblock title %}
+
+{% block content_header %}
+	<link rel="stylesheet" href="{% static 'home/css/form_style.css' %}">
+{% endblock content_header %}
+
+{% block content %}
+	<form class="form" method="post">
+		{% csrf_token %}
+		<span class="error">{{ error }}</span>
+
+		<div class="title">What are you complaining about?</div>
+		<div class="input-container ic1">
+			<input class="input" type="text" name="theme" maxlength="40" required="" id="id_theme">
+			<div class="cut"></div>
+			<label for="id_theme" class="placeholder">Theme</label>
+		</div>
+
+		<div class="input-container ic2">
+			<textarea style="resize: none;" class="input" name="description" cols="40" rows="10" id="id_description"></textarea>
+			<div class="cut"></div>
+			<label for="id_description" class="placeholder">Descriptions</label>
+		</div>
+
+		<button type="submit" class="submit">Submit</button>
+	</form>
+	
+{% endblock content %}

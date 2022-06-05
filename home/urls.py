@@ -35,6 +35,8 @@ urlpatterns = [
  
     path('activity', views.activity.as_view(), name='activity'),
     path('saves_posts', views.saves_posts.as_view(), name='saves_posts'),
+    
+    path('complain', views.complain.as_view(), name='complain'),
 
     path('ajax/', include("home.urls_ajax")),
 

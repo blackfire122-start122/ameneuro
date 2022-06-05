@@ -24,7 +24,7 @@
 								<button onclick="delete_post({{ p.id }})" class="link_options_menu">Видалити</button>
 							{% endif %}
 							
-							<a class="link_options_menu_red" href="">Поскаржитись</a>
+							<a class="link_options_menu_red" href="{% url 'complain' %}">Поскаржитись</a>
 						</div>
 					</div>
 				{% endif %}

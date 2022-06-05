@@ -119,6 +119,6 @@ bug not play music in user if scroll *
 turn over post *
 forgot password *
 email in registrations *
+button поскаржитися new page *
 
-button поскаржитися new page
 style reset password

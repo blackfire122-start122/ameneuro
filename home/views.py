@@ -8,7 +8,8 @@ from .forms import (RegisterForm,
 					MusicForm,
 					AllThemeForm,
 					PlaylistForm,
-					VideoForm)
+					VideoForm,
+					ComplainPostForm)
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import StreamingHttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
@@ -431,3 +432,28 @@ class PasswordResetRequest(TemplateView):
 					return redirect ("/password_reset/done/")
 		password_reset_form = PasswordResetForm()
 		return render(request=request, template_name="home/password_reset/password_reset.html", context={"password_reset_form":password_reset_form})
+
+class complain(TemplateView):
+	template_name = "home/complain.html"
+	login_url = "login"
+
+	def get(self, request, *args, **kwargs):
+		self.complain_post = ComplainPostForm()
+		self.error = ""
+		return super().get(request,*args, **kwargs)
+
+	def post(self, request, *args, **kwargs):
+		data = request.POST.copy()
+		data["autor"] = request.user.id
+		self.complain_post = ComplainPostForm(data)
+		self.error = ""
+		if self.complain_post.is_valid():
+			self.complain_post.save()
+		else:error = self.complain_post.errors
+		return super().get(request,*args, **kwargs)
+		
+	def get_context_data(self,*args,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context["form"] = self.complain_post
+		context["error"] = self.error
+		return context

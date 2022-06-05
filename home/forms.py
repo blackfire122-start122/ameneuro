@@ -10,7 +10,7 @@ from django.forms import(ModelForm,
 						FileInput,
 						Select,
 						FileField)
-from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes, Playlist, Video
+from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes, Playlist, Video, ComplainPost
 from django.conf import settings
 import magic
 
@@ -160,3 +160,8 @@ class VideoForm(ModelForm):
 		video = ModelForm.save(self)
 		video.user_pub = user
 		video.save()
+
+class ComplainPostForm(ModelForm):
+	class Meta:
+		model = ComplainPost
+		fields = ["theme","description","autor"]
