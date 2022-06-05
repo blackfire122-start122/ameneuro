@@ -337,7 +337,8 @@ class UserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def session_save(self):
-        self.scope["session"].save()
+        try:self.scope.get("session").save()
+        except:pass
 
     @database_sync_to_async
     def get_first_music(self):

@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.home.as_view(), name='home'),
@@ -35,7 +36,12 @@ urlpatterns = [
     path('activity', views.activity.as_view(), name='activity'),
     path('saves_posts', views.saves_posts.as_view(), name='saves_posts'),
 
-    path('ajax/', include("home.urls_ajax"))
+    path('ajax/', include("home.urls_ajax")),
+
+    path("password_reset", views.PasswordResetRequest.as_view(), name="password_reset"),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='home/password_reset/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="home/password_reset/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='home/password_reset/password_reset_complete.html'), name='password_reset_complete'),      
 ]
 
 if settings.DEBUG:

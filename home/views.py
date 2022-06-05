@@ -11,10 +11,17 @@ from .forms import (RegisterForm,
 					VideoForm)
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import StreamingHttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import StreamingHttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.views.generic import ListView, TemplateView, CreateView
-from ameneuro.settings import get_posts_how, get_user_how
+from ameneuro.settings import get_posts_how, get_user_how, email_server, domain
 from django.core.files.base import ContentFile
+from django.core.mail import send_mail, BadHeaderError
+from django.contrib.auth.forms import PasswordResetForm
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
 
 from .services import *
 
@@ -394,3 +401,33 @@ class change_playlist(LoginRequiredMixin,TemplateView):
 		context = super().get_context_data(**kwargs)
 		context["playlist"] = self.playlist
 		return context
+
+class PasswordResetRequest(TemplateView):
+	template_name = "home/password_reset/password_reset.html"
+
+	def post(self, request, *args, **kwargs):
+		password_reset_form = PasswordResetForm(request.POST)
+		if password_reset_form.is_valid():
+			data = password_reset_form.cleaned_data['email']
+			associated_users = User.objects.filter(Q(email=data))
+			if associated_users.exists():
+				for user in associated_users:
+					subject = "Password Reset Requested"
+					email_template_name = "home/password_reset/password_reset_email.txt"
+					c = {
+					"email":user.email,
+					'domain':domain,
+					'site_name': 'Ameneuro',
+					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
+					"user": user,
+					'token': default_token_generator.make_token(user),
+					'protocol': 'http',
+					}
+					email = render_to_string(email_template_name, c)
+					try:
+						send_mail(subject, email, email_server , [user.email], fail_silently=False)
+					except BadHeaderError:
+						return HttpResponse('Invalid header found.')
+					return redirect ("/password_reset/done/")
+		password_reset_form = PasswordResetForm()
+		return render(request=request, template_name="home/password_reset/password_reset.html", context={"password_reset_form":password_reset_form})

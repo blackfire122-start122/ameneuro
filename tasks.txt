@@ -117,7 +117,8 @@ ____________________________v2____________________________
 consumer in dict *
 bug not play music in user if scroll *
 turn over post *
+forgot password *
+email in registrations *
 
 button поскаржитися new page
-forgot password 
-email in registrations 
+style reset password

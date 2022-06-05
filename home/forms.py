@@ -23,10 +23,11 @@ class RegisterForm(UserCreationForm):
 				'class':'input','placeholder':''})
 		self.fields['password2'].widget = PasswordInput(attrs={
 				'class':'input','placeholder':''})
-
+		self.fields['email'].widget = TextInput(attrs={
+				'class':'input','placeholder':''})
 	class Meta:
 		model = User
-		fields = ['username','password1','password2']
+		fields = ['username','password1','password2','email']
 
 class LoginForm(AuthenticationForm):
 	def __init__(self, *args, **kwargs):

@@ -120,3 +120,6 @@ get_user_how = 5
 CELERY_BROKER_URL = "redis://"+REDIS_HOST+":"+str(REDIS_PORT)+"/0"
 CELERY_RESULT_BACKEND = "redis://"+REDIS_HOST+":"+str(REDIS_PORT)+"/0"
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+email_server = "gsambir519@gmail.com"
+domain = "192.168.0.105"
