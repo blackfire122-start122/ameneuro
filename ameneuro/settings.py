@@ -119,3 +119,4 @@ get_user_how = 5
 
 CELERY_BROKER_URL = "redis://"+REDIS_HOST+":"+str(REDIS_PORT)+"/0"
 CELERY_RESULT_BACKEND = "redis://"+REDIS_HOST+":"+str(REDIS_PORT)+"/0"
+

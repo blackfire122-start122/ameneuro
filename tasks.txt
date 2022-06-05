@@ -117,6 +117,5 @@ ____________________________v2____________________________
 button поскаржитися new page
 forgot password 
 email in registrations
-
-
-
+revolution post
+bug not play music in user if scroll

@@ -413,74 +413,52 @@ class UserConsumer(AsyncWebsocketConsumer):
             ma.save()
             user.message_activity.add(ma)
 
+    types = {'add_mus_share':add_mus_share,
+        'not_add_mus_share':not_add_mus_share,
+        'add_to_me':add_to_me,
+        'delete_mus':delete_mus,
+        'mus_share':mus_share,
+        'save_post':save_post,
+        'not_save':not_save,
+        'delete_friend':delete_friend,
+        'add_friend':add_friend,
+        'want_add_friend':want_add_friend,
+        'follow':follow,
+        'add_chat':add_chat,
+        'like':like,
+        'not_like':not_like,
+        'comment_like':comment_like,
+        'not_comment_like':not_comment_like,
+        'comment_user':comment_user,
+        'comment_reply':comment_reply,
+        'delete_post':delete_post,
+        'new_theme_all':new_theme_all,
+        'delete_theme_all':delete_theme_all,
+        'visible_ma':visible_ma,
+        'like_video':like_video,
+        'not_like_video':not_like_video,
+        'comment_video_user':comment_video_user,
+        'comment_video_reply':comment_video_reply,
+        'ps_share':ps_share,
+        'add_ps_share':add_ps_share,
+        'not_add_ps_share':not_add_ps_share,
+        'delete_ps_form_me':delete_ps_form_me
+    }
+    types_not_return = {
+        'add_to_playlists':add_to_playlists,
+        'not_add_to_playlists':not_add_to_playlists,
+        'delete_video':delete_video,
+    }
+
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
 
-        if self.text_data_json.get('type')=='add_mus_share':
-            await self.add_mus_share()
+        if self.text_data_json.get('type') in self.types.keys():
+            await self.types.get(self.text_data_json.get('type'))(self)
             return
-        elif self.text_data_json.get('type')=='not_add_mus_share':
-            await self.not_add_mus_share()
-            return
-        elif self.text_data_json.get('type')=='add_to_me':
-            await self.add_to_me()
-            return
-        elif self.text_data_json.get('type')=='delete_mus':
-            await self.delete_mus()
-            return
-        elif self.text_data_json.get('type')=='mus_share':
-            await self.mus_share()
-            return
-        elif self.text_data_json.get('type')=='save_post':
-            await self.save_post()
-            return
-        elif self.text_data_json.get('type')=='not_save':
-            await self.not_save()
-            return
-        elif self.text_data_json.get('type')=='delete_friend':
-            await self.delete_friend()
-            return  
-        elif self.text_data_json.get('type')=='add_friend':
-            await self.add_friend()
-            return
-        elif self.text_data_json.get('type')=='want_add_friend':
-            await self.want_add_friend()
-            return
-        elif self.text_data_json.get('type')=='follow':
-            await self.follow()
-            return
-        elif self.text_data_json.get('type')=='add_chat':
-            await self.add_chat()
-            return
-        elif self.text_data_json.get('type')=='like':
-            await self.like()
-            return
-        elif self.text_data_json.get('type')=='not_like':
-            await self.not_like()
-            return
-        elif self.text_data_json.get('type')=='comment_like':
-            await self.comment_like()
-            return
-        elif self.text_data_json.get('type')=='not_comment_like':
-            await self.not_comment_like()
-            return
-        elif self.text_data_json.get('type')=='comment_user':
-            await self.comment_user()
-            return
-        elif self.text_data_json.get('type')=='comment_reply':
-            await self.comment_reply()
-            return
-        elif self.text_data_json.get('type')=='delete_post':
-            await self.delete_post()
-        elif self.text_data_json.get('type')=='new_theme_all':
-            await self.new_theme_all()
-            return
-        elif self.text_data_json.get('type')=='delete_theme_all':
-            await self.delete_theme_all()
-            return
-        elif self.text_data_json.get('type')=='visible_ma':
-            await self.visible_ma()
-            return
+        elif self.text_data_json.get('type') in self.types_not_return.keys():
+            await self.types_not_return.get(self.text_data_json.get('type'))(self)
+
         elif self.text_data_json.get('type')=='play_in_all':
             if self.text_data_json.get("type_media")=="playlist":
                 self.scope["session"]["playlist_play_in_all"]=self.text_data_json.get("id_playlist")
@@ -502,39 +480,6 @@ class UserConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json.get('type')=='play_in_all_current_time':
             self.scope["session"]["music_play_in_all_currentTime"]=self.text_data_json.get("currentTime")
-            return
-
-        elif self.text_data_json.get('type')=='add_to_playlists':
-            await self.add_to_playlists()
-
-        elif self.text_data_json.get('type')=='not_add_to_playlists':
-            await self.not_add_to_playlists()
-
-        elif self.text_data_json.get('type')=='like_video':
-            await self.like_video()
-            return
-        elif self.text_data_json.get('type')=='not_like_video':
-            await self.not_like_video()
-            return
-        elif self.text_data_json.get('type')=='comment_video_user':
-            await self.comment_video_user()
-            return
-        elif self.text_data_json.get('type')=='comment_video_reply':
-            await self.comment_video_reply()
-            return
-        elif self.text_data_json.get('type')=='delete_video':
-            await self.delete_video()
-        elif self.text_data_json.get('type')=='ps_share':
-            await self.ps_share()
-            return
-        elif self.text_data_json.get('type')=='add_ps_share':
-            await self.add_ps_share()
-            return
-        elif self.text_data_json.get('type')=='not_add_ps_share':
-            await self.not_add_ps_share()
-            return
-        elif self.text_data_json.get('type')=='delete_ps_form_me':
-            await self.delete_ps_form_me()
             return
 
         await self.channel_layer.group_send(
