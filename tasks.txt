@@ -114,8 +114,10 @@ css style:
 	ai new style modern *
 
 ____________________________v2____________________________
+consumer in dict *
+bug not play music in user if scroll *
+
 button поскаржитися new page
 forgot password 
 email in registrations
 revolution post
-bug not play music in user if scroll

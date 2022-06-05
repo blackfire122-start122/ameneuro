@@ -163,15 +163,6 @@ function set_click_audio_timeline(data,audio,timeline){
 		document.querySelector(".play_in_all_div").style.display = "none"
 		document.querySelector("#img_left_el").style.display = "block"
 	})
-	audio.currentTime = data["currentTime"]
-	audio.addEventListener("timeupdate", ()=>{
-		const percentagePosition = (100*audio.currentTime) / audio.duration
-		timeline.style.backgroundSize = `${percentagePosition}% 100%`
-		timeline.value = percentagePosition
-		if(Math.round(percentagePosition)%2==0){
-			conn_u.send(JSON.stringify({'type':'play_in_all_current_time',"currentTime":audio.currentTime}))
-		}
-	})
 }
 
 conn_u.onopen = ()=>{
@@ -264,7 +255,11 @@ function playlist_pia(data,div){
 		url: musics_all_ajax,
 		data: {'pia':'play_in_all','type':'playlist','ps':data["id_playlist"],"musics_start":musics_start_pia, "musics_end":musics_end_pia},
 		success: function (response) {
-			div.innerHTML += response
+	  	resp = $(response)
+	    for (let i = resp.length - 1; i >= 0; i--) {
+	   		div.appendChild(resp[i])
+	    }
+
 			let audio = document.querySelector("#audio_play_in_all_"+data["id"])
 			let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
 			musics_start_pia += how_get
@@ -280,7 +275,11 @@ function music_pia(data,div){
 		url: musics_all_ajax,
 		data: {'type':'music','pia':'play_in_all',"musics_start":musics_start_pia, "musics_end":musics_end_pia},
 		success: function (response) {
-			div.innerHTML += response
+	  	resp = $(response)
+	    for (let i = resp.length - 1; i >= 0; i--) {
+	   		div.appendChild(resp[i])
+	    }
+
 			let audio = document.querySelector("#audio_play_in_all_"+data["id"])
 			let timeline = document.querySelector("#timeline_play_in_all_"+data["id"])
 			musics_start_pia += how_get

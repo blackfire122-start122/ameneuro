@@ -59,8 +59,12 @@ function get_my_musics(){
 	  type: $(this).attr('post'),
 	  url: musics_all_ajax,
 	  data: {'id':id_user,'type':'user_music_add',"musics_start":musics_start,"musics_end":musics_end},
-	  success: function (response){
-	    document.querySelector(".musics").innerHTML += response
+	  success: function (response){	    
+	  	resp = $(response)
+	    for (let i = resp.length - 1; i >= 0; i--) {
+	   		musics.appendChild(resp[i])
+	    }
+
 	    musics_start += how_get
 			musics_end += how_get
 	  }
