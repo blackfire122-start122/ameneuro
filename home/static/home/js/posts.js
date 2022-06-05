@@ -136,6 +136,17 @@ function options(e){
 	opt_menu.style.display = "flex"
 }
 
+function turn_over(e,id){
+	post_media = document.getElementById("post_"+id)
+	
+	if (post_media.style.transform == "rotate(180deg)"){
+		post_media.style.transform = "rotate(0deg)"
+	}else{
+		post_media.style.transform = "rotate(180deg)"
+	}
+}
+
+
 function copy_link(e){
 	e.innerText = "http://"+window.location.hostname+e.value
 

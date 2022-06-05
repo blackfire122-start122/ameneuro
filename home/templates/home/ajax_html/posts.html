@@ -8,27 +8,33 @@
 					<h4 class="name_user_post">{{ p.user_pub }}</h4>
 				</a>
 				{% if data_get.type != "play_in_all" %}
-					<img id="{{ p.id }}" onclick="options(this)" class="options_post_img" src="{{ user.theme_all.options_img.url }}" alt="">
+					<div class="options_div">
+						{% if p.type_p.type_f != 'audio' %}
+							<img onclick="turn_over(this,'{{p.id}}')" class="turn_over" src="{{ user.theme_all.turn_over_img.url }}" alt="turn over">
+						{% endif %}
 
-					<div class="options_menu" id='opt_{{ p.id }}'>
-						<button value="{% url 'post' p.id %}" onclick="copy_link(this)" class="link_options_menu" href="">Скопіювати</button>
-						{% if not user.is_anonymous %}
-							<button onclick="share('{{ p.id }}')" class="link_options_menu">Поширити</button>
-						{% endif %}
-						{% if p.user_pub == user %}
-							<button onclick="delete_post({{ p.id }})" class="link_options_menu">Видалити</button>
-						{% endif %}
-						
-						<a class="link_options_menu_red" href="">Поскаржитись</a>
+						<img id="{{ p.id }}" onclick="options(this)" class="options_post_img" src="{{ user.theme_all.options_img.url }}" alt="">
+
+						<div class="options_menu" id='opt_{{ p.id }}'>
+							<button value="{% url 'post' p.id %}" onclick="copy_link(this)" class="link_options_menu" href="">Скопіювати</button>
+							{% if not user.is_anonymous %}
+								<button onclick="share('{{ p.id }}')" class="link_options_menu">Поширити</button>
+							{% endif %}
+							{% if p.user_pub == user %}
+								<button onclick="delete_post({{ p.id }})" class="link_options_menu">Видалити</button>
+							{% endif %}
+							
+							<a class="link_options_menu_red" href="">Поскаржитись</a>
+						</div>
 					</div>
 				{% endif %}
 			</div>
 			{% if p.type_p.type_f == 'video' %}
-				<video autoplay class="video_post post_file" controls controlsList="nodownload" controls prelad="auto">
+				<video autoplay id="post_{{p.id}}" class="video_post post_file" controls controlsList="nodownload" controls prelad="auto">
 					<source src="{% url 'stream_post' p.id %}">
 				</video>
 			{% elif p.type_p.type_f == 'img' %}
-				<img class="post_file" src="{{ p.file.url }}">
+				<img id="post_{{p.id}}" class="post_file" src="{{ p.file.url }}">
 			{% elif p.type_p.type_f == 'audio' %}
 				{% if data_get.type == "play_in_all" %}
 					<div class="player_play_in_all">
