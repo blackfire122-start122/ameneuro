@@ -61,6 +61,10 @@ body {
   width: 76px;
 }
 
+.big_cut{
+  width: 122px;
+}
+
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {
   transform: translateY(8px);
@@ -114,7 +118,7 @@ body {
   color: red;
 }
 
-.forgot_pass{
+.forgot_pass, .link_login{
   text-decoration: none;
   color: white;
   font-size: 1.1em;
