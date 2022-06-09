@@ -120,7 +120,6 @@ class AllTheme(models.Model):
 	menu_img = models.ImageField(upload_to="theme_all/menu_img",default=None,null=True,blank=True)
 	settings_img = models.ImageField(upload_to="theme_all/settings_img",default=None,null=True,blank=True)
 	play_in_all_img = models.ImageField(upload_to="theme_all/play_in_all_img",default=None,null=True,blank=True)
-	ai_img = models.ImageField(upload_to="theme_all/ai_img",default=None,null=True,blank=True)
 	no_media_img = models.ImageField(upload_to="theme_all/no_media_img",default=None,null=True,blank=True)
 	file_send_img = models.ImageField(upload_to="theme_all/file_send_img",default=None,null=True,blank=True)
 	options_img = models.ImageField(upload_to="theme_all/options_img",default=None,null=True,blank=True)

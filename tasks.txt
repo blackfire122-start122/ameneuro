@@ -121,3 +121,4 @@ forgot password *
 email in registrations *
 button поскаржитися new page *
 style reset password *
+celery tasks *
