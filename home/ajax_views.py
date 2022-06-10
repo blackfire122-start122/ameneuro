@@ -5,8 +5,9 @@ from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotFou
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from .services import *
+import logging
 
-from django.core import serializers
+logger = logging.getLogger(__name__)
 
 @login_required(login_url='login')
 def comment_ajax(request):
@@ -14,7 +15,9 @@ def comment_ajax(request):
 		if not defence_isdigit(request.GET.get("id")):return HttpResponseBadRequest()
 		if not defence_isdigit(request.GET.get("start_comments"),request.GET.get("end_comments"),request.GET.get("id")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("start_comments"),request.GET.get("end_comments")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:
 		post = Post.objects.get(pk=request.GET.get("id"))
@@ -28,7 +31,9 @@ def comment_video_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("start_comments"),request.GET.get("end_comments"),request.GET.get("id")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("start_comments"),request.GET.get("end_comments")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:
 		video = Video.objects.get(pk=request.GET.get("id"))
@@ -43,14 +48,19 @@ def post_ajax(request):
 	if request.GET.get("id"):
 		try:
 			if not defence_isdigit(request.GET.get("id")):return HttpResponseBadRequest()
-		except:return HttpResponseBadRequest()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseBadRequest()
 		
 		try:posts = Post.objects.filter(pk=request.GET.get("id"))
 		except: HttpResponseNotFound()
 	else:
 		try:
 			if not defence_isdigit(request.GET.get("end_scroll")):return HttpResponseBadRequest()
-		except:return HttpResponseBadRequest()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseBadRequest()
+
 		if int(request.GET.get("end_scroll")) == 0:
 			posts, next_data, error_response = get_posts(request.GET.copy(),request.user)
 			if error_response:
@@ -65,12 +75,18 @@ def post_ajax(request):
 def video_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("end_scroll_video")):return HttpResponseBadRequest()
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
+
 	videos = {}
 	next_data = {}
 	if int(request.GET.get("end_scroll_video")) == 0:
 		try:videos, next_data, error_response = get_videos(request.GET.copy(),request.user)
-		except:return HttpResponseNotFound()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseNotFound()
+
 		if error_response:
 			return error_response()
 		if not videos:
@@ -84,7 +100,9 @@ def chat_options_ajax(request):
 	chat = {}
 	try:
 		if not defence_isdigit(request.GET.get("chat_id")):return HttpResponseBadRequest()
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:chat = Chat.objects.get(pk=request.GET.get('chat_id'))
 	except:return HttpResponseNotFound()
@@ -103,7 +121,9 @@ def chat_get_mess_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("mess_start"),request.GET.get("mess_end"),request.GET.get("chat_id")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("mess_start"),request.GET.get("mess_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 	mess = []
 
 	try:chat = Chat.objects.get(pk=request.GET.get('chat_id'))
@@ -122,7 +142,9 @@ def send_file_mes_ajax(request):
 	if request.method == "POST":
 		try:
 			if not defence_isdigit(request.POST.get("chat_id")):return HttpResponseBadRequest()
-		except:return HttpResponseBadRequest()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseBadRequest()
 		src = ""
 		form = MessageForm(request.POST, request.FILES)
 		if form.is_valid():
@@ -147,7 +169,9 @@ def musics_all_ajax(request):
 		try:
 			if not defence_isdigit(request.GET.get("musics_start"),request.GET.get("musics_end")):return HttpResponseBadRequest()
 			if not defence_ptl(request.GET.get("musics_start"),request.GET.get("musics_end")):return HttpResponse('Payload Too Large', status=413)
-		except:return HttpResponseBadRequest()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseBadRequest()
 
 		try:mus = Playlist.objects.get(pk=request.GET.get("ps")).musics.all()[int(request.GET.get("musics_start")):int(request.GET.get("musics_end"))]
 		except:return HttpResponseNotFound()
@@ -159,7 +183,9 @@ def musics_all_ajax(request):
 		try:
 			if not defence_isdigit(request.GET.get("musics_start"),request.GET.get("musics_end")):return HttpResponseBadRequest()
 			if not defence_ptl(request.GET.get("musics_start"),request.GET.get("musics_end")):return HttpResponse('Payload Too Large', status=413)
-		except:return HttpResponseBadRequest()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseBadRequest()
 
 		mus = request.user.music.all().order_by("-date")[int(request.GET.get("musics_start")):int(request.GET.get("musics_end"))]
 	return render(request,"home/ajax_html/all_music.html",{"music":mus,"data_get":request.GET})
@@ -169,7 +195,9 @@ def user_find_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("users_find_start"), request.GET.get("users_find_end")):return HttpResponseBadRequest()
 		if int(request.GET.get("users_find_end"))-int(request.GET.get("users_find_start"))!=20:return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 	
 	users = []
 	if request.GET.get("type") == "all":
@@ -191,7 +219,9 @@ def users_get_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("users_start"),request.GET.get("users_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("users_start"),request.GET.get("users_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	users = []
 	if request.GET.get("type") == "all":
@@ -223,7 +253,9 @@ def saves_posts_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("start_post"), request.GET.get("end_post")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("start_post"),request.GET.get("end_post")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:posts = request.user.saves_posts.all()[int(request.GET.get("start_post")):int(request.GET.get("end_post"))]
 	except:return HttpResponseNotFound()
@@ -235,7 +267,9 @@ def music_get_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("music_start"), request.GET.get("music_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("music_start"),request.GET.get("music_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:music = Music.objects.all().order_by("-date")[int(request.GET.get("music_start")):int(request.GET.get("music_end"))]
 	except: return HttpResponseNotFound()
@@ -252,7 +286,9 @@ def music_find_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("music_find_start"), request.GET.get("music_find_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("music_find_start"),request.GET.get("music_find_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:music = Music.objects.filter(name__contains=request.GET.get("find_name")).order_by("-date")[int(request.GET.get("music_find_start")):int(request.GET.get("music_find_end"))]
 	except:return HttpResponseNotFound()
@@ -269,7 +305,9 @@ def playlist_get_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("playlist_start"), request.GET.get("playlist_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("playlist_start"),request.GET.get("playlist_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:ps = Playlist.objects.all()[int(request.GET.get("playlist_start")):int(request.GET.get("playlist_end"))]
 	except: return HttpResponseNotFound()
@@ -281,7 +319,9 @@ def playlist_find_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("playlist_find_start"), request.GET.get("playlist_find_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("playlist_find_start"),request.GET.get("playlist_find_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:ps = Playlist.objects.filter(name__contains=request.GET.get("find_name"))[int(request.GET.get("playlist_find_start")):int(request.GET.get("playlist_find_end"))]
 	except:return HttpResponseNotFound()
@@ -292,7 +332,9 @@ def video_get_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("video_start"), request.GET.get("video_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("video_start"),request.GET.get("video_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:videos = Video.objects.all()[int(request.GET.get("video_start")):int(request.GET.get("video_end"))]
 	except: return HttpResponseNotFound()
@@ -303,7 +345,9 @@ def video_find_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("video_find_start"), request.GET.get("video_find_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("video_find_start"),request.GET.get("video_find_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:videos = Video.objects.filter(name__contains=request.GET.get("find_name"))[int(request.GET.get("video_find_start")):int(request.GET.get("video_find_end"))]
 	except:return HttpResponseNotFound()
@@ -318,7 +362,9 @@ def playlists_ajax(request):
 		try:
 			if not defence_isdigit(request.GET.get("playlists_start"),request.GET.get("playlists_end")):return HttpResponseBadRequest()
 			if not defence_ptl(request.GET.get("playlists_start"),request.GET.get("playlists_end")):return HttpResponse('Payload Too Large', status=413)
-		except:return HttpResponseBadRequest()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseBadRequest()
 		playlists = request.user.playlists.all()[int(request.GET.get("playlists_start")):int(request.GET.get("playlists_end"))]
 	return render(request,"home/ajax_html/playlists.html",{"playlists":playlists,"data_get":request.GET})
 
@@ -332,7 +378,9 @@ def post_user_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("posts_start"), request.GET.get("posts_end"), request.GET.get("user")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("posts_start"),request.GET.get("posts_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:posts = Post.objects.filter(user_pub=request.GET.get("user")).order_by("-date")[int(request.GET.get("posts_start")):int(request.GET.get("posts_end"))]
 	except:return HttpResponseNotFound()
@@ -342,7 +390,9 @@ def video_user_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("videos_start"), request.GET.get("videos_end"), request.GET.get("user")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("videos_start"),request.GET.get("videos_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 
 	try:videos = Video.objects.filter(user_pub=request.GET.get("user")).order_by("-date")[int(request.GET.get("videos_start")):int(request.GET.get("videos_end"))]
 	except:return HttpResponseNotFound()
@@ -353,7 +403,9 @@ def activity_mess_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("mess_start"), request.GET.get("mess_end")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("mess_start"),request.GET.get("mess_end")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 	
 	try:mess = request.user.message_activity.all().order_by("-date")[int(request.GET.get('mess_start')):int(request.GET.get('mess_end'))]
 	except:return HttpResponseNotFound()
@@ -364,7 +416,9 @@ def chat_find_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("start_chat"), request.GET.get("end_chat")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("start_chat"),request.GET.get("end_chat")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 	
 	try:chats = request.user.chats.filter(chat_friend__user__username__contains=request.GET.get("find_ch"))[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
 	except:return HttpResponseNotFound()
@@ -375,7 +429,9 @@ def get_chats_ajax(request):
 	try:
 		if not defence_isdigit(request.GET.get("start_chat"), request.GET.get("end_chat")):return HttpResponseBadRequest()
 		if not defence_ptl(request.GET.get("start_chat"),request.GET.get("end_chat")):return HttpResponse('Payload Too Large', status=413)
-	except:return HttpResponseBadRequest()
+	except Exception as e:
+		logger.warning(str(e))
+		return HttpResponseBadRequest()
 	
 	try:chats = request.user.chats.all()[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
 	except:return HttpResponseNotFound()

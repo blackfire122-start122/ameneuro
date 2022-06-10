@@ -1,13 +1,41 @@
 from pathlib import Path
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
 ALLOWED_HOSTS = ["192.168.0.105","127.0.0.1"]
 # ALLOWED_HOSTS = ["*"]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    "formatters":{
+        "file_format":{
+            "format":"{asctime} - {levelname} - {module} - {filename} - {message}",
+            "style":"{",
+        },
+    },
+
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            "level":"WARNING",
+            'filename': BASE_DIR / 'log.log',
+            'formatter':"file_format",
+        },
+    },
+
+    'loggers': {
+        '': {
+            'handlers': ['file'],
+            "level": "WARNING",
+            'propagate': True,
+        },
+    },
+}
 
 INTERNAL_IPS = [
     "127.0.0.1",

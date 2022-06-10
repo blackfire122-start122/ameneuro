@@ -2,8 +2,10 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import *
-from django.db.models import Max
 from .services import *
+import logging
+
+logger = logging.getLogger(__name__)
 
 close_less_chat = [
     "end_readable",
@@ -338,7 +340,7 @@ class UserConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def session_save(self):
         try:self.scope.get("session").save()
-        except:pass
+        except Exception as e:logger.warning(str(e))
 
     @database_sync_to_async
     def get_first_music(self):

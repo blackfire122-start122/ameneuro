@@ -7,6 +7,9 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.core.mail import send_mail, BadHeaderError
 from home.models import User
+import logging
+
+logger = logging.getLogger(__name__)
 
 @app.task
 def send_email(data):
@@ -27,6 +30,7 @@ def send_email(data):
 			email = render_to_string(email_template_name, c)
 			try:
 				send_mail(subject, email, email_server , [user.email], fail_silently=False)
-			except BadHeaderError:
+			except BadHeaderError as e:
+				logger.warning(str(e))
 				return "Fail"
 	return "Good"
