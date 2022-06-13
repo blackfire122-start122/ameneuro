@@ -54,7 +54,7 @@
 
 			<a class="link_menu" href="{% url 'friends' %}"><div id ="friends" class="red_point"><p>0</p></div><img class="img_main_link" src="{{ user.theme_all.friends_img.url }}"></a>
 
-			<a class="link_menu" href="{% url 'musics' %}"><div id ="musics" class="red_point"><p>{{ music_shared }}</p></div><img class="img_main_link" src="{{ user.theme_all.music_img }}"></a>
+			<a class="link_menu" href="{% url 'musics' %}"><div id ="musics" class="red_point"><p>{{ music_shared }}</p></div><img class="img_main_link" src="{{ user.theme_all.music_img.url }}"></a>
 
 			<a class="link_menu" href="{% url 'activity' %}"><div id ="activity" class="red_point"><p>{{ message_activity }}</p></div><img class="img_main_link" src="{{ user.theme_all.activity_img.url }}"></a>
 		</div>
@@ -63,7 +63,7 @@
 	</div>
 
 	<div class="friends_share">
-		<img src="{{ user.theme_all.close_img }}" class="close_sh" onclick="close_sh()">
+		<img src="{{ user.theme_all.close_img.url }}" class="close_sh" onclick="close_sh()">
 		<div class="menu_post_share">
 			<div class="post_share"></div>
 			<div class="inputs_post_share">

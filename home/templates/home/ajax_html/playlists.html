@@ -2,7 +2,7 @@
 	{% for p in playlists.all %}
 		<div class="playlist">
 			<div class="ps_prew">
-				<img class="img_ps" src="{{ p.img }}">
+				<img class="img_ps" src="{{ p.img.url }}">
 				<div class="autor_name">
 					<a class="link_name_ps" href="{% url 'playlists' p %} "><h3>{{ p }}</h3></a>
 					<h4><a class="ps_link_user" href="{% url 'user' p.autor %}">{{ p.autor }}</a></h4>

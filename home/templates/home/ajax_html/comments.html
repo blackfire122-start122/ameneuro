@@ -3,7 +3,7 @@
 		<div class="parent_com">
 			<p class="comment_text">{{ c.parent }}</p>
 			<div class="parent_user">
-				<img class="img_user_comment" src="{{ c.parent.user.img }}">
+				<img class="img_user_comment" src="{{ c.parent.user.img.url }}">
 				<span class="user_name_comment">{{ c.parent.user |truncatechars:5 }}</span>
 			</div>
 		</div>
