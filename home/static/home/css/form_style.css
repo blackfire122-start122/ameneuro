@@ -126,3 +126,7 @@ body {
   padding: 2px;
   margin-top: 2%;
 }
+
+.link_login{
+  float: left;
+}
