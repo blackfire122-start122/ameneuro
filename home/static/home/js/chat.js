@@ -3,10 +3,10 @@ let msg_div = document.querySelector('.messages')
 let musics = document.querySelector('.musics')
 let music
 
-conn = new WebSocket("ws://"+window.location.hostname+"/chat/"+chat)
+conn = new WebSocket("ws://"+window.location.hostname+"/ws/chat/"+chat)
 conn.onmessage = onmessage
 
-conn_u_f = new WebSocket("ws://"+window.location.hostname+"/user/"+friend)
+conn_u_f = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+friend)
 
 m_pause = true
 m_time = true
