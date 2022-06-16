@@ -5846,3 +5846,8 @@ ValueError: No route found for path 'user/admin-ameneuro'.
 2022-06-16 08:55:06,997 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
 2022-06-16 11:20:09,094 - WARNING - consumers - consumers.py - 
 2022-06-16 11:28:13,184 - WARNING - consumers - consumers.py - 
+2022-06-16 11:45:48,779 - WARNING - consumers - consumers.py - 
+2022-06-16 11:45:50,581 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-16 11:45:50,581 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.13, 192.168.0.105:51818][0m
+2022-06-16 12:46:45,850 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-16 12:46:45,850 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.04, 192.168.0.105:54000][0m

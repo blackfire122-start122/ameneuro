@@ -126,7 +126,7 @@ logging *
 
 ____________________________v3____________________________
 register in login *
-sendEmail ***
+sendEmail *
 chats
 ____________________________v4____________________________
 big files in celery
