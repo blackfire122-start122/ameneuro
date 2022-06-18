@@ -68,7 +68,7 @@ function onmessage(e){
 		if (data["type_file"] == "audio"){
 			element = `
 				<div>
-					<div class="my_msgs file_mes">
+					<div class="other_msgs" style="background: rgb(255, 247, 0);">
 						<div class="audio-player">
 							<h4 class="name_mus">` + data["msg"] + `</h4>
 							<audio class="audio_ap" id="audio_`+data["id"]+`" src="`+data["src"]+`"></audio>
@@ -95,16 +95,16 @@ function onmessage(e){
 		let file = document.createElement(data["type_file"])
 		
 		if (data["user"]==user) {
-			div.className = "my_msgs file_mes"
+			div.className = "my_msgs my_file_mes"
 		}else{
-			div.className = "other_msgs file_mes"
+			div.className = "other_msgs other_file_mes"
 		}
 		div.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
 
 		p.className="mes"
 		p.innerText = data["msg"]
 
-		file.className = "img_file_mes"
+		file.className = "other_file_mes"
 		file.src = data["src"]
 		file.addEventListener("click", ()=>{file_see(file)})
 
@@ -126,11 +126,11 @@ function onmessage(e){
 		
 		if (data["type_file"] == "audio"){
 			file = document.createElement("img")
-			file.className="file_mes"
+			file.className="other_msgs"
 			file.src = user_music_theme
 		}else{
 			file = document.createElement(data['type_file'])
-			file.className="img_file_mes"
+			file.className="other_file_mes"
 			file.src = data["url_file"]
 		}
 		
@@ -140,9 +140,9 @@ function onmessage(e){
 		let readeble = document.querySelector('.readeble')
 
 		if (data["user"]==user) {
-			div.className = "my_msgs"
+			div.className = "my_msgs my_file_mes"
 		}else{
-			div.className = "other_msgs"
+			div.className = "other_msgs other_file_mes"
 		}
 		div.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
 

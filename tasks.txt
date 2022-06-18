@@ -128,5 +128,7 @@ ____________________________v3____________________________
 register in login *
 sendEmail *
 ____________________________v4____________________________
+chats style *
+chats reply
+chats emoji reaction
 big files in celery
-chats

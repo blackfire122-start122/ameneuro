@@ -168,7 +168,7 @@ function hexToRgb(hex) {
 function fon_msgs(){
   my_msgs = document.getElementsByClassName('my_msgs')
   other_msgs = document.getElementsByClassName('other_msgs')
-  
+
   for (let i = my_msgs.length-1; i>=0 ;i-- ){
     my_msgs[i].style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
   }
