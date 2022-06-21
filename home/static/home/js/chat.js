@@ -1,11 +1,25 @@
 let msg_user = document.querySelector("#msg_user")
 let msg_div = document.querySelector('.messages')
 let musics = document.querySelector('.musics')
+let emojis_select = document.querySelector('.emojis_select')
 let music
 
-conn = new WebSocket("ws://"+window.location.hostname+"/ws/chat/"+chat)
-conn.onmessage = onmessage
+function connect() {
+	conn = new WebSocket("ws://"+window.location.hostname+"/ws/chat/"+chat)
+	conn.onmessage = onmessage
 
+	conn.onclose = (e)=>{
+	  setTimeout(()=>{
+	    connect()
+	  }, 100)
+	}
+
+	conn.onopen = ()=>{
+		conn.send(JSON.stringify({'type':'first_msg',"chat":chat_id}))	
+		end_readable_send()
+	}
+}
+connect()
 conn_u_f = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+friend)
 
 m_pause = true
@@ -13,15 +27,17 @@ m_time = true
 
 function onmessage(e){
 	let data = JSON.parse(e.data)
+	let readeble = document.querySelector('.readeble')
 
- 	if (data['type']=='msg'){
+	if (data['type']=='msg'){
 		conn_u_f.send(JSON.stringify({'type':'msg','msg':data["msg"],'from_user': user, "from_chat":chat}))
 		
 		let div_ = document.createElement('div')
+		div_.onclick = () => {emoji(div_,data["id_msg"])}
+		div_.id = data['id_msg']
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 		let time = document.createElement('time')
-		let readeble = document.querySelector('.readeble')
 
 		if (data["user"]==user) {
 			div.className = "my_msgs"
@@ -56,7 +72,6 @@ function onmessage(e){
 		}
 
 	}else if(data['type']=='end_readable'){
-		let readeble = document.querySelector('.readeble')
 		if (data['readeble'] == 'True'){
 			readeble.innerText = 'Read'
 		}else{
@@ -67,8 +82,8 @@ function onmessage(e){
 
 		if (data["type_file"] == "audio"){
 			element = `
-				<div>
-					<div class="other_msgs" style="background: rgb(255, 247, 0);">
+				<div id="`+data["id"]+`" onclick="emoji(this,'`+data["id"]+`')">
+					<div class="other_msgs" style="background: rgba(` + rgba[0] + `,` + rgba[1] + `,`+ rgba[2] +`,`+ color_mes_bg_op + `);">
 						<div class="audio-player">
 							<h4 class="name_mus">` + data["msg"] + `</h4>
 							<audio class="audio_ap" id="audio_`+data["id"]+`" src="`+data["src"]+`"></audio>
@@ -88,10 +103,10 @@ function onmessage(e){
 		}
 
 		let div_ = document.createElement('div')
+		div_.id = data['id']
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 		let time = document.createElement('time')
-		let readeble = document.querySelector('.readeble')
 		let file = document.createElement(data["type_file"])
 		
 		if (data["user"]==user) {
@@ -121,6 +136,8 @@ function onmessage(e){
 	}
 	else if (data['type']=='share'){
 		let div_ = document.createElement('div')
+		div_.onclick = () => {emoji(div_,data["id_msg"])}
+		div_.id = data['id_msg']
 		let div = document.createElement('div')
 		let file
 		
@@ -137,7 +154,6 @@ function onmessage(e){
 		let a = document.createElement('a')
 		let p = document.createElement('p')
 		let time = document.createElement('time')
-		let readeble = document.querySelector('.readeble')
 
 		if (data["user"]==user) {
 			div.className = "my_msgs my_file_mes"
@@ -160,12 +176,50 @@ function onmessage(e){
 		msg_div.append(div_)
 		readeble.innerText = 'not read'
 		end_readable_send()
+
+	}else if (data['type']=='emogi_msg'){
+		let msg_emoji = document.getElementById(data['msg_id'])
+
+		if (msg_emoji.nextElementSibling){
+			let emojis = get_node_chield(msg_emoji.nextElementSibling.childNodes)
+			for (var i = emojis.length - 1; i >= 0; i--) {
+				if(emojis[i].id == "emoji_" + data['user']){
+					emojis[i].innerHTML = data['emoji']
+					return
+				}
+			}
+			let span = document.createElement("span")
+			span.innerHTML = data['emoji']
+			span.className = "emoji_msg"
+			span.id = "emoji_"+data['user']
+			msg_emoji.nextElementSibling.append(span)
+		}else{
+			let div = document.createElement('div')
+			let span = document.createElement("span")
+
+			classname_msg = get_node_chield(msg_emoji.childNodes)[0].className.split(" ")
+			if (classname_msg.includes("my_msgs")){
+				div.className = "emoji_my"
+			}else if(classname_msg.includes("other_msgs")){
+				div.className = "emoji_other"
+			}
+			span.innerHTML = data['emoji']
+			span.className = "emoji_msg"
+			span.id = "emoji_"+data['user']
+			div.append(span)
+			msg_emoji.after(div)
+		}
 	}
 }
 
-conn.onopen = ()=>{
-	conn.send(JSON.stringify({'type':'first_msg',"chat":chat_id}))	
-	end_readable_send()
+function get_node_chield(chields){
+	let res = []
+	for (let i = chields.length - 1; i >= 0; i--) {
+		if(chields[i].nodeType == chields[i].ELEMENT_NODE){
+			res.push(chields[i])
+		}
+	}
+	return res
 }
 
 function btn_send(){
@@ -297,4 +351,65 @@ function inp_msg_user(inp){
 	else if(event.key === 'Enter') {
 		btn_send()
 	 }
+}
+
+let open_emoji = false
+let msg_emoji
+function emoji(e,id){
+	if (open_emoji) {
+		close_emoji()
+		open_emoji = false
+		return
+	}else{
+		open_emoji = true
+	}
+	msg_emoji = [e,id]
+	emojis_select.style.display="block"
+}
+function close_emoji(){
+	emojis_select.style.display="none"
+}
+
+function emoji_p_select(e){
+	conn.send(JSON.stringify({'type':'emogi_msg','msg_id':msg_emoji[1],'emoji':e.target.innerHTML}))
+}
+
+let emojis = document.getElementById('emojis')
+let newEl;
+let emojRange = [
+  [128513, 128591], [9986, 10160], [128640, 128704]
+];
+
+for (let i = 0; i < emojRange.length; i++) {
+  let range = emojRange[i];
+  let newdiv = document.createElement("div")
+  newdiv.className = "emoji_tab"
+  newdiv.id = "emoji_tab_"+i
+  for (let x = range[0]; x < range[1]; x++) {
+    newEl = document.createElement('p')
+  	newEl.className = "emoji_p"
+    newEl.innerHTML = "&#" + x + ";"
+    newEl.addEventListener("click", emoji_p_select)
+    newdiv.appendChild(newEl)
+  }
+  emojis.appendChild(newdiv)
+}
+btns_emoji_tab = document.getElementsByClassName("emogi_tab_btn")
+document.getElementById("emoji_tab_0").style.display = 'grid'
+btns_emoji_tab[0].style.borderBottom = "1px solid white"
+
+function select_emoji_tab(btn,id){
+	all_btn_black()
+	btn.style.borderBottom = "1px solid white"
+	emojis_tabs = emojis.childNodes
+	for (var i = emojis_tabs.length - 1; i >= 0; i--) {
+		emojis_tabs[i].style.display = "none"
+	}
+	document.getElementById(id).style.display = 'grid'
+}
+
+function all_btn_black(){
+	for (let i = btns_emoji_tab.length - 1; i >= 0; i--) {
+		btns_emoji_tab[i].style.borderBottom = "1px solid black"
+	}
 }

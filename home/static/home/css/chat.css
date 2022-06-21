@@ -449,3 +449,89 @@ body{
 .other_file_mes{
 	border-radius:0 10px 10px 0;
 }
+
+.parent_my_msg, .parent_other_msg{
+	left: 5%;
+	border-radius:10px;
+	display: flex;
+}
+
+.parent_my_msg{
+	left: -5%;
+}
+
+.other_vertical_line, .my_vertical_line{
+	height: 100%;
+	border-left: 2px solid red;
+	position: absolute;
+	right: 100%;
+	top: -0.5%;
+}
+
+.my_vertical_line{
+	left: 105%;
+}
+
+.emoji_msg{
+	position: relative;
+	top: -10px;
+}
+
+.emoji_my, .emoji_other{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.emoji_other{
+	justify-content: flex-start;
+}
+
+.emoji_tab{
+	width: 100%;
+	display: none;
+	grid-template-columns: repeat(5, 1fr);
+	height: 47vh;
+	position: relative;
+	overflow-y: auto;
+}
+
+.emojis_tabs{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.emojis_select{
+	display: none;
+	width: 50%;
+	height: 50%;
+	position: fixed;
+	left: 25%;
+	top: 25%;
+	background: white;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+.emogi_tab_btn{
+	width: 100%;
+	background: none;
+	border: none;
+	border-bottom: 1px solid black;
+}
+
+.emoji_p{
+	font-size: 1.8em;
+}
+
+.close_emoji{
+	width: 10%;
+}
+
+@media screen and (max-width: 720px) {
+	.emoji_tab{
+		grid-template-columns: repeat(5, 1fr);
+		height: 43vh;
+	}
+}

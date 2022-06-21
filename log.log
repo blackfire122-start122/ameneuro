@@ -3,3 +3,842 @@
 2022-06-18 13:05:20,272 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
 2022-06-18 21:06:34,588 - WARNING - log - log.py - Request Entity Too Large: /ajax/chat_get_mess
 2022-06-18 21:06:34,592 - WARNING - runserver - runserver.py - [31;1mHTTP GET /ajax/chat_get_mess?chat_id=102&mess_start=0&mess_end=4 413 [0.05, 192.168.0.105:59670][0m
+2022-06-20 08:08:58,804 - ERROR - server - server.py - Exception inside application: [Errno 10061] Connect call failed ('127.0.0.1', 6379)
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 173, in websocket_connect
+    await self.connect()
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 139, in connect
+    await self.channel_layer.group_add(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 646, in group_add
+    async with self.connection(self.consistent_hash(group)) as connection:
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 902, in __aenter__
+    self.conn = await self.pool.pop()
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 93, in pop
+    conn = await self.create_conn(loop)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 79, in create_conn
+    return await aioredis.create_redis_pool(**kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\commands\__init__.py", line 188, in create_redis_pool
+    pool = await create_pool(address, db=db,
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 58, in create_pool
+    await pool._fill_free(override_min=False)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 383, in _fill_free
+    conn = await self._create_new_connection(self._address)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\connection.py", line 111, in create_connection
+    reader, writer = await asyncio.wait_for(open_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\stream.py", line 23, in open_connection
+    transport, _ = await get_event_loop().create_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1017, in create_connection
+    raise exceptions[0]
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1002, in create_connection
+    sock = await self._connect_sock(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 916, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 485, in sock_connect
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 517, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 10061] Connect call failed ('127.0.0.1', 6379)
+2022-06-20 08:19:30,224 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 477, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: home_message.parent_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 109, in post
+    return super().get(request,*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 185, in get
+    context = self.get_context_data(**kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 114, in get_context_data
+    context["end_mes"] = self.chat.messages.last()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 758, in last
+    for obj in (self.reverse() if self.ordered else self.order_by("-pk"))[:1]:
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 320, in __iter__
+    self._fetch_all()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1507, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1361, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 477, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: home_message.parent_id
+2022-06-20 08:19:30,233 - ERROR - runserver - runserver.py - [35;1mHTTP POST /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.25, 192.168.0.105:57987][0m
+2022-06-20 08:19:30,445 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-20 08:19:30,447 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:57987][0m
+2022-06-20 08:47:36,578 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 08:59:07,470 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-20 08:59:07,471 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:60760][0m
+2022-06-20 09:13:25,803 - ERROR - server - server.py - Exception inside application: Single thread executor already being used, would deadlock
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 40, in __call__
+    return await self.staticfiles_handler_class()(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 56, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\http.py", line 198, in __call__
+    await self.handle(scope, async_to_sync(send), body_stream)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 403, in __call__
+    raise RuntimeError(
+RuntimeError: Single thread executor already being used, would deadlock
+2022-06-20 09:13:25,820 - ERROR - runserver - runserver.py - [35;1mHTTP GET /static/admin/js/jquery.init.js 500 [0.81, 192.168.0.105:61604][0m
+2022-06-20 09:13:25,894 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-20 09:13:25,895 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:61656][0m
+2022-06-20 09:16:02,721 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 09:33:00,303 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 09:49:10,689 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 09:54:16,625 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-20 09:54:16,626 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:64186][0m
+2022-06-20 09:56:12,171 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 09:56:48,207 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 10:12:45,113 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 10:26:47,603 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 88, in post
+    self.emoji_form = MessEmojiForm()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\forms\models.py", line 356, in __init__
+    raise ValueError("ModelForm has no model class specified.")
+ValueError: ModelForm has no model class specified.
+2022-06-20 10:26:47,609 - ERROR - runserver - runserver.py - [35;1mHTTP POST /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.07, 192.168.0.105:54963][0m
+2022-06-20 10:26:47,787 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-20 10:26:47,790 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:54963][0m
+2022-06-20 10:32:23,062 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 81, in get
+    print(self.emoji_form.emoji)
+AttributeError: 'MessEmojiForm' object has no attribute 'emoji'
+2022-06-20 10:32:23,123 - ERROR - runserver - runserver.py - [35;1mHTTP GET /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.17, 192.168.0.105:55314][0m
+2022-06-20 10:32:41,341 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 81, in get
+    print(self.emoji_form.emoji)
+AttributeError: 'MessEmojiForm' object has no attribute 'emoji'
+2022-06-20 10:32:41,387 - ERROR - runserver - runserver.py - [35;1mHTTP GET /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.14, 192.168.0.105:55343][0m
+2022-06-20 10:35:10,648 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 89, in post
+    self.emoji_form = MessEmojiForm()
+  File "D:\igor\ameneuro\ameneuro\home\forms.py", line 175, in __init__
+    super().__init__(*args,**kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\forms.py", line 113, in __init__
+    if self._meta.model.USERNAME_FIELD in self.fields:
+AttributeError: type object 'Message' has no attribute 'USERNAME_FIELD'
+2022-06-20 10:35:10,654 - ERROR - runserver - runserver.py - [35;1mHTTP POST /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.07, 192.168.0.105:55502][0m
+2022-06-20 10:37:41,161 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 81, in get
+    print(self.emoji_form.emoji)
+AttributeError: 'MessEmojiForm' object has no attribute 'emoji'
+2022-06-20 10:37:41,208 - ERROR - runserver - runserver.py - [35;1mHTTP GET /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.15, 192.168.0.105:55651][0m
+2022-06-20 10:40:58,458 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 88, in post
+    self.emoji_form = MessEmojiForm()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\forms\models.py", line 356, in __init__
+    raise ValueError("ModelForm has no model class specified.")
+ValueError: ModelForm has no model class specified.
+2022-06-20 10:40:58,465 - ERROR - runserver - runserver.py - [35;1mHTTP POST /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.06, 192.168.0.105:55902][0m
+2022-06-20 10:40:58,561 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-20 10:40:58,563 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:55902][0m
+2022-06-20 10:40:59,879 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\views\generic\base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\views.py", line 88, in post
+    self.emoji_form = MessEmojiForm()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\forms\models.py", line 356, in __init__
+    raise ValueError("ModelForm has no model class specified.")
+ValueError: ModelForm has no model class specified.
+2022-06-20 10:40:59,885 - ERROR - runserver - runserver.py - [35;1mHTTP POST /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.04, 192.168.0.105:55902][0m
+2022-06-20 11:01:20,099 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-20 11:01:20,101 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:57988][0m
+2022-06-20 12:41:57,798 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 12:41:57,798 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 12:41:57,799 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 12:41:57,799 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 19:15:27,392 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 19:43:56,588 - ERROR - server - server.py - Exception inside application: Single thread executor already being used, would deadlock
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 40, in __call__
+    return await self.staticfiles_handler_class()(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 56, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\http.py", line 198, in __call__
+    await self.handle(scope, async_to_sync(send), body_stream)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 403, in __call__
+    raise RuntimeError(
+RuntimeError: Single thread executor already being used, would deadlock
+2022-06-20 19:43:56,615 - ERROR - runserver - runserver.py - [35;1mHTTP GET /static/home/js/style_chat.js 500 [1.03, 192.168.0.105:51919][0m
+2022-06-20 20:08:08,925 - CRITICAL - server - server.py - Listen failure: Couldn't listen on 192.0.168.105:80: [WinError 10049] The requested address is not valid in its context.
+2022-06-20 20:20:10,746 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 21:43:51,321 - ERROR - server - server.py - Exception inside application: Message matching query does not exist.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 128, in receive
+    await self.emoji_msg()
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 93, in emoji_msg
+    mes = Message.objects.get(pk=self.text_data_json.get("id"))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 496, in get
+    raise self.model.DoesNotExist(
+home.models.Message.DoesNotExist: Message matching query does not exist.
+2022-06-20 21:43:54,648 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-20 21:44:16,651 - ERROR - server - server.py - Exception inside application: Message matching query does not exist.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 129, in receive
+    await self.emoji_msg()
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 93, in emoji_msg
+    mes = Message.objects.get(pk=self.text_data_json.get("id"))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 496, in get
+    raise self.model.DoesNotExist(
+home.models.Message.DoesNotExist: Message matching query does not exist.
+2022-06-20 21:44:51,441 - ERROR - server - server.py - Exception inside application: Message matching query does not exist.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 130, in receive
+    await self.emoji_msg()
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 93, in emoji_msg
+    mes = Message.objects.get(pk=self.text_data_json.get("id"))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 496, in get
+    raise self.model.DoesNotExist(
+home.models.Message.DoesNotExist: Message matching query does not exist.
+2022-06-20 21:51:13,491 - CRITICAL - server - server.py - Listen failure: Couldn't listen on 192.0.168.105:80: [WinError 10049] The requested address is not valid in its context.
+2022-06-21 09:03:13,448 - ERROR - server - server.py - Exception inside application: Single thread executor already being used, would deadlock
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 40, in __call__
+    return await self.staticfiles_handler_class()(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 56, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\http.py", line 198, in __call__
+    await self.handle(scope, async_to_sync(send), body_stream)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 403, in __call__
+    raise RuntimeError(
+RuntimeError: Single thread executor already being used, would deadlock
+2022-06-21 09:03:13,452 - ERROR - runserver - runserver.py - [35;1mHTTP GET /static/home/js/music_all.js 500 [0.49, 192.168.0.105:51251][0m
+2022-06-21 09:30:06,941 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-21 09:30:06,945 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.11, 192.168.0.105:53068][0m
+2022-06-21 09:37:52,465 - ERROR - server - server.py - Exception inside application: get() returned more than one Emoji -- it returned 2!
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 140, in receive
+    await self.emoji_msg()
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 97, in emoji_msg
+    print(mes.emoji.get(user = self.scope['user']))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 499, in get
+    raise self.model.MultipleObjectsReturned(
+home.models.Emoji.MultipleObjectsReturned: get() returned more than one Emoji -- it returned 2!
+2022-06-21 09:37:53,477 - ERROR - server - server.py - Exception inside application: get() returned more than one Emoji -- it returned 2!
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 140, in receive
+    await self.emoji_msg()
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 97, in emoji_msg
+    print(mes.emoji.get(user = self.scope['user']))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 499, in get
+    raise self.model.MultipleObjectsReturned(
+home.models.Emoji.MultipleObjectsReturned: get() returned more than one Emoji -- it returned 2!
+2022-06-21 09:37:54,487 - ERROR - server - server.py - Exception inside application: get() returned more than one Emoji -- it returned 2!
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 140, in receive
+    await self.emoji_msg()
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 97, in emoji_msg
+    print(mes.emoji.get(user = self.scope['user']))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 499, in get
+    raise self.model.MultipleObjectsReturned(
+home.models.Emoji.MultipleObjectsReturned: get() returned more than one Emoji -- it returned 2!
+2022-06-21 09:38:45,783 - ERROR - server - server.py - Exception inside application: get() returned more than one Emoji -- it returned 2!
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 141, in receive
+    await self.emoji_msg()
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 100, in emoji_msg
+    new_emoji = mes.emoji.get(user=self.scope['user'])
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 499, in get
+    raise self.model.MultipleObjectsReturned(
+home.models.Emoji.MultipleObjectsReturned: get() returned more than one Emoji -- it returned 2!
+2022-06-21 09:41:00,924 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-21 09:41:01,272 - ERROR - log - log.py - Internal Server Error: /ajax/chat_get_mess
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 135, in chat_get_mess_ajax
+    return render(request, "home/ajax_html/mess.html",{"mess":mess})
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 62, in render
+    return self.template.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 193, in render
+    values = list(values)
+TypeError: 'ManyRelatedManager' object is not iterable
+2022-06-21 09:41:01,280 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/chat_get_mess?chat_id=102&mess_start=0&mess_end=20 500 [0.27, 192.168.0.105:53914][0m
+2022-06-21 10:02:51,800 - ERROR - server - server.py - Exception inside application: can not serialize 'UserLazyObject' object
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 142, in receive
+    await self.channel_layer.group_send(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 685, in group_send
+    ) = self._map_channel_keys_to_connection(channel_names, message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 820, in _map_channel_keys_to_connection
+    channel_key_to_message[key] = self.serialize(value)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 840, in serialize
+    value = msgpack.packb(message, use_bin_type=True)
+  File "D:\igor\ameneuro\venv\lib\site-packages\msgpack\__init__.py", line 38, in packb
+    return Packer(**kwargs).pack(o)
+  File "msgpack\_packer.pyx", line 294, in msgpack._cmsgpack.Packer.pack
+  File "msgpack\_packer.pyx", line 300, in msgpack._cmsgpack.Packer.pack
+  File "msgpack\_packer.pyx", line 297, in msgpack._cmsgpack.Packer.pack
+  File "msgpack\_packer.pyx", line 231, in msgpack._cmsgpack.Packer._pack
+  File "msgpack\_packer.pyx", line 231, in msgpack._cmsgpack.Packer._pack
+  File "msgpack\_packer.pyx", line 291, in msgpack._cmsgpack.Packer._pack
+TypeError: can not serialize 'UserLazyObject' object
+2022-06-21 10:02:52,846 - ERROR - server - server.py - Exception inside application: can not serialize 'UserLazyObject' object
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 142, in receive
+    await self.channel_layer.group_send(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 685, in group_send
+    ) = self._map_channel_keys_to_connection(channel_names, message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 820, in _map_channel_keys_to_connection
+    channel_key_to_message[key] = self.serialize(value)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 840, in serialize
+    value = msgpack.packb(message, use_bin_type=True)
+  File "D:\igor\ameneuro\venv\lib\site-packages\msgpack\__init__.py", line 38, in packb
+    return Packer(**kwargs).pack(o)
+  File "msgpack\_packer.pyx", line 294, in msgpack._cmsgpack.Packer.pack
+  File "msgpack\_packer.pyx", line 300, in msgpack._cmsgpack.Packer.pack
+  File "msgpack\_packer.pyx", line 297, in msgpack._cmsgpack.Packer.pack
+  File "msgpack\_packer.pyx", line 231, in msgpack._cmsgpack.Packer._pack
+  File "msgpack\_packer.pyx", line 231, in msgpack._cmsgpack.Packer._pack
+  File "msgpack\_packer.pyx", line 291, in msgpack._cmsgpack.Packer._pack
+TypeError: can not serialize 'UserLazyObject' object
+2022-06-21 10:09:00,232 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.

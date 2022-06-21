@@ -32,6 +32,16 @@
 	<div class="options"></div>
 	<div class="file_mes_form"></div>
 
+	<div class="emojis_select">
+		<div class="emojis_tabs">
+			<button class="emogi_tab_btn" onclick = "select_emoji_tab(this, 'emoji_tab_0')">1</button>
+			<button class="emogi_tab_btn" onclick = "select_emoji_tab(this, 'emoji_tab_1')">2</button>
+			<button class="emogi_tab_btn" onclick = "select_emoji_tab(this, 'emoji_tab_2')">3</button>
+			<img src="{{ user.theme_all.close_img.url }}" class="close_emoji" onclick="close_emoji()">
+		</div>
+		<div id='emojis'></div>
+	</div>
+
 	<style>
 		body{
 			{% if chat.theme.background %}

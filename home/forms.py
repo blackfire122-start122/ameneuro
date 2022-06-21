@@ -11,6 +11,7 @@ from django.forms import(ModelForm,
 						Select,
 						FileField)
 from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeMes, Playlist, Video, ComplainPost
+from emoji_picker.widgets import EmojiPickerTextInputAdmin, EmojiPickerTextareaAdmin
 from django.conf import settings
 import magic
 

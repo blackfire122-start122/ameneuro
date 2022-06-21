@@ -4,11 +4,12 @@ from django.db.models.signals import pre_delete, pre_save
 from django.dispatch.dispatcher import receiver
 from colorful.fields import RGBColorField
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils.timezone import now
 
 class Comment(models.Model):
 	user = models.ForeignKey("User", on_delete=models.CASCADE,related_name="comment_user")
 	parent = models.ForeignKey("self",on_delete=models.CASCADE,null=True,blank=True,related_name="comment_parent")
-	date = models.DateTimeField(null=True,auto_now=True)
+	date = models.DateTimeField(null=True,default=now)
 	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_comments")
 	text = models.TextField()
 
@@ -24,7 +25,7 @@ class TypeFile(models.Model):
 class Post(models.Model):
 	user_pub = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="user_pub_post")
 	type_p = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_post",null=True)
-	date = models.DateTimeField(auto_now=True)
+	date = models.DateTimeField(default=now)
 	file = models.FileField(upload_to='posts')
 	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_post")
 	description = models.TextField(blank=True,null=True)
@@ -36,7 +37,7 @@ class Post(models.Model):
 class Video(models.Model):
 	name = models.CharField(max_length=100)
 	user_pub = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="user_pub_video")
-	date = models.DateTimeField(auto_now=True)
+	date = models.DateTimeField(default=now)
 	file = models.FileField(upload_to='videos')
 	likes = models.ManyToManyField("User", null=True,blank=True, related_name="likes_video")
 	description = models.TextField(blank=True,null=True)
@@ -60,13 +61,21 @@ class TypeMes(models.Model):
 	def __str__(self):
 		return self.type_m
 
+class Emoji(models.Model):
+	emoji = models.CharField(max_length=3,null=True,blank=True)
+	user = models.ForeignKey("User",on_delete=models.SET_NULL,null=True,blank=True,related_name="emoji_user")
+	def __str__(self):
+		return self.emoji
+
 class Message(models.Model):
+	parent = models.ForeignKey("self",on_delete=models.SET_NULL,null=True,blank=True,related_name="message_parent")
 	user = models.ForeignKey("User", on_delete=models.SET_NULL,null=True)
 	type_m = models.ForeignKey("TypeMes",on_delete=models.SET_NULL,related_name="type_mes",null=True,blank=True)
 	text = models.TextField(null=True,blank=True) 
+	emoji = models.ManyToManyField("Emoji",null=True,blank=True,related_name="emoji_mess")
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
-	type_file = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_mes",null=True)
-	date = models.DateTimeField(null=True,auto_now=True)
+	type_file = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_mes",null=True,blank=True)
+	date = models.DateTimeField(null=True,default=now)
 	readeble = models.BooleanField(null=True,default=False)
 	def __str__(self):
 		return self.text
@@ -76,7 +85,7 @@ class MessageActivity(models.Model):
 	from_user = models.ForeignKey("User", on_delete=models.SET_NULL,null=True)
 	file = models.FileField(upload_to='message_activity_file',null=True,blank=True)
 	type_f = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_ma",null=True)
-	date = models.DateTimeField(null=True,auto_now=True)
+	date = models.DateTimeField(null=True,default=now)
 	readeble = models.BooleanField(null=True,default=False)
 	def __str__(self):
 		return self.text
@@ -94,7 +103,7 @@ class Chat(models.Model):
 class Music(models.Model):
 	file = models.FileField(upload_to='music',null=False,blank=False)
 	name = models.CharField(max_length=15)
-	date = models.DateTimeField(null=True,auto_now=True)
+	date = models.DateTimeField(null=True,default=now)
 	def __str__(self):
 		return self.name
 
@@ -172,7 +181,7 @@ class Playlist(models.Model):
 	musics = models.ManyToManyField("Music",symmetrical=False,null=True,blank=True,related_name="musics_playlist")
 	img = models.ImageField(upload_to="playlists_img",default=None)
 	name = models.CharField(max_length=15)
-	date = models.DateField(null=True,auto_now=True)
+	date = models.DateField(null=True,default=now)
 	autor = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="autor_playlist")
 	
 	def __str__(self):
@@ -181,7 +190,7 @@ class Playlist(models.Model):
 class ComplainPost(models.Model):
 	theme = models.CharField(max_length=40)
 	description = models.TextField(null=True,blank=True)
-	date = models.DateField(null=True,auto_now=True)
+	date = models.DateField(null=True,default=now)
 	autor = models.ForeignKey("User", on_delete=models.SET_NULL,null=True,related_name="autor_complain_post")
 	fixed = models.BooleanField(default=False)
 
