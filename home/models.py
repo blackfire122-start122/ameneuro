@@ -71,7 +71,7 @@ class Message(models.Model):
 	parent = models.ForeignKey("self",on_delete=models.SET_NULL,null=True,blank=True,related_name="message_parent")
 	user = models.ForeignKey("User", on_delete=models.SET_NULL,null=True)
 	type_m = models.ForeignKey("TypeMes",on_delete=models.SET_NULL,related_name="type_mes",null=True,blank=True)
-	text = models.TextField(null=True,blank=True) 
+	text = models.TextField(default="") 
 	emoji = models.ManyToManyField("Emoji",null=True,blank=True,related_name="emoji_mess")
 	file = models.FileField(upload_to='message_file',null=True,blank=True)
 	type_file = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_mes",null=True,blank=True)

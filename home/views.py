@@ -199,7 +199,10 @@ class add(LoginRequiredMixin,TemplateView):
 		return context
 
 def stream_video(request,id):
-	file, status_code, content_length, content_range = open_file(request,id,'video')
+	try:
+		file, status_code, content_length, content_range = open_file(request,id,'video')
+	except Exception as e:
+		return HttpResponseNotFound()
 	response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
 
 	response['Accept-Ranges'] = 'bytes'
@@ -209,7 +212,10 @@ def stream_video(request,id):
 	return response
 
 def streaming_post(request,id):
-	file, status_code, content_length, content_range = open_file(request,id,'post')
+	try:
+		file, status_code, content_length, content_range = open_file(request,id,'post')
+	except Exception as e:
+		return HttpResponseNotFound()
 	response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
 
 	response['Accept-Ranges'] = 'bytes'

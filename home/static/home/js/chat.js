@@ -1,8 +1,9 @@
 let msg_user = document.querySelector("#msg_user")
 let msg_div = document.querySelector('.messages')
-let musics = document.querySelector('.musics')
+let reply = document.querySelector('.reply')
 let emojis_select = document.querySelector('.emojis_select')
-let music
+const timeout = 700;
+let idTimeout;
 
 function connect() {
 	conn = new WebSocket("ws://"+window.location.hostname+"/ws/chat/"+chat)
@@ -22,9 +23,6 @@ function connect() {
 connect()
 conn_u_f = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+friend)
 
-m_pause = true
-m_time = true
-
 function onmessage(e){
 	let data = JSON.parse(e.data)
 	let readeble = document.querySelector('.readeble')
@@ -34,6 +32,8 @@ function onmessage(e){
 		
 		let div_ = document.createElement('div')
 		div_.onclick = () => {emoji(div_,data["id_msg"])}
+		div_.ontouchstart= () =>{reply_check(div_)}
+		div_.onmousedown= () =>{reply_check(div_)}
 		div_.id = data['id_msg']
 		let div = document.createElement('div')
 		let p = document.createElement('p')
@@ -79,11 +79,17 @@ function onmessage(e){
 		}
 	}else if(data['type']=='msg_file'){
 		conn_u_f.send(JSON.stringify({'type':'msg','msg':data["msg"],'from_user': user, "from_chat":chat}))
+		let className
+		if (data["user"]==user) {
+			className = "my_msgs"
+		}else{
+			className = "other_msgs"
+		}
 
 		if (data["type_file"] == "audio"){
 			element = `
-				<div id="`+data["id"]+`" onclick="emoji(this,'`+data["id"]+`')">
-					<div class="other_msgs" style="background: rgba(` + rgba[0] + `,` + rgba[1] + `,`+ rgba[2] +`,`+ color_mes_bg_op + `);">
+				<div id="`+data["id"]+`" ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'`+data["id"]+`')">
+					<div class="`+className+`" style="background: rgba(` + rgba[0] + `,` + rgba[1] + `,`+ rgba[2] +`,`+ color_mes_bg_op + `);">
 						<div class="audio-player">
 							<h4 class="name_mus">` + data["msg"] + `</h4>
 							<audio class="audio_ap" id="audio_`+data["id"]+`" src="`+data["src"]+`"></audio>
@@ -104,6 +110,9 @@ function onmessage(e){
 
 		let div_ = document.createElement('div')
 		div_.id = data['id']
+		div_.onclick = () => {emoji(div_,data["id"])}
+		div_.ontouchstart= () =>{reply_check(div_)}
+		div_.onmousedown= () =>{reply_check(div_)}
 		let div = document.createElement('div')
 		let p = document.createElement('p')
 		let time = document.createElement('time')
@@ -111,15 +120,16 @@ function onmessage(e){
 		
 		if (data["user"]==user) {
 			div.className = "my_msgs my_file_mes"
+			file.className = "my_file_mes"
 		}else{
 			div.className = "other_msgs other_file_mes"
+			file.className = "other_file_mes"
 		}
 		div.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
 
 		p.className="mes"
 		p.innerText = data["msg"]
 
-		file.className = "other_file_mes"
 		file.src = data["src"]
 		file.addEventListener("click", ()=>{file_see(file)})
 
@@ -137,6 +147,8 @@ function onmessage(e){
 	else if (data['type']=='share'){
 		let div_ = document.createElement('div')
 		div_.onclick = () => {emoji(div_,data["id_msg"])}
+		div_.ontouchstart= () =>{reply_check(div_)}
+		div_.onmousedown= () =>{reply_check(div_)}
 		div_.id = data['id_msg']
 		let div = document.createElement('div')
 		let file
@@ -209,7 +221,103 @@ function onmessage(e){
 			div.append(span)
 			msg_emoji.after(div)
 		}
+	}else if (data['type']=='reply_msg'){
+		conn_u_f.send(JSON.stringify({'type':'msg','msg':data["msg"],'from_user': user, "from_chat":chat}))
+		
+		let div_reply = document.createElement('div')
+		let div_parent = document.createElement('div')
+		let div_vertical = document.createElement('div')
+		let p_parent = document.createElement('p')
+
+		div_parent.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
+
+		p_parent.className = 'mes'
+		p_parent.innerText = data['msg_parent']
+
+		div_reply.append(div_parent)
+		div_parent.append(div_vertical)
+		div_parent.append(p_parent)
+		msg_div.append(div_reply)
+
+		let div_ = document.createElement('div')
+		div_.onclick = () => {emoji(div_,data["id_msg"])}
+		div_.ontouchstart= () =>{reply_check(div_)}
+		div_.onmousedown= () =>{reply_check(div_)}
+		div_.id = data['id_msg']
+		let div = document.createElement('div')
+		let p = document.createElement('p')
+		let time = document.createElement('time')
+
+		if (data["user"]==user) {
+			div_parent.className = "my_msgs parent_my_msg"
+			div_vertical.className = 'my_vertical_line'
+			div.className = "my_msgs"
+		}else{
+			div_parent.className = "other_msgs parent_other_msg"
+			div_vertical.className = 'other_vertical_line'
+			div.className = "other_msgs"
+		}
+
+		div.style.background = "rgba("+rgba[0]+","+rgba[1]+","+rgba[2]+","+color_mes_bg_op + ")"
+
+		p.className="mes"
+		p.innerText = data["msg"]
+
+		time.className = 'time'
+		time.innerText = data["time"].slice(11,16)
+
+		div.append(p)
+		div.append(time)
+		div_.append(div)
+		msg_div.append(div_)
+		readeble.innerText = 'not read'
+		end_readable_send()
+		scrollToEndPage()
 	}
+}
+
+function reply_close(e=reply_div){
+  send_msg_func = btn_send
+
+	reply.style.display = "none"
+	e.style.margin = "0" 
+  e.style.opacity = "1" 
+
+  let classname_msg = get_node_chield(e.childNodes)[0].className.split(" ")
+
+	if (classname_msg.includes("my_msgs")){
+		get_node_chield(e.childNodes)[0].style.borderRadius = "10px 0 0 10px" 
+	}else if(classname_msg.includes("other_msgs")){
+  	get_node_chield(e.childNodes)[0].style.borderRadius = "0 10px 10px 0" 
+	}
+  
+}
+
+function reply_send(e){
+	reply_close(e)
+	conn.send(JSON.stringify({'type':'reply_msg','msg_id': e.id,'msg':msg_user.value}))
+	msg_user.value = ""
+}
+
+let reply_div
+
+function reply_check(e){
+  let idTimeout = setTimeout(function() {
+  	send_msg_func = () => {reply_send(e)}
+  	reply.style.display = "block"
+    e.style.margin = "1%" 
+    e.style.opacity = "0.5" 
+    get_node_chield(e.childNodes)[0].style.borderRadius = "10px" 
+  	reply_div = e
+  }, timeout);
+
+	e.addEventListener('mouseup', function() {
+	  clearTimeout(idTimeout)
+	})
+
+	e.addEventListener('touchend', function() {
+	  clearTimeout(idTimeout)
+	})
 }
 
 function get_node_chield(chields){
@@ -276,16 +384,6 @@ function end_readable_send(){
 	}
 }
 
-function close_popups(){
-	document.querySelector(".click_mus").style.display = "none"
-	document.querySelector(".click_not_mus").style.display = "none"
-}
-
-function click_mus(){
-	close_popups()
-	conn.send(JSON.stringify({'type':'get_seeked'}))
-}
-
 let sel_f_vis = true
 
 function send_file_mes(){
@@ -346,10 +444,12 @@ function send_file_mes_btn(btn){
 	})
 }
 
+let send_msg_func = btn_send
+
 function inp_msg_user(inp){
 	if (inp.value == "" || inp.value.split(' ').join('')==""){return}
 	else if(event.key === 'Enter') {
-		btn_send()
+		send_msg_func()
 	 }
 }
 
@@ -372,6 +472,7 @@ function close_emoji(){
 
 function emoji_p_select(e){
 	conn.send(JSON.stringify({'type':'emogi_msg','msg_id':msg_emoji[1],'emoji':e.target.innerHTML}))
+	close_emoji()
 }
 
 let emojis = document.getElementById('emojis')

@@ -43,7 +43,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def new_mes(self,text):
         if self.scope["user"] == self.chat.user:
-            mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m=self.text_data_json.get("type")))
+            mes = Message(user = self.scope["user"],text=text,type_m=TypeMes.objects.get(type_m='msg'))
             mes.save()
             self.text_data_json["time"]=str(mes.date)
             self.text_data_json["id_msg"]=str(mes.id)
@@ -105,6 +105,22 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         mes.emoji.add(new_emoji)
         mes.save()
+
+    @database_sync_to_async
+    def reply_msg(self):
+        print(self.text_data_json)
+        new_mes = Message(user=self.scope["user"],text=self.text_data_json.get("msg"),type_m=TypeMes.objects.get(type_m='msg'))
+        mes = Message.objects.get(pk=self.text_data_json.get("msg_id"))
+
+        new_mes.parent = mes
+        new_mes.save()
+
+        self.text_data_json["time"]=str(new_mes.date)
+        self.text_data_json["msg_parent"]=str(mes)
+        self.text_data_json["id_msg"]=str(new_mes.id)
+        self.text_data_json["user"]=str(self.scope["user"])
+        self.chat.messages.add(new_mes)
+        self.chat.chat_friend.messages.add(new_mes)
     
     async def receive(self, text_data):
         self.text_data_json = json.loads(text_data)
@@ -138,6 +154,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif self.text_data_json.get('type')=='emogi_msg':
             await self.emoji_msg()
+
+        elif self.text_data_json.get('type')=='reply_msg':
+            await self.reply_msg()
 
         await self.channel_layer.group_send(
             self.room_group_name,{

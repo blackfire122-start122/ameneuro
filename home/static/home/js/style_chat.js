@@ -1,3 +1,5 @@
+document.getElementsByTagName('body')[0].oncontextmenu=()=>{return false}
+
 let rgba = hexToRgb(color_mes_bg)
 
 let mess_start = 0 

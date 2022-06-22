@@ -53,8 +53,11 @@ def open_file(request, id, type_s) -> tuple:
 
     path = Path(_file.file.path)
 
-    file = path.open('rb')
-    file_size = path.stat().st_size
+    try:
+        file = path.open('rb')
+        file_size = path.stat().st_size
+    except Exception as e:
+        return e
 
     content_length = file_size
     status_code = 200

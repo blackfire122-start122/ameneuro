@@ -42,6 +42,10 @@
 		<div id='emojis'></div>
 	</div>
 
+	<div class="reply">
+		<img src="{{ user.theme_all.close_img.url }}" class="close_reply" onclick="reply_close()">
+	</div>
+
 	<style>
 		body{
 			{% if chat.theme.background %}

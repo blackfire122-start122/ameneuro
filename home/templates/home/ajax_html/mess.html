@@ -5,26 +5,26 @@
 		<div>
 			{% if m.user == user %}
 	    		<div class="my_msgs parent_my_msg">
-	    		<div class="my_vertical_line"></div>
+	    			<div class="my_vertical_line"></div>
 	    	{% else %}
 	    		<div class="other_msgs parent_other_msg">
-	    		<div class="other_vertical_line"></div>
+	    			<div class="other_vertical_line"></div>
 	    	{% endif %}
-	    		<p class="mes">{{ m }}</p>
+	    		<p class="mes">{{ m.parent }}</p>
 	    	</div>
 	    </div>
 	{% endif %}
 
 	{% if m.type_m.type_m == 'msg' %}
 		{% if m.user == user %}
-			<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+			<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 				<div class="my_msgs">
 					<p class="mes">{{ m }}</p>
 					<time class='time'>{{ m.date|date:"h:m" }}</time>
 				</div>
 			</div>
 		{% else %}
-			<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+			<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 				<div class="other_msgs">
 					<p class="mes">{{ m }}</p>
 					<time class='time'>{{ m.date|date:"h:m" }}</time>
@@ -32,7 +32,7 @@
 			</div>
 		{% endif %}
 	{% elif m.type_m.type_m == 'new_theme' %}
-		<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+		<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 			<div class="new_theme">
 				<p class="mes">{{ m }}</p>
 			</div>
@@ -40,7 +40,7 @@
 	{% elif m.type_m.type_m == 'file' %}
 		{% if m.type_file.type_f == "audio" %}
 		    {% if m.user == user %}
-				<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+				<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 					<div class="my_msgs">
 						<div class="audio-player">
 							<h4 class="name_mus">{{ m }}</h4>
@@ -55,7 +55,7 @@
 					</div>
 				</div>
 			{% else %}
-				<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+				<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 					<div class="other_msgs ">
 						<div class="audio-player">
 							<h4 class="name_mus">{{ m }}</h4>
@@ -72,7 +72,7 @@
 			{% endif %}
 		{% else %}
 			{% if m.user == user %}
-				<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+				<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 					<div class="my_msgs my_file_mes">
 						<{{ m.type_file }} class="my_file_mes" src="{% url 'stream_mess' m.id %}" onclick="file_see(this)"></{{ m.type_file }}>
 						<p class="mes">{{ m }}</p>
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 			{% else %}
-				<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+				<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 					<div class="other_msgs other_file_mes">
 						<{{ m.type_file }} class="other_file_mes" src="{% url 'stream_mess' m.id %}" onclick="file_see(this)"></{{ m.type_file }}>
 						<p class="mes">{{ m }}</p>
@@ -93,7 +93,7 @@
 		{% with m_list=m.text|split_mess:"#@;" %}
 			{% if m.type_file.type_f == "audio" %}
 				{% if m.user == user %}
-					<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+					<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 						<div class="my_msgs">
 							<a href="{{ m_list.0 }}">
 								<img class="my_file_mes" src="{{ user.theme_all.music_img.url }}">
@@ -103,7 +103,7 @@
 						</div>
 					</div>
 				{% else %}
-					<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+					<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 						<div class="other_msgs">
 							<a href="{{ m_list.0 }}">
 								<img class="other_file_mes" src="{{ user.theme_all.music_img.url }}">
@@ -115,7 +115,7 @@
 				{% endif %}
 			{% else %}
 				{% if m.user == user %}
-					<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+					<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 						<div class="my_msgs my_file_mes">
 							<a href="{{ m_list.0 }}">
 								<{{ m.type_file }} class="my_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
@@ -125,7 +125,7 @@
 						</div>
 					</div>
 				{% else %}
-					<div id={{ m.id }} onclick="emoji(this,'{{ m.id }}')">
+					<div id={{ m.id }} ontouchstart="reply_check(this)" onmousedown="reply_check(this)" onclick="emoji(this,'{{ m.id }}')">
 						<div class="other_msgs other_file_mes">
 							<a href="{{ m_list.0 }}">
 								<{{ m.type_file }} class="other_file_mes" src="{{ m.file.url }}"></{{ m.type_file }}>
