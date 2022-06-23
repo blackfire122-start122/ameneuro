@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist,Video
-from .forms import ThemeForm,MessageForm,AllTheme
+from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist,Video,TypeFile
+from .forms import ThemeForm,MessageForm,AllTheme,MessageVoiceForm
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
@@ -161,6 +161,36 @@ def send_file_mes_ajax(request):
 		return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
 
 	return render(request,"home/ajax_html/send_file.html",{"form":form})
+
+
+@login_required(login_url='login')
+def send_voice_mes_ajax(request):
+	if request.method == "POST":
+		try:
+			if not defence_isdigit(request.POST.get("chat_id")):return HttpResponseBadRequest()
+		except Exception as e:
+			logger.warning(str(e))
+			return HttpResponseBadRequest()
+		src = ""
+		form = MessageVoiceForm(request.POST, request.FILES)
+
+		if form.is_valid():
+			mes = form.save()
+			if not mes.file:return HttpResponseBadRequest()
+			mes.user = request.user
+			mes.type_m = TypeMes.objects.get(type_m="file")
+			mes.type_file = TypeFile.objects.get(type_f="audio")
+			mes.save()
+			src = "/stream_mess/"+str(mes.id)
+			chat = Chat.objects.get(pk=request.POST["chat_id"])
+			chat.messages.add(mes)
+			chat.chat_friend.messages.add(mes)
+		else:return HttpResponseBadRequest()
+		return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+
+	return HttpResponseBadRequest()
+
+
 
 @login_required(login_url='login')
 def musics_all_ajax(request):

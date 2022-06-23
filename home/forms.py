@@ -110,6 +110,11 @@ class MessageForm(ModelForm):
 		
 		return mes
 
+class MessageVoiceForm(ModelForm):
+	class Meta:
+		model = Message
+		fields = ["file","text"]
+
 class AllThemeForm(ModelForm):
 	class Meta:
 		model = AllTheme

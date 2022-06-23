@@ -5714,3 +5714,1278 @@ UnboundLocalError: local variable 'file' referenced before assignment
 2022-06-22 12:14:43,764 - WARNING - log - log.py - Not Found: /stream_post/64
 2022-06-22 12:14:43,767 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 192.168.0.105:63182][0m
 2022-06-22 12:14:43,776 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.10, 192.168.0.105:63168][0m
+2022-06-22 12:15:56,378 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:15:56,380 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:63287][0m
+2022-06-22 12:15:56,384 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 12:15:56,448 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.13, 192.168.0.105:63275][0m
+2022-06-22 12:15:56,453 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:15:56,458 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.13, 192.168.0.105:63288][0m
+2022-06-22 12:15:56,468 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:15:56,468 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:15:56,471 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:63274][0m
+2022-06-22 12:15:56,479 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.16, 192.168.0.105:63277][0m
+2022-06-22 12:15:58,465 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:15:58,467 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 12:15:58,468 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:15:58,468 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 12:15:58,470 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.105:63287][0m
+2022-06-22 12:15:58,478 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:15:58,478 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:15:58,480 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.10, 192.168.0.105:63288][0m
+2022-06-22 12:15:58,484 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:63274][0m
+2022-06-22 12:15:58,486 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 192.168.0.105:63275][0m
+2022-06-22 12:15:58,489 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.11, 192.168.0.105:63277][0m
+2022-06-22 12:15:58,492 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.10, 192.168.0.105:63290][0m
+2022-06-22 12:15:59,526 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:15:59,526 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 12:15:59,527 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:15:59,531 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:63277][0m
+2022-06-22 12:15:59,544 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.105:63274][0m
+2022-06-22 12:15:59,547 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.105:63290][0m
+2022-06-22 12:15:59,560 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:15:59,560 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 12:15:59,561 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:15:59,563 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.07, 192.168.0.105:63287][0m
+2022-06-22 12:15:59,569 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 192.168.0.105:63288][0m
+2022-06-22 12:15:59,572 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.105:63275][0m
+2022-06-22 12:16:00,763 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:16:00,764 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:16:00,772 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.105:63288][0m
+2022-06-22 12:16:00,775 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:63275][0m
+2022-06-22 12:16:00,779 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 12:16:00,783 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.11, 192.168.0.105:63290][0m
+2022-06-22 12:16:00,836 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 12:16:00,840 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 192.168.0.105:63287][0m
+2022-06-22 12:16:00,850 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:16:00,851 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:16:00,853 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.105:63277][0m
+2022-06-22 12:16:00,858 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.09, 192.168.0.105:63274][0m
+2022-06-22 12:19:05,422 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:19:05,426 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.101:37964][0m
+2022-06-22 12:19:05,485 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:19:05,486 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:19:05,487 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.05, 192.168.0.101:37976][0m
+2022-06-22 12:19:05,488 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.101:37970][0m
+2022-06-22 12:19:05,495 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:19:05,497 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.101:37964][0m
+2022-06-22 12:25:51,789 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:25:51,791 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.101:38056][0m
+2022-06-22 12:25:51,847 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:25:51,847 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:25:51,847 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:25:51,849 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.101:38056][0m
+2022-06-22 12:25:51,851 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.101:38054][0m
+2022-06-22 12:25:51,853 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.06, 192.168.0.101:38058][0m
+2022-06-22 12:28:36,424 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:28:36,427 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.101:38104][0m
+2022-06-22 12:28:36,480 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:28:36,481 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:28:36,482 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.101:38108][0m
+2022-06-22 12:28:36,485 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.06, 192.168.0.101:38100][0m
+2022-06-22 12:28:36,487 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:28:36,490 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.101:38104][0m
+2022-06-22 12:38:02,221 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:38:02,226 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.101:38168][0m
+2022-06-22 12:38:02,280 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:38:02,282 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.07, 192.168.0.101:38170][0m
+2022-06-22 12:38:02,282 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:38:02,288 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.101:38166][0m
+2022-06-22 12:38:02,291 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:38:02,292 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.101:38168][0m
+2022-06-22 12:39:51,353 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:39:51,358 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.101:38228][0m
+2022-06-22 12:39:51,425 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:39:51,428 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.101:38232][0m
+2022-06-22 12:39:51,445 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:39:51,447 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.04, 192.168.0.101:38222][0m
+2022-06-22 12:39:51,458 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:39:51,460 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.02, 192.168.0.101:38226][0m
+2022-06-22 12:48:34,102 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 12:48:34,107 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.101:38352][0m
+2022-06-22 12:48:34,154 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 12:48:34,157 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.05, 192.168.0.101:38350][0m
+2022-06-22 12:48:34,164 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 12:48:34,168 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.101:38346][0m
+2022-06-22 12:48:34,170 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 12:48:34,172 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.101:38352][0m
+2022-06-22 13:03:01,128 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:03:01,129 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.02, 192.168.0.101:38476][0m
+2022-06-22 13:03:02,470 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.06, 192.168.0.105:56991][0m
+2022-06-22 13:03:07,143 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:56995][0m
+2022-06-22 13:03:14,453 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.101:38476][0m
+2022-06-22 13:06:49,443 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:57224][0m
+2022-06-22 13:07:32,329 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:57224][0m
+2022-06-22 13:08:38,972 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:08:38,975 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.06, 192.168.0.105:57336][0m
+2022-06-22 13:09:44,914 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.07, 192.168.0.105:57424][0m
+2022-06-22 13:13:26,582 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 13:13:26,588 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.07, 192.168.0.105:57684][0m
+2022-06-22 13:13:26,599 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:13:26,600 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:13:26,603 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:57683][0m
+2022-06-22 13:13:26,606 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.09, 192.168.0.105:57678][0m
+2022-06-22 13:13:26,675 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:13:26,677 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:57679][0m
+2022-06-22 13:13:26,682 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:13:26,687 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.09, 192.168.0.105:57684][0m
+2022-06-22 13:13:33,447 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:57679][0m
+2022-06-22 13:16:53,793 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 875, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFieldFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 62, in render
+    return self.template.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 712, in resolve
+    obj = self.var.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 842, in resolve
+    value = self._resolve_lookup(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 65, in url
+    self._require_file()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 40, in _require_file
+    raise ValueError(
+ValueError: The 'microphone_img' attribute has no file associated with it.
+2022-06-22 13:16:53,809 - ERROR - runserver - runserver.py - [35;1mHTTP GET /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.22, 192.168.0.105:57923][0m
+2022-06-22 13:16:54,145 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-22 13:16:54,147 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:57923][0m
+2022-06-22 13:17:22,852 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.05, 192.168.0.105:57924][0m
+2022-06-22 13:17:27,087 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 875, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFieldFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 62, in render
+    return self.template.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 712, in resolve
+    obj = self.var.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 842, in resolve
+    value = self._resolve_lookup(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 65, in url
+    self._require_file()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 40, in _require_file
+    raise ValueError(
+ValueError: The 'microphone_img' attribute has no file associated with it.
+2022-06-22 13:17:27,096 - ERROR - runserver - runserver.py - [35;1mHTTP GET /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.11, 192.168.0.105:57924][0m
+2022-06-22 13:17:32,235 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 875, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFieldFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 62, in render
+    return self.template.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 712, in resolve
+    obj = self.var.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 842, in resolve
+    value = self._resolve_lookup(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 60, in path
+    self._require_file()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 40, in _require_file
+    raise ValueError(
+ValueError: The 'microphone_img' attribute has no file associated with it.
+2022-06-22 13:17:32,243 - ERROR - runserver - runserver.py - [35;1mHTTP GET /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.10, 192.168.0.105:57924][0m
+2022-06-22 13:17:35,148 - ERROR - log - log.py - Internal Server Error: /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 875, in _resolve_lookup
+    current = current[bit]
+TypeError: 'ImageFieldFile' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 284, in _get_response_async
+    response = await sync_to_async(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 62, in render
+    return self.template.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 712, in resolve
+    obj = self.var.resolve(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 842, in resolve
+    value = self._resolve_lookup(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 885, in _resolve_lookup
+    current = getattr(current, bit)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 65, in url
+    self._require_file()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\files.py", line 40, in _require_file
+    raise ValueError(
+ValueError: The 'microphone_img' attribute has no file associated with it.
+2022-06-22 13:17:35,158 - ERROR - runserver - runserver.py - [35;1mHTTP GET /chat/Bd8uUmNZtYlPzgdkdKsWIW4yNLh3vs 500 [0.12, 192.168.0.105:57924][0m
+2022-06-22 13:25:06,610 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:58332][0m
+2022-06-22 13:25:16,066 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 192.168.0.105:58348][0m
+2022-06-22 13:26:46,495 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:58440][0m
+2022-06-22 13:26:48,979 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:58440][0m
+2022-06-22 13:28:42,891 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:28:42,891 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:28:42,895 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.102:42274][0m
+2022-06-22 13:28:42,899 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.102:42418][0m
+2022-06-22 13:28:42,911 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:28:42,915 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.102:42272][0m
+2022-06-22 13:28:42,919 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:28:42,919 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.102:42420][0m
+2022-06-22 13:28:44,627 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:28:44,627 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.102:42278][0m
+2022-06-22 13:28:44,636 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:28:44,643 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.102:42420][0m
+2022-06-22 13:28:44,683 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 13:28:44,691 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.10, 192.168.0.102:42416][0m
+2022-06-22 13:28:44,715 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:28:44,715 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:28:44,719 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.102:42418][0m
+2022-06-22 13:28:44,723 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.04, 192.168.0.102:42420][0m
+2022-06-22 13:28:50,335 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:28:50,335 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:28:50,335 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 192.168.0.102:42274][0m
+2022-06-22 13:28:50,343 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.102:42272][0m
+2022-06-22 13:28:50,382 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:28:50,386 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.102:42420][0m
+2022-06-22 13:28:50,394 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:28:50,394 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.102:42274][0m
+2022-06-22 13:28:55,278 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:28:55,278 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:28:55,286 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.102:42420][0m
+2022-06-22 13:28:55,299 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.102:42272][0m
+2022-06-22 13:28:55,365 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:28:55,366 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:28:55,368 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.102:42418][0m
+2022-06-22 13:28:55,375 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.09, 192.168.0.102:42278][0m
+2022-06-22 13:29:35,046 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:58586][0m
+2022-06-22 13:30:07,592 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.05, 192.168.0.105:58583][0m
+2022-06-22 13:30:30,646 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.05, 192.168.0.105:58583][0m
+2022-06-22 13:31:02,566 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.06, 192.168.0.105:58583][0m
+2022-06-22 13:31:23,638 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:58583][0m
+2022-06-22 13:31:43,241 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-22 13:31:43,242 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:58667][0m
+2022-06-22 13:32:57,739 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:58791][0m
+2022-06-22 13:33:01,076 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.05, 192.168.0.105:58791][0m
+2022-06-22 13:33:04,635 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:58793][0m
+2022-06-22 13:33:06,663 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:58793][0m
+2022-06-22 13:33:13,683 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:33:13,824 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:33:13,826 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.05, 192.168.0.105:58835][0m
+2022-06-22 13:33:42,961 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:33:42,964 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 192.168.0.102:42546][0m
+2022-06-22 13:33:42,968 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:33:42,973 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.102:42548][0m
+2022-06-22 13:33:43,000 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:33:43,004 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.02, 192.168.0.102:42546][0m
+2022-06-22 13:33:43,012 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:33:43,014 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.02, 192.168.0.102:42548][0m
+2022-06-22 13:33:53,677 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.09, 192.168.0.105:58835][0m
+2022-06-22 13:34:00,315 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:00,318 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:58832][0m
+2022-06-22 13:34:00,335 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:00,336 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 13:34:00,343 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.11, 192.168.0.105:58834][0m
+2022-06-22 13:34:00,348 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.12, 192.168.0.105:58830][0m
+2022-06-22 13:34:00,381 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:00,447 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.14, 192.168.0.105:58831][0m
+2022-06-22 13:34:00,452 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:00,455 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.12, 192.168.0.105:58832][0m
+2022-06-22 13:34:01,209 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:01,209 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:01,211 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 192.168.0.102:42562][0m
+2022-06-22 13:34:01,215 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.102:42546][0m
+2022-06-22 13:34:01,238 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:01,240 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.102:42548][0m
+2022-06-22 13:34:01,253 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:01,255 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.01, 192.168.0.102:42562][0m
+2022-06-22 13:34:09,101 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:09,107 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 192.168.0.102:42562][0m
+2022-06-22 13:34:09,124 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:09,127 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.102:42548][0m
+2022-06-22 13:34:09,134 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 13:34:09,140 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.05, 192.168.0.102:42546][0m
+2022-06-22 13:34:09,149 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:09,152 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.102:42572][0m
+2022-06-22 13:34:09,155 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:09,156 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.102:42562][0m
+2022-06-22 13:34:15,757 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:15,763 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:58832][0m
+2022-06-22 13:34:15,767 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:15,772 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:58831][0m
+2022-06-22 13:34:15,776 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 13:34:15,788 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.10, 192.168.0.105:58888][0m
+2022-06-22 13:34:15,862 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:15,864 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:15,866 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 13:34:15,867 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.105:58830][0m
+2022-06-22 13:34:15,875 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.08, 192.168.0.105:58831][0m
+2022-06-22 13:34:15,877 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 192.168.0.105:58832][0m
+2022-06-22 13:34:16,724 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:16,728 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:58831][0m
+2022-06-22 13:34:16,729 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 13:34:16,734 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.105:58833][0m
+2022-06-22 13:34:16,745 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:16,749 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:58832][0m
+2022-06-22 13:34:16,812 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 13:34:16,815 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 192.168.0.105:58830][0m
+2022-06-22 13:34:16,821 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:16,824 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.105:58831][0m
+2022-06-22 13:34:16,828 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:16,831 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.09, 192.168.0.105:58833][0m
+2022-06-22 13:34:33,208 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:33,210 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.101:38584][0m
+2022-06-22 13:34:40,077 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:40,077 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:40,081 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.101:38592][0m
+2022-06-22 13:34:40,084 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.101:38584][0m
+2022-06-22 13:34:40,105 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:40,105 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:40,107 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 192.168.0.101:38602][0m
+2022-06-22 13:34:40,111 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.05, 192.168.0.101:38600][0m
+2022-06-22 13:34:41,918 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:41,920 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.102:42562][0m
+2022-06-22 13:34:41,923 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:41,925 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.102:42572][0m
+2022-06-22 13:34:41,926 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 13:34:41,929 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.08, 192.168.0.102:42546][0m
+2022-06-22 13:34:41,994 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:41,995 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.102:42578][0m
+2022-06-22 13:34:41,997 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:41,999 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.102:42572][0m
+2022-06-22 13:34:43,521 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:34:43,522 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:34:43,525 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 192.168.0.101:38602][0m
+2022-06-22 13:34:43,528 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.101:38600][0m
+2022-06-22 13:34:43,551 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:34:43,551 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:34:43,553 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.04, 192.168.0.101:38584][0m
+2022-06-22 13:34:43,555 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 192.168.0.101:38592][0m
+2022-06-22 13:35:03,580 - WARNING - log - log.py - Not Found: /media/media/user_img/user.png
+2022-06-22 13:35:03,581 - WARNING - runserver - runserver.py - [33mHTTP GET /media/media/user_img/user.png 404 [0.02, 192.168.0.102:42546][0m
+2022-06-22 13:35:07,678 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:35:07,679 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.102:42546][0m
+2022-06-22 13:35:07,680 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:35:07,684 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.102:42548][0m
+2022-06-22 13:35:07,713 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:35:07,714 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:35:07,716 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.102:42572][0m
+2022-06-22 13:35:07,718 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.02, 192.168.0.102:42578][0m
+2022-06-22 13:35:13,599 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 13:35:13,600 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.02, 192.168.0.102:42578][0m
+2022-06-22 13:36:04,967 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:36:04,970 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.101:38644][0m
+2022-06-22 13:36:05,033 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:36:05,035 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.101:38642][0m
+2022-06-22 13:36:05,044 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:36:05,045 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.101:38650][0m
+2022-06-22 13:36:05,061 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:36:05,062 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.01, 192.168.0.101:38638][0m
+2022-06-22 13:38:01,794 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 192.168.0.105:59071][0m
+2022-06-22 13:38:31,947 - ERROR - server - server.py - Exception inside application: Single thread executor already being used, would deadlock
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 40, in __call__
+    return await self.staticfiles_handler_class()(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 56, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\http.py", line 198, in __call__
+    await self.handle(scope, async_to_sync(send), body_stream)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 403, in __call__
+    raise RuntimeError(
+RuntimeError: Single thread executor already being used, would deadlock
+2022-06-22 13:38:31,952 - ERROR - runserver - runserver.py - [35;1mHTTP GET /static/admin/js/core.js 500 [0.36, 192.168.0.105:59072][0m
+2022-06-22 13:38:32,082 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-22 13:38:32,083 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:59101][0m
+2022-06-22 13:38:53,950 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:38:53,952 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.102:42642][0m
+2022-06-22 13:38:53,970 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:38:53,973 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.102:42760][0m
+2022-06-22 13:38:54,024 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 13:38:54,026 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.02, 192.168.0.102:42760][0m
+2022-06-22 13:38:54,087 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:38:54,087 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:38:54,088 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.102:42762][0m
+2022-06-22 13:38:54,092 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.06, 192.168.0.102:42764][0m
+2022-06-22 13:39:02,769 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:39:02,772 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.105:59071][0m
+2022-06-22 13:39:08,097 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:39:08,101 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:39:08,104 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.105:59068][0m
+2022-06-22 13:39:08,106 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 13:39:08,107 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:59101][0m
+2022-06-22 13:39:08,108 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:39:08,111 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.08, 192.168.0.105:59100][0m
+2022-06-22 13:39:08,111 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:39:08,114 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-22 13:39:08,115 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.09, 192.168.0.105:59067][0m
+2022-06-22 13:39:08,118 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.08, 192.168.0.105:59136][0m
+2022-06-22 13:39:08,120 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.10, 192.168.0.105:59072][0m
+2022-06-22 13:39:10,632 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 13:39:10,635 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.06, 192.168.0.105:59136][0m
+2022-06-22 13:39:10,637 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:39:10,644 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.105:59072][0m
+2022-06-22 13:39:10,646 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:39:10,648 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:39:10,648 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:59100][0m
+2022-06-22 13:39:10,651 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:59067][0m
+2022-06-22 13:39:10,655 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:39:10,656 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.07, 192.168.0.105:59101][0m
+2022-06-22 13:39:25,416 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:39:25,456 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.102:42764][0m
+2022-06-22 13:39:25,456 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:39:25,462 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.07, 192.168.0.102:42778][0m
+2022-06-22 13:39:37,121 - WARNING - log - log.py - Not Found: /theme_all/close_img/close.png
+2022-06-22 13:39:37,132 - WARNING - runserver - runserver.py - [33mHTTP GET /theme_all/close_img/close.png 404 [0.08, 192.168.0.105:59068][0m
+2022-06-22 13:39:43,560 - WARNING - log - log.py - Not Found: /theme_all/close_img/close.png
+2022-06-22 13:39:43,563 - WARNING - runserver - runserver.py - [33mHTTP GET /theme_all/close_img/close.png 404 [0.06, 192.168.0.105:59883][0m
+2022-06-22 13:39:49,731 - WARNING - log - log.py - Not Found: /theme_all/close_img/close.png
+2022-06-22 13:39:49,738 - WARNING - runserver - runserver.py - [33mHTTP GET /theme_all/close_img/close.png 404 [0.05, 192.168.0.101:38734][0m
+2022-06-22 13:40:01,520 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:40:01,520 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:40:01,522 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.101:38758][0m
+2022-06-22 13:40:01,526 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.101:38752][0m
+2022-06-22 13:40:01,532 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:40:01,533 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.05, 192.168.0.101:38760][0m
+2022-06-22 13:40:01,545 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:40:01,546 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.02, 192.168.0.101:38762][0m
+2022-06-22 13:40:18,441 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:40:18,441 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:40:18,443 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.101:38760][0m
+2022-06-22 13:40:18,449 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.101:38762][0m
+2022-06-22 13:40:18,487 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:40:18,488 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:40:18,490 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.101:38758][0m
+2022-06-22 13:40:18,496 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.04, 192.168.0.101:38752][0m
+2022-06-22 13:40:21,385 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 13:40:21,387 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 13:40:21,391 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.101:38752][0m
+2022-06-22 13:40:21,392 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 192.168.0.101:38758][0m
+2022-06-22 13:40:21,419 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 13:40:21,421 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 13:40:21,423 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.05, 192.168.0.101:38762][0m
+2022-06-22 13:40:21,425 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 192.168.0.101:38760][0m
+2022-06-22 13:40:31,665 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:59936][0m
+2022-06-22 13:40:46,132 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:59932][0m
+2022-06-22 15:22:09,564 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:56173][0m
+2022-06-22 15:22:17,197 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 192.168.0.105:56173][0m
+2022-06-22 15:23:03,498 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:56225][0m
+2022-06-22 15:34:05,919 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:56773][0m
+2022-06-22 15:34:20,668 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:56773][0m
+2022-06-22 15:38:15,215 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:57056][0m
+2022-06-22 15:42:35,977 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 192.168.0.105:57299][0m
+2022-06-22 15:45:53,898 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:57456][0m
+2022-06-22 15:47:01,115 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-22 15:47:15,017 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 192.168.0.105:57545][0m
+2022-06-22 15:49:45,197 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 15:49:45,200 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:57798][0m
+2022-06-22 15:49:45,207 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 15:49:45,208 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 15:49:45,241 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 15:49:45,251 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:57800][0m
+2022-06-22 15:49:45,252 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.11, 192.168.0.105:57796][0m
+2022-06-22 15:49:45,256 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.12, 192.168.0.105:57797][0m
+2022-06-22 15:49:45,275 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 15:49:45,276 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.03, 192.168.0.105:57798][0m
+2022-06-22 16:51:16,402 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-22 16:51:16,404 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:49717][0m
+2022-06-22 16:51:24,715 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 16:51:24,716 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 16:51:24,717 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.105:49717][0m
+2022-06-22 16:51:24,723 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.105:49721][0m
+2022-06-22 16:51:24,752 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 16:51:24,753 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 16:51:24,811 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.11, 192.168.0.105:49718][0m
+2022-06-22 16:51:24,822 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.12, 192.168.0.105:49720][0m
+2022-06-22 16:51:24,829 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 16:51:24,832 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.12, 192.168.0.105:49719][0m
+2022-06-22 16:57:00,854 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 16:57:00,857 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.03, 192.168.0.105:50143][0m
+2022-06-22 16:57:00,893 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 16:57:00,894 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 16:57:00,897 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:50139][0m
+2022-06-22 16:57:00,900 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:50138][0m
+2022-06-22 16:57:00,947 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 16:57:00,954 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:50145][0m
+2022-06-22 16:57:00,959 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 16:57:00,963 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.12, 192.168.0.105:50146][0m
+2022-06-22 17:04:00,322 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 17:04:00,324 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:50598][0m
+2022-06-22 17:04:00,325 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 17:04:00,330 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.06, 192.168.0.105:50591][0m
+2022-06-22 17:04:00,393 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 17:04:00,400 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.12, 192.168.0.105:50599][0m
+2022-06-22 17:04:00,415 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 17:04:00,415 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 17:04:00,419 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.15, 192.168.0.105:50593][0m
+2022-06-22 17:04:00,423 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.16, 192.168.0.105:50592][0m
+2022-06-22 17:04:01,248 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 17:04:01,249 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 17:04:01,251 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:50599][0m
+2022-06-22 17:04:01,254 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.105:50593][0m
+2022-06-22 17:04:01,254 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 17:04:01,255 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 17:04:01,258 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.105:50592][0m
+2022-06-22 17:04:01,260 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 192.168.0.105:50591][0m
+2022-06-22 17:04:01,262 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 17:04:01,263 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.04, 192.168.0.105:50598][0m
+2022-06-22 17:21:01,614 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 17:21:01,618 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:51605][0m
+2022-06-22 17:21:01,695 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 17:21:01,696 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 17:21:01,696 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 17:21:01,699 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:51607][0m
+2022-06-22 17:21:01,702 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.14, 192.168.0.105:51595][0m
+2022-06-22 17:21:01,706 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.15, 192.168.0.105:51597][0m
+2022-06-22 17:21:01,708 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 17:21:01,711 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.12, 192.168.0.105:51594][0m
+2022-06-22 21:04:34,623 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-22 21:04:34,702 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-22 21:04:34,717 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-22 21:04:35,045 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-22 21:04:35,136 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-22 21:28:10,617 - WARNING - log - log.py - Forbidden (CSRF token missing.): /ajax/send_voice_mes
+2022-06-22 21:28:11,233 - WARNING - log - log.py - Forbidden (CSRF token missing.): /ajax/send_voice_mes
+2022-06-22 21:30:22,792 - WARNING - log - log.py - Forbidden (CSRF token missing.): /ajax/send_voice_mes
+2022-06-22 21:30:23,055 - WARNING - log - log.py - Forbidden (CSRF token missing.): /ajax/send_voice_mes
+2022-06-22 21:31:25,948 - WARNING - log - log.py - Forbidden (CSRF token from POST has incorrect length.): /ajax/send_voice_mes
+2022-06-22 21:34:31,221 - WARNING - log - log.py - Bad Request: /ajax/send_voice_mes
+2022-06-22 21:35:19,833 - WARNING - log - log.py - Bad Request: /ajax/send_voice_mes
+2022-06-22 21:35:25,315 - WARNING - log - log.py - Bad Request: /ajax/send_voice_mes
+2022-06-22 21:35:28,881 - WARNING - log - log.py - Bad Request: /ajax/send_voice_mes
+2022-06-22 21:35:35,466 - WARNING - log - log.py - Bad Request: /ajax/send_voice_mes
+2022-06-22 21:35:42,595 - WARNING - log - log.py - Bad Request: /ajax/send_voice_mes
+2022-06-22 21:37:22,769 - WARNING - log - log.py - Bad Request: /ajax/send_voice_mes
+2022-06-22 21:44:02,875 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-23 08:55:50,983 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 08:55:50,987 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.03, 192.168.0.105:49646][0m
+2022-06-23 08:55:51,040 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 08:55:51,040 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 08:55:51,045 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.15, 192.168.0.105:49663][0m
+2022-06-23 08:55:51,053 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:49661][0m
+2022-06-23 08:55:51,063 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-23 08:55:51,067 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/64 404 [0.07, 192.168.0.105:49662][0m
+2022-06-23 08:55:51,069 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 08:55:51,156 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.16, 192.168.0.105:49646][0m
+2022-06-23 08:59:53,837 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 08:59:53,850 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 08:59:53,868 - WARNING - log - log.py - Not Found: /stream_post/64
+2022-06-23 08:59:53,918 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 08:59:53,920 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:00:01,264 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-23 09:00:18,574 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:00:18,578 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:00:18,588 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:00:18,592 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:00:19,358 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:00:19,362 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:00:19,400 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-23 09:00:19,404 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:00:19,417 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:00:20,461 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:00:20,468 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:00:20,472 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-23 09:00:20,521 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:00:20,525 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:00:28,561 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:00:28,567 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:00:28,569 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:00:28,580 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:00:29,226 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:00:29,229 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:00:29,237 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-23 09:00:29,247 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:00:29,249 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:00:30,077 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:00:30,085 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:00:30,097 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:00:30,098 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:06:31,869 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-23 09:07:12,309 - WARNING - log - log.py - Not Found: /chat/t0MFEjSsPhbBOOrldcBk6NARgjHvuJ
+2022-06-23 09:07:20,294 - WARNING - log - log.py - Not Found: /chat/t0MFEjSsPhbBOOrldcBk6NARgjHvuJ
+2022-06-23 09:15:20,326 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:15:20,336 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.07, 127.0.0.1:63977][0m
+2022-06-23 09:15:20,345 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:15:20,346 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:15:20,352 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 127.0.0.1:63988][0m
+2022-06-23 09:15:20,354 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 127.0.0.1:63986][0m
+2022-06-23 09:15:20,446 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:15:20,448 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 127.0.0.1:63989][0m
+2022-06-23 09:16:42,473 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.05, 127.0.0.1:64212][0m
+2022-06-23 09:16:44,474 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 127.0.0.1:64212][0m
+2022-06-23 09:16:48,006 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 127.0.0.1:64199][0m
+2022-06-23 09:17:45,244 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 127.0.0.1:64199][0m
+2022-06-23 09:17:55,443 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 127.0.0.1:64298][0m
+2022-06-23 09:21:24,137 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 127.0.0.1:64471][0m
+2022-06-23 09:21:34,792 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 127.0.0.1:64474][0m
+2022-06-23 09:21:40,450 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:21:40,450 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:21:40,473 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:21:40,482 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 127.0.0.1:64472][0m
+2022-06-23 09:21:40,484 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.08, 127.0.0.1:64496][0m
+2022-06-23 09:21:40,487 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.09, 127.0.0.1:64474][0m
+2022-06-23 09:21:40,507 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:21:40,509 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.07, 127.0.0.1:64495][0m
+2022-06-23 09:22:16,673 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:22:16,673 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:22:16,673 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:22:16,676 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64544][0m
+2022-06-23 09:22:16,680 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64545][0m
+2022-06-23 09:22:16,682 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 127.0.0.1:64532][0m
+2022-06-23 09:22:16,685 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:22:16,687 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 127.0.0.1:64523][0m
+2022-06-23 09:22:17,318 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:22:17,318 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:22:17,318 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:22:17,319 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:22:17,319 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64545][0m
+2022-06-23 09:22:17,324 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64544][0m
+2022-06-23 09:22:17,326 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 127.0.0.1:64523][0m
+2022-06-23 09:22:17,327 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 127.0.0.1:64532][0m
+2022-06-23 09:22:17,835 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:22:17,836 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:22:17,837 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64545][0m
+2022-06-23 09:22:17,840 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64544][0m
+2022-06-23 09:22:17,841 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:22:17,841 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:22:17,844 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 127.0.0.1:64523][0m
+2022-06-23 09:22:17,846 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 127.0.0.1:64532][0m
+2022-06-23 09:22:21,327 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:22:21,328 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64544][0m
+2022-06-23 09:22:21,328 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:22:21,331 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:22:21,333 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64545][0m
+2022-06-23 09:22:21,333 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:22:21,335 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 127.0.0.1:64532][0m
+2022-06-23 09:22:21,337 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 127.0.0.1:64523][0m
+2022-06-23 09:22:21,605 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:22:21,606 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:22:21,606 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:22:21,607 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:22:21,609 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64544][0m
+2022-06-23 09:22:21,612 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 127.0.0.1:64523][0m
+2022-06-23 09:22:21,613 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64545][0m
+2022-06-23 09:22:21,615 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 127.0.0.1:64532][0m
+2022-06-23 09:22:21,895 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:22:21,896 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:22:21,897 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:22:21,898 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64523][0m
+2022-06-23 09:22:21,900 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:22:21,901 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64544][0m
+2022-06-23 09:22:21,902 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 127.0.0.1:64545][0m
+2022-06-23 09:22:21,904 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 127.0.0.1:64532][0m
+2022-06-23 09:22:32,178 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:22:32,181 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:22:32,183 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.09, 127.0.0.1:64544][0m
+2022-06-23 09:22:32,190 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 127.0.0.1:64532][0m
+2022-06-23 09:22:32,190 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-23 09:22:32,202 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.11, 127.0.0.1:64545][0m
+2022-06-23 09:23:08,538 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:23:08,541 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64613][0m
+2022-06-23 09:23:08,543 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:23:08,544 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:23:08,545 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.04, 127.0.0.1:64569][0m
+2022-06-23 09:23:08,545 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:23:08,546 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64614][0m
+2022-06-23 09:23:08,549 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 127.0.0.1:64545][0m
+2022-06-23 09:23:16,153 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:23:16,155 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:64614][0m
+2022-06-23 09:23:16,207 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:23:16,210 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 127.0.0.1:64569][0m
+2022-06-23 09:23:31,517 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:23:31,520 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 127.0.0.1:64659][0m
+2022-06-23 09:23:31,527 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:23:31,531 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 127.0.0.1:64652][0m
+2022-06-23 09:23:31,542 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:23:31,546 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 127.0.0.1:64656][0m
+2022-06-23 09:23:31,549 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:23:31,552 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 127.0.0.1:64653][0m
+2022-06-23 09:23:39,179 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.02, 127.0.0.1:64658][0m
+2022-06-23 09:24:08,976 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.04, 127.0.0.1:64726][0m
+2022-06-23 09:24:21,578 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:24:21,583 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.11, 127.0.0.1:64726][0m
+2022-06-23 09:24:25,000 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/Night_City_-_Cyberpunk_2077_-_%D0%B6%D0%B8%D0%B2%D1%8B%D0%B5_%D0%BE%D0%B1%D0%BE%D0%B8_%D0%BD%D0%B0_%D0%BF%D0%BA_RRYdxlo.mp4 404 [0.03, 127.0.0.1:64725][0m
+2022-06-23 09:24:31,725 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:24:31,726 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:24:31,728 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 127.0.0.1:64760][0m
+2022-06-23 09:24:31,731 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:24:31,732 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 127.0.0.1:64726][0m
+2022-06-23 09:24:31,734 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 127.0.0.1:64725][0m
+2022-06-23 09:24:31,761 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:24:31,763 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.07, 127.0.0.1:64762][0m
+2022-06-23 09:24:34,689 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-23 09:24:34,693 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.03, 127.0.0.1:64726][0m
+2022-06-23 09:27:20,200 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:27:20,205 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.07, 127.0.0.1:64912][0m
+2022-06-23 09:29:37,680 - ERROR - server - server.py - Exception inside application: Single thread executor already being used, would deadlock
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 40, in __call__
+    return await self.staticfiles_handler_class()(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 56, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\http.py", line 198, in __call__
+    await self.handle(scope, async_to_sync(send), body_stream)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 403, in __call__
+    raise RuntimeError(
+RuntimeError: Single thread executor already being used, would deadlock
+2022-06-23 09:29:37,697 - ERROR - runserver - runserver.py - [35;1mHTTP GET /static/home/js/style_chat.js 500 [0.17, 127.0.0.1:65047][0m
+2022-06-23 09:29:48,663 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:29:48,675 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.12, 127.0.0.1:65046][0m
+2022-06-23 09:29:48,693 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:29:48,696 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.14, 127.0.0.1:65047][0m
+2022-06-23 09:30:26,784 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:30:26,790 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.08, 127.0.0.1:65109][0m
+2022-06-23 09:30:53,944 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:30:53,949 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.09, 127.0.0.1:65154][0m
+2022-06-23 09:31:23,941 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:31:23,947 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.08, 127.0.0.1:65193][0m
+2022-06-23 09:34:17,585 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:34:17,589 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.07, 127.0.0.1:65359][0m
+2022-06-23 09:34:43,582 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:34:43,587 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.07, 127.0.0.1:65359][0m
+2022-06-23 09:38:44,243 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:38:44,253 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.08, 127.0.0.1:49271][0m
+2022-06-23 09:38:46,768 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:38:46,773 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.07, 127.0.0.1:49273][0m
+2022-06-23 09:38:49,007 - WARNING - log - log.py - Not Found: /3ab48e80-ca47-44ef-93f0-a01941dccdd3
+2022-06-23 09:38:49,009 - WARNING - runserver - runserver.py - [33mHTTP GET /3ab48e80-ca47-44ef-93f0-a01941dccdd3 404 [0.01, 127.0.0.1:49273][0m
+2022-06-23 09:38:49,093 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-23 09:38:49,094 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.01, 127.0.0.1:49273][0m
+2022-06-23 09:38:56,674 - WARNING - log - log.py - Not Found: /3ab48e80-ca47-44ef-93f0-a01941dccdd3
+2022-06-23 09:38:56,675 - WARNING - runserver - runserver.py - [33mHTTP GET /3ab48e80-ca47-44ef-93f0-a01941dccdd3 404 [0.01, 127.0.0.1:49273][0m
+2022-06-23 09:41:26,255 - WARNING - log - log.py - Not Found: /chat/[object File]
+2022-06-23 09:41:26,256 - WARNING - runserver - runserver.py - [33mHTTP GET /chat/[object%20File] 404 [0.01, 127.0.0.1:49424][0m
+2022-06-23 09:41:37,361 - WARNING - log - log.py - Not Found: /chat/[object File]
+2022-06-23 09:41:37,362 - WARNING - runserver - runserver.py - [33mHTTP GET /chat/[object%20File] 404 [0.02, 127.0.0.1:49424][0m
+2022-06-23 09:41:58,718 - WARNING - log - log.py - Not Found: /chat/[object File]
+2022-06-23 09:41:58,719 - WARNING - runserver - runserver.py - [33mHTTP GET /chat/[object%20File] 404 [0.01, 127.0.0.1:49424][0m
+2022-06-23 09:42:00,454 - WARNING - log - log.py - Not Found: /chat/[object File]
+2022-06-23 09:42:00,456 - WARNING - runserver - runserver.py - [33mHTTP GET /chat/[object%20File] 404 [0.03, 127.0.0.1:49424][0m
+2022-06-23 09:42:01,116 - WARNING - log - log.py - Not Found: /chat/[object File]
+2022-06-23 09:42:01,117 - WARNING - runserver - runserver.py - [33mHTTP GET /chat/[object%20File] 404 [0.01, 127.0.0.1:49424][0m
+2022-06-23 09:44:51,281 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:44:51,286 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.07, 127.0.0.1:49611][0m
+2022-06-23 09:45:25,420 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-23 09:45:25,421 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.01, 127.0.0.1:49610][0m
+2022-06-23 09:47:41,740 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-23 09:47:41,741 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.01, 127.0.0.1:49824][0m
+2022-06-23 09:49:04,623 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 190, in send_voice_mes_ajax
+    return JsonResponse({"data_text":"OK","src":src,"type_file":mes.type_file.type_f,"id":mes.id}, status=200)
+AttributeError: 'NoneType' object has no attribute 'type_f'
+2022-06-23 09:49:04,628 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.07, 127.0.0.1:49941][0m
+2022-06-23 09:50:32,102 - ERROR - log - log.py - Internal Server Error: /ajax/send_voice_mes
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 182, in send_voice_mes_ajax
+    mes.type_file = TypeFile.objects.get(type_f="audio")
+NameError: name 'TypeFile' is not defined
+2022-06-23 09:50:32,108 - ERROR - runserver - runserver.py - [35;1mHTTP POST /ajax/send_voice_mes 500 [0.04, 127.0.0.1:50109][0m
+2022-06-23 09:54:07,465 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:54:07,469 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 127.0.0.1:50329][0m
+2022-06-23 09:54:07,503 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:54:07,505 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:54:07,507 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 127.0.0.1:50328][0m
+2022-06-23 09:54:07,509 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 127.0.0.1:50327][0m
+2022-06-23 09:54:38,335 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 09:54:38,335 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 09:54:38,336 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 09:54:38,391 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 09:54:38,399 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.11, 127.0.0.1:50378][0m
+2022-06-23 09:54:38,401 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 127.0.0.1:50376][0m
+2022-06-23 09:54:38,403 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.12, 127.0.0.1:50369][0m
+2022-06-23 09:54:38,405 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 127.0.0.1:50354][0m
+2022-06-23 10:04:14,278 - ERROR - server - server.py - Exception inside application: Single thread executor already being used, would deadlock
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 40, in __call__
+    return await self.staticfiles_handler_class()(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 56, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\http.py", line 198, in __call__
+    await self.handle(scope, async_to_sync(send), body_stream)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 403, in __call__
+    raise RuntimeError(
+RuntimeError: Single thread executor already being used, would deadlock
+2022-06-23 10:04:14,281 - ERROR - runserver - runserver.py - [35;1mHTTP GET /static/home/js/style_chat.js 500 [0.04, 127.0.0.1:50941][0m
+2022-06-23 10:17:42,102 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-23 12:02:14,205 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-23 12:02:14,208 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 127.0.0.1:49754][0m
+2022-06-23 12:02:14,208 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-23 12:02:14,215 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 127.0.0.1:49755][0m
+2022-06-23 12:02:14,283 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 12:02:14,283 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 12:02:14,297 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.20, 127.0.0.1:49758][0m
+2022-06-23 12:02:14,297 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.21, 127.0.0.1:49761][0m
+2022-06-23 12:02:15,619 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-23 12:02:15,623 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-23 12:02:15,627 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.13, 127.0.0.1:49765][0m
+2022-06-23 12:02:15,631 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 127.0.0.1:49761][0m
+2022-06-23 12:02:15,631 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-23 12:02:15,642 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.14, 127.0.0.1:49755][0m

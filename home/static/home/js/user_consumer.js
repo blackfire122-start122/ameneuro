@@ -1,4 +1,4 @@
-conn_u = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+username)
+conn_u = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/user/"+username)
 conn_u.onmessage = onmessage_u
 let chats_point = []
 
@@ -179,7 +179,7 @@ function not_add_mus_share(e){
 function mus_share(e,name){
 	if (share_now == "ps"){
 		conn_u.send(JSON.stringify({'type':'ps_share', "id":share_id, "to_user":e.value}))
-		conn_share_ps = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+name)
+		conn_share_ps = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/user/"+name)
 		
 		conn_share_ps.onopen = ()=>{
 			conn_share_ps.send(JSON.stringify({'type':'share_mus'}))
@@ -189,7 +189,7 @@ function mus_share(e,name){
 
 	}else if(share_now == "mus"){
 		conn_u.send(JSON.stringify({'type':'mus_share', "id":share_id, "to_user":e.value}))
-		conn_share_mus = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+name)
+		conn_share_mus = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/user/"+name)
 		
 		conn_share_mus.onopen = ()=>{
 			conn_share_mus.send(JSON.stringify({'type':'share_mus'}))

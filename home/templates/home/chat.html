@@ -24,9 +24,18 @@
 	
 	<div class="input_mes_send">
 		<input onkeydown="inp_msg_user(this)" placeholder='message' id="msg_user" type="text">
-		<div class="send_file">
-			<button id="btn_send" onclick="btn_send()">Send</button>
+		<div class="menu_inp">
+			<button id="btn_send" onclick="send_msg_func()">Send</button>
 			<img onclick="send_file_mes()" class="file_img" src="{{ user.theme_all.file_send_img.url }}">
+			<div class="file_img">
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<img onmousedown="send_voice_mes(this)" ontouchstart="send_voice_mes(this)" class=" microphone" src="{{ user.theme_all.microphone_img.url }}">
+			</div>
+			
 		</div>
 	</div>
 	<div class="options"></div>
@@ -44,6 +53,10 @@
 
 	<div class="reply">
 		<img src="{{ user.theme_all.close_img.url }}" class="close_reply" onclick="reply_close()">
+	</div>
+
+	<div id="csrf_voice">
+		{% csrf_token %}
 	</div>
 
 	<style>
@@ -74,6 +87,7 @@
 		let color_mes_bg_op = "{{ chat.theme.color_mes_bg_op }}"
 		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
 		let send_file_mes_ajax = "{% url 'send_file_mes_ajax' %}"
+		let send_voice_mes_ajax = "{% url 'send_voice_mes_ajax' %}"
 		let user_music_theme = "{{ user.theme_all.music_img.url }}"
 	</script>
 	<script src="{% static 'home/js/chat.js' %}"></script>

@@ -2,11 +2,12 @@ let msg_user = document.querySelector("#msg_user")
 let msg_div = document.querySelector('.messages')
 let reply = document.querySelector('.reply')
 let emojis_select = document.querySelector('.emojis_select')
+let	circles = document.getElementsByClassName("circle")
 const timeout = 700;
 let idTimeout;
 
 function connect() {
-	conn = new WebSocket("ws://"+window.location.hostname+"/ws/chat/"+chat)
+	conn = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/chat/"+chat)
 	conn.onmessage = onmessage
 
 	conn.onclose = (e)=>{
@@ -21,7 +22,7 @@ function connect() {
 	}
 }
 connect()
-conn_u_f = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+friend)
+conn_u_f = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/user/"+friend)
 
 function onmessage(e){
 	let data = JSON.parse(e.data)
@@ -299,17 +300,19 @@ function reply_send(e){
 	msg_user.value = ""
 }
 
+function reply_style(e){
+  send_msg_func = () => {reply_send(e)}
+	reply.style.display = "block"
+  e.style.margin = "1%" 
+  e.style.opacity = "0.5" 
+  get_node_chield(e.childNodes)[0].style.borderRadius = "10px" 
+	reply_div = e
+}
+
 let reply_div
 
 function reply_check(e){
-  let idTimeout = setTimeout(function() {
-  	send_msg_func = () => {reply_send(e)}
-  	reply.style.display = "block"
-    e.style.margin = "1%" 
-    e.style.opacity = "0.5" 
-    get_node_chield(e.childNodes)[0].style.borderRadius = "10px" 
-  	reply_div = e
-  }, timeout);
+  let idTimeout = setTimeout(()=>{reply_style(e)},timeout)
 
 	e.addEventListener('mouseup', function() {
 	  clearTimeout(idTimeout)
@@ -513,4 +516,99 @@ function all_btn_black(){
 	for (let i = btns_emoji_tab.length - 1; i >= 0; i--) {
 		btns_emoji_tab[i].style.borderBottom = "1px solid black"
 	}
+}
+
+function voice_style(){
+	for (var i = circles.length - 1; i >= 0; i--) {
+		rand = Math.random() * 2
+		circles[i].style.transform = "scale("+rand+","+rand+")"
+	}
+	setTimeout(()=>{
+		if (!stop_voice_anim) {
+			voice_style()
+		}else{
+			for (var i = circles.length - 1; i >= 0; i--) {
+				circles[i].style.display = "none"
+			}
+			return
+		}
+	},300)
+}
+
+let stop_voice_anim = false
+
+function send_voice_mes(e) {
+	stop_voice_anim = false
+	setTimeout(()=>{
+		for (var i = circles.length - 1; i >= 0; i--) {
+			circles[i].style.display = "block"
+		}
+		voice_style()
+	},0)
+
+	navigator.mediaDevices.getUserMedia({ audio: true})
+    .then(stream => {
+        const mediaRecorder = new MediaRecorder(stream);
+        let voice = []
+        mediaRecorder.start()
+
+        mediaRecorder.addEventListener("dataavailable",function(event) {
+            voice.push(event.data)
+        })
+
+        e.addEventListener('mouseup', function(){
+						stop_voice_anim = true
+						if(mediaRecorder.state!="inactive"){
+            	mediaRecorder.stop()
+						}
+        })
+        e.addEventListener('touchend', function(){
+						stop_voice_anim = true
+						if(mediaRecorder.state!="inactive"){
+            	mediaRecorder.stop()
+						}
+        })
+
+				mediaRecorder.addEventListener("stop", () => {
+				  const voiceBlob = new Blob(voice, {type: 'audio/mp3'})
+
+					const voice_file = new File(
+					    [voiceBlob],
+					    "voice.mp3",
+					    { type: 'audio/mp3' }
+					)
+
+				  let fd = new FormData()
+				  
+					msg = msg_user.value
+					if (!msg) {
+						msg = "file"
+					}
+
+					fd.append('file', voice_file)
+					fd.append("chat_id", chat_id)
+					fd.append("text", msg);
+					fd.append('csrfmiddlewaretoken',document.querySelector("#csrf_voice").childNodes[1].value)
+
+					$.ajax({
+						type:"POST",
+						url: send_voice_mes_ajax,
+						data: fd,
+						processData: false,
+						contentType: false,
+						success: function (response) {
+							conn.send(JSON.stringify({'type':'msg_file',
+													"src":response["src"],
+													"msg":msg,
+													"id":response["id"],
+													"type_file":response["type_file"],
+													"user":user,
+													"time":String(new Date()).slice(16,21)
+							}))
+							msg_user.value = ""
+							end_readable_send()
+						}
+					})
+				})
+    })
 }

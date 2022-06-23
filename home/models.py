@@ -140,6 +140,7 @@ class AllTheme(models.Model):
 	music_right_img = models.ImageField(upload_to="theme_all/music_right_img",default=None,null=True,blank=True)
 	close_img = models.ImageField(upload_to="theme_all/close_img",default=None,null=True,blank=True)
 	turn_over_img = models.ImageField(upload_to="theme_all/turn_over_img",default=None,null=True,blank=True)
+	microphone_img = models.ImageField(upload_to="theme_all/microphone_img",default=None,null=True,blank=True)
 	
 	def __str__(self):
 		return self.name

@@ -108,7 +108,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def reply_msg(self):
-        print(self.text_data_json)
         new_mes = Message(user=self.scope["user"],text=self.text_data_json.get("msg"),type_m=TypeMes.objects.get(type_m='msg'))
         mes = Message.objects.get(pk=self.text_data_json.get("msg_id"))
 

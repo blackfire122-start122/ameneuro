@@ -307,7 +307,10 @@ class musics_all(LoginRequiredMixin,TemplateView):
 	login_url = "login"
 
 def streaming_music(request,id):
-	file, status_code, content_length, content_range = open_file(request,id,'music')
+	try:
+		file, status_code, content_length, content_range = open_file(request,id,'music')
+	except Exception as e:
+		return HttpResponseNotFound()
 	response = StreamingHttpResponse(file, status=status_code, content_type='music/mp3')
 
 	response['Accept-Ranges'] = 'bytes'
@@ -327,7 +330,10 @@ class add_music(LoginRequiredMixin,CreateView):
 		return redirect('musics')
 
 def streaming_mess(request,id):
-	file, status_code, content_length, content_range = open_file(request,id,'mess')
+	try:
+		file, status_code, content_length, content_range = open_file(request,id,'mess')
+	except Exception as e:
+		return HttpResponseNotFound()
 	response = StreamingHttpResponse(file, status=status_code)
 
 	response['Accept-Ranges'] = 'bytes'
