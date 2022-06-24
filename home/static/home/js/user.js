@@ -42,7 +42,7 @@ function close_musics_f(){
 function follow(btn,user) {
 	conn_u.send(JSON.stringify({'type':'follow', "id":btn.value}))
 	
-	conn_u_f = new WebSocket("ws://"+window.location.hostname+":"+location.port+"ws/user/"+user)	
+	conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"ws/user/"+user)	
 	conn_u_f.onopen = ()=>{
 		conn_u_f.send(JSON.stringify({'type':'activity'}))
 		conn_u_f.close()

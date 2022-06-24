@@ -98,7 +98,7 @@ function comment_user(e){
 	if (reply){
 		conn_u.send(JSON.stringify({'type':'comment_reply','com_id':btn_reply.id,'post_id':btn_reply.value,'text':inp_comment.value}))
 		
-		conn_u_f = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+user_reply)	
+		conn_u_f = new WebSocket(wsStart+window.location.hostname+"/ws/user/"+user_reply)	
 		conn_u_f.onopen = ()=>{
 			conn_u_f.send(JSON.stringify({'type':'activity'}))
 			conn_u_f.close()
@@ -181,8 +181,8 @@ function close_sh(){
 	document.querySelector(".friends_share").style.display="none"
 }
 function share_btn(ch_id,friend,ch_pk){
-	conn = new WebSocket("ws://"+window.location.hostname+"/ws/chat/"+ch_id)
-	conn_u_f = new WebSocket("ws://"+window.location.hostname+"/ws/user/"+friend)
+	conn = new WebSocket(wsStart+window.location.hostname+"/ws/chat/"+ch_id)
+	conn_u_f = new WebSocket(wsStart+window.location.hostname+"/ws/user/"+friend)
  
 	conn.onopen = ()=>{
 		conn.send(JSON.stringify({'type':'share','chat':ch_pk,'user': user,'id_share':id_share,'msg':"http://"+window.location.hostname+"/post/"+id_share+ "#@;" +document.querySelector("#mess_share").value}))

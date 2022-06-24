@@ -6989,3 +6989,204 @@ RuntimeError: Single thread executor already being used, would deadlock
 2022-06-23 12:02:15,631 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 127.0.0.1:49761][0m
 2022-06-23 12:02:15,631 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
 2022-06-23 12:02:15,642 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.14, 127.0.0.1:49755][0m
+2022-06-24 08:57:19,213 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-24 08:57:19,220 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.06, 127.0.0.1:53833][0m
+2022-06-24 08:57:19,281 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-24 08:57:19,284 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 127.0.0.1:53833][0m
+2022-06-24 08:57:19,376 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-24 08:57:19,377 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-24 08:57:19,379 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.21, 127.0.0.1:53832][0m
+2022-06-24 08:57:19,382 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.22, 127.0.0.1:53834][0m
+2022-06-24 08:57:21,306 - ERROR - server - server.py - Exception inside application: [Errno 10061] Connect call failed ('127.0.0.1', 6379)
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 173, in websocket_connect
+    await self.connect()
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 179, in connect
+    await self.channel_layer.group_add(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 646, in group_add
+    async with self.connection(self.consistent_hash(group)) as connection:
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 902, in __aenter__
+    self.conn = await self.pool.pop()
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 93, in pop
+    conn = await self.create_conn(loop)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 79, in create_conn
+    return await aioredis.create_redis_pool(**kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\commands\__init__.py", line 188, in create_redis_pool
+    pool = await create_pool(address, db=db,
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 58, in create_pool
+    await pool._fill_free(override_min=False)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 383, in _fill_free
+    conn = await self._create_new_connection(self._address)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\connection.py", line 111, in create_connection
+    reader, writer = await asyncio.wait_for(open_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\stream.py", line 23, in open_connection
+    transport, _ = await get_event_loop().create_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1017, in create_connection
+    raise exceptions[0]
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1002, in create_connection
+    sock = await self._connect_sock(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 916, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 485, in sock_connect
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 517, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 10061] Connect call failed ('127.0.0.1', 6379)
+2022-06-24 08:57:25,819 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-24 08:57:25,824 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.06, 127.0.0.1:53833][0m
+2022-06-24 08:57:25,828 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-24 08:57:25,831 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-24 08:57:25,832 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 127.0.0.1:53834][0m
+2022-06-24 08:57:25,832 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-24 08:57:25,836 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 127.0.0.1:53832][0m
+2022-06-24 08:57:25,839 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.07, 127.0.0.1:53830][0m
+2022-06-24 08:57:28,512 - ERROR - server - server.py - Exception inside application: [Errno 10061] Connect call failed ('127.0.0.1', 6379)
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 173, in websocket_connect
+    await self.connect()
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 179, in connect
+    await self.channel_layer.group_add(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 646, in group_add
+    async with self.connection(self.consistent_hash(group)) as connection:
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 902, in __aenter__
+    self.conn = await self.pool.pop()
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 93, in pop
+    conn = await self.create_conn(loop)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 79, in create_conn
+    return await aioredis.create_redis_pool(**kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\commands\__init__.py", line 188, in create_redis_pool
+    pool = await create_pool(address, db=db,
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 58, in create_pool
+    await pool._fill_free(override_min=False)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 383, in _fill_free
+    conn = await self._create_new_connection(self._address)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\connection.py", line 111, in create_connection
+    reader, writer = await asyncio.wait_for(open_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\stream.py", line 23, in open_connection
+    transport, _ = await get_event_loop().create_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1017, in create_connection
+    raise exceptions[0]
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1002, in create_connection
+    sock = await self._connect_sock(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 916, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 485, in sock_connect
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 517, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 10061] Connect call failed ('127.0.0.1', 6379)
+2022-06-24 08:58:08,517 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-24 08:58:08,520 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-24 08:58:08,520 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-24 08:58:08,525 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 127.0.0.1:53968][0m
+2022-06-24 08:58:08,528 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.12, 127.0.0.1:53966][0m
+2022-06-24 08:58:08,533 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.11, 127.0.0.1:53967][0m
+2022-06-24 08:58:08,647 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-24 08:58:08,649 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.14, 127.0.0.1:53960][0m
+2022-06-24 08:58:10,667 - ERROR - server - server.py - Exception inside application: [Errno 10061] Connect call failed ('127.0.0.1', 6379)
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 173, in websocket_connect
+    await self.connect()
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 179, in connect
+    await self.channel_layer.group_add(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 646, in group_add
+    async with self.connection(self.consistent_hash(group)) as connection:
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 902, in __aenter__
+    self.conn = await self.pool.pop()
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 93, in pop
+    conn = await self.create_conn(loop)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels_redis\core.py", line 79, in create_conn
+    return await aioredis.create_redis_pool(**kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\commands\__init__.py", line 188, in create_redis_pool
+    pool = await create_pool(address, db=db,
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 58, in create_pool
+    await pool._fill_free(override_min=False)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\pool.py", line 383, in _fill_free
+    conn = await self._create_new_connection(self._address)
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\connection.py", line 111, in create_connection
+    reader, writer = await asyncio.wait_for(open_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "D:\igor\ameneuro\venv\lib\site-packages\aioredis\stream.py", line 23, in open_connection
+    transport, _ = await get_event_loop().create_connection(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1017, in create_connection
+    raise exceptions[0]
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1002, in create_connection
+    sock = await self._connect_sock(
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 916, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 485, in sock_connect
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\selector_events.py", line 517, in _sock_connect_cb
+    raise OSError(err, f'Connect call failed {address}')
+ConnectionRefusedError: [Errno 10061] Connect call failed ('127.0.0.1', 6379)

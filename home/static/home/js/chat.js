@@ -7,7 +7,7 @@ const timeout = 700;
 let idTimeout;
 
 function connect() {
-	conn = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/chat/"+chat)
+	conn = new WebSocket(wsStart+window.location.hostname+":"+location.port+"/ws/chat/"+chat)
 	conn.onmessage = onmessage
 
 	conn.onclose = (e)=>{
@@ -22,7 +22,7 @@ function connect() {
 	}
 }
 connect()
-conn_u_f = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/user/"+friend)
+conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"/ws/user/"+friend)
 
 function onmessage(e){
 	let data = JSON.parse(e.data)

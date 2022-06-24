@@ -223,7 +223,7 @@ function scroll_event_find(e) {
 function want_add_friend(btn,user) {
 	conn_u.send(JSON.stringify({'type':'want_add_friend', "id":btn.value}))
 
-	conn_u_f = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/user/"+user)
+	conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"/ws/user/"+user)
 	conn_u_f.onopen = ()=>{
 		conn_u_f.send(JSON.stringify({'type':'activity'}))
 		conn_u_f.close()
@@ -235,7 +235,7 @@ function want_add_friend(btn,user) {
 
 function follow(btn,user) {
 	conn_u.send(JSON.stringify({'type':'follow', "id":btn.value}))
-	conn_u_f = new WebSocket("ws://"+window.location.hostname+":"+location.port+"/ws/user/"+user)
+	conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"/ws/user/"+user)
 	conn_u_f.onopen = ()=>{
 		conn_u_f.send(JSON.stringify({'type':'activity'}))
 		conn_u_f.close()
