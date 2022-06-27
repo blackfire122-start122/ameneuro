@@ -1,5 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
+{% load try_url %}
 {% block title %}Chats{% endblock title %}
 
 {% block content_header %}
@@ -29,7 +30,7 @@
 				<input onchange="inp_file_change(this)" class="file_inp_form" type="file" name="file" required="" id="id_file">
 				<label class="input label_file_inp" for="id_file">
 					<h3>File post</h3>
-					<img id="file_post_file" src="{{ user.theme_all.no_media_img.url }}" alt="file"></img>
+					<img id="file_post_file" src="{{ user.theme_all|try_url:'no_media_img' }}" alt="file"></img>
 				</label>
 			</div>
 
@@ -63,7 +64,7 @@
 				<input onchange="file_set(this,'prewiew_img')" class="file_inp_form" type="file" name="preview" accept="image/*" required="" id="id_preview">
 				<label class="input label_file_inp" for="id_preview">
 					<h3>File preview</h3>
-					<img id="prewiew_img" src="{{ user.theme_all.no_media_img.url }}" alt="preview"></img>
+					<img id="prewiew_img" src="{{ user.theme_all|try_url:'no_media_img' }}" alt="preview"></img>
 				</label>
 			</div>
 
@@ -77,7 +78,7 @@
 
 {% block end_scripts %}
 	<script>
-		let img_mus = "{{ user.theme_all.music_img.url }}"
+		let img_mus = "{{ user.theme_all|try_url:'music_img' }}"
 	</script>
 	<script src="{% static 'home/js/add.js' %}"></script>
 {% endblock end_scripts %}

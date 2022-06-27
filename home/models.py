@@ -81,7 +81,8 @@ class Message(models.Model):
 		return self.text
 
 class MessageActivity(models.Model):
-	text = models.TextField(null=True,blank=True) 
+	text = models.TextField(null=True,blank=True)
+	url = models.CharField(max_length=300, null=True,blank=True)
 	from_user = models.ForeignKey("User", on_delete=models.SET_NULL,null=True)
 	file = models.FileField(upload_to='message_activity_file',null=True,blank=True)
 	type_f = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_ma",null=True)
@@ -144,6 +145,20 @@ class AllTheme(models.Model):
 	
 	def __str__(self):
 		return self.name
+
+	@classmethod
+	def get_all_img_fields(cls):
+		img_fields = []
+		for i in cls.__dict__:
+			if i.endswith("img"):img_fields.append(i)
+		return img_fields
+
+	# @classmethod
+	# def get_all_img_names(cls):
+	# 	img_names = []
+	# 	for i in cls.__dict__:
+	# 		if i.endswith("img"):img_names.append(i.replace("_img",""))
+	# 	return img_names
 
 	class Meta:
 		verbose_name = "AllTheme"

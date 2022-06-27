@@ -1,5 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
+{% load try_url %}
 {% block title %}Chats{% endblock title %}
 
 {% block content_header %}
@@ -15,7 +16,7 @@
 			<input placeholder="name" type="text" name="name" maxlength="15" required="" id="id_name">
 			<input onchange="img_set(this)" type="file" name="img" accept="image/*" required="" id="id_img">
 			<label for="id_img">
-				<img class="img_input" src="{{ user.theme_all.no_media_img.url }}">
+				<img class="img_input" src="{{ user.theme_all|try_url:no_media_img }}">
 			</label>
 		</div>
 

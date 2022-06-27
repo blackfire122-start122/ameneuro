@@ -1,5 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
+{% load try_url %}
 
 {% block title %}Music{% endblock title %}
 
@@ -9,12 +10,12 @@
 		<a class="add_playlist" href="{% url 'add_playlist' %}">Add playlist</a>
 	</div>
 	<div class="shared_musics">
-		<img onclick="music_share(this)" class="m_s_img" src="{{ user.theme_all.music_share_img.url }}">
+		<img onclick="music_share(this)" class="m_s_img" src="{{ user.theme_all|try_url:'music_share_img' }}">
 		{% if user.music_shared.all.count != 0 or user.playlists_shared.all.count != 0 %}
 		    <div class="red_point"></div>
 		{% endif %}
 		
-		<img src="{{ user.theme_all.close_img.url }}" class="close_sh_me" onclick="close_sh_me_f()">
+		<img src="{{ user.theme_all|try_url:'close_img' }}" class="close_sh_me" onclick="close_sh_me_f()">
 		<div class="musics_share"></div>
 	</div>
 {% endblock content_header %}

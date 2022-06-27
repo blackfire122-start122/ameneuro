@@ -1,5 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
+{% load try_url %}
 
 {% block title %}Music{% endblock title %}
 
@@ -21,7 +22,7 @@
 	<script src="{% static 'home/js/playlist.js' %}"></script>
 	<style>
 		body{
-			background-image: url("{{ playlist.img.url }}");
+			background-image: url("{{ playlist|try_url:'img' }}");
 			background-repeat: no-repeat;
 			background-position: center;
 		}

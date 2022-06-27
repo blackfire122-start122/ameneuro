@@ -1,6 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
-{% load url_from_options %}
+{% load try_url %}
 {% block title %}Change{% endblock title %}
 
 {% block content_header %}
@@ -39,7 +39,7 @@
 					<div class="file_img">
 						<input onchange="select_file_name(this)" type="file" name="img" id="id_img">
 						<label class="img_file" for="id_img">Image</label>
-						<img class="img_user" src="{{ user.img.url }}">
+						<img class="img_user" src="{{ user|try_url:'img' }}">
 					</div>
 				</div>
 				<div class="inputs">
@@ -88,7 +88,7 @@
 						<input class="inp_opt_img"  onchange="select_file_name(this)" type="file" name="fon_img" accept="image/*" id="id_fon_img">
 						<label class="img_file" for="id_fon_img">Image</label>
 						{% if user.theme_all.fon_img %}
-						    <img class="img_user" src="{{ user.theme_all.fon_img.url }}">
+						    <img class="img_user" src="{{ user.theme_all|try_url:'fon_img' }}">
 						{% endif %}
 						
 					</div>
@@ -101,7 +101,7 @@
 							<div class="file_img">
 								<input class="inp_opt_img" onchange="select_file_name(this)" type="file" name="{{ opt_th }}" accept="image/*" id="id_{{ opt_th }}">
 								<label class="img_file" for="id_{{ opt_th }}">Image</label>
-								<img class="img_user" src="{{ user.theme_all|url_from_options:opt_th }}">
+								<img class="img_user" src="{{ user.theme_all|try_url:opt_th }}">
 							</div>
 						</div>
 					{% endif %}
@@ -117,22 +117,22 @@
 							<div class="def_th_user" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.like_img.url }}">
-									<img class="img_theme" src="{{ i.music_img.url }}">
-									<img class="img_theme" src="{{ i.friends_img.url }}">
-									<img class="img_theme" src="{{ i.settings_img.url }}">
-									<img class="img_theme" src="{{ i.find_img.url }}">
+									<img class="img_theme" src="{{ i|try_url:'like_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'music_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'friends_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'settings_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'find_img' }}">
 								</div>
 							</div>
 						{% else %}
 							<div class="def_th" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.like_img.url }}">
-									<img class="img_theme" src="{{ i.music_img.url }}">
-									<img class="img_theme" src="{{ i.friends_img.url }}">
-									<img class="img_theme" src="{{ i.settings_img.url }}">
-									<img class="img_theme" src="{{ i.find_img.url }}">		
+									<img class="img_theme" src="{{ i|try_url:'like_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'music_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'friends_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'settings_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'find_img' }}">		
 								</div>
 							</div>
 						{% endif %}
@@ -149,11 +149,11 @@
 							<div class="th_user" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.like_img.url }}">
-									<img class="img_theme" src="{{ i.music_img.url }}">
-									<img class="img_theme" src="{{ i.friends_img.url }}">
-									<img class="img_theme" src="{{ i.settings_img.url }}">
-									<img class="img_theme" src="{{ i.find_img.url }}">
+									<img class="img_theme" src="{{ i|try_url:'like_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'music_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'friends_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'settings_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'find_img' }}">
 								</div>
 								<div class="end_element"></div>
 							</div>
@@ -161,21 +161,27 @@
 							<div class="th" id="{{ i.id }}">
 								<h3 onclick="select_theme(this,'{{ i.id }}')" class="name_theme">{{ i|truncatechars:7 }}</h3>
 								<div class="imgs_theme_all">
-									<img class="img_theme" src="{{ i.like_img.url }}">
-									<img class="img_theme" src="{{ i.music_img.url }}">
-									<img class="img_theme" src="{{ i.friends_img.url }}">
-									<img class="img_theme" src="{{ i.settings_img.url }}">
-									<img class="img_theme" src="{{ i.find_img.url }}">
+									<img class="img_theme" src="{{ i|try_url:'like_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'music_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'friends_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'settings_img' }}">
+									<img class="img_theme" src="{{ i|try_url:'find_img' }}">
 								</div>
 								<button class="end_element" type='button' onclick="delete_theme(this)">Delete</button>
 							</div>
 						{% endif %}
 					{% endfor %}
 				</div>
-
 				<div class="inputs">
+					<div class="from_folder">
+						<input class="inp_from_folder" onchange="select_from_folder(this)" type="file" webkitdirectory directory multiple name="from_folder" accept="image/*" id="id_from_folder">
+						<label class="from_folder_select" for="id_from_folder">
+							<h3>Theme from folder</h3>
+							<img class="img_user" src="{% static 'home/images/folder.png' %}">
+						</label>
+					</div>
 					<input name='submit' class="submit" type="submit" value="Save changes theme">
-					<input name='submit' class="new_theme" type="submit" value="Save new theme">	
+					<input name='submit' class="new_theme" type="submit" value="Save new theme">
 				</div>
 			</form>
 		</div>
@@ -184,4 +190,17 @@
 
 {% block end_scripts %}
 	<script src="{% static 'home/js/user_change.js' %}" ></script>
+	<script>
+		let theme_from_folder_ajax = '{% url "theme_from_folder_ajax" %}'
+		let fields = []
+
+		{% for i in fields %}
+			fields.push('{{ i }}')
+		{% endfor %}
+
+		for (var i = fields.length - 1; i >= 0; i--) {
+			fields[i] = fields[i].replace("_img", "")
+		}
+
+	</script>
 {% endblock end_scripts %}

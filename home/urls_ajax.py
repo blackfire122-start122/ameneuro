@@ -27,4 +27,5 @@ urlpatterns = [
     path('chat_find', ajax_views.chat_find_ajax, name='chat_find_ajax'),
     path('get_chats', ajax_views.get_chats_ajax, name='get_chats_ajax'),
     path('send_voice_mes', ajax_views.send_voice_mes_ajax, name='send_voice_mes_ajax'),
+    path('theme_from_folder', ajax_views.theme_from_folder_ajax, name='theme_from_folder_ajax'),
 ]

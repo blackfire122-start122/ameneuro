@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist,Video,TypeFile
-from .forms import ThemeForm,MessageForm,AllTheme,MessageVoiceForm
+from .models import User,Post,Chat,Comment,Theme,TypeMes,Playlist,Video,TypeFile,AllTheme
+from .forms import ThemeForm,MessageForm,AllThemeForm,MessageVoiceForm
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from .services import *
 import logging
 
+all_img_fields = AllTheme.get_all_img_fields()
 logger = logging.getLogger(__name__)
 
 @login_required(login_url='login')
@@ -466,3 +467,26 @@ def get_chats_ajax(request):
 	try:chats = request.user.chats.all()[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
 	except:return HttpResponseNotFound()
 	return render(request, "home/ajax_html/chats.html",{"chats":chats})
+
+import re
+
+@login_required(login_url='login')
+def theme_from_folder_ajax(request):
+	files = {}
+	if request.method == "POST":
+		for i in request.FILES:
+			name = re.sub('[.][a-z]*$', '_img', i)
+			if name in all_img_fields:
+				files[name] = request.FILES[i]
+				
+		form = AllThemeForm(request.POST,files)
+
+		if form.is_valid():
+			new_theme = form.save()
+			request.user.theme_all = new_theme
+			request.user.themes_all.add(new_theme)
+			request.user.save()
+
+		return JsonResponse({"data_text":"OK"}, status=200)
+
+	return HttpResponseBadRequest()

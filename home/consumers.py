@@ -225,7 +225,7 @@ class UserConsumer(AsyncWebsocketConsumer):
             user.music_shared.add(mus)
             type_f = TypeFile.objects.get(type_f="audio")
 
-            ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.scope["user"],readeble=False,type_f=type_f)
+            ma = MessageActivity(text="you shared music: "+mus.name,from_user=self.scope["user"],readeble=False,type_f=type_f,url = "/musics")
             ma.save()
             user.message_activity.add(ma)
 
@@ -254,7 +254,7 @@ class UserConsumer(AsyncWebsocketConsumer):
  
         type_f = TypeFile.objects.filter(type_f="img")[0]
 
-        ma = MessageActivity(text="to you what add to friends: "+friend.username,from_user=self.scope["user"],readeble=False,type_f=type_f,file=friend.img.url)
+        ma = MessageActivity(text="to you what add to friends: "+friend.username,from_user=self.scope["user"],readeble=False,type_f=type_f,file=friend.img.url,url = "/friends")
         ma.save()
         friend.message_activity.add(ma)
 
@@ -264,8 +264,7 @@ class UserConsumer(AsyncWebsocketConsumer):
         follow_to.followers.add(self.scope["user"].id)
         self.scope["user"].follow.add(follow_to.id)
 
-        ma = MessageActivity(text="on you follow: "+self.scope["user"].username,from_user=self.scope["user"],readeble=False)  
-        ma.save()
+        ma = MessageActivity(text="on you follow: "+self.scope["user"].username,from_user=self.scope["user"],readeble=False,url = "/")
         follow_to.message_activity.add(ma)
 
     @database_sync_to_async
@@ -335,9 +334,10 @@ class UserConsumer(AsyncWebsocketConsumer):
 
         post = Post.objects.get(pk=int(self.text_data_json.get("post_id")))
         post.comments.add(com.id)
-        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=post.file,readeble=False,type_f=post.type_p)
-        
+
+        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=post.file,readeble=False,type_f=post.type_p,url = 'post/'+str(post.id))
         ma.save()
+
         com.parent.user.message_activity.add(ma)
 
     @database_sync_to_async
@@ -425,8 +425,7 @@ class UserConsumer(AsyncWebsocketConsumer):
         video = Video.objects.get(pk=int(self.text_data_json.get("video_id")))
         video.comments.add(com.id)
         type_f = TypeFile.objects.get(type_f="video")
-        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=video.file,readeble=False,type_f=type_f)
-        
+        ma = MessageActivity(text="you reply comment: "+com.text,from_user=self.scope["user"],file=video.file,readeble=False,type_f=type_f,url = 'video/'+str(video))
         ma.save()
         com.parent.user.message_activity.add(ma)
 
@@ -452,7 +451,7 @@ class UserConsumer(AsyncWebsocketConsumer):
             user.playlists_shared.add(ps)
             type_f = TypeFile.objects.get(type_f="audio")
 
-            ma = MessageActivity(text="you shared playlist: "+ps.name,from_user=self.scope["user"],readeble=False,type_f=type_f)
+            ma = MessageActivity(text="you shared playlist: "+ps.name,from_user=self.scope["user"],readeble=False,type_f=type_f,url = '/musics')
             ma.save()
             user.message_activity.add(ma)
 

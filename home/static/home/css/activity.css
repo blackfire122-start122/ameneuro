@@ -44,3 +44,10 @@
 .not_point{
 	display: none;
 }
+
+.url_ma{
+	display: flex;
+	width: 85%;
+	justify-content: space-between;
+	text-decoration: none;
+}

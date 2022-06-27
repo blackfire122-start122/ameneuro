@@ -1,5 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
+{% load try_url %}
 {% block title %}User{% endblock title %}
 
 {% block content_header %}
@@ -7,22 +8,22 @@
 	<link rel="stylesheet" href="{% static 'home/css/users.css' %}">
 	{% if user_reg == user %}
 		<a href="{% url 'user_change' %}">
-			<img class="set_img" src="{{ user.theme_all.settings_img.url }}">
+			<img class="set_img" src="{{ user.theme_all|try_url:'settings_img' }}">
 		</a>
 	{% endif %}
 {% endblock content_header %}
 {% block content %}	
 	<header class="header_user">
-		<img class="img_user" src="{{ user.img.url }}" alt="">
+		<img class="img_user" src="{{ user|try_url:'img' }}" alt="">
 		<div class="info_user">
 			<h3 onclick="get_friends()">{{ user.friends.all|length }}<br>Friends</h3>
 			<div class="friends_show">
-				<img src="{{ user.theme_all.close_img.url }}" onclick="close_friends(this)" class="close" id="close_fr">
+				<img src="{{ user.theme_all|try_url:'close_img' }}" onclick="close_friends(this)" class="close" id="close_fr">
 			</div>
 			<h3>{{ posts|length }}<br>Posts</h3>
 			<h3 onclick="get_followers()">{{ user.followers.all|length }}<br>Followers</h3>
 			<div class="followers_show">
-				<img src="{{ user.theme_all.close_img.url }}" onclick="close_followers(this)" class="close" id="close_fl">
+				<img src="{{ user.theme_all|try_url:'close_img' }}" onclick="close_followers(this)" class="close" id="close_fl">
 			</div>
 
 		</div>
@@ -31,7 +32,7 @@
 	<div class="menu_user">
 		<b class="user_name">{{ user.username|truncatechars:11 }}</b>
 		{% if user_reg == user %}
-			<a class="add_post" href="{% url 'add' %}"><img class="add_post_img" src="{{ user.theme_all.add_img.url }}" alt=""></a>
+			<a class="add_post" href="{% url 'add' %}"><img class="add_post_img" src="{{ user.theme_all|try_url:'add_img' }}" alt=""></a>
 		{% elif not user in user_reg.friends.all and not user in user_reg.follow.all %}
 		    <button value="{{ user.id }}" class="btn_follow" onclick="follow(this)">Follow</button>
 		{% else %}
@@ -45,7 +46,7 @@
 		<div class='musics_user'>
 			<h3 onclick="music_show()">Musics</h3>
 			<div class="musics"></div>
-			<img src="{{ user.theme_all.close_img.url }}" onclick="close_musics_f()" class="close_musics">
+			<img src="{{ user.theme_all|try_url:'close_img' }}" onclick="close_musics_f()" class="close_musics">
 		</div>
 	</div>
 	<div class="what_show">

@@ -74,3 +74,32 @@ function select_file_name(file){
 	file_file = file.nextSibling.nextSibling.nextSibling.nextSibling
 	file_file.src = window.URL.createObjectURL(file_inp)
 }
+
+let reg = /[.][a-z]*$/
+
+function select_from_folder(file){
+	let fd = new FormData()
+	for (var i = 0; i < file.files.length; i++) {
+		if(fields.includes(file.files[i].name.replace(reg, ''))){
+			fd.append(file.files[i].name,file.files[i])
+		}
+	}
+
+	fd.append('csrfmiddlewaretoken',document.getElementsByName('csrfmiddlewaretoken')[1].value)
+	fd.append('name',document.getElementById('id_name').value)
+	fd.append('fon_color',document.getElementById('id_fon_color').value)
+	fd.append('text_color',document.getElementById('id_text_color').value)
+	fd.append('header_bg_color',document.getElementById('id_header_bg_color').value)
+	fd.append('header_bg_opacity',document.getElementById('id_header_bg_opacity').value)
+
+	$.ajax({
+		type:"POST",
+		url: theme_from_folder_ajax,
+		data: fd,
+		processData: false,
+		contentType: false,
+		success: function (response) {
+			console.log(response)
+		}
+	})
+}

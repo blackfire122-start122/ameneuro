@@ -34,7 +34,7 @@
 	outline: 0;
 }
 
-.submit, .exit, .new_theme{
+.submit, .exit, .new_theme, .from_folder{
     background-color: #08d;
     border-radius: 12px;
     border: 0;
@@ -55,7 +55,7 @@
 	background: red;
 }
 
-.inp_opt_img, #id_img{
+.inp_opt_img, #id_img, .inp_from_folder{
 	display: none;
 }
 
@@ -160,3 +160,16 @@
 	position: relative;
 	right: 35%;
 }
+
+.from_folder{
+	display: flex;
+	align-items: center;
+}
+
+.from_folder_select{
+	display: flex;
+	align-items: center;	
+	justify-content: space-around;
+	width: 100%;
+}
+

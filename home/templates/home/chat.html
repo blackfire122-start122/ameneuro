@@ -1,5 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
+{% load try_url %}
 
 {% block title %}Chat{% endblock title %}
 
@@ -7,7 +8,7 @@
 	<link rel="stylesheet" href="{% static 'home/css/chat.css' %}">
 	<h4 class="username">{{ chat.chat_friend.user }}</h4>
 	<div class="opt_mus">
-		<img onclick="chat_options(this)" class='img_opt' src="{{ user.theme_all.options_img.url }}">
+		<img onclick="chat_options(this)" class='img_opt' src="{{ user.theme_all|try_url:'options_img' }}">
 	</div>
 {% endblock content_header %}
 
@@ -26,14 +27,14 @@
 		<input onkeydown="inp_msg_user(this)" placeholder='message' id="msg_user" type="text">
 		<div class="menu_inp">
 			<button id="btn_send" onclick="send_msg_func()">Send</button>
-			<img onclick="send_file_mes()" class="file_img" src="{{ user.theme_all.file_send_img.url }}">
+			<img onclick="send_file_mes()" class="file_img" src="{{ user.theme_all|try_url:'file_send_img' }}">
 			<div class="file_img">
 				<div class="circle"></div>
 				<div class="circle"></div>
 				<div class="circle"></div>
 				<div class="circle"></div>
 				<div class="circle"></div>
-				<img onmousedown="send_voice_mes(this)" ontouchstart="send_voice_mes(this)" class=" microphone" src="{{ user.theme_all.microphone_img.url }}">
+				<img onmousedown="send_voice_mes(this)" ontouchstart="send_voice_mes(this)" class=" microphone" src="{{ user.theme_all|try_url:'microphone_img' }}">
 			</div>
 			
 		</div>
@@ -46,13 +47,13 @@
 			<button class="emogi_tab_btn" onclick = "select_emoji_tab(this, 'emoji_tab_0')">1</button>
 			<button class="emogi_tab_btn" onclick = "select_emoji_tab(this, 'emoji_tab_1')">2</button>
 			<button class="emogi_tab_btn" onclick = "select_emoji_tab(this, 'emoji_tab_2')">3</button>
-			<img src="{{ user.theme_all.close_img.url }}" class="close_emoji" onclick="close_emoji()">
+			<img src="{{ user.theme_all|try_url:'close_img' }}" class="close_emoji" onclick="close_emoji()">
 		</div>
 		<div id='emojis'></div>
 	</div>
 
 	<div class="reply">
-		<img src="{{ user.theme_all.close_img.url }}" class="close_reply" onclick="reply_close()">
+		<img src="{{ user.theme_all|try_url:'close_img' }}" class="close_reply" onclick="reply_close()">
 	</div>
 
 	<div id="csrf_voice">
@@ -62,7 +63,7 @@
 	<style>
 		body{
 			{% if chat.theme.background %}
-				background-image: url("{{ chat.theme.background.url }}");
+				background-image: url("{{ chat.theme|try_url:'background' }}");
 			{% endif %}
 
 			background-size: cover;
@@ -88,7 +89,7 @@
 		let chat_get_mess_ajax = "{% url 'chat_get_mess_ajax' %}"
 		let send_file_mes_ajax = "{% url 'send_file_mes_ajax' %}"
 		let send_voice_mes_ajax = "{% url 'send_voice_mes_ajax' %}"
-		let user_music_theme = "{{ user.theme_all.music_img.url }}"
+		let user_music_theme = "{{ user.theme_all|try_url:'music_img' }}"
 	</script>
 	<script src="{% static 'home/js/chat.js' %}"></script>
 	<script src="{% static 'home/js/style_chat.js' %}"></script>

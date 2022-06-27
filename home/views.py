@@ -20,6 +20,8 @@ from django.contrib.auth.forms import PasswordResetForm
 from .tasks import send_email
 from .services import *
 
+all_img_fields = AllTheme.get_all_img_fields()
+
 class home(LoginRequiredMixin,TemplateView):
 	template_name = "home/home.html"
 	login_url = 'login'
@@ -233,10 +235,7 @@ class user_change(LoginRequiredMixin,TemplateView):
 		self.form_theme = AllThemeForm(instance=request.user.theme_all)
 		self.default_themes = AllTheme.objects.filter(default=True)
 		self.error = ''
-		self.fields = []
-
-		for i in request.user.theme_all.__dict__:
-			if i.endswith("img"):self.fields.append(i)
+		self.fields = all_img_fields
 
 		return super().get(request,*args, **kwargs)
 
@@ -245,10 +244,7 @@ class user_change(LoginRequiredMixin,TemplateView):
 		self.form_theme = AllThemeForm(instance=request.user.theme_all)
 		self.default_themes = AllTheme.objects.filter(default=True)
 		self.error = ''
-		self.fields = []
-		
-		for i in request.user.theme_all.__dict__:
-			if i.endswith("img"):self.fields.append(i)
+		self.fields = all_img_fields
 			
 		if request.POST['submit'] == 'Save changes':
 			self.form_user = ChangeForm(request.POST,request.FILES,instance=request.user)
@@ -274,11 +270,7 @@ class user_change(LoginRequiredMixin,TemplateView):
 				theme_all_update = self.form_theme.save()
 
 				if request.POST['submit'] == 'Save new theme':
-					fields = []
-					for i in theme_all_update.__dict__:
-						if i.endswith("img"):fields.append(i)
-
-					for i in fields:
+					for i in self.fields:
 						if getattr(theme_all_update,i).name:
 							new_file = ContentFile(getattr(theme_all_update,i).read())
 							new_file.name = getattr(theme_all_update,i).name.split("/")[-1]
@@ -298,8 +290,7 @@ class user_change(LoginRequiredMixin,TemplateView):
 		context["form_theme"]= self.form_theme
 		context["default_themes"]= self.default_themes
 		context["error"]= self.error
-		context["fields"]= self.fields
-
+		context["fields"] = self.fields
 		return context
 
 class musics_all(LoginRequiredMixin,TemplateView):

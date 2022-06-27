@@ -14,6 +14,8 @@ from .models import User, Post, TypeFile, Theme, Music, Message, AllTheme, TypeM
 from django.conf import settings
 import magic
 
+all_img_fields = AllTheme.get_all_img_fields()
+
 class RegisterForm(UserCreationForm):
 	def __init__(self,*args,**kwargs):
 		super().__init__(*args,**kwargs)
@@ -125,32 +127,7 @@ class AllThemeForm(ModelForm):
 				"text_color",
 				"header_bg_color",
 				"header_bg_opacity",
-				"fon_img",
-				"comment_img",
-				"like_img",
-				"back_img",
-				"music_img",
-				"save_img",
-				"add_img",
-				"chats_img",
-				"find_img",
-				"friends_img",
-				"activity_img",
-				"menu_img",
-				"settings_img",
-				"play_in_all_img",
-				"no_media_img",
-				"file_send_img",
-				"options_img",
-				"pause_img",
-				"play_img",
-				"music_share_img",
-				"end_scroll_img",
-				"music_left_img",
-				"music_right_img",
-				"close_img",
-				"turn_over_img",
-		]+fields_text
+		]+all_img_fields
 		
 		widgets = {i:TextInput(attrs={'class':'form_name_change','placeholder':i}) for i in fields_text}
 

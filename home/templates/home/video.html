@@ -1,6 +1,6 @@
 {% extends 'home/shablons/base.html' %}
 {% load static %}
-
+{% load try_url %}
 {% block title %}Post{% endblock title %}
 
 {% block content_header %}
@@ -14,14 +14,14 @@
 {% block content %}	
 	<video controls class="video_video" src="{% url 'stream_video' video.id %}"></video>
 	<div class='menu_video'>
-		<img class="img_user_video" src="{{ video.user_pub.img.url }}">
+		<img class="img_user_video" src="{{ video.user_pub|try_url:'img' }}">
 		<h3>{{ video.name|truncatechars:25 }}</h3>
 		<time class="time">{{ video.date }}</time>
 		{% if user in video.likes.all and not user.is_anonymous %}
-			<img onclick="not_like_video(this,'{{ video.id }}')" style="opacity:0.5" class="like" src="{{ user.theme_all.like_img.url }}">
+			<img onclick="not_like_video(this,'{{ video.id }}')" style="opacity:0.5" class="like" src="{{ user.theme_all|try_url:'like_img' }}">
 			<span id="like_count">{{ video.likes.count }}</span>
 		{% elif not user.is_anonymous %}			    
-			<img class="like" onclick="like_video(this,'{{ video.id }}')" src="{{ user.theme_all.like_img.url }}">
+			<img class="like" onclick="like_video(this,'{{ video.id }}')" src="{{ user.theme_all|try_url:'like_img' }}">
 			<span id="like_count">{{ video.likes.count }}</span>
 		{% endif %}
 	</div>
@@ -32,7 +32,7 @@
 	    
 		<div class="comments_btn">
 			<div>
-				<img class="comments_img" onclick="comments(this)" src="{{ user.theme_all.comment_img.url }}" alt="">
+				<img class="comments_img" onclick="comments(this)" src="{{ user.theme_all|try_url:'comment_img' }}" alt="">
 				<span>{{ video.comments.count }}</span>
 			</div>
 

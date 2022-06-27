@@ -1,4 +1,5 @@
 {% load static %}
+{% load try_url %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,20 +21,20 @@
 				<button id="posts" onclick="wath_now(this,'posts')" class="btn_wath_now">Posts</button>
 				<button onclick="wath_now(this,'videos')" class="btn_wath_now">Videos</button>
 			</div>
-			<a href="{% url 'user' user %}"><img class="link_user" src="{{ user.img.url }}"></a>
+			<a href="{% url 'user' user %}"><img class="link_user" src="{{ user|try_url:'img' }}"></a>
 		</div>
 		<div class="friends_and_user">
 			{% with all_friends=user.friends.all %}
 				{% for f in all_friends %}
 					<a class="user_header" href="{% url 'user' f.username %}">
-						<img class="img_user" src="{{ f.img.url }}">
+						<img class="img_user" src="{{ f|try_url:'img' }}">
 						<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
 					</a>
 				{% endfor %}
 				{% for f in user.follow.all %}
 					{% if f not in user.all_friends %}
 						<a class="user_header" href="{% url 'user' f.username %}">
-							<img class="img_user" src="{{ f.img.url }}">
+							<img class="img_user" src="{{ f|try_url:'img' }}">
 							<h4 class="name_user">{{ f.username|truncatechars:7 }}</h4>
 						</a>
 					{% endif %}
@@ -48,22 +49,22 @@
 
 	<div class="menu_home_btn">
 		<div class="menu_home">
-			<a class="link_menu" href="{% url 'chats' %}"><div id ="chats" class="red_point"><p>{{ chat_not_read_count }}</p></div><img class="img_main_link" src="{{ user.theme_all.chats_img.url }}"></a>
+			<a class="link_menu" href="{% url 'chats' %}"><div id ="chats" class="red_point"><p>{{ chat_not_read_count }}</p></div><img class="img_main_link" src="{{ user.theme_all|try_url:'chats_img' }}"></a>
 
-			<a class="link_menu" href="{% url 'find' %}"><img class="img_main_link" src="{{ user.theme_all.find_img.url }}"></a>
+			<a class="link_menu" href="{% url 'find' %}"><img class="img_main_link" src="{{ user.theme_all|try_url:'find_img' }}"></a>
 
-			<a class="link_menu" href="{% url 'friends' %}"><div id ="friends" class="red_point"><p>0</p></div><img class="img_main_link" src="{{ user.theme_all.friends_img.url }}"></a>
+			<a class="link_menu" href="{% url 'friends' %}"><div id ="friends" class="red_point"><p>0</p></div><img class="img_main_link" src="{{ user.theme_all|try_url:'friends_img' }}"></a>
 
-			<a class="link_menu" href="{% url 'musics' %}"><div id ="musics" class="red_point"><p>{{ music_shared }}</p></div><img class="img_main_link" src="{{ user.theme_all.music_img.url }}"></a>
+			<a class="link_menu" href="{% url 'musics' %}"><div id ="musics" class="red_point"><p>{{ music_shared }}</p></div><img class="img_main_link" src="{{ user.theme_all|try_url:'music_img' }}"></a>
 
-			<a class="link_menu" href="{% url 'activity' %}"><div id ="activity" class="red_point"><p>{{ message_activity }}</p></div><img class="img_main_link" src="{{ user.theme_all.activity_img.url }}"></a>
+			<a class="link_menu" href="{% url 'activity' %}"><div id ="activity" class="red_point"><p>{{ message_activity }}</p></div><img class="img_main_link" src="{{ user.theme_all|try_url:'activity_img' }}"></a>
 		</div>
-		<img onclick="menu_show(this)" class="link_menu" src="{{ user.theme_all.menu_img.url }}">
+		<img onclick="menu_show(this)" class="link_menu" src="{{ user.theme_all|try_url:'menu_img' }}">
 		<div id ="menu_id" class="red_point"></div>
 	</div>
 
 	<div class="friends_share">
-		<img src="{{ user.theme_all.close_img.url }}" class="close_sh" onclick="close_sh()">
+		<img src="{{ user.theme_all|try_url:'close_img' }}" class="close_sh" onclick="close_sh()">
 		<div class="menu_post_share">
 			<div class="post_share"></div>
 			<div class="inputs_post_share">
@@ -82,10 +83,10 @@
 		let post_ajax = "{% url 'post_ajax' %}"
 		let video_ajax = "{% url 'video_ajax' %}"
 		let share_ch_ajax = "{% url 'share_ch_ajax' %}"
-		let play_img = "{{ user.theme_all.play_img.url }}"
-		let pause_img = "{{ user.theme_all.pause_img.url }}"
-		let img_left = "{{ user.theme_all.music_left_img.url }}"
-		let img_right = "{{ user.theme_all.music_right_img.url }}"
+		let play_img = "{{ user.theme_all|try_url:'play_img' }}"
+		let pause_img = "{{ user.theme_all|try_url:'pause_img' }}"
+		let img_left = "{{ user.theme_all|try_url:'music_left_img' }}"
+		let img_right = "{{ user.theme_all|try_url:'music_right_img' }}"
 		let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 
 		let get_posts_how = {{ get_posts_how }}

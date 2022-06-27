@@ -1,4 +1,5 @@
 {% load static %}
+{% load try_url %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
 </head>
 <body>
 	<header class="back_header">
-		<img onclick="window.history.back()" class="back_img" src="{{ user.theme_all.back_img.url }}">
+		<img onclick="window.history.back()" class="back_img" src="{{ user.theme_all|try_url:'back_img' }}">
 		{% block content_header %}
 		{% endblock content_header %}
 	</header>
@@ -33,13 +34,13 @@
 				let username = "{{ user }}"
 			{% endif %}
 
-			let play_img = "{{ user.theme_all.play_img.url }}"
-			let pause_img = "{{ user.theme_all.pause_img.url }}"
+			let play_img = "{{ user.theme_all|try_url:'play_img' }}"
+			let pause_img = "{{ user.theme_all|try_url:'pause_img' }}"
 			let post_ajax = "{% url 'post_ajax' %}"
 			let musics_all_ajax = "{% url 'musics_all_ajax' %}"
 			let share_ch_ajax = "{% url 'share_ch_ajax' %}"
-			let img_left = "{{ user.theme_all.music_left_img.url }}"
-			let img_right = "{{ user.theme_all.music_right_img.url }}"
+			let img_left = "{{ user.theme_all|try_url:'music_left_img' }}"
+			let img_right = "{{ user.theme_all|try_url:'music_right_img' }}"
 
 		</script>
 		<script src="{% static 'home/js/jquery-3.6.0.min.js' %}"></script>
