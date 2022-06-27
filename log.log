@@ -1054,3 +1054,374 @@ ValueError: Cannot add "<MessageActivity: on you follow: igor>": the value for f
 2022-06-27 17:26:04,393 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
 2022-06-27 17:26:04,393 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.07, 192.168.0.105:59571][0m
 2022-06-27 17:26:04,397 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.08, 192.168.0.105:59575][0m
+2022-06-27 17:31:15,064 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:31:15,064 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:31:15,064 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:31:15,088 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.12, 192.168.0.105:59863][0m
+2022-06-27 17:31:15,108 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.15, 192.168.0.105:59859][0m
+2022-06-27 17:31:15,108 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:59858][0m
+2022-06-27 17:31:16,250 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:31:16,250 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:31:16,254 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.11, 192.168.0.105:59859][0m
+2022-06-27 17:31:16,254 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:31:16,270 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.13, 192.168.0.105:59863][0m
+2022-06-27 17:31:16,278 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 192.168.0.105:59858][0m
+2022-06-27 17:31:48,323 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:31:48,327 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.101:55858][0m
+2022-06-27 17:31:48,331 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:31:48,335 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.101:55862][0m
+2022-06-27 17:31:48,343 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 17:31:48,347 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 192.168.0.101:55866][0m
+2022-06-27 17:31:50,752 - ERROR - server - server.py - Exception inside application: Cannot add "<MessageActivity: on you follow: admin-ameneuro>": the value for field "messageactivity" is None
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 499, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 268, in follow
+    follow_to.message_activity.add(ma)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1048, in add
+    self._add_items(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1263, in _add_items
+    target_ids = self._get_target_ids(target_field_name, objs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1186, in _get_target_ids
+    raise ValueError(
+ValueError: Cannot add "<MessageActivity: on you follow: admin-ameneuro>": the value for field "messageactivity" is None
+2022-06-27 17:32:06,489 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 17:32:06,492 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.101:55880][0m
+2022-06-27 17:34:29,431 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:34:29,431 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:34:29,435 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.101:55900][0m
+2022-06-27 17:34:29,443 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.101:55902][0m
+2022-06-27 17:34:29,462 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 17:34:29,463 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 192.168.0.101:55906][0m
+2022-06-27 17:34:33,744 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:34:33,756 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.101:55900][0m
+2022-06-27 17:34:33,764 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:34:33,764 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 17:34:33,768 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.101:55914][0m
+2022-06-27 17:34:33,772 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.101:55916][0m
+2022-06-27 17:35:35,621 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:35:35,623 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:35:35,624 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.101:55922][0m
+2022-06-27 17:35:35,624 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:35:35,627 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.101:55930][0m
+2022-06-27 17:35:35,630 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.101:55928][0m
+2022-06-27 17:35:37,326 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:35:37,326 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:35:37,330 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.06, 192.168.0.101:55922][0m
+2022-06-27 17:35:37,338 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:35:37,338 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.101:55928][0m
+2022-06-27 17:35:37,342 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.101:55930][0m
+2022-06-27 17:35:59,921 - WARNING - log - log.py - Not Found: /media/media/user_img/spiderman-1.jpg
+2022-06-27 17:35:59,921 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:35:59,921 - WARNING - runserver - runserver.py - [33mHTTP GET /media/media/user_img/spiderman-1.jpg 404 [0.06, 192.168.0.105:60071][0m
+2022-06-27 17:35:59,933 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.07, 192.168.0.105:60072][0m
+2022-06-27 17:43:28,960 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:43:28,964 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.02, 192.168.0.101:56026][0m
+2022-06-27 17:43:29,012 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:43:29,012 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:43:29,012 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.04, 192.168.0.101:56036][0m
+2022-06-27 17:43:29,023 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.101:56028][0m
+2022-06-27 17:43:32,017 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:43:32,021 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.02, 192.168.0.101:56026][0m
+2022-06-27 17:43:32,041 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:43:32,045 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.101:56044][0m
+2022-06-27 17:43:32,057 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 17:43:32,057 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.101:56046][0m
+2022-06-27 17:43:37,841 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:43:37,845 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:60474][0m
+2022-06-27 17:43:37,849 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:43:37,853 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 17:43:37,857 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.09, 192.168.0.105:60483][0m
+2022-06-27 17:43:37,893 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.12, 192.168.0.105:60496][0m
+2022-06-27 17:43:37,912 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 17:43:37,916 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.13, 192.168.0.105:60498][0m
+2022-06-27 17:43:40,233 - WARNING - log - log.py - Not Found: /media/media/user_img/spiderman-1.jpg
+2022-06-27 17:43:40,236 - WARNING - runserver - runserver.py - [33mHTTP GET /media/media/user_img/spiderman-1.jpg 404 [0.05, 192.168.0.105:60498][0m
+2022-06-27 17:43:40,236 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:43:40,240 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.05, 192.168.0.105:60496][0m
+2022-06-27 17:49:51,393 - WARNING - log - log.py - Not Found: /media/media/user_img/spiderman-1.jpg
+2022-06-27 17:49:51,397 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:49:51,397 - WARNING - runserver - runserver.py - [33mHTTP GET /media/media/user_img/spiderman-1.jpg 404 [0.05, 192.168.0.105:60769][0m
+2022-06-27 17:49:51,401 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.05, 192.168.0.105:60771][0m
+2022-06-27 17:49:52,422 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:49:52,426 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 17:49:52,430 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:60773][0m
+2022-06-27 17:49:52,430 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:49:52,434 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 192.168.0.105:60770][0m
+2022-06-27 17:49:52,442 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:60772][0m
+2022-06-27 17:49:52,574 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 17:49:52,574 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.16, 192.168.0.105:60768][0m
+2022-06-27 17:49:53,788 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 17:49:53,804 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.12, 192.168.0.105:60773][0m
+2022-06-27 17:49:53,812 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 17:49:53,816 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 17:49:53,824 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 192.168.0.105:60770][0m
+2022-06-27 17:49:53,836 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.14, 192.168.0.105:60769][0m
+2022-06-27 17:54:50,373 - ERROR - server - server.py - Exception inside application: Field 'id' expected a number but got ''.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1988, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 505, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 461, in no_add_friend
+    self.scope.get('user').friend_want_add.remove(self.text_data_json.get('id'))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1068, in remove
+    self._remove_items(self.source_field_name, self.target_field_name, *objs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1360, in _remove_items
+    self.through._default_manager.using(db).filter(filters).delete()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1071, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1089, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1096, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1502, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1532, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1358, in build_filter
+    return self._add_q(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1532, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1448, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1273, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 77, in get_prep_lookup
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 77, in <listcomp>
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1990, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got ''.
+2022-06-27 17:55:18,772 - ERROR - server - server.py - Exception inside application: Field 'id' expected a number but got ''.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1988, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 506, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 462, in no_add_friend
+    self.scope.get('user').friend_want_add.remove(self.text_data_json.get('id'))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1068, in remove
+    self._remove_items(self.source_field_name, self.target_field_name, *objs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1360, in _remove_items
+    self.through._default_manager.using(db).filter(filters).delete()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1071, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1089, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1096, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1502, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1532, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1358, in build_filter
+    return self._add_q(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1532, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1448, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1273, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 77, in get_prep_lookup
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 77, in <listcomp>
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1990, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got ''.
+2022-06-27 17:55:31,998 - ERROR - server - server.py - Exception inside application: Field 'id' expected a number but got ''.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1988, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: ''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 506, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 462, in no_add_friend
+    self.scope.get('user').friend_want_add.remove(self.text_data_json.get('id'))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1068, in remove
+    self._remove_items(self.source_field_name, self.target_field_name, *objs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 1360, in _remove_items
+    self.through._default_manager.using(db).filter(filters).delete()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1071, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1089, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1096, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1502, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1532, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1358, in build_filter
+    return self._add_q(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1532, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1448, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1273, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 77, in get_prep_lookup
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_lookups.py", line 77, in <listcomp>
+    self.rhs = [target_field.get_prep_value(v) for v in self.rhs]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1990, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'id' expected a number but got ''.

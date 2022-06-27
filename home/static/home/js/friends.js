@@ -19,6 +19,11 @@ function add_friend(btn) {
 	btn.style.display = "none"
 }
 
+function no_add_friend(btn) {
+	conn_u.send(JSON.stringify({'type':'no_add_friend', "id":btn.value}))
+	btn.parentNode.remove()
+}
+
 function get_friends(){
 	$.ajax({
 		type: $(this).attr('post'),

@@ -264,7 +264,8 @@ class UserConsumer(AsyncWebsocketConsumer):
         follow_to.followers.add(self.scope["user"].id)
         self.scope["user"].follow.add(follow_to.id)
 
-        ma = MessageActivity(text="on you follow: "+self.scope["user"].username,from_user=self.scope["user"],readeble=False,url = "/")
+        ma = MessageActivity(text="on you follow: "+self.scope["user"].username,from_user=self.scope["user"],readeble=False,url = "user/"+self.scope["user"].username)
+        ma.save()
         follow_to.message_activity.add(ma)
 
     @database_sync_to_async
@@ -455,6 +456,10 @@ class UserConsumer(AsyncWebsocketConsumer):
             ma.save()
             user.message_activity.add(ma)
 
+    @database_sync_to_async
+    def no_add_friend(self):
+        self.scope.get('user').friend_want_add.remove(self.text_data_json.get('id'))
+
     types = {'add_mus_share':add_mus_share,
         'not_add_mus_share':not_add_mus_share,
         'add_to_me':add_to_me,
@@ -484,7 +489,8 @@ class UserConsumer(AsyncWebsocketConsumer):
         'ps_share':ps_share,
         'add_ps_share':add_ps_share,
         'not_add_ps_share':not_add_ps_share,
-        'delete_ps_form_me':delete_ps_form_me
+        'delete_ps_form_me':delete_ps_form_me,
+        'no_add_friend':no_add_friend
     }
     types_not_return = {
         'add_to_playlists':add_to_playlists,

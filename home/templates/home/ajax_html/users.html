@@ -38,6 +38,7 @@
 						<img class="img_f" src={{ u.img.url }}>
 						<h4> {{ u.username }}</h4>
 					</div>
+					<button class="btn_friend_add" value={{ u.id }} onclick="no_add_friend(this)">Do not add</button>
 					<button class="btn_friend_add" value={{ u.id }} onclick="add_friend(this)">Add</button>
 				</div>
 				{% define "continue" False %}

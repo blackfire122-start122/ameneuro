@@ -136,6 +136,6 @@ chats voice message *
 ____________________________v5____________________________
 theme read from folder *
 urls in activity *
-no add
+no add friend want *
 no friend
 big files in celery
