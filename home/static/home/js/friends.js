@@ -16,7 +16,25 @@ function add_chat(btn) {
 
 function add_friend(btn) {
 	conn_u.send(JSON.stringify({'type':'add_friend', "id":btn.value}))
-	btn.style.display = "none"
+	
+	let pn = btn.parentNode
+
+	let button = document.createElement('button')
+	button.innerText = 'Add chat'
+	button.className = "write_btn"
+	button.value = btn.value
+	button.onclick = () => {add_chat(button)}
+
+	let button_del = document.createElement('button')
+	button_del.innerText = 'Delete friend'
+	button_del.className = "btn_delete_friend"
+	button_del.onclick = () => {del_friend(button_del,btn.value)}
+
+	pn.append(button_del)
+	pn.append(button)
+
+	pn.childNodes[3].remove()
+	pn.childNodes[4].remove()
 }
 
 function no_add_friend(btn) {

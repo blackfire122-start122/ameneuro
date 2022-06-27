@@ -52,7 +52,7 @@
 	right: 5%;
 }
 
-.btn_friend_add, .write_btn{
+.btn_friend_add, .write_btn, .btn_friend_no_add, .btn_delete_friend{
 	border: none;
 	background:rgba(255, 255, 255, 0.1);
 	border-radius: 5px;
@@ -61,4 +61,10 @@
 	height: 1.7em;
 	position: relative;
 	right: 2%;
+}
+
+.link_user{
+	text-decoration: none;
+	position: relative;
+	left: 10px;
 }

@@ -137,5 +137,7 @@ ____________________________v5____________________________
 theme read from folder *
 urls in activity *
 no add friend want *
-no friend
+delete friend in friends *
+no add 2 chats
+follow no follow
 big files in celery

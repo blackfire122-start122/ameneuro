@@ -36,9 +36,11 @@
 				<div class="u_f">
 					<div class="img_name">
 						<img class="img_f" src={{ u.img.url }}>
-						<h4> {{ u.username }}</h4>
+						<a class="link_user" href="{% url 'user' u.username %}">
+							<h4> {{ u.username }}</h4>
+						</a>
 					</div>
-					<button class="btn_friend_add" value={{ u.id }} onclick="no_add_friend(this)">Do not add</button>
+					<button class="btn_friend_no_add" value={{ u.id }} onclick="no_add_friend(this)">Do not add</button>
 					<button class="btn_friend_add" value={{ u.id }} onclick="add_friend(this)">Add</button>
 				</div>
 				{% define "continue" False %}
@@ -49,8 +51,11 @@
 					<div class="u_f">
 						<div class="img_name">
 							<img class="img_f" src={{ u.img.url }}>
-							<h4> {{ u.username }}</h4>
+							<a class="link_user" href="{% url 'user' u.username %}">
+								<h4> {{ u.username }}</h4>
+							</a>
 						</div>
+						<button onclick="del_friend(this,{{ u.id }})" class="btn_delete_friend"> Delete friend</button>
 						<button class="write_btn" value="{{ u.id }}" onclick="add_chat(this)"> Add chat</button>
 					</div>
 					{% define "continue" False %}
@@ -59,12 +64,15 @@
 			{% endif %}
 
 			{% if continue %}
-				<a href="{% url 'user' u.username %}" class="u_f">
+				<div class="u_f">
 					<div class="img_name">
 						<img class="img_f" src={{ u.img.url }}>
-						<h4> {{ u.username }}</h4>
+						<a class="link_user" href="{% url 'user' u.username %}">
+							<h4> {{ u.username }}</h4>
+						</a>
 					</div>
-				</a>
+					<button onclick="del_friend(this,{{ u.id }})" class="btn_delete_friend"> Delete friend</button>
+				</div>
 			{% endif %}
 		{% endfor %}
 	{% endwith %}
