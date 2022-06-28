@@ -21,6 +21,7 @@ function onmessage_u(e){
 		let msg_point = document.getElementById('chats')
 
 		if (msg_span){
+			msg_span.className = 'not_read'
 			msg_span.innerText = data["msg"]
 			msg_span.parentNode.parentNode.childNodes[5].className = "point"
 		}

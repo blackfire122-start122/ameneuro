@@ -285,6 +285,9 @@ class UserConsumer(AsyncWebsocketConsumer):
 
         chat = Chat(chat_id=gen_rand_id(30))
         chat_friend = Chat()
+
+        first_mes = Message(user=self.scope.get('user'),text='hi',type_m=TypeMes.objects.get(type_m='msg'))
+
         chat_friend.chat_id = chat.chat_id
         
         chat.theme=theme_chat
@@ -293,8 +296,13 @@ class UserConsumer(AsyncWebsocketConsumer):
         chat.user=self.scope["user"]
         chat_friend.user = friend
 
+        first_mes.save()
+
         chat.save()
         chat_friend.save()
+
+        chat.messages.add(first_mes)
+        chat_friend.messages.add(first_mes)
 
         chat.chat_friend=chat_friend
         chat_friend.chat_friend = chat

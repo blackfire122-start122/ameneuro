@@ -1,35 +1,37 @@
 {% load users %}
 
 {% if type == "friends" or type == "all" or type == "followers"%}
-	{% for u in users %}
-		{% if u != user %}
-			<div class="user">
-				<a href="{% url 'user' u %}" class="img_name">
-					<img class="img_f" src={{ u.img.url }}>
-					<h4> {{ u.username }}</h4>
-				</a>
-				{% if not u in user.friends.all %}
-					<div class="friend_follow">
-						{% if not u in user.follow.all %}
-						    <button value="{{ u.id }}" onclick="follow(this,'{{ u }}')" class="btn_follow" >Follow</button>
-						{% else %}
-							<p id="{{ u.id }}" class="follow">follow</p>
-						{% endif %}
+	{% with u_f_a=user.friends.all u_fol_a=user.follow.all %}
+		{% for u in users %}
+			{% if u != user %}
+				<div class="user">
+					<a href="{% url 'user' u %}" class="img_name">
+						<img class="img_f" src={{ u.img.url }}>
+						<h4> {{ u.username }}</h4>
+					</a>
+					{% if not u in u_f_a %}
+						<div class="friend_follow">
+							{% if not u in u_fol_a %}
+							    <button value="{{ u.id }}" onclick="follow(this,'{{ u }}')" class="btn_follow" >Follow</button>
+							{% else %}
+								<p id="{{ u.id }}" class="follow">follow</p>
+							{% endif %}
 
-						<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this,'{{ u }}')">Add friend</button>
-					</div>
-				{% endif %}
+							<button class="btn_friend_add" value="{{ u.id }}" onclick="want_add_friend(this,'{{ u }}')">Add friend</button>
+						</div>
+					{% endif %}
 
-				{% if type == 'friends' and u in user.friends.all %}
-					<button onclick="del_friend(this, {{ u.id }})" class="del_friend_btn">Delete friend</button>
-				{% endif %}
+					{% if type == 'friends' and u in u_f_a %}
+						<button onclick="del_friend(this, {{ u.id }})" class="del_friend_btn">Delete friend</button>
+					{% endif %}
 
-			</div>
-		{% endif %}
-	{% endfor %}
+				</div>
+			{% endif %}
+		{% endfor %}
+	{% endwith %}
 
 {% elif type == "friends_and_want" %}
-    {% with friend_want_add=user.friend_want_add.all %}
+    {% with friend_want_add=user.friend_want_add.all u_c_a=user.chats.all %}
 		{% for u in users %}
 			{% define "continue" True %}
 			{% if u in friend_want_add %}
@@ -47,7 +49,7 @@
 			{% endif %}
 
 			{% if continue %}
-				{% if user.chats.all|filter_ch:u %}
+				{% if u_c_a|filter_ch:u %}
 					<div class="u_f">
 						<div class="img_name">
 							<img class="img_f" src={{ u.img.url }}>

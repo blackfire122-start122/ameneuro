@@ -464,8 +464,10 @@ def get_chats_ajax(request):
 		logger.warning(str(e))
 		return HttpResponseBadRequest()
 	
-	try:chats = request.user.chats.all()[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+
+	try:chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
 	except:return HttpResponseNotFound()
+
 	return render(request, "home/ajax_html/chats.html",{"chats":chats})
 
 import re

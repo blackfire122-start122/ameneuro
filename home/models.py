@@ -77,6 +77,7 @@ class Message(models.Model):
 	type_file = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_mes",null=True,blank=True)
 	date = models.DateTimeField(null=True,default=now)
 	readeble = models.BooleanField(null=True,default=False)
+
 	def __str__(self):
 		return self.text
 
@@ -88,6 +89,7 @@ class MessageActivity(models.Model):
 	type_f = models.ForeignKey("TypeFile", on_delete=models.SET_NULL,related_name="type_file_ma",null=True)
 	date = models.DateTimeField(null=True,default=now)
 	readeble = models.BooleanField(null=True,default=False)
+
 	def __str__(self):
 		return self.text
 
@@ -152,13 +154,6 @@ class AllTheme(models.Model):
 		for i in cls.__dict__:
 			if i.endswith("img"):img_fields.append(i)
 		return img_fields
-
-	# @classmethod
-	# def get_all_img_names(cls):
-	# 	img_names = []
-	# 	for i in cls.__dict__:
-	# 		if i.endswith("img"):img_names.append(i.replace("_img",""))
-	# 	return img_names
 
 	class Meta:
 		verbose_name = "AllTheme"

@@ -2091,3 +2091,1241 @@ RuntimeError: Single thread executor already being used, would deadlock
 2022-06-28 10:10:36,903 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.101:60210][0m
 2022-06-28 10:10:36,908 - WARNING - log - log.py - Not Found: /stream_post/63
 2022-06-28 10:10:36,909 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.02, 192.168.0.101:60218][0m
+2022-06-28 10:22:10,256 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 10:22:10,269 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 10:22:10,271 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.12, 192.168.0.105:56694][0m
+2022-06-28 10:22:10,277 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.12, 192.168.0.105:56705][0m
+2022-06-28 10:22:12,069 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:22:12,069 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:22:12,069 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:22:12,074 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.12, 192.168.0.105:56709][0m
+2022-06-28 10:22:12,098 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.15, 192.168.0.105:56705][0m
+2022-06-28 10:22:12,101 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:56694][0m
+2022-06-28 10:22:13,023 - ERROR - log - log.py - Internal Server Error: /ajax/users_get
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 280, in users_get_ajax
+    return render(request,"home/ajax_html/users.html",{"users":users,"type":request.GET.get("type")})
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\engine.py", line 176, in get_template
+    template, origin = self.find_template(template_name)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 1489, in do_with
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'with' received an invalid token: 'u_c_a'
+2022-06-28 10:22:13,031 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/users_get?user=1&type=friends&users_start=0&users_end=20 500 [0.20, 192.168.0.105:56709][0m
+2022-06-28 10:22:34,046 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:22:34,049 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.12, 192.168.0.105:56709][0m
+2022-06-28 10:22:34,049 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:22:34,049 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:22:34,066 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 192.168.0.105:56694][0m
+2022-06-28 10:22:34,088 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.15, 192.168.0.105:56714][0m
+2022-06-28 10:22:35,309 - ERROR - log - log.py - Internal Server Error: /ajax/users_get
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 280, in users_get_ajax
+    return render(request,"home/ajax_html/users.html",{"users":users,"type":request.GET.get("type")})
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\engine.py", line 176, in get_template
+    template, origin = self.find_template(template_name)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 954, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 1483, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1111, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ',' from 'user.friends.all,'
+2022-06-28 10:22:35,317 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/users_get?user=1&type=friends&users_start=0&users_end=20 500 [0.06, 192.168.0.105:56736][0m
+2022-06-28 10:22:38,306 - ERROR - log - log.py - Internal Server Error: /ajax/users_get
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 280, in users_get_ajax
+    return render(request,"home/ajax_html/users.html",{"users":users,"type":request.GET.get("type")})
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\engine.py", line 176, in get_template
+    template, origin = self.find_template(template_name)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\engine.py", line 158, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 954, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 1483, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1111, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 701, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ',' from 'user.friends.all,'
+2022-06-28 10:22:38,312 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/users_get?user=1&type=followers&users_start=0&users_end=20 500 [0.06, 192.168.0.105:56736][0m
+2022-06-28 10:22:38,604 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:22:38,607 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:22:38,608 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:22:38,610 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.13, 192.168.0.105:56694][0m
+2022-06-28 10:22:38,624 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.14, 192.168.0.105:56709][0m
+2022-06-28 10:22:38,627 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.14, 192.168.0.105:56736][0m
+2022-06-28 10:27:35,814 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:27:35,816 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:27:35,816 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:27:35,817 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.11, 192.168.0.105:57275][0m
+2022-06-28 10:27:35,823 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.12, 192.168.0.105:57271][0m
+2022-06-28 10:27:35,826 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.12, 192.168.0.105:57272][0m
+2022-06-28 10:27:37,659 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:27:37,676 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:27:37,681 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:27:37,682 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.105:57272][0m
+2022-06-28 10:27:37,685 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.105:57271][0m
+2022-06-28 10:27:37,686 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.06, 192.168.0.105:57275][0m
+2022-06-28 10:27:38,557 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:27:38,558 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:27:38,558 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:27:38,558 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.105:57275][0m
+2022-06-28 10:27:38,562 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.04, 192.168.0.105:57271][0m
+2022-06-28 10:27:38,563 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.04, 192.168.0.105:57272][0m
+2022-06-28 10:27:39,714 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:27:39,717 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.03, 192.168.0.105:57271][0m
+2022-06-28 10:27:39,719 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:27:39,720 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:27:39,720 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.105:57272][0m
+2022-06-28 10:27:39,722 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.03, 192.168.0.105:57275][0m
+2022-06-28 10:27:41,257 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:27:41,258 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:27:41,259 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:27:41,263 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.11, 192.168.0.105:57271][0m
+2022-06-28 10:27:41,272 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.12, 192.168.0.105:57272][0m
+2022-06-28 10:27:41,278 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.13, 192.168.0.105:57275][0m
+2022-06-28 10:28:22,197 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 10:28:22,199 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:28:22,200 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:28:22,201 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.10, 192.168.0.105:57271][0m
+2022-06-28 10:28:22,202 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.11, 192.168.0.105:57272][0m
+2022-06-28 10:28:22,205 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.11, 192.168.0.105:57275][0m
+2022-06-28 10:28:23,510 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 10:28:23,511 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:28:23,511 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 192.168.0.105:57272][0m
+2022-06-28 10:28:23,514 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:28:23,515 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 10:28:23,516 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.105:57271][0m
+2022-06-28 10:28:23,518 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.105:57327][0m
+2022-06-28 10:28:23,520 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:57328][0m
+2022-06-28 10:28:28,911 - ERROR - base_events - base_events.py - An open stream object is being garbage collected; call "stream.close()" explicitly.
+2022-06-28 10:31:35,317 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:31:35,318 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:57514][0m
+2022-06-28 10:31:36,232 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:31:36,235 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:57514][0m
+2022-06-28 10:31:37,654 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:31:37,656 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:57514][0m
+2022-06-28 10:32:37,247 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:32:37,250 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:57623][0m
+2022-06-28 10:32:38,401 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:32:38,403 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:57624][0m
+2022-06-28 10:33:03,951 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:33:03,953 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:57667][0m
+2022-06-28 10:33:04,688 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:33:04,691 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:57667][0m
+2022-06-28 10:33:35,234 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-28 10:33:35,235 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:57711][0m
+2022-06-28 10:34:27,452 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:34:27,454 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:57767][0m
+2022-06-28 10:37:56,578 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:37:56,581 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:57956][0m
+2022-06-28 10:37:57,153 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:37:57,156 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:57957][0m
+2022-06-28 10:37:57,512 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:37:57,516 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:57957][0m
+2022-06-28 10:37:58,030 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:37:58,033 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:57957][0m
+2022-06-28 10:42:04,278 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:42:04,281 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.09, 192.168.0.105:51109][0m
+2022-06-28 10:42:04,815 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:42:04,817 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:51110][0m
+2022-06-28 10:42:05,148 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:42:05,150 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:51110][0m
+2022-06-28 10:42:05,379 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:42:05,382 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:51110][0m
+2022-06-28 10:44:33,359 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:33,360 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.08, 192.168.0.105:62914][0m
+2022-06-28 10:44:33,948 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:33,950 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:62915][0m
+2022-06-28 10:44:34,239 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:34,240 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:62915][0m
+2022-06-28 10:44:34,509 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:34,513 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:62915][0m
+2022-06-28 10:44:41,984 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:41,985 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:62933][0m
+2022-06-28 10:44:42,445 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:42,447 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:62933][0m
+2022-06-28 10:44:42,722 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:42,725 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:62933][0m
+2022-06-28 10:44:55,083 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:55,084 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.08, 192.168.0.105:62955][0m
+2022-06-28 10:44:55,205 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:44:55,207 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:62955][0m
+2022-06-28 10:52:48,846 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 10:52:48,850 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 192.168.0.105:54056][0m
+2022-06-28 10:52:48,895 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 10:52:48,899 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.105:54068][0m
+2022-06-28 10:52:54,625 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 10:52:54,629 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.08, 192.168.0.105:54077][0m
+2022-06-28 10:52:54,666 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 10:52:54,669 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:54079][0m
+2022-06-28 10:52:54,674 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:52:54,675 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:52:54,679 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.14, 192.168.0.105:54075][0m
+2022-06-28 10:52:54,683 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.14, 192.168.0.105:54068][0m
+2022-06-28 10:52:56,710 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:52:56,711 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:54068][0m
+2022-06-28 10:52:58,029 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:52:58,031 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:54075][0m
+2022-06-28 10:52:59,451 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:52:59,454 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.08, 192.168.0.105:54075][0m
+2022-06-28 10:52:59,912 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:52:59,915 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:54075][0m
+2022-06-28 10:53:00,284 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:00,287 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:54075][0m
+2022-06-28 10:53:05,884 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:05,887 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:54075][0m
+2022-06-28 10:53:06,225 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:06,226 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:54075][0m
+2022-06-28 10:53:06,449 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:06,452 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:54075][0m
+2022-06-28 10:53:06,632 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:06,634 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:54075][0m
+2022-06-28 10:53:06,823 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:06,827 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:54075][0m
+2022-06-28 10:53:07,003 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:07,005 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:54079][0m
+2022-06-28 10:53:08,690 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 10:53:08,693 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 10:53:08,696 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:54079][0m
+2022-06-28 10:53:08,697 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:54075][0m
+2022-06-28 10:53:08,699 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 10:53:08,702 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.07, 192.168.0.105:54077][0m
+2022-06-28 10:53:08,729 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 10:53:08,738 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:54105][0m
+2022-06-28 10:53:10,948 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:10,951 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:54105][0m
+2022-06-28 10:53:13,817 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 10:53:13,819 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:54075][0m
+2022-06-28 11:01:50,659 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:01:50,660 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:62956][0m
+2022-06-28 11:01:51,368 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:01:51,369 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:62957][0m
+2022-06-28 11:02:28,941 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:02:28,942 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.08, 192.168.0.105:63009][0m
+2022-06-28 11:05:38,125 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:05:38,127 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.10, 192.168.0.105:63200][0m
+2022-06-28 11:05:57,456 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:05:57,457 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:63224][0m
+2022-06-28 11:05:59,365 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:05:59,368 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:63224][0m
+2022-06-28 11:05:59,719 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:05:59,722 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:63224][0m
+2022-06-28 11:06:00,191 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:06:00,192 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:63224][0m
+2022-06-28 11:06:26,603 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:06:26,604 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:63270][0m
+2022-06-28 11:06:27,974 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:06:27,976 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:63270][0m
+2022-06-28 11:06:37,503 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:06:37,506 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:63288][0m
+2022-06-28 11:06:38,764 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:06:38,765 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:63288][0m
+2022-06-28 11:06:49,701 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:06:49,702 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:63311][0m
+2022-06-28 11:06:50,469 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:06:50,472 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:63311][0m
+2022-06-28 11:07:02,670 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:07:02,672 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:63330][0m
+2022-06-28 11:07:03,107 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:07:03,109 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:63330][0m
+2022-06-28 11:07:03,300 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:07:03,305 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:63330][0m
+2022-06-28 11:12:20,965 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:12:20,991 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.10, 192.168.0.105:63675][0m
+2022-06-28 11:12:21,099 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:12:21,101 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:63674][0m
+2022-06-28 11:12:22,030 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:12:22,031 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:63674][0m
+2022-06-28 11:12:22,794 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 11:12:22,795 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:63674][0m
+2022-06-28 11:53:50,710 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1796, in transform
+    return self.try_transform(wrapped, name)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1311, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'latest' for BigAutoField or join on the field not permitted, perhaps you meant lte?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 471, in get_chats_ajax
+    return render(request, "home/ajax_html/chats.html",{"chats":chats})
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\backends\django.py", line 62, in render
+    return self.template.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\base.py", line 958, in render_annotated
+    return self.render(context)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\template\defaulttags.py", line 194, in render
+    len_values = len(values)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 302, in __len__
+    self._fetch_all()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 1507, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1348, in execute_sql
+    sql, params = self.as_sql()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 573, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 65, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 415, in get_order_by
+    for expr, is_ref in self._order_by_pairs():
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 397, in _order_by_pairs
+    yield from self.find_ordering_name(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 900, in find_ordering_name
+    return [
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\compiler.py", line 901, in <listcomp>
+    (OrderBy(transform_function(t, alias), descending=descending), False)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1800, in transform
+    raise last_field_exception
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1773, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\sql\query.py", line 1677, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'latest' into field. Choices are: chat, date, emoji, file, id, message_parent, parent, parent_id, readeble, text, type_file, type_file_id, type_m, type_m_id, user, user_id
+2022-06-28 11:53:50,750 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.22, 192.168.0.105:61664][0m
+2022-06-28 12:04:30,736 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:30,738 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.08, 192.168.0.105:51144][0m
+2022-06-28 12:04:31,590 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:31,591 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:51144][0m
+2022-06-28 12:04:41,981 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:41,982 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:51162][0m
+2022-06-28 12:04:42,580 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:42,582 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.04, 192.168.0.105:51163][0m
+2022-06-28 12:04:51,970 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:51,972 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:51182][0m
+2022-06-28 12:04:52,132 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:52,135 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:51182][0m
+2022-06-28 12:04:52,918 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:52,919 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:51182][0m
+2022-06-28 12:04:53,408 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:04:53,409 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.03, 192.168.0.105:51182][0m
+2022-06-28 12:05:11,514 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:05:11,515 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:51227][0m
+2022-06-28 12:05:12,429 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:05:12,430 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:51227][0m
+2022-06-28 12:07:50,844 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:07:50,845 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:51439][0m
+2022-06-28 12:08:03,363 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:03,365 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.09, 192.168.0.105:51460][0m
+2022-06-28 12:08:13,715 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:13,717 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:51478][0m
+2022-06-28 12:08:15,486 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:15,487 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:51478][0m
+2022-06-28 12:08:25,296 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:25,297 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:51501][0m
+2022-06-28 12:08:26,055 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:26,056 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:51501][0m
+2022-06-28 12:08:26,573 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:26,575 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.08, 192.168.0.105:51502][0m
+2022-06-28 12:08:27,089 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:27,091 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:51501][0m
+2022-06-28 12:08:48,623 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:48,627 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.08, 192.168.0.105:51530][0m
+2022-06-28 12:08:49,793 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:08:49,794 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:51531][0m
+2022-06-28 12:09:03,386 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 471, in get_chats_ajax
+    print(pop(chats,i))
+NameError: name 'pop' is not defined
+2022-06-28 12:09:03,395 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.13, 192.168.0.105:51559][0m
+2022-06-28 12:09:20,537 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 472, in get_chats_ajax
+    chats.insert(0,chats.pop(i))
+IndexError: pop index out of range
+2022-06-28 12:09:20,548 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.11, 192.168.0.105:51581][0m
+2022-06-28 12:09:40,938 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 473, in get_chats_ajax
+    chats.insert(0,chats.pop(i))
+IndexError: pop index out of range
+2022-06-28 12:09:40,946 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.13, 192.168.0.105:51606][0m
+2022-06-28 12:09:57,739 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 473, in get_chats_ajax
+    chats.insert(0,chats.pop(i))
+IndexError: pop index out of range
+2022-06-28 12:09:57,747 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.12, 192.168.0.105:51628][0m
+2022-06-28 12:15:24,012 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-28 12:15:24,014 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:52099][0m
+2022-06-28 12:51:44,020 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:51:44,051 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 192.168.0.105:54654][0m
+2022-06-28 12:51:44,065 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:51:44,072 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:51:44,078 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:54655][0m
+2022-06-28 12:51:44,078 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:51:44,086 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 192.168.0.105:54657][0m
+2022-06-28 12:51:44,092 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.14, 192.168.0.105:54653][0m
+2022-06-28 12:51:48,297 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:51:48,298 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:51:48,298 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:51:48,301 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:54656][0m
+2022-06-28 12:51:48,302 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:51:48,320 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.16, 192.168.0.105:54671][0m
+2022-06-28 12:51:48,331 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.19, 192.168.0.105:54657][0m
+2022-06-28 12:51:48,341 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.17, 192.168.0.105:54672][0m
+2022-06-28 12:52:44,902 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:52:44,903 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:52:44,909 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.105:54671][0m
+2022-06-28 12:52:44,910 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.105:54672][0m
+2022-06-28 12:52:44,917 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:52:44,918 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:52:44,945 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 192.168.0.105:54734][0m
+2022-06-28 12:52:44,956 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:54736][0m
+2022-06-28 12:53:09,187 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:53:09,188 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:53:09,190 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.105:54672][0m
+2022-06-28 12:53:09,199 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.105:54734][0m
+2022-06-28 12:53:09,289 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:53:09,296 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:53:09,297 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.15, 192.168.0.105:54760][0m
+2022-06-28 12:53:09,301 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.16, 192.168.0.105:54671][0m
+2022-06-28 12:53:09,802 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:53:09,803 - WARNING - log - log.py - Not Found: /stream_post/36
+2022-06-28 12:53:09,804 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:53:09,804 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:53:09,806 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 192.168.0.105:54734][0m
+2022-06-28 12:53:09,807 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/36 404 [0.04, 192.168.0.105:54672][0m
+2022-06-28 12:53:09,810 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.105:54760][0m
+2022-06-28 12:53:09,811 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.105:54671][0m
+2022-06-28 12:53:09,922 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:53:09,924 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.01, 192.168.0.105:54734][0m
+2022-06-28 12:53:11,937 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:53:11,938 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.20, 192.168.0.105:54734][0m
+2022-06-28 12:53:13,411 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:53:13,414 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:54760][0m
+2022-06-28 12:53:17,669 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:53:17,671 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.31, 192.168.0.105:54760][0m
+2022-06-28 12:53:21,225 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:53:21,228 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.07, 192.168.0.105:54671][0m
+2022-06-28 12:53:22,277 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:53:22,277 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:53:22,284 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.09, 192.168.0.105:54760][0m
+2022-06-28 12:53:22,287 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:54671][0m
+2022-06-28 12:53:22,294 - WARNING - log - log.py - Not Found: /stream_post/36
+2022-06-28 12:53:22,294 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:53:22,302 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:53:22,303 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/36 404 [0.09, 192.168.0.105:54763][0m
+2022-06-28 12:53:22,307 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 192.168.0.105:54672][0m
+2022-06-28 12:53:22,310 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.105:54780][0m
+2022-06-28 12:53:22,959 - WARNING - log - log.py - Not Found: /stream_post/36
+2022-06-28 12:53:22,963 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/36 404 [0.04, 192.168.0.105:54671][0m
+2022-06-28 12:53:22,964 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:53:22,965 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:53:22,967 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:53:22,969 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.105:54672][0m
+2022-06-28 12:53:22,970 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:53:22,970 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:54763][0m
+2022-06-28 12:53:22,972 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:54760][0m
+2022-06-28 12:53:22,974 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.105:54780][0m
+2022-06-28 12:53:26,413 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:53:26,415 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.05, 192.168.0.105:54780][0m
+2022-06-28 12:53:26,933 - WARNING - log - log.py - Not Found: /ajax/get_chats
+2022-06-28 12:53:26,936 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 404 [0.06, 192.168.0.105:54760][0m
+2022-06-28 12:53:29,016 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:53:29,019 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:53:29,020 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:54671][0m
+2022-06-28 12:53:29,022 - WARNING - log - log.py - Not Found: /stream_post/36
+2022-06-28 12:53:29,024 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.105:54672][0m
+2022-06-28 12:53:29,026 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/36 404 [0.05, 192.168.0.105:54791][0m
+2022-06-28 12:53:29,029 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:53:29,033 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.105:54763][0m
+2022-06-28 12:53:29,036 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:53:29,037 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:54792][0m
+2022-06-28 12:53:42,992 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 12:53:42,993 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 12:53:42,994 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:54791][0m
+2022-06-28 12:53:42,996 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 12:53:42,997 - WARNING - log - log.py - Not Found: /stream_post/36
+2022-06-28 12:53:42,999 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.105:54763][0m
+2022-06-28 12:53:43,005 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.105:54792][0m
+2022-06-28 12:53:43,007 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/36 404 [0.05, 192.168.0.105:54672][0m
+2022-06-28 12:53:43,009 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 12:53:43,011 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:54671][0m
+2022-06-28 12:54:33,868 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 225, in sort_on_end_messages
+    _quick_sort(chats, 0, len(chats) - 1)
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 221, in _quick_sort
+    split_index = partition(items, low, high)
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 230, in partition
+    pivot = nums[(low + high) // 2].messages.last().date
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 12:54:33,880 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.13, 192.168.0.105:54861][0m
+2022-06-28 12:54:35,610 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 225, in sort_on_end_messages
+    _quick_sort(chats, 0, len(chats) - 1)
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 221, in _quick_sort
+    split_index = partition(items, low, high)
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 230, in partition
+    pivot = nums[(low + high) // 2].messages.last().date
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 12:54:35,622 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.11, 192.168.0.105:54862][0m
+2022-06-28 12:56:13,591 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 216, in sort_on_end_messages
+    if chats[j].messages.last().date < chats[j+1].messages.last().date:
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 12:56:13,599 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.13, 192.168.0.105:54966][0m
+2022-06-28 12:56:42,874 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 217, in sort_on_end_messages
+    if chats[j].messages.last().date < chats[j+1].messages.last().date:
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 12:56:42,900 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.21, 192.168.0.105:55011][0m
+2022-06-28 12:57:11,111 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 217, in sort_on_end_messages
+    if chats[j].messages.last().date < chats[j+1].messages.last().date:
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 12:57:11,126 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.12, 192.168.0.105:55045][0m
+2022-06-28 12:57:41,414 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 218, in sort_on_end_messages
+    if chats[j].messages.last().date < chats[j+1].messages.last().date:
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 12:57:41,420 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.14, 192.168.0.105:55083][0m
+2022-06-28 13:12:13,065 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 218, in sort_on_end_messages
+    if chats[j].messages.last().date < chats[j+1].messages.last().date:
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 13:12:13,076 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.14, 192.168.0.105:49237][0m
+2022-06-28 13:12:22,152 - ERROR - log - log.py - Internal Server Error: /ajax/get_chats
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 472, in thread_handler
+    raise exc_info[1]
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\exception.py", line 42, in inner
+    response = await get_response(request)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\core\handlers\base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\ajax_views.py", line 474, in get_chats_ajax
+    chats = sort_on_end_messages(request.user.chats.all())[int(request.GET.get('start_chat')):int(request.GET.get('end_chat'))]
+  File "D:\igor\ameneuro\ameneuro\home\services.py", line 218, in sort_on_end_messages
+    if chats[j].messages.last().date < chats[j+1].messages.last().date:
+AttributeError: 'NoneType' object has no attribute 'date'
+2022-06-28 13:12:22,161 - ERROR - runserver - runserver.py - [35;1mHTTP GET /ajax/get_chats?start_chat=0&end_chat=20 500 [0.10, 192.168.0.105:49251][0m
+2022-06-28 13:17:11,483 - ERROR - server - server.py - Exception inside application: "<Chat: 2yDLsNyPnFMETcmW40gQMDoXzFi7Jb>" needs to have a value for field "id" before this many-to-many relationship can be used.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 518, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 299, in add_chat
+    chat.messages.add(first_mes)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 586, in __get__
+    return self.related_manager_cls(instance)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 935, in __init__
+    raise ValueError(
+ValueError: "<Chat: 2yDLsNyPnFMETcmW40gQMDoXzFi7Jb>" needs to have a value for field "id" before this many-to-many relationship can be used.
+2022-06-28 13:18:57,710 - ERROR - server - server.py - Exception inside application: "<Chat: C1gfypO0yB0fxu2etIeGTqVFSrBtsU>" needs to have a value for field "id" before this many-to-many relationship can be used.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 518, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 299, in add_chat
+    chat.messages.add(first_mes)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 586, in __get__
+    return self.related_manager_cls(instance)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 935, in __init__
+    raise ValueError(
+ValueError: "<Chat: C1gfypO0yB0fxu2etIeGTqVFSrBtsU>" needs to have a value for field "id" before this many-to-many relationship can be used.
+2022-06-28 13:19:34,230 - ERROR - server - server.py - Exception inside application: "<Chat: BM5tyqGVOqh5RebsGhluh9CzXQK36f>" needs to have a value for field "id" before this many-to-many relationship can be used.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 522, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 301, in add_chat
+    chat.messages.add(first_mes)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 586, in __get__
+    return self.related_manager_cls(instance)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 935, in __init__
+    raise ValueError(
+ValueError: "<Chat: BM5tyqGVOqh5RebsGhluh9CzXQK36f>" needs to have a value for field "id" before this many-to-many relationship can be used.
+2022-06-28 13:20:03,507 - ERROR - server - server.py - Exception inside application: "<Chat: Zcde0rJFkUzjQCiB4NxzAe8kynkOon>" needs to have a value for field "id" before this many-to-many relationship can be used.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 523, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 300, in add_chat
+    chat.messages.add(first_mes)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 586, in __get__
+    return self.related_manager_cls(instance)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 935, in __init__
+    raise ValueError(
+ValueError: "<Chat: Zcde0rJFkUzjQCiB4NxzAe8kynkOon>" needs to have a value for field "id" before this many-to-many relationship can be used.
+2022-06-28 13:20:16,776 - ERROR - server - server.py - Exception inside application: "<Chat: 7J1OpMEjLXPuDJbOTzEuk69QaFQcWr>" needs to have a value for field "id" before this many-to-many relationship can be used.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 521, in receive
+    if self.text_data_json.get('type') in self.types.keys():
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 300, in add_chat
+    chat.messages.add(first_mes)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 586, in __get__
+    return self.related_manager_cls(instance)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 935, in __init__
+    raise ValueError(
+ValueError: "<Chat: 7J1OpMEjLXPuDJbOTzEuk69QaFQcWr>" needs to have a value for field "id" before this many-to-many relationship can be used.
+2022-06-28 13:20:55,573 - ERROR - server - server.py - Exception inside application: "<Chat: zQMwKeZ49KS7mrdUHZqrRuM1fS4TGU>" needs to have a value for field "id" before this many-to-many relationship can be used.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 523, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 300, in add_chat
+    print(chat.messages.all())
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 586, in __get__
+    return self.related_manager_cls(instance)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 935, in __init__
+    raise ValueError(
+ValueError: "<Chat: zQMwKeZ49KS7mrdUHZqrRuM1fS4TGU>" needs to have a value for field "id" before this many-to-many relationship can be used.
+2022-06-28 13:21:18,249 - ERROR - server - server.py - Exception inside application: "<Chat: bgme7zxYeS4OAgJqLQCkYZzIAgPwQ4>" needs to have a value for field "id" before this many-to-many relationship can be used.
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 523, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 300, in add_chat
+    print(chat.messages)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 586, in __get__
+    return self.related_manager_cls(instance)
+  File "D:\igor\ameneuro\venv\lib\site-packages\django\db\models\fields\related_descriptors.py", line 935, in __init__
+    raise ValueError(
+ValueError: "<Chat: bgme7zxYeS4OAgJqLQCkYZzIAgPwQ4>" needs to have a value for field "id" before this many-to-many relationship can be used.
+2022-06-28 13:21:38,447 - ERROR - server - server.py - Exception inside application: name 'chat__dict__' is not defined
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 44, in __call__
+    return await self.application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 71, in __call__
+    return await application(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 47, in __call__
+    return await self.inner(dict(scope, cookies=cookies), receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\sessions.py", line 263, in __call__
+    return await self.inner(wrapper.scope, receive, wrapper.send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\auth.py", line 185, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\middleware.py", line 26, in __call__
+    return await self.inner(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\routing.py", line 150, in __call__
+    return await application(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 94, in app
+    return await consumer(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 58, in __call__
+    await await_many_dispatch(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\utils.py", line 51, in await_many_dispatch
+    await dispatch(result)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\consumer.py", line 73, in dispatch
+    await handler(message)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\generic\websocket.py", line 194, in websocket_receive
+    await self.receive(text_data=message["text"])
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 523, in receive
+    await self.types.get(self.text_data_json.get('type'))(self)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 435, in __call__
+    ret = await asyncio.wait_for(future, timeout=None)
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 455, in wait_for
+    return await fut
+  File "C:\Users\igor\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\db.py", line 13, in thread_handler
+    return super().thread_handler(loop, *args, **kwargs)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 476, in thread_handler
+    return func(*args, **kwargs)
+  File "D:\igor\ameneuro\ameneuro\home\consumers.py", line 300, in add_chat
+    print(chat.__dict__)
+NameError: name 'chat__dict__' is not defined
+2022-06-28 13:25:43,585 - WARNING - log - log.py - Not Found: /ajax/chat_get_mess
+2022-06-28 13:25:43,587 - WARNING - runserver - runserver.py - [33mHTTP GET /ajax/chat_get_mess?chat_id=112&mess_start=0&mess_end=20 404 [0.02, 192.168.0.101:33210][0m
+2022-06-28 13:25:47,479 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 13:25:47,480 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.02, 192.168.0.101:33210][0m
+2022-06-28 13:25:47,490 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 13:25:47,491 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.02, 192.168.0.101:33212][0m
+2022-06-28 13:25:47,505 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 13:25:47,506 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.01, 192.168.0.101:33210][0m
