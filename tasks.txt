@@ -139,6 +139,6 @@ urls in activity *
 no add friend want *
 delete friend in friends *
 follow no follow *
-normal show friends, followers ***
+normal show friends, followers *
 no add 2 chats
 big files in celery

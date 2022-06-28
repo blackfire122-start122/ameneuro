@@ -10,7 +10,7 @@ let ajax_now = "get"
 
 for (var i = user_ch.length - 1; i >= 0; i--) {
 	let user_in = user_ch[i].innerText
-	conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"ws/user/"+user_in)
+	conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"/ws/user/"+user_in)
 	conn_u_f.onopen = (e)=>{
 		e.target.send(JSON.stringify({'type':'in_net',"user_in":user_in}))	
 	}

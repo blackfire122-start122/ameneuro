@@ -8,10 +8,10 @@
 					<img class="img_f" src={{ u.img.url }}>
 					<h4> {{ u.username }}</h4>
 				</a>
-				{% if u not in user.friends.all %}
+				{% if not u in user.friends.all %}
 					<div class="friend_follow">
 						{% if not u in user.follow.all %}
-						    <button id="{{ u.id }}" value="{{ u.id }}" onclick="follow(this,'{{ u }}')" class="btn_follow" >Follow</button>
+						    <button value="{{ u.id }}" onclick="follow(this,'{{ u }}')" class="btn_follow" >Follow</button>
 						{% else %}
 							<p id="{{ u.id }}" class="follow">follow</p>
 						{% endif %}
@@ -20,7 +20,7 @@
 					</div>
 				{% endif %}
 
-				{% if type == 'friends' %}
+				{% if type == 'friends' and u in user.friends.all %}
 					<button onclick="del_friend(this, {{ u.id }})" class="del_friend_btn">Delete friend</button>
 				{% endif %}
 
