@@ -1637,3 +1637,379 @@ RuntimeError: Single thread executor already being used, would deadlock
 2022-06-27 18:54:32,539 - WARNING - log - log.py - Not Found: /stream_post/63
 2022-06-27 18:54:32,543 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.105:55392][0m
 2022-06-27 18:54:32,547 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:55396][0m
+2022-06-27 19:06:56,741 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:06:56,749 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.08, 192.168.0.105:56096][0m
+2022-06-27 19:06:56,769 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:06:56,769 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:06:56,773 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.11, 192.168.0.105:56095][0m
+2022-06-27 19:06:56,777 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.11, 192.168.0.105:56070][0m
+2022-06-27 19:06:56,833 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:06:56,837 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.105:56069][0m
+2022-06-27 19:07:03,410 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:03,418 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.14, 192.168.0.105:56068][0m
+2022-06-27 19:07:03,430 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:03,442 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.15, 192.168.0.105:56095][0m
+2022-06-27 19:07:03,450 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:03,474 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.19, 192.168.0.105:56096][0m
+2022-06-27 19:07:05,096 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:07:05,098 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:05,098 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:05,100 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 192.168.0.105:56096][0m
+2022-06-27 19:07:05,100 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:05,146 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:56107][0m
+2022-06-27 19:07:05,147 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.15, 192.168.0.105:56068][0m
+2022-06-27 19:07:05,148 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.15, 192.168.0.105:56070][0m
+2022-06-27 19:07:13,550 - ERROR - server - server.py - Exception inside application: Single thread executor already being used, would deadlock
+Traceback (most recent call last):
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 40, in __call__
+    return await self.staticfiles_handler_class()(
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\staticfiles.py", line 56, in __call__
+    return await super().__call__(scope, receive, send)
+  File "D:\igor\ameneuro\venv\lib\site-packages\channels\http.py", line 198, in __call__
+    await self.handle(scope, async_to_sync(send), body_stream)
+  File "D:\igor\ameneuro\venv\lib\site-packages\asgiref\sync.py", line 403, in __call__
+    raise RuntimeError(
+RuntimeError: Single thread executor already being used, would deadlock
+2022-06-27 19:07:13,550 - ERROR - runserver - runserver.py - [35;1mHTTP GET /static/admin/js/core.js 500 [0.78, 192.168.0.105:56070][0m
+2022-06-27 19:07:13,642 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-27 19:07:13,646 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.02, 192.168.0.105:56119][0m
+2022-06-27 19:07:34,278 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:34,283 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:56118][0m
+2022-06-27 19:07:34,283 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:34,285 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:34,290 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.14, 192.168.0.105:56068][0m
+2022-06-27 19:07:34,293 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.16, 192.168.0.105:56070][0m
+2022-06-27 19:07:34,300 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:07:34,343 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.18, 192.168.0.105:56119][0m
+2022-06-27 19:07:34,780 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:34,780 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:34,780 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:34,784 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:56070][0m
+2022-06-27 19:07:34,792 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.105:56068][0m
+2022-06-27 19:07:34,796 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.105:56119][0m
+2022-06-27 19:07:36,001 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:36,001 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:36,001 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:36,005 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:56119][0m
+2022-06-27 19:07:36,005 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:36,009 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56068][0m
+2022-06-27 19:07:36,013 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.105:56118][0m
+2022-06-27 19:07:36,013 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.08, 192.168.0.105:56070][0m
+2022-06-27 19:07:36,661 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:36,661 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:36,661 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.105:56068][0m
+2022-06-27 19:07:36,661 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:36,669 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.105:56070][0m
+2022-06-27 19:07:36,669 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:36,669 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:56119][0m
+2022-06-27 19:07:36,674 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.07, 192.168.0.105:56118][0m
+2022-06-27 19:07:38,018 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:38,018 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:38,050 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:38,058 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:56068][0m
+2022-06-27 19:07:38,062 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:38,066 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.12, 192.168.0.105:56070][0m
+2022-06-27 19:07:38,102 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.16, 192.168.0.105:56119][0m
+2022-06-27 19:07:38,114 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.17, 192.168.0.105:56118][0m
+2022-06-27 19:07:38,702 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:38,734 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:56145][0m
+2022-06-27 19:07:38,746 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:38,746 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:38,746 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:38,750 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.13, 192.168.0.105:56119][0m
+2022-06-27 19:07:38,758 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.14, 192.168.0.105:56068][0m
+2022-06-27 19:07:38,762 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.14, 192.168.0.105:56118][0m
+2022-06-27 19:07:40,312 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:40,312 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:40,316 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.105:56149][0m
+2022-06-27 19:07:40,320 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:40,320 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.105:56152][0m
+2022-06-27 19:07:40,324 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:07:40,324 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:40,324 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:56150][0m
+2022-06-27 19:07:40,328 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 192.168.0.105:56153][0m
+2022-06-27 19:07:40,340 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.12, 192.168.0.105:56151][0m
+2022-06-27 19:07:47,054 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:47,054 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:47,054 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.105:56153][0m
+2022-06-27 19:07:47,058 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:47,062 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:56151][0m
+2022-06-27 19:07:47,070 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.07, 192.168.0.105:56150][0m
+2022-06-27 19:07:48,109 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:48,113 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:48,113 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56151][0m
+2022-06-27 19:07:48,133 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:56152][0m
+2022-06-27 19:07:48,137 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:48,157 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:48,161 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.14, 192.168.0.105:56150][0m
+2022-06-27 19:07:48,187 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.16, 192.168.0.105:56153][0m
+2022-06-27 19:07:49,867 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:49,867 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:49,867 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:49,867 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.105:56152][0m
+2022-06-27 19:07:49,871 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:49,875 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.09, 192.168.0.105:56151][0m
+2022-06-27 19:07:49,875 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.105:56153][0m
+2022-06-27 19:07:49,879 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:56150][0m
+2022-06-27 19:07:50,650 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:50,650 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:50,650 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:50,650 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.105:56150][0m
+2022-06-27 19:07:50,658 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:50,658 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:56152][0m
+2022-06-27 19:07:50,662 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.105:56153][0m
+2022-06-27 19:07:50,662 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.07, 192.168.0.105:56151][0m
+2022-06-27 19:07:55,151 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:55,155 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:55,155 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:55,163 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56149][0m
+2022-06-27 19:07:55,167 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:56150][0m
+2022-06-27 19:07:55,171 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.105:56166][0m
+2022-06-27 19:07:55,199 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:55,267 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.16, 192.168.0.105:56167][0m
+2022-06-27 19:07:56,122 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:56,122 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:56,126 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:56,126 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:56,130 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:07:56,130 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:56174][0m
+2022-06-27 19:07:56,142 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.12, 192.168.0.105:56172][0m
+2022-06-27 19:07:56,150 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.13, 192.168.0.105:56173][0m
+2022-06-27 19:07:56,150 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.14, 192.168.0.105:56170][0m
+2022-06-27 19:07:56,154 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.11, 192.168.0.105:56175][0m
+2022-06-27 19:07:56,576 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:07:56,584 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56170][0m
+2022-06-27 19:07:56,588 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:07:56,588 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:07:56,596 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.105:56172][0m
+2022-06-27 19:07:56,600 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.105:56173][0m
+2022-06-27 19:07:56,624 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:07:56,628 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:07:56,636 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:56174][0m
+2022-06-27 19:07:56,646 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.10, 192.168.0.105:56177][0m
+2022-06-27 19:08:03,061 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:08:03,065 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:08:03,069 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:08:03,077 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:08:03,145 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.24, 192.168.0.105:56183][0m
+2022-06-27 19:08:03,177 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.29, 192.168.0.105:56173][0m
+2022-06-27 19:08:03,185 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.30, 192.168.0.105:56174][0m
+2022-06-27 19:08:03,189 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.30, 192.168.0.105:56172][0m
+2022-06-27 19:08:03,465 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:08:03,537 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.32, 192.168.0.105:56174][0m
+2022-06-27 19:08:03,756 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:08:03,760 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:08:03,761 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:08:03,761 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.08, 192.168.0.105:56190][0m
+2022-06-27 19:08:03,797 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:08:03,805 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.14, 192.168.0.105:56187][0m
+2022-06-27 19:08:03,805 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:08:03,809 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.14, 192.168.0.105:56188][0m
+2022-06-27 19:08:03,813 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.15, 192.168.0.105:56174][0m
+2022-06-27 19:08:03,817 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:56186][0m
+2022-06-27 19:09:04,442 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:09:04,446 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.03, 192.168.0.105:56241][0m
+2022-06-27 19:09:12,037 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:12,037 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.105:56242][0m
+2022-06-27 19:09:12,037 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:12,041 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:12,041 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.105:56241][0m
+2022-06-27 19:09:12,045 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:56250][0m
+2022-06-27 19:09:15,035 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:15,039 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:15,039 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:15,039 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.04, 192.168.0.105:56242][0m
+2022-06-27 19:09:15,043 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.06, 192.168.0.105:56250][0m
+2022-06-27 19:09:15,047 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.06, 192.168.0.105:56241][0m
+2022-06-27 19:09:16,111 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:16,111 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:16,115 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:56256][0m
+2022-06-27 19:09:16,115 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:16,119 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:16,123 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:56250][0m
+2022-06-27 19:09:16,123 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.07, 192.168.0.105:56242][0m
+2022-06-27 19:09:16,127 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56241][0m
+2022-06-27 19:09:18,768 - WARNING - log - log.py - Not Found: /media/media/user_img/spiderman-1.jpg
+2022-06-27 19:09:18,768 - WARNING - runserver - runserver.py - [33mHTTP GET /media/media/user_img/spiderman-1.jpg 404 [0.05, 192.168.0.105:56241][0m
+2022-06-27 19:09:18,768 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:18,772 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.05, 192.168.0.105:56242][0m
+2022-06-27 19:09:19,587 - WARNING - log - log.py - Not Found: /media/media/user_img/spiderman-1.jpg
+2022-06-27 19:09:19,587 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:19,587 - WARNING - runserver - runserver.py - [33mHTTP GET /media/media/user_img/spiderman-1.jpg 404 [0.04, 192.168.0.105:56241][0m
+2022-06-27 19:09:19,595 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.04, 192.168.0.105:56242][0m
+2022-06-27 19:09:20,798 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:20,806 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.11, 192.168.0.105:56242][0m
+2022-06-27 19:09:20,812 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:20,825 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:20,832 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.13, 192.168.0.105:56250][0m
+2022-06-27 19:09:20,844 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.15, 192.168.0.105:56241][0m
+2022-06-27 19:09:21,077 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:21,077 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:21,077 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:21,081 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.105:56256][0m
+2022-06-27 19:09:21,113 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.13, 192.168.0.105:56241][0m
+2022-06-27 19:09:21,121 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.14, 192.168.0.105:56250][0m
+2022-06-27 19:09:21,133 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:21,137 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.14, 192.168.0.105:56242][0m
+2022-06-27 19:09:21,614 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:21,618 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:56241][0m
+2022-06-27 19:09:21,618 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:21,618 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:21,622 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.07, 192.168.0.105:56242][0m
+2022-06-27 19:09:21,626 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.105:56250][0m
+2022-06-27 19:09:25,187 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:25,187 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:25,190 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56250][0m
+2022-06-27 19:09:25,198 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:56242][0m
+2022-06-27 19:09:25,202 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:25,202 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.105:56241][0m
+2022-06-27 19:09:27,028 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:27,036 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.14, 192.168.0.105:56241][0m
+2022-06-27 19:09:27,048 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:27,060 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:27,064 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.17, 192.168.0.105:56242][0m
+2022-06-27 19:09:27,068 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.16, 192.168.0.105:56250][0m
+2022-06-27 19:09:27,246 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:27,246 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:27,250 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:27,250 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:56270][0m
+2022-06-27 19:09:27,254 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:27,254 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56250][0m
+2022-06-27 19:09:27,258 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.09, 192.168.0.105:56242][0m
+2022-06-27 19:09:27,262 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.105:56241][0m
+2022-06-27 19:09:28,956 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:28,956 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:28,956 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:28,960 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.10, 192.168.0.105:56270][0m
+2022-06-27 19:09:28,964 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:28,964 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.11, 192.168.0.105:56242][0m
+2022-06-27 19:09:28,964 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.12, 192.168.0.105:56241][0m
+2022-06-27 19:09:28,968 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.12, 192.168.0.105:56250][0m
+2022-06-27 19:09:29,993 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:30,081 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.17, 192.168.0.105:56241][0m
+2022-06-27 19:09:30,085 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:30,085 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:30,101 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:30,105 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.19, 192.168.0.105:56270][0m
+2022-06-27 19:09:30,109 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.20, 192.168.0.105:56242][0m
+2022-06-27 19:09:30,117 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.21, 192.168.0.105:56250][0m
+2022-06-27 19:09:30,795 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:30,871 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:30,875 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.17, 192.168.0.105:56250][0m
+2022-06-27 19:09:30,875 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:30,883 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:30,883 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.17, 192.168.0.105:56277][0m
+2022-06-27 19:09:30,899 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.19, 192.168.0.105:56242][0m
+2022-06-27 19:09:30,903 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.20, 192.168.0.105:56270][0m
+2022-06-27 19:09:31,631 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:31,631 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:31,631 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.07, 192.168.0.105:56282][0m
+2022-06-27 19:09:31,631 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:31,635 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:31,639 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.08, 192.168.0.105:56281][0m
+2022-06-27 19:09:31,639 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:56279][0m
+2022-06-27 19:09:31,643 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56280][0m
+2022-06-27 19:09:31,659 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:09:31,663 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.06, 192.168.0.105:56283][0m
+2022-06-27 19:09:38,398 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-27 19:09:38,402 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-27 19:09:38,402 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-27 19:09:38,402 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.07, 192.168.0.105:56279][0m
+2022-06-27 19:09:38,414 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.08, 192.168.0.105:56280][0m
+2022-06-27 19:09:38,422 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.09, 192.168.0.105:56283][0m
+2022-06-27 19:09:38,446 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-27 19:09:38,446 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:56281][0m
+2022-06-27 19:09:38,454 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-27 19:09:38,458 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.07, 192.168.0.105:56282][0m
+2022-06-28 09:08:28,393 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 09:08:28,398 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:50558][0m
+2022-06-28 09:08:28,428 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:08:28,431 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.06, 192.168.0.105:50570][0m
+2022-06-28 09:08:28,513 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:08:28,514 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:08:28,518 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.18, 192.168.0.105:50550][0m
+2022-06-28 09:08:28,520 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.18, 192.168.0.105:50551][0m
+2022-06-28 09:08:50,065 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 09:08:50,066 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.04, 192.168.0.105:50607][0m
+2022-06-28 09:08:50,067 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:08:50,067 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:08:50,067 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:08:50,070 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.05, 192.168.0.105:50604][0m
+2022-06-28 09:08:50,072 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.05, 192.168.0.105:50605][0m
+2022-06-28 09:08:50,074 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:50608][0m
+2022-06-28 09:10:50,538 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 09:10:50,540 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:10:50,543 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:50875][0m
+2022-06-28 09:10:50,550 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.05, 192.168.0.105:50879][0m
+2022-06-28 09:11:02,117 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:11:02,124 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.10, 192.168.0.105:50895][0m
+2022-06-28 09:11:02,129 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:11:02,135 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.10, 192.168.0.105:50884][0m
+2022-06-28 09:11:02,139 - WARNING - log - log.py - Not Found: /media/posts/3_wD6EfaR.png
+2022-06-28 09:11:02,145 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/3_wD6EfaR.png 404 [0.11, 192.168.0.105:50897][0m
+2022-06-28 09:11:03,134 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:11:03,167 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.11, 192.168.0.105:50897][0m
+2022-06-28 09:11:03,167 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:11:03,167 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:11:03,180 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 09:11:03,182 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:50902][0m
+2022-06-28 09:11:03,185 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.13, 192.168.0.105:50884][0m
+2022-06-28 09:11:03,189 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.13, 192.168.0.105:50895][0m
+2022-06-28 09:36:57,578 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-28 09:36:57,584 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.06, 192.168.0.105:54138][0m
+2022-06-28 09:36:57,641 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:36:57,642 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.11, 192.168.0.105:54153][0m
+2022-06-28 09:36:57,642 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:36:57,645 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.12, 192.168.0.105:54154][0m
+2022-06-28 09:36:57,651 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:36:57,652 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.11, 192.168.0.105:54155][0m
+2022-06-28 09:37:02,071 - WARNING - log - log.py - Not Found: /favicon.ico
+2022-06-28 09:37:02,073 - WARNING - runserver - runserver.py - [33mHTTP GET /favicon.ico 404 [0.03, 192.168.0.105:54155][0m
+2022-06-28 09:47:32,483 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:47:32,485 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.01, 192.168.0.101:60076][0m
+2022-06-28 09:47:32,503 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:47:32,505 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.02, 192.168.0.101:60074][0m
+2022-06-28 09:47:32,509 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:47:32,510 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.01, 192.168.0.101:60076][0m
+2022-06-28 09:47:33,650 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:47:33,651 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.03, 192.168.0.101:60076][0m
+2022-06-28 09:47:33,652 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:47:33,654 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.101:60094][0m
+2022-06-28 09:47:33,656 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:47:33,657 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.101:60074][0m
+2022-06-28 09:47:39,004 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:47:39,005 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:47:39,006 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.02, 192.168.0.101:60094][0m
+2022-06-28 09:47:39,008 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.02, 192.168.0.101:60074][0m
+2022-06-28 09:47:39,021 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:47:39,023 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.01, 192.168.0.101:60076][0m
+2022-06-28 09:47:40,377 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:47:40,379 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.101:60094][0m
+2022-06-28 09:47:40,379 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:47:40,381 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:47:40,382 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.101:60074][0m
+2022-06-28 09:47:40,383 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.03, 192.168.0.101:60076][0m
+2022-06-28 09:47:46,143 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:47:46,143 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:47:46,144 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.02, 192.168.0.101:60074][0m
+2022-06-28 09:47:46,147 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.02, 192.168.0.101:60094][0m
+2022-06-28 09:47:46,169 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:47:46,170 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.02, 192.168.0.101:60112][0m
+2022-06-28 09:47:48,871 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:47:48,872 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.01, 192.168.0.101:60112][0m
+2022-06-28 09:47:48,890 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:47:48,892 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.02, 192.168.0.101:60094][0m
+2022-06-28 09:47:48,898 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:47:48,898 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.01, 192.168.0.101:60112][0m
+2022-06-28 09:47:50,160 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:47:50,161 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:47:50,162 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.03, 192.168.0.101:60112][0m
+2022-06-28 09:47:50,164 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.101:60094][0m
+2022-06-28 09:47:50,165 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:47:50,166 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.101:60074][0m
+2022-06-28 09:48:02,893 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-28 09:48:02,895 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-28 09:48:02,896 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.02, 192.168.0.101:60112][0m
+2022-06-28 09:48:02,899 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.02, 192.168.0.101:60094][0m
+2022-06-28 09:48:02,915 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-28 09:48:02,916 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.02, 192.168.0.101:60074][0m

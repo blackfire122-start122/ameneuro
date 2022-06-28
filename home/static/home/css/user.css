@@ -68,7 +68,7 @@
 	width: 100%;
 }
 
-.btn_follow, .follow_none{
+.btn_follow, .btn_no_follow{
 	background: none;
 	color: blue;
 	border: none;
@@ -76,7 +76,7 @@
 	position: relative;
 }
 
-.follow_none{
+.btn_no_follow{
 	color: gray;
 }
 

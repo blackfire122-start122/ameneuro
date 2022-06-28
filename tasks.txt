@@ -138,6 +138,7 @@ theme read from folder *
 urls in activity *
 no add friend want *
 delete friend in friends *
+follow no follow *
+normal show friends, followers ***
 no add 2 chats
-follow no follow
 big files in celery

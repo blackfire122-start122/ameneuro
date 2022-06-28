@@ -269,6 +269,12 @@ class UserConsumer(AsyncWebsocketConsumer):
         follow_to.message_activity.add(ma)
 
     @database_sync_to_async
+    def not_follow(self):
+        follow_to = User.objects.get(pk=self.text_data_json.get('id'))
+        follow_to.followers.remove(self.scope["user"].id)
+        self.scope["user"].follow.remove(follow_to.id)
+
+    @database_sync_to_async
     def add_chat(self):
         friend = User.objects.get(pk=self.text_data_json.get("id"))
 
@@ -471,6 +477,7 @@ class UserConsumer(AsyncWebsocketConsumer):
         'add_friend':add_friend,
         'want_add_friend':want_add_friend,
         'follow':follow,
+        'not_follow':not_follow,
         'add_chat':add_chat,
         'like':like,
         'not_like':not_like,

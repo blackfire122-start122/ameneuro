@@ -42,16 +42,23 @@ function close_musics_f(){
 function follow(btn,user) {
 	conn_u.send(JSON.stringify({'type':'follow', "id":btn.value}))
 	
-	conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"ws/user/"+user)	
+	conn_u_f = new WebSocket(wsStart+window.location.hostname+":"+location.port+"/ws/user/"+user)	
 	conn_u_f.onopen = ()=>{
 		conn_u_f.send(JSON.stringify({'type':'activity'}))
 		conn_u_f.close()
 	}
-	
-	btn.disabled = true
-	btn.style.color = "gray"
-	btn.style.fontSize = "1em"
-	btn.innerText = "follow"
+
+	btn.className = "btn_no_follow"
+	btn.innerText = "Not follow"
+	btn.onclick = ()=>{not_follow(btn,user)}
+}
+
+function not_follow(btn,user){
+	conn_u.send(JSON.stringify({'type':'not_follow', "id":btn.value}))
+
+	btn.className = "btn_follow"
+	btn.innerText = "Follow"
+	btn.onclick = ()=>{follow(btn,user)}
 }
 
 function get_my_musics(){
