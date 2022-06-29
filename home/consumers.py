@@ -278,6 +278,9 @@ class UserConsumer(AsyncWebsocketConsumer):
     def add_chat(self):
         friend = User.objects.get(pk=self.text_data_json.get("id"))
 
+        for i in self.scope.get('user').chats.all():
+           if i.chat_friend.user == friend:return
+
         theme_chat = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=friend.username+self.scope["user"].username)
         friend_theme_chat = Theme(background=None, color_mes='#FFFFFF',color_mes_bg='#000000',name=self.scope["user"].username+friend.username)
         friend_theme_chat.save()

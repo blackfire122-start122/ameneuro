@@ -3549,3 +3549,23 @@ NameError: name 'chat__dict__' is not defined
 2022-06-29 10:08:41,211 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.03, 192.168.0.101:39580][0m
 2022-06-29 10:08:41,229 - WARNING - log - log.py - Not Found: /stream_post/63
 2022-06-29 10:08:41,231 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.03, 192.168.0.101:39578][0m
+2022-06-29 12:01:13,597 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-29 12:01:13,598 - WARNING - log - log.py - Not Found: /stream_post/36
+2022-06-29 12:01:13,604 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.09, 192.168.0.105:49338][0m
+2022-06-29 12:01:13,606 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/36 404 [0.09, 192.168.0.105:49333][0m
+2022-06-29 12:01:13,628 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-29 12:01:13,629 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-29 12:01:13,636 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.13, 192.168.0.105:49357][0m
+2022-06-29 12:01:13,637 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.13, 192.168.0.105:49335][0m
+2022-06-29 12:01:13,687 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-29 12:01:13,688 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.07, 192.168.0.105:49333][0m
+2022-06-29 12:08:59,565 - WARNING - log - log.py - Not Found: /stream_post/7
+2022-06-29 12:08:59,569 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/7 404 [0.05, 192.168.0.105:50710][0m
+2022-06-29 12:08:59,573 - WARNING - log - log.py - Not Found: /stream_post/36
+2022-06-29 12:08:59,582 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/36 404 [0.06, 192.168.0.105:50735][0m
+2022-06-29 12:08:59,587 - WARNING - log - log.py - Not Found: /media/posts/fon_WeEhRyM.png
+2022-06-29 12:08:59,588 - WARNING - log - log.py - Not Found: /media/posts/fon.png
+2022-06-29 12:08:59,592 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon_WeEhRyM.png 404 [0.07, 192.168.0.105:50734][0m
+2022-06-29 12:08:59,597 - WARNING - runserver - runserver.py - [33mHTTP GET /media/posts/fon.png 404 [0.08, 192.168.0.105:50733][0m
+2022-06-29 12:08:59,647 - WARNING - log - log.py - Not Found: /stream_post/63
+2022-06-29 12:08:59,651 - WARNING - runserver - runserver.py - [33mHTTP GET /stream_post/63 404 [0.08, 192.168.0.105:50710][0m
