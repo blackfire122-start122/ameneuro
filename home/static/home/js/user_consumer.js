@@ -35,6 +35,13 @@ function onmessage_u(e){
 		if(menu_id){
 			menu_id.style.display = "block"
 		}
+	}else if (data['type']=='readable'){
+		console.log(data)
+		if (data['from'].split(' ').includes('other_msgs')) {
+			msg_span = document.getElementById(data['from_chat'])
+			msg_span.innerText = data['msg']+" Revised"
+		}
+		
 
 	}else if (data['type']=='share_mus'){
 		menu_id = document.getElementById('menu_id')
@@ -147,10 +154,6 @@ function onmessage_u(e){
 		document.body.append(div)
 		document.body.append(img_left_el)
 
-	}else if (data['type']=='recognize'){
-		p = document.getElementById("p_confidence")
-
-		p.innerText = data['recognize']+" on "+data["procent"].slice(0,5)+"%"
 	}else if(data['type']=='add_to_playlists'){
 		p = document.createElement("p")
 		p.innerText = data["name_mus"]+','

@@ -377,12 +377,18 @@ function end_readable_send(){
 
 	if(readeble.innerText=="Read"){return}
 
-	let messages = document.getElementsByClassName("other_msgs")
-	end_mes = messages[messages.length-1]
-	
+	let messages = get_node_chield(msg_div.childNodes)
+	for (var i = 0; i <= messages.length-1; i++) {
+		if (messages[i].className == 'emoji_my' || messages[i].className == 'emoji_other'){
+			messages.splice(i,i+1)
+		}
+	}
+	end_mes = messages[0]
+
 	if (end_mes){
 		if (Visible(end_mes) && conn.readyState){
 			conn.send(JSON.stringify({'type':'end_readable','user': user}))
+			conn_u_f.send(JSON.stringify({'type':'readable','msg':end_mes.querySelector('.mes').innerText,'from': get_node_chield(end_mes.childNodes)[0].className, "from_chat":chat}))
 		}
 	}
 }

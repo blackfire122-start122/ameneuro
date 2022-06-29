@@ -11,6 +11,8 @@
 				<h4 class="user_ch">{{ ch.chat_friend.user }}</h4>
 				{% if not m_last.readeble and m_last.user != user %}
 					<span id="{{ ch.chat_id }}" class="not_read" >{{ m_last }}</span>
+				{% elif m_last.readeble and m_last.user == user %}
+				    <span id="{{ ch.chat_id }}" class="end_mes" >{{ m_last }} Revised</span>
 				{% else %}
 					<span id="{{ ch.chat_id }}" class="end_mes" >{{ m_last }}</span>
 				{% endif %}
