@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from .services import *
 import logging
+import re
 
 all_img_fields = AllTheme.get_all_img_fields()
 logger = logging.getLogger(__name__)
@@ -469,9 +470,7 @@ def get_chats_ajax(request):
 	except:return HttpResponseNotFound()
 
 	return render(request, "home/ajax_html/chats.html",{"chats":chats})
-
-import re
-
+	
 @login_required(login_url='login')
 def theme_from_folder_ajax(request):
 	files = {}

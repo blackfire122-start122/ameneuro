@@ -142,5 +142,4 @@ follow no follow *
 normal show friends, followers *
 point in chats and first *
 chats readable show *
-no add 2 chats ***
-big files in celery
+no add 2 chats *
